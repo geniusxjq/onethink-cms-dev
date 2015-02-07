@@ -35,6 +35,14 @@ class WaterAddon extends Addon
 		
 		if(!$param) return $param;
 		
+		if(!$param['path']) return $param;
+		
+		if($param['waterAddonOff']&&$param['waterAddonOff']==true){//判断是否启用水印功能
+			
+			return $param;
+			
+		}
+		
 		try{
 			
 			$config = $this->getConfig();
@@ -46,11 +54,11 @@ class WaterAddon extends Addon
 					$water ='./'.$this->addon_path.'water.png';
 				}
 				$water_open=file_exists($water);
-				$picture_open=file_exists($water);
+				$picture_open=file_exists($param['path']);
 				require_once('./'.$this->addon_path."WaterMark.class.php");
 				if($water_open&&$picture_open)
 				{
-					$watermark=new \WaterMark($param ,$config['position']);
+					$watermark=new \WaterMark($param['path'],$config['position']);
 					$watermark->setWaterImage($water);
 					$watermark->imageWaterMark();
 				}

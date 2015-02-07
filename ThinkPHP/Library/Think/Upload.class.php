@@ -201,6 +201,10 @@ class Upload {
                     $this->error = '非法图像文件！';
                     continue;
                 }
+				
+				//【图片处理钩子《Water水印插件等，用于挂载一些针对图片上传后进行额外处理的的插件》】
+				hook("dealPicture",array('path'=>$file['tmp_name'],'waterAddonOff'=>$this->config['waterAddonOff']));
+				
             }
 
             /* 保存文件 并记录保存成功的文件 */

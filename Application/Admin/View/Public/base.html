@@ -130,7 +130,10 @@
             $window.resize(function(){
                 $("#main").css("min-height", $window.height() - 130);
             }).resize();
-
+			
+			/* 左边菜单高亮(针对Addons插件)*/
+			highlight_subnav("{:cookie('__forward__')}");
+			
             /* 左边菜单高亮 */
             url = window.location.pathname + window.location.search;
             url = url.replace(/(\/(p)\/\d+)|(&p=\d+)|(\/(id)\/\d+)|(&id=\d+)|(\/(group)\/\d+)|(&group=\d+)/, "");
