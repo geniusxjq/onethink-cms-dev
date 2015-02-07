@@ -57,8 +57,6 @@ class PictureModel extends Model{
                     //TODO: 文件上传成功，但是记录文件信息失败，需记录日志
                     unset($info[$key]);
                 }
-				
-				hook('dealPicture','.'.$value['path']);//图片处理钩子
 								
             }
 			
