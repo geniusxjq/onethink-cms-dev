@@ -11,8 +11,8 @@
 	float:left;
 	width:50px;
 	height:50px;
-	background-color:#E0DFE1;
-	border:#E0DFE1 solid 1px;
+	background-color:#E8E8E8;
+	border:1px solid #E8E8E8;
 	line-height:50px;
 	text-align:center;
 	margin:5px;
@@ -31,12 +31,12 @@
 	text-align:center;
 	margin:5px;
 	cursor:pointer;
-	background-color:#10D81A;
-	border:#10D81A solid 1px;
+	background-color:#0CC;
+	border:1px solid #0CC;
 	color:#FFF;
 }
 .date_month_box_tab_selected:hover{
-	background-color:#09D282;
-	border:#09D282 solid 1px;
+	background-color:#F60;
+	border:#F60 solid 1px;
 	color:#FFF;
 }
