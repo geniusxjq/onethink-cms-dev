@@ -107,7 +107,7 @@ Mell.MapCall = function (mapcall_array, callback){//扫描数组回调
 Mell.Each=function (each_array, callback){//逐个执行回调
 	
   //each_array:数组[1,2,3]或对象{n:1,m:2} 。callback:回调。示例：Mell.Each({n:1,m:2},function(name,value){})
-		
+
 	var length=each_array.length;
 	
 	var	type = typeof each_array;
@@ -1306,7 +1306,7 @@ Mell.Cookie={
 	},
 	
 	//添加cookie
-	
+
 	set:function(name,value,hours,path){
 	
 		var str = name + "=" + escape(value)+(path? ";path="+path:";path=/;");
@@ -1348,20 +1348,26 @@ Mell.Cookie={
 //+++++++++++++++++++++++++++++++++++++++++++++++++++切换/开关(Mell.Toggle)++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Mell.Toggle=function(o,on_callback,off_callback,is_init){
-		  
-	  var status=o["mell-toggle"];
-	  	  
-	  on_callback&&on_callback!=o["mell-toggle-on-callback"]?
-	  o["mell-toggle-on-callback"]=on_callback:false;
-	  
-	  off_callback&&off_callback!=o["mell-toggle-off-callback"]?
-	  o["mell-toggle-off-callback"]=off_callback:false;
-
-	  if(arguments.callee.caller&&!is_init){
-	 
-		  (!status||status=="off")?Mell.Toggle.on(o):Mell.Toggle.off(o);
-	  
-	  }
+	
+	var has_caller=arguments.callee.caller?true:false;
+	
+	Mell.MapCall(o,function(o){
+		
+		var status=o["mell-toggle"];
+			
+		on_callback&&on_callback!=o["mell-toggle-on-callback"]?
+		o["mell-toggle-on-callback"]=on_callback:false;
+		
+		off_callback&&off_callback!=o["mell-toggle-off-callback"]?
+		o["mell-toggle-off-callback"]=off_callback:false;
+  
+		if(has_caller&&!is_init){
+	   
+			(!status||status=="off")?Mell.Toggle.on(o):Mell.Toggle.off(o);
+		
+		}
+		
+	});
 	  
 	 return arguments.callee;
 				
@@ -1371,13 +1377,17 @@ Mell.Toggle=function(o,on_callback,off_callback,is_init){
 
 Mell.Toggle.on=function(o){
 	
-	if("mell-toggle" in o==false||o["mell-toggle"]=="off"){
+	Mell.MapCall(o,function(o){
 		
-		o["mell-toggle"]="on";
+		if("mell-toggle" in o==false||o["mell-toggle"]=="off"){
+			
+			o["mell-toggle"]="on";
+			
+			o["mell-toggle-on-callback"].call(o,o)||false;
+			
+		}
 		
-		o["mell-toggle-on-callback"].call(o,o)||false;
-		
-	}
+	});
 		
 	return arguments.callee;
 	
@@ -1387,13 +1397,17 @@ Mell.Toggle.on=function(o){
 
 Mell.Toggle.off=function(o){
 	
-	if("mell-toggle" in o&&o["mell-toggle"]=="on"){
+	Mell.MapCall(o,function(o){
 		
-		o["mell-toggle"]="off";
+		if("mell-toggle" in o&&o["mell-toggle"]=="on"){
+			
+			o["mell-toggle"]="off";
+			
+			o["mell-toggle-off-callback"].call(o,o)||false;
+			
+		}
 		
-		o["mell-toggle-off-callback"].call(o,o)||false;
-		
-	}
+	});
 		
 	return arguments.callee;
 			

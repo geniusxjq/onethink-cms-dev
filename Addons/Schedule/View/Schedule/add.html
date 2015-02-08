@@ -1,53 +1,13 @@
 <extend name="Public/base" />
 
-<block name="body">
-<style type="text/css">
-<!--
-.date_month_box {
-	position:relative;
-	float:left;
-	width:400px;
-	height:auto;
-	top:0px;
-	padding-top:10px;
-}
-.date_month_box_tab{
-	position:relative;
-	float:left;
-	width:50px;
-	height:50px;
-	background-color:#F1F1EB;
-	border:#E2DFD6 solid 1px;
-	line-height:50px;
-	text-align:center;
-	margin:5px;
-	cursor:pointer;
-}
-.date_month_box_tab:hover{
-	background-color:#666;
-	color:#FFF;
-}
-.date_month_box_tab_selected{
-	position:relative;
-	float:left;
-	width:50px;
-	height:50px;
-	line-height:50px;
-	text-align:center;
-	margin:5px;
-	cursor:pointer;
-	background-color:#F96;
-	border:#F96 solid 1px;
-	color:#FFF;
-}
-.date_month_box_tab_selected:hover{
-	background-color:#F66;
-	border:#F66 solid 1px;
-	color:#FFF;
-}
+<block name="style">
+<link href="__ADDONROOT__/css/base.css" rel="stylesheet" type="text/css">
+<link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+<php> if(C('COLOR_STYLE')=='blue_color') echo '<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">';</php>
+<link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+</block>
 
--->
-</style>
+<block name="body">
 	<div class="main-title cf">
 		<h2>新增计划</h2>
 	</div>
@@ -98,7 +58,7 @@
                         <div class="controls">
                         <input type="hidden"  name="month" id="month_input" value=""> 
                         <span class="date_month_box" id="date_month_box">
-                        <b class="date_month_box_tab" date-value="*">每月</b>
+                        <b class="date_month_box_tab " date-value="*">每月</b>
                         <b class="date_month_box_tab" date-value="Jan" >一月</b>
                          <b class="date_month_box_tab" date-value="Feb" >二月</b>
                           <b class="date_month_box_tab" date-value="Mar" >三月</b>
@@ -149,14 +109,10 @@
 	</div>
 </block>
 <block name="script">
-<link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
-<php>if(C('COLOR_STYLE')=='blue_color') echo '<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">';</php>
-<link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
 <script type="text/javascript" src="__STATIC__/mell-1.0.js"></script>
 <script type="text/javascript" charset="utf-8">
-
 
 Mell.Ready(function(){
 	
@@ -185,14 +141,14 @@ Mell.Ready(function(){
 				
 		month_input.value="";
 		
-		var length_all=Mell.ByClass(
+		var length_all=(Mell.ByClass(
 		
 		date_month_box,
 		
 		"date_month_box_tab date_month_box_tab_selected"
-		).length;
+		)||[]).length;
 		
-		var length=Mell.ByClass(
+		var length=(Mell.ByClass(
 		
 		date_month_box,
 		
@@ -214,7 +170,7 @@ Mell.Ready(function(){
 			
 		}
 					
-		).length;
+		)||[]).length;
 		
 		if(length_all-1==length){
 			
@@ -262,8 +218,8 @@ Mell.Ready(function(){
 		
 	}
 		
-	Mell.Each(Mell.ByTag(date_month_box,"b"),function(){
-													  
+	Mell.MapCall(Mell.ByTag(date_month_box,"b"),function(o){
+											  
 		var on_fn=function(){set_toggle_month_input(1)};
 		
 		var off_fn=function(){set_toggle_month_input(0)};
