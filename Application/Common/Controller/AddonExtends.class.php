@@ -10,7 +10,7 @@
 namespace Common\Controller;
 use Think\Storage;
 /**
- * 插件类//二次开发自定义的新功能函数（非系统自带）
+ * 插件类扩展//二次开发自定义的新功能函数（非系统自带）
  * @author yangweijie <yangweijiester@gmail.com>
  */
 abstract class AddonExtends{
