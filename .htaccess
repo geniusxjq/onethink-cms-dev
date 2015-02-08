@@ -1,0 +1,126 @@
+
+##拒绝服务配置##
+#deny from  all
+
+
+##禁止显示目录列表##
+
+Options -Indexes
+
+
+##禁止访问SQL文件##
+
+<Files *.sql>
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+##URL重写(重定向)##
+
+<IfModule mod_rewrite.c>
+ 
+  #允许符号连接
+
+  Options +FollowSymlinks
+
+  #开启重写引擎
+
+  RewriteEngine On
+  
+  ##禁止访问##
+
+  #禁止访问 View
+  
+  RewriteRule (.*)/?View/(.*)?.html$   - [F]
+  
+  #禁止访问 Uploads中的.php文件
+  
+  RewriteRule (.*)/?Uploads/(.*)?.php(.*)?$   - [F]
+  
+  ##禁止访问 END ##
+
+  ##默认情况##
+  
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^(.*)$ index.php/$1 [QSA,PT,L]
+  
+  ##默认情况 END ##
+  
+  ##防盗链##
+
+  #用于防盗链的图片不做重写处理，允许连接。
+   
+  RewriteCond %{REQUEST_FILENAME} !logo.png [NC]
+  
+  #不匹配以下条件的直接跳转到下面的规则指定的文件
+ 
+  RewriteCond %{HTTP_REFERER} !localhost [NC]
+  
+  #上面不匹配则执行以下规则(重写到防盗链指定的图片文件或其它文件)
+  
+  RewriteRule ^(.*)\.(png|gif|jpg|swf)$ /logo.png [R,NC]
+  
+  ##防盗链 END ##
+  
+</IfModule>
+
+##缓存提速##
+
+## EXPIRES CACHING ##
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css A31536000
+  ExpiresByType application/x-javascript A31536000
+  ExpiresByType text/x-component A31536000
+  ExpiresByType text/html A3600
+  ExpiresByType text/richtext A3600
+  ExpiresByType image/svg+xml A3600
+  ExpiresByType text/plain A3600
+  ExpiresByType text/xsd A3600
+  ExpiresByType text/xsl A3600
+  ExpiresByType text/xml A3600
+  ExpiresByType video/asf A31536000
+  ExpiresByType video/avi A31536000
+  ExpiresByType image/bmp A31536000
+  ExpiresByType application/java A31536000
+  ExpiresByType video/divx A31536000
+  ExpiresByType application/msword A31536000
+  ExpiresByType application/vnd.ms-fontobject A31536000
+  ExpiresByType application/x-msdownload A31536000
+  ExpiresByType image/gif A31536000
+  ExpiresByType application/x-gzip A31536000
+  ExpiresByType image/x-icon A31536000
+  ExpiresByType image/jpeg A31536000
+  ExpiresByType application/vnd.ms-access A31536000
+  ExpiresByType audio/midi A31536000
+  ExpiresByType video/quicktime A31536000
+  ExpiresByType audio/mpeg A31536000
+  ExpiresByType video/mp4 A31536000
+  ExpiresByType video/mpeg A31536000
+  ExpiresByType application/vnd.ms-project A31536000
+  ExpiresByType application/x-font-otf A31536000
+  ExpiresByType application/vnd.oasis.opendocument.database A31536000
+  ExpiresByType application/vnd.oasis.opendocument.chart A31536000
+  ExpiresByType application/vnd.oasis.opendocument.formula A31536000
+  ExpiresByType application/vnd.oasis.opendocument.graphics A31536000
+  ExpiresByType application/vnd.oasis.opendocument.presentation A31536000
+  ExpiresByType application/vnd.oasis.opendocument.spreadsheet A31536000
+  ExpiresByType application/vnd.oasis.opendocument.text A31536000
+  ExpiresByType audio/ogg A31536000
+  ExpiresByType application/pdf A31536000
+  ExpiresByType image/png A31536000
+  ExpiresByType application/vnd.ms-powerpoint A31536000
+  ExpiresByType audio/x-realaudio A31536000
+  ExpiresByType image/svg+xml A31536000
+  ExpiresByType application/x-shockwave-flash A31536000
+  ExpiresByType application/x-tar A31536000
+  ExpiresByType image/tiff A31536000
+  ExpiresByType application/x-font-ttf A31536000
+  ExpiresByType audio/wav A31536000
+  ExpiresByType audio/wma A31536000
+  ExpiresByType application/vnd.ms-write A31536000
+  ExpiresByType application/vnd.ms-excel A31536000
+  ExpiresByType application/zip A31536000
+</IfModule>
+## EXPIRES CACHING ##
