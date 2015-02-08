@@ -48,19 +48,28 @@ abstract class AddonExtends{
 		  $sql = str_replace("\r", "\n", str_replace('`'.$sql_db_prefix, '`'.C('DB_PREFIX'), $sql));
 		    
 		  foreach (explode(";\n", trim($sql)) as $query) {
+			  
 			  $query = trim($query);
+			  
 			  if($query) {
+				  
 				  if(substr($query, 0, 12) == 'CREATE TABLE') {
 					  //预处理建表语句
 					  $db_charset = (strpos($db_charset, '-') === FALSE) ? $db_charset : str_replace('-', '', $db_charset);
+					  
 					  $type   = strtoupper(preg_replace("/^\s*CREATE TABLE\s+.+\s+\(.+?\).*(ENGINE|TYPE)\s*=\s*([a-z]+?).*$/isU", "\\2", $query));
+					  
 					  $type   = in_array($type, array("MYISAM", "HEAP")) ? $type : "MYISAM";
+					  
 					  $_temp_query = preg_replace("/^\s*(CREATE TABLE\s+.+\s+\(.+?\)).*$/isU", "\\1", $query).
 						  (mysql_get_server_info() > "4.1" ? " ENGINE=$type DEFAULT CHARSET=$db_charset" : " TYPE=$type");
   
 					  $res = M('')->execute($_temp_query);
+					  
 				  }else {
+					  
 					  $res = M('')->execute($query);
+					  
 				  }
 				  
 				  if($res === false) { 
@@ -99,19 +108,31 @@ abstract class AddonExtends{
 		if(!$hook_name) return;
 		
         $hook_mod = M('Hooks');
+		
         $where['name'] = $hook_name;
+		
         $gethook = $hook_mod->where($where)->find();
+		
         if(!$gethook || empty($gethook) || !is_array($gethook)){
+			
             $data['name'] = $hook_name;
+			
             $data['description'] = $addon_description;
+			
             $data['type'] = $hook_type;
+			
             $data['update_time'] = NOW_TIME;
 			
             $data['addons'] = $addon_name?$addon_name:$this->getName();
-            if( false !== $hook_mod->create($data) ){
+			
+            if( false !== $hook_mod->create($data)){
+				
                 $hook_mod->add();
+				
             }
+			
         }
+		
     }
     
     /**
@@ -119,25 +140,35 @@ abstract class AddonExtends{
      * @param string $hook_name  钩子名称
      */
     public function deleteHook($hook_name){
+		
+		if(!$hook_name) return;
+		
         $model = M('hooks');
+		
         $condition = array(//删除条件,只在钩子为唯一（独立）钩子时才删除，避免钩子删除影响其他插件。
-            'name' => $hook_name,
+            
+			'name' => $hook_name,
+			
 			'addons'=>($this->getName()),
+			
         );
+		
         $model->where($condition)->delete();
     }
 
 	/*
+	
 	安装插件自带的SQL数据库（表）
+	
 	* @param array $install_info 安装插件用到的配置参数，如下：
 
 	array(
 		  
-		  hooks=>''，// 需要创建的钩子（如果没有可以不填）
+		  hooks=>''，// @string 需要创建的钩子（如果没有可以不填，如果要指定钩子类型则在钩子后面加上“冒号+钩子类型编号<ID>。如：hookName:1）（可选）
 		  
-		  install_sql=>'',//安装时执行的SQL语句（可选）
+		  install_sql=>'',//@string 安装时执行的SQL语句（可选）
 		  
-		  uninstall_sql=>'',//卸载时执行的SQL语句（可选）
+		  uninstall_sql=>'',//@string 卸载时执行的SQL语句（可选）
 	) 
 	
 	*/
