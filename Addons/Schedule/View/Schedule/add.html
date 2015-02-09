@@ -28,7 +28,7 @@
                     	<div class="form-item cf">
 						<label class="item-label">开始时间 -- 结束时间<span class="check-tips">（任务启止时间。格式如：2015-02-09 21:50:00 ）</span></label>
 						<div class="controls">
-							<input type="text" id="start_datetime" class="text input-mid" name="start_datetime" value=""> -- <input type="text" id="end_datetime" class="text input-mid " name="end_datetime" value="">
+							<input type="text"  id="start_datetime" class="text input-mid" name="start_datetime" value=""> -- <input type="text"  id="end_datetime" class="text input-mid " name="end_datetime" value="">
 						</div>
 					</div>
 					<div class="form-item cf">
@@ -147,23 +147,27 @@ Mell.Ready(function(){
 	  format: 'YYYY-MM-DD hh:mm:ss'
 	});
 	
-	$('#start_datetime').click(function(){
-										
-		set_date_input_focus(this);
+	Mell.Event.on(document,"focus",
 		
-	});
-	
-	$('#end_datetime').click(function(){
-										
-		set_date_input_focus(this);
-										
-	});
-	
-	$('.applyBtn').click(function(){
+		"#start_datetime #end_datetime",
+		
+		function(){
 			
-		setTimeout(set_date_input_value,1);
-				
-	});		
+			set_date_input_focus(this);
+																			
+		}
+		
+	)(document,"click",
+		
+		".applyBtn",
+		
+		function(){
+			
+			setTimeout(set_date_input_value,1);
+																			
+		}
+		
+	);
 	
 	var month_input=Mell("month_input");
 	
