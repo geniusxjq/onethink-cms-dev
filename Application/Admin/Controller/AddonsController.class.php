@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // +----------------------------------------------------------------------
 // | OneThink [ WE CAN DO IT JUST THINK IT ]
 // +----------------------------------------------------------------------
@@ -16,10 +16,12 @@ namespace Admin\Controller;
 class AddonsController extends AdminController {
 
     public function _initialize(){
+		
+	parent::_initialize();
+		
         $this->assign('_extra_menu',array(
-            '已装插件后台'=> D('Addons')->getAdminList(),
+            '已装插件后台&nbsp;<font color=red>排序</font>'=> D('Addons')->getAdminList(),
         ));
-        parent::_initialize();
     }
 
     //创建向导首页
