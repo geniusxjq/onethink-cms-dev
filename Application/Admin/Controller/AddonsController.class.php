@@ -18,9 +18,9 @@ class AddonsController extends AdminController {
     public function _initialize(){
 		
 		parent::_initialize();
-		
+				
         $this->assign('_extra_menu',array(
-            '已装插件后'=> D('Addons')->getAdminList(),
+            '已装插件后台'=> D('Addons')->getAdminList(),
         ));
     }
 
@@ -705,6 +705,41 @@ str;
             $this->success('删除成功');
         } else {
             $this->error('删除失败！');
+        }
+    }
+	
+	/**
+     * 已安装插件菜单排序
+     * @author huajie <banhuajie@163.com>
+     */
+    public function sort(){
+        if(IS_GET){
+            $ids = I('get.ids');
+
+            //获取排序的数据
+            $map = array('status'=>1,'has_adminlist'=>1);
+            if(!empty($ids)){
+                $map['id'] = array('in',$ids);
+            }
+			
+            $list = M('Addons')->where($map)->field('id,title')->order('sort asc,id asc')->select();
+
+            $this->assign('list', $list);
+            $this->meta_title = '已安装插件菜单排序';
+            $this->display();
+        }elseif (IS_POST){
+            $ids = I('post.ids');
+            $ids = explode(',', $ids);
+            foreach ($ids as $key=>$value){
+                $res = M('Addons')->where(array('id'=>$value))->setField('sort', $key+1);
+            }
+            if($res !== false){
+                $this->success('排序成功！');
+            }else{
+                $this->error('排序失败！');
+            }
+        }else{
+            $this->error('非法请求！');
         }
     }
 

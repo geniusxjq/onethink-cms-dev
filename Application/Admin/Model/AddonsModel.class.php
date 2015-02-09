@@ -82,13 +82,13 @@ class AddonsModel extends Model {
      */
     public function getAdminList(){
         $admin = array();		
-        $db_addons = $this->where("status=1 AND has_adminlist=1")->field('title,name')->select();
+        $db_addons = $this->where("status=1 AND has_adminlist=1")->field('title,name')->order("sort asc")->select();
         if($db_addons){
             foreach ($db_addons as $value) {
                 $admin[] = array('title'=>$value['title'],'url'=>"Addons/adminList?name={$value['name']}");
             }
         }
-		
+		 
         return $admin;
     }
 }
