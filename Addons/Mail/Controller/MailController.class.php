@@ -14,7 +14,6 @@ use Admin\Builder\AdminConfigBuilder;
 use Admin\Builder\AdminListBuilder;
 use Admin\Builder\AdminTreeListBuilder;
 use Admin\Controller\AddonsController;
-use Vendor\PHPMailer;
 /**
  * 邮件订阅模块
  * Class MailController
@@ -333,7 +332,7 @@ class MailController extends AddonsController
 		$reply_email = C('MAIL_REPLY_EMAIL');
 		$reply_name = C('MAIL_REPLY_NAME');
 		//require_once('./ThinkPHP/Library/Vendor/PHPMailer/phpmailer.class.php');增加命名空间，可以注释掉此行
-		$mail = new PHPMailer(); //实例化PHPMailer
+		$mail = new \Vendor\PHPMailer(); //实例化PHPMailer
 		$mail->CharSet = 'UTF-8'; //设定邮件编码，默认ISO-8859-1，如果发中文此项必须设置，否则乱码
 		$mail->IsSMTP(); // 设定使用SMTP服务
 		$mail->SMTPDebug = 0; // 关闭SMTP调试功能

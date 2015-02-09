@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // +----------------------------------------------------------------------
 // | OneThink [ WE CAN DO IT JUST THINK IT ]
 // +----------------------------------------------------------------------
@@ -17,10 +17,10 @@ class AddonsController extends AdminController {
 
     public function _initialize(){
 		
-	parent::_initialize();
+		parent::_initialize();
 		
         $this->assign('_extra_menu',array(
-            '已装插件后台&nbsp;<font color=red>排序</font>'=> D('Addons')->getAdminList(),
+            '已装插件后'=> D('Addons')->getAdminList(),
         ));
     }
 

@@ -2,7 +2,7 @@
 
 <block name="style">
 <link href="__ADDONROOT__/css/base.css" rel="stylesheet" type="text/css">
-<link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+<link href="__STATIC__/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css">
 <php> if(C('COLOR_STYLE')=='blue_color') echo '<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">';</php>
 <link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
 </block>
@@ -23,6 +23,12 @@
 						<label class="item-label">执行函数<span class="check-tips">（计划任务执行的函数，格式为：app/Model/method）</span></label>
 						<div class="controls">
 							<input type="text" class="text input-large" name="task_to_run" value="">
+						</div>
+					</div>
+                    	<div class="form-item cf">
+						<label class="item-label">开始时间 -- 结束时间<span class="check-tips">（任务启止时间。格式如：2015-02-09 21:50:00 ）</span></label>
+						<div class="controls">
+							<input type="text" id="start_datetime" class="text input-mid" name="start_datetime" value=""> -- <input type="text" id="end_datetime" class="text input-mid " name="end_datetime" value="">
 						</div>
 					</div>
 					<div class="form-item cf">
@@ -75,18 +81,7 @@
 					  </div>  
                     
                     </div> 
-					<div class="form-item cf">
-						<label class="item-label">开始时间<span class="check-tips">（任务启动时间，使用“Y-m-d H:i:s”格式）</span></label>
-						<div class="controls">
-							<input type="text" id="start_datetime" class="text input-large" name="start_datetime" value="">
-						</div>
-					</div>
-					<div class="form-item cf">
-						<label class="item-label">结束时间<span class="check-tips">（失效时间，使用“Y-m-d H:i:s”格式）</span></label>
-						<div class="controls">
-							<input type="text" id="end_datetime" class="text input-large" name="end_datetime" value="">
-						</div>
-					</div>
+				
 					<div class="form-item cf">
 						<label class="item-label">简介<span class="check-tips">（对计划任务的简要描述）</span></label>
 						<div class="controls">
@@ -109,27 +104,66 @@
 	</div>
 </block>
 <block name="script">
-<script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
-<script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+<script type="text/javascript" src="__STATIC__/daterangepicker/moment.js"></script>
+<script type="text/javascript" src="__STATIC__/daterangepicker/daterangepicker.js"></script>
 <script type="text/javascript" src="__STATIC__/mell-1.0.js"></script>
 <script type="text/javascript" charset="utf-8">
 
 Mell.Ready(function(){
 					
-	$('#start_datetime').datetimepicker({
-	    format: 'yyyy-mm-dd HH:mm:ss',
-	    language:"zh-CN",
-	    minView:2,
-	    autoclose:true,
+	var date_input_focus=null;
+	
+	function set_date_input_focus(o){
+		
+		date_input_focus=o;
+		
+	}
+	
+	function set_date_input_value(){
+		
+		var _date=$(date_input_focus).val();
+		
+		if(_date){
+			
+			_date.match(/(\d{4}-\d{2}-\d{2}\s{1}\d{2}:\d{2}:\d{2}\s{1})-(\s{1}\d{4}-\d{2}-\d{2}\s{1}\d{2}:\d{2}:\d{2})/g);
+				
+			Mell('start_datetime').value=RegExp.$1;
+			
+			Mell('end_datetime').value=RegExp.$2;
+		
+		}
+		
+	}
+	  
+	$('#start_datetime').daterangepicker({
+	  timePicker: true,
+	  timePickerIncrement: 30,
+	  format: 'YYYY-MM-DD hh:mm:ss'
 	});
-
-	$('#end_datetime').datetimepicker({
-	   format: 'yyyy-mm-dd HH:mm:ss',
-	    language:"zh-CN",
-	    minView:2,
-	    autoclose:true,
-	    pickerPosition:'bottom-left'
+	
+	$('#end_datetime').daterangepicker({
+	  timePicker: true,
+	  timePickerIncrement: 30,
+	  format: 'YYYY-MM-DD hh:mm:ss'
 	});
+	
+	$('#start_datetime').click(function(){
+										
+		set_date_input_focus(this);
+		
+	});
+	
+	$('#end_datetime').click(function(){
+										
+		set_date_input_focus(this);
+										
+	});
+	
+	$('.applyBtn').click(function(){
+			
+		setTimeout(set_date_input_value,1);
+				
+	});		
 	
 	var month_input=Mell("month_input");
 	
