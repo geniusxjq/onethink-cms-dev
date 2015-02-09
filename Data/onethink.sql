@@ -63,7 +63,7 @@ CREATE TABLE `onethink_action_log` (
   KEY `action_ip_ix` (`action_ip`),
   KEY `action_id_ix` (`action_id`),
   KEY `user_id_ix` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=62 DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED COMMENT='ÐÐÎªÈÕÖ¾±í';
+) ENGINE=MyISAM AUTO_INCREMENT=66 DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED COMMENT='ÐÐÎªÈÕÖ¾±í';
 
 #
 # Dumping data for table onethink_action_log
@@ -71,6 +71,10 @@ CREATE TABLE `onethink_action_log` (
 
 INSERT INTO `onethink_action_log` VALUES (60,1,1,2130706433,'member',1,'adminÔÚ2015-02-06 16:36µÇÂ¼ÁËºóÌ¨',1,1423211815);
 INSERT INTO `onethink_action_log` VALUES (61,1,1,2130706433,'member',1,'adminÔÚ2015-02-07 15:43µÇÂ¼ÁËºóÌ¨',1,1423295015);
+INSERT INTO `onethink_action_log` VALUES (62,1,1,2130706433,'member',1,'adminÔÚ2015-02-08 13:42µÇÂ¼ÁËºóÌ¨',1,1423374174);
+INSERT INTO `onethink_action_log` VALUES (63,1,1,2130706433,'member',1,'adminÔÚ2015-02-09 13:06µÇÂ¼ÁËºóÌ¨',1,1423458397);
+INSERT INTO `onethink_action_log` VALUES (64,1,1,2130706433,'member',1,'adminÔÚ2015-02-09 18:37µÇÂ¼ÁËºóÌ¨',1,1423478270);
+INSERT INTO `onethink_action_log` VALUES (65,1,1,2130706433,'member',1,'adminÔÚ2015-02-10 00:11µÇÂ¼ÁËºóÌ¨',1,1423498263);
 
 #
 # Source for table onethink_addons
@@ -111,7 +115,6 @@ INSERT INTO `onethink_addons` VALUES (94,'SyncLogin','µÚÈý·½ÕËºÅÍ¬²½µÇÂ½','µÚÈý·
 INSERT INTO `onethink_addons` VALUES (95,'Mail','ÓÊ¼þ¶©ÔÄ','ÓÊ¼þ¶©ÔÄ²å¼þ',1,'null','xjw129xjt','0.1.1',1423065015,1);
 INSERT INTO `onethink_addons` VALUES (96,'Friendlinks','ÓÑÇéÁ´½Ó','ÓÑÇéÁ´½Ó',1,'{\"random\":\"1\"}','geniusxjq(app880.com)','0.1',1423065141,1);
 INSERT INTO `onethink_addons` VALUES (100,'Guestbook','ÁôÑÔ°å','ÕâÊÇÒ»¸ö¼òµ¥µÄÁôÑÔ°å',1,'{\"display\":\"1\",\"messages_check\":\"1\"}','geniusxjq(ap880.com)','0.2',1423131727,1);
-INSERT INTO `onethink_addons` VALUES (101,'Template','Ä£°æ¹ÜÀí','Ä£°æÔÚÏß±à¼­²å¼þ',1,'null','Marvin(ÁøÓ¢Î°)','1.0',1423132050,1);
 INSERT INTO `onethink_addons` VALUES (102,'Schedule','¼Æ»®ÈÎÎñ','Ö´ÐÐ¼Æ»®ÈÎÎñ²å¼þ',1,'{\"random\":\"1\"}','iszhang','0.1',1423148478,1);
 INSERT INTO `onethink_addons` VALUES (103,'Advs','¹ã¸æ¹ÜÀí','¹ã¸æ²å¼þ',1,'null','onep2p','0.1',1423235238,1);
 INSERT INTO `onethink_addons` VALUES (104,'Advertising','¹ã¸æÎ»ÖÃ','¹ã¸æÎ»²å¼þ',1,'null','onep2p','0.1',1423235264,1);
@@ -771,7 +774,7 @@ CREATE TABLE `onethink_document` (
 #
 
 INSERT INTO `onethink_document` VALUES (5,1,'','tt',2,0,'',0,0,2,2,0,0,22,1,0,0,0,0,0,0,1422970946,1422970946,3);
-INSERT INTO `onethink_document` VALUES (6,1,'','01',2,0,'',0,0,2,2,0,0,27,1,0,0,15,0,0,0,1422981600,1423297290,1);
+INSERT INTO `onethink_document` VALUES (6,1,'','01',2,0,'',0,0,2,2,0,0,27,1,0,0,16,0,0,0,1422981600,1423297290,1);
 INSERT INTO `onethink_document` VALUES (7,1,'','01',2,0,'',0,0,2,2,0,0,27,1,0,0,0,0,0,0,1422981607,1422981607,3);
 
 #
@@ -1048,7 +1051,7 @@ CREATE TABLE `onethink_member` (
 # Dumping data for table onethink_member
 #
 
-INSERT INTO `onethink_member` VALUES (1,'admin',0,'0000-00-00','',20,27,0,1422599239,2130706433,1423295015,1);
+INSERT INTO `onethink_member` VALUES (1,'admin',0,'0000-00-00','',20,31,0,1422599239,2130706433,1423498263,1);
 INSERT INTO `onethink_member` VALUES (2,'xjq',0,'0000-00-00','',10,2,0,0,2130706433,1422699744,1);
 INSERT INTO `onethink_member` VALUES (3,'geniusxjq',0,'0000-00-00','',20,7,2130706433,1422700152,2130706433,1423068443,1);
 
@@ -1265,12 +1268,14 @@ CREATE TABLE `onethink_schedule` (
   `last_run_time` datetime DEFAULT NULL COMMENT '×î½üÖ´ÐÐÊ±¼ä',
   `info` varchar(255) DEFAULT NULL COMMENT '¶Ô¼Æ»®ÈÎÎñµÄ¼òÒªÃèÊö',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 #
 # Dumping data for table onethink_schedule
 #
 
+INSERT INTO `onethink_schedule` VALUES (13,'aa','ONCE','','','*','2015-02-10 12:00:00','2015-02-10 11:59:59',NULL,'');
+INSERT INTO `onethink_schedule` VALUES (14,'ff','ONCE','','','Jan,Feb,Mar,May,Aug,Sep,Nov,Dec','2015-02-10 12:00:00','2015-02-10 11:59:59',NULL,'');
 
 #
 # Source for table onethink_sync_login
@@ -1360,7 +1365,7 @@ CREATE TABLE `onethink_ucenter_member` (
 # Dumping data for table onethink_ucenter_member
 #
 
-INSERT INTO `onethink_ucenter_member` VALUES (1,'admin','ecfb4272feb1d1fd11fc719c45b5e21d','836692464@qq.com','',1422599239,2130706433,1423295015,2130706433,1422599239,1);
+INSERT INTO `onethink_ucenter_member` VALUES (1,'admin','ecfb4272feb1d1fd11fc719c45b5e21d','836692464@qq.com','',1422599239,2130706433,1423498263,2130706433,1422599239,1);
 INSERT INTO `onethink_ucenter_member` VALUES (2,'xjq','bbe81237a2de1471f322ae25b0132dfc','app880@foxmail.com','',1422698522,2130706433,1422699744,2130706433,1422698522,1);
 INSERT INTO `onethink_ucenter_member` VALUES (3,'geniusxjq','bbe81237a2de1471f322ae25b0132dfc','geniusxjq@126.com','',1422699641,2130706433,1423068443,2130706433,1422699641,1);
 
