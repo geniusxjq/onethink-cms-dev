@@ -75,6 +75,7 @@ INSERT INTO `onethink_action_log` VALUES (62,1,1,2130706433,'member',1,'admin在2
 INSERT INTO `onethink_action_log` VALUES (63,1,1,2130706433,'member',1,'admin在2015-02-09 13:06登录了后台',1,1423458397);
 INSERT INTO `onethink_action_log` VALUES (64,1,1,2130706433,'member',1,'admin在2015-02-09 18:37登录了后台',1,1423478270);
 INSERT INTO `onethink_action_log` VALUES (65,1,1,2130706433,'member',1,'admin在2015-02-10 00:11登录了后台',1,1423498263);
+INSERT INTO `onethink_action_log` VALUES (66,10,1,2130706433,'Menu',124,'操作url：/admin.php?s=/Menu/add.html',1,1423502830);
 
 #
 # Source for table onethink_addons
@@ -92,6 +93,7 @@ CREATE TABLE `onethink_addons` (
   `version` varchar(20) DEFAULT '' COMMENT '版本号',
   `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '安装时间',
   `has_adminlist` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否有后台列表',
+  `sort` int(10) DEFAULT '0' COMMENT '已安装插件菜单排序',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=105 DEFAULT CHARSET=utf8 COMMENT='插件表';
 
@@ -99,25 +101,25 @@ CREATE TABLE `onethink_addons` (
 # Dumping data for table onethink_addons
 #
 
-INSERT INTO `onethink_addons` VALUES (2,'SiteStat','站点统计信息','统计站点的基础信息',1,'{\"title\":\"\\u7cfb\\u7edf\\u4fe1\\u606f\",\"width\":\"1\",\"display\":\"1\",\"status\":\"0\"}','thinkphp','0.1',1379512015,0);
-INSERT INTO `onethink_addons` VALUES (3,'DevTeam','开发团队信息','开发团队成员信息',1,'{\"title\":\"OneThink\\u5f00\\u53d1\\u56e2\\u961f\",\"width\":\"2\",\"display\":\"1\"}','thinkphp','0.1',1379512022,0);
-INSERT INTO `onethink_addons` VALUES (4,'SystemInfo','系统环境信息','用于显示一些服务器的信息',1,'{\"title\":\"\\u7cfb\\u7edf\\u4fe1\\u606f\",\"width\":\"2\",\"display\":\"1\"}','thinkphp','0.1',1379512036,0);
-INSERT INTO `onethink_addons` VALUES (5,'Editor','前台编辑器','用于增强整站长文本的输入和显示',1,'{\"editor_type\":\"2\",\"editor_wysiwyg\":\"1\",\"editor_height\":\"300px\",\"editor_resize_type\":\"1\"}','thinkphp','0.1',1379830910,0);
-INSERT INTO `onethink_addons` VALUES (6,'Attachment','附件','用于文档模型上传附件',1,'null','thinkphp','0.1',1379842319,1);
-INSERT INTO `onethink_addons` VALUES (9,'SocialComment','通用社交化评论','集成了各种社交化评论插件，轻松集成到系统中。',1,'{\"comment_type\":\"1\",\"comment_uid_youyan\":\"\",\"comment_short_name_duoshuo\":\"\",\"comment_data_list_duoshuo\":\"\"}','thinkphp','0.1',1380273962,0);
-INSERT INTO `onethink_addons` VALUES (15,'EditorForAdmin','后台编辑器','用于增强整站长文本的输入和显示',1,'{\"editor_type\":\"2\",\"editor_wysiwyg\":\"1\",\"editor_height\":\"500px\",\"editor_resize_type\":\"1\"}','thinkphp','0.1',1383126253,0);
-INSERT INTO `onethink_addons` VALUES (43,'Water','图片水印','用于为上传的图片添加水印',1,'{\"switch\":\"1\",\"water\":\".\\/Uploads\\/water\\/water.png\",\"position\":\"9\"}','xjw129xjt','0.1',1422720236,0);
-INSERT INTO `onethink_addons` VALUES (45,'ReturnTop','返回顶部','回到顶部美化，随机或指定显示，100款样式，每天一种换，天天都用新样式',1,'{\"random\":\"0\",\"current\":\"68\"}','thinkphp','0.1',1422723050,0);
-INSERT INTO `onethink_addons` VALUES (82,'Comment','评论功能','用于各种类型文档评论',1,'null','Wolixli','0.1',1422871179,1);
-INSERT INTO `onethink_addons` VALUES (84,'BaiduShare','百度分享','用户将网站内容分享到第三方网站，第三方网站的用户点击专有的分享链接，从第三方网站带来社会化流量。',1,'{\"openbutton\":\"0\",\"buttonlist\":[\"mshare\",\"qzone\",\"tsina\",\"renren\",\"tqq\",\"tieba\"],\"button_size\":\"1\",\"openimg\":\"0\",\"imglist\":[\"mshare\",\"qzone\",\"tsina\",\"renren\",\"tqq\",\"tieba\"],\"img_size\":\"1\",\"openselect\":\"0\",\"selectlist\":[\"mshare\",\"qzone\",\"tsina\",\"renren\",\"tqq\",\"tieba\"]}','jesuspan','0.1',1422871419,0);
-INSERT INTO `onethink_addons` VALUES (91,'Unslider','焦点图','焦点图',1,'{\"title\":\"Uslider\",\"display\":\"1\"}','cepljxiongjun','0.1',1422885933,0);
-INSERT INTO `onethink_addons` VALUES (94,'SyncLogin','第三方账号同步登陆','第三方账号同步登陆',1,'{\"type\":null,\"meta\":\"\",\"QqKEY\":\"\",\"QqSecret\":\"\",\"SinaKEY\":\"\",\"SinaSecret\":\"\"}','yidian','0.1',1423064815,0);
-INSERT INTO `onethink_addons` VALUES (95,'Mail','邮件订阅','邮件订阅插件',1,'null','xjw129xjt','0.1.1',1423065015,1);
-INSERT INTO `onethink_addons` VALUES (96,'Friendlinks','友情链接','友情链接',1,'{\"random\":\"1\"}','geniusxjq(app880.com)','0.1',1423065141,1);
-INSERT INTO `onethink_addons` VALUES (100,'Guestbook','留言板','这是一个简单的留言板',1,'{\"display\":\"1\",\"messages_check\":\"1\"}','geniusxjq(ap880.com)','0.2',1423131727,1);
-INSERT INTO `onethink_addons` VALUES (102,'Schedule','计划任务','执行计划任务插件',1,'{\"random\":\"1\"}','iszhang','0.1',1423148478,1);
-INSERT INTO `onethink_addons` VALUES (103,'Advs','广告管理','广告插件',1,'null','onep2p','0.1',1423235238,1);
-INSERT INTO `onethink_addons` VALUES (104,'Advertising','广告位置','广告位插件',1,'null','onep2p','0.1',1423235264,1);
+INSERT INTO `onethink_addons` VALUES (2,'SiteStat','站点统计信息','统计站点的基础信息',1,'{\"title\":\"\\u7cfb\\u7edf\\u4fe1\\u606f\",\"width\":\"1\",\"display\":\"1\",\"status\":\"0\"}','thinkphp','0.1',1379512015,0,0);
+INSERT INTO `onethink_addons` VALUES (3,'DevTeam','开发团队信息','开发团队成员信息',1,'{\"title\":\"OneThink\\u5f00\\u53d1\\u56e2\\u961f\",\"width\":\"2\",\"display\":\"1\"}','thinkphp','0.1',1379512022,0,0);
+INSERT INTO `onethink_addons` VALUES (4,'SystemInfo','系统环境信息','用于显示一些服务器的信息',1,'{\"title\":\"\\u7cfb\\u7edf\\u4fe1\\u606f\",\"width\":\"2\",\"display\":\"1\"}','thinkphp','0.1',1379512036,0,0);
+INSERT INTO `onethink_addons` VALUES (5,'Editor','前台编辑器','用于增强整站长文本的输入和显示',1,'{\"editor_type\":\"2\",\"editor_wysiwyg\":\"1\",\"editor_height\":\"300px\",\"editor_resize_type\":\"1\"}','thinkphp','0.1',1379830910,0,0);
+INSERT INTO `onethink_addons` VALUES (6,'Attachment','附件','用于文档模型上传附件',1,'null','thinkphp','0.1',1379842319,1,1);
+INSERT INTO `onethink_addons` VALUES (9,'SocialComment','通用社交化评论','集成了各种社交化评论插件，轻松集成到系统中。',1,'{\"comment_type\":\"1\",\"comment_uid_youyan\":\"\",\"comment_short_name_duoshuo\":\"\",\"comment_data_list_duoshuo\":\"\"}','thinkphp','0.1',1380273962,0,0);
+INSERT INTO `onethink_addons` VALUES (15,'EditorForAdmin','后台编辑器','用于增强整站长文本的输入和显示',1,'{\"editor_type\":\"2\",\"editor_wysiwyg\":\"1\",\"editor_height\":\"500px\",\"editor_resize_type\":\"1\"}','thinkphp','0.1',1383126253,0,0);
+INSERT INTO `onethink_addons` VALUES (43,'Water','图片水印','用于为上传的图片添加水印',1,'{\"switch\":\"1\",\"water\":\".\\/Uploads\\/water\\/water.png\",\"position\":\"9\"}','xjw129xjt','0.1',1422720236,0,0);
+INSERT INTO `onethink_addons` VALUES (45,'ReturnTop','返回顶部','回到顶部美化，随机或指定显示，100款样式，每天一种换，天天都用新样式',1,'{\"random\":\"0\",\"current\":\"68\"}','thinkphp','0.1',1422723050,0,0);
+INSERT INTO `onethink_addons` VALUES (82,'Comment','评论功能','用于各种类型文档评论',1,'null','Wolixli','0.1',1422871179,1,3);
+INSERT INTO `onethink_addons` VALUES (84,'BaiduShare','百度分享','用户将网站内容分享到第三方网站，第三方网站的用户点击专有的分享链接，从第三方网站带来社会化流量。',1,'{\"openbutton\":\"0\",\"buttonlist\":[\"mshare\",\"qzone\",\"tsina\",\"renren\",\"tqq\",\"tieba\"],\"button_size\":\"1\",\"openimg\":\"0\",\"imglist\":[\"mshare\",\"qzone\",\"tsina\",\"renren\",\"tqq\",\"tieba\"],\"img_size\":\"1\",\"openselect\":\"0\",\"selectlist\":[\"mshare\",\"qzone\",\"tsina\",\"renren\",\"tqq\",\"tieba\"]}','jesuspan','0.1',1422871419,0,0);
+INSERT INTO `onethink_addons` VALUES (91,'Unslider','焦点图','焦点图',1,'{\"title\":\"Uslider\",\"display\":\"1\"}','cepljxiongjun','0.1',1422885933,0,0);
+INSERT INTO `onethink_addons` VALUES (94,'SyncLogin','第三方账号同步登陆','第三方账号同步登陆',1,'{\"type\":null,\"meta\":\"\",\"QqKEY\":\"\",\"QqSecret\":\"\",\"SinaKEY\":\"\",\"SinaSecret\":\"\"}','yidian','0.1',1423064815,0,0);
+INSERT INTO `onethink_addons` VALUES (95,'Mail','邮件订阅','邮件订阅插件',1,'null','xjw129xjt','0.1.1',1423065015,1,2);
+INSERT INTO `onethink_addons` VALUES (96,'Friendlinks','友情链接','友情链接',1,'{\"random\":\"1\"}','geniusxjq(app880.com)','0.1',1423065141,1,5);
+INSERT INTO `onethink_addons` VALUES (100,'Guestbook','留言板','这是一个简单的留言板',1,'{\"display\":\"1\",\"messages_check\":\"1\"}','geniusxjq(ap880.com)','0.2',1423131727,1,4);
+INSERT INTO `onethink_addons` VALUES (102,'Schedule','计划任务','执行计划任务插件',1,'{\"random\":\"1\"}','iszhang','0.1',1423148478,1,6);
+INSERT INTO `onethink_addons` VALUES (103,'Advs','广告管理','广告插件',1,'null','onep2p','0.1',1423235238,1,7);
+INSERT INTO `onethink_addons` VALUES (104,'Advertising','广告位置','广告位插件',1,'null','onep2p','0.1',1423235264,1,8);
 
 #
 # Source for table onethink_advertising
@@ -1191,6 +1193,7 @@ INSERT INTO `onethink_menu` VALUES (120,'排序',75,0,'Menu/sort',1,'','',0,1);
 INSERT INTO `onethink_menu` VALUES (121,'排序',76,0,'Channel/sort',1,'','',0,1);
 INSERT INTO `onethink_menu` VALUES (122,'数据列表',58,0,'think/lists',1,'','',0,1);
 INSERT INTO `onethink_menu` VALUES (123,'审核列表',3,0,'Article/examine',1,'','',0,1);
+INSERT INTO `onethink_menu` VALUES (124,'已安装插件菜单排序',44,0,'Addons/sort',1,'已安装插件菜单排序','',0,1);
 
 #
 # Source for table onethink_model
