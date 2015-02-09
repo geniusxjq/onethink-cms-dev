@@ -81,13 +81,14 @@ class AddonsModel extends Model {
      * 获取插件的后台列表
      */
     public function getAdminList(){
-        $admin = array();
+        $admin = array();		
         $db_addons = $this->where("status=1 AND has_adminlist=1")->field('title,name')->select();
         if($db_addons){
             foreach ($db_addons as $value) {
                 $admin[] = array('title'=>$value['title'],'url'=>"Addons/adminList?name={$value['name']}");
             }
         }
+		
         return $admin;
     }
 }
