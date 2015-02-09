@@ -1,13 +1,12 @@
 <?php
 
 namespace Addons\Schedule\Model;
-use Think\Model;
-
+use Vendor\PHPMailer;
 /**
  * 用户服务
  * by iszhang
  */
-class UserServiceModel extends Model{
+class UserServiceModel{
 	
 	/**
 	 * 用常规方式发送邮件。

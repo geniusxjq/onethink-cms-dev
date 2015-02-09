@@ -125,22 +125,38 @@
 .themePreview a.top_stick097{width:35px; height:50px; background:url(__ADDONROOT__/images/097.gif);}
 .themePreview a.top_stick098{width:44px; height:72px; background:url(__ADDONROOT__/images/098.png);}
 .themePreview a.top_stick099{width:79px; height:64px; background:url(__ADDONROOT__/images/099.png);}
-.themePreview .colorBox{border:2px solid #FFF; height:100px;padding:10px; margin:10px;float:left; margin-left:10px; text-align:center; cursor:pointer;}
-.themePreview .colorBox:hover, .themePreview .colorBox.current {border: 2px solid #000;}
+.themePreview .colorBox{ background-color:#EDF1F0;border:3px solid #E6EAEC;height:100px;padding:10px; margin:10px;float:left; margin-left:10px; text-align:center; cursor:pointer;}
+.themePreview .colorBox:hover, .themePreview .colorBox.current {border: 3px solid #F03;}
 </style>
 <div class="fl">
     <dl class="lineD">
-      <dt>是否开启随机：</dt>
-      <dd> <input type="radio" name="config[random]" value="1"
-        <eq name="data.config.random.value" value="1">checked=checked</eq>
-        >开启 <input type="radio" name="config[random]" value="0"
-        <eq name="data.config.random.value" value="0">checked=checked</eq>
-        >关闭 <br />
-        <p>开启随机用户每次刷新，回到顶部样式将会随机变化，开启时指定样式失效</p>
-      </dd>
+
+		
+        
+      <dt><label class="item-label">是否开启随机：<span class="check-tips">（开启随机用户每次刷新，回到顶部样式将会随机变化，开启时指定样式失效）</span> </label></dt>
+      
+      <dd> 
+      
+      <div class="controls">
+      
+      <label>
+      <input type="radio" name="config[random]" value="1"
+        <eq name="data.config.random.value" value="1">checked=checked</eq>>开启 
+      </label>
+      <label> 
+       <input type="radio" name="config[random]" value="0"
+        <eq name="data.config.random.value" value="0">checked=checked</eq>>关闭 
+        <br />&nbsp;
+      </label>
+        
+       </div>
+        
+      </dd>     
+      
     </dl>
     <dl class="lineD">
-      <dt>指定样式：</dt>
+      <dt><label class="item-label">指定样式：<span class="check-tips">（选择在前台显示的效果）</span> </label></dt>
+      
       <dd id="style_list">
       	<div class="themePreview">
         <php>for( $i=1;$i<=99;$i++ ){</php>

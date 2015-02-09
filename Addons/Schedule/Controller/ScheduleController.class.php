@@ -1,7 +1,7 @@
 <?php
 
 namespace Addons\Schedule\Controller;
-use Home\Controller\AddonsController;
+use Admin\Controller\AddonsController;
 
 class ScheduleController extends AddonsController{
 	

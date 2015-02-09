@@ -10,10 +10,10 @@
 
 
 namespace Addons\Mail\Controller;
-use Home\Controller\AddonsController;
 use Admin\Builder\AdminConfigBuilder;
 use Admin\Builder\AdminListBuilder;
 use Admin\Builder\AdminTreeListBuilder;
+use Admin\Controller\AddonsController;
 use Vendor\PHPMailer;
 /**
  * 邮件订阅模块
