@@ -3,7 +3,7 @@
 <block name="body">
 	<div class="main-title cf">
 		<h2>
-			已安装插件菜单排序 [ <a href="{:U('index',array('pid'=>I('pid')))}">返回列表</a> ]
+			已安装插件后台菜单排序 [ <a href="{:U('index',array('pid'=>I('pid')))}">返回列表</a> ]
 		</h2>
 	</div>
 	<div class="sort">
@@ -37,8 +37,6 @@
 
 <block name="script">
 	<script type="text/javascript">
-		//导航高亮
-	    highlight_subnav('{:U('Addons/sort')}');
 		$(function(){
 			sort();
 			$(".top").click(function(){

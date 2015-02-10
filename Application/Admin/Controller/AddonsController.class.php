@@ -347,6 +347,30 @@ str;
         S('hooks', null);
         $this->forbid('Addons', "id={$id}", $msg);
     }
+	
+	/**
+	* 锁定插件
+	*/
+    public function lock(){
+        $id     =   I('id');
+		$where["id"]=$id;
+		$data['is_locked']=1;
+        $msg    =   array('success'=>'锁定成功', 'error'=>'锁定失败');
+        S('hooks', null);
+        $this->editRow('Addons',$data,$where,$msg);
+    }
+	
+	/**
+	* 解锁插件
+	*/
+    public function unlock(){
+        $id     =   I('id');
+		$where["id"]=$id;
+		$data['is_locked']=0;
+        $msg    =   array('success'=>'解锁成功', 'error'=>'解锁失败');
+        S('hooks', null);
+        $this->editRow('Addons',$data,$where,$msg);
+    }
 
     /**
      * 设置插件页面
@@ -517,6 +541,8 @@ str;
         $db_addons      =   $addonsModel->find($id);
         $class          =   get_addon_class($db_addons['name']);
         $this->assign('jumpUrl',U('index'));
+		if($db_addons["is_locked"]==1)
+			$this->error('插件已被锁定，不能卸载');
         if(!$db_addons || !class_exists($class))
             $this->error('插件不存在');
         session('addons_uninstall_error',null);
@@ -548,7 +574,7 @@ str;
             $map[$key] = array('like', '%'.$_GET[$key].'%');
             unset($_REQUEST[$key]);
         }
-        $list   =   $this->lists(D("Hooks")->field($fields),$map,'name asc');
+        $list   =   $this->lists(D("Hooks")->field($fields),$map,'id asc');
         int_to_string($list, array('type'=>C('HOOKS_TYPE')));
         // 记录当前列表页的cookie
         Cookie('__forward__',$_SERVER['REQUEST_URI']);

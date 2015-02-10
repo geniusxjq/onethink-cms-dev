@@ -6,7 +6,7 @@
 		<h2>插件列表</h2>
 	</div>
 	<div>
-		<a href="{:U('create')}" class="btn">快速创建</a><a href="{:U('sort')}" class="btn">已安装插件菜单排序</a>
+		<a href="{:U('create')}" class="btn">快速创建</a><a href="{:U('sort')}" class="btn">已装插件后台 [菜单排序]</a>
 	</div>
 
 	<!-- 数据列表 -->
@@ -17,10 +17,11 @@
 					<th>名称</th>
 					<th>标识</th>
 					<th >描述</th>
-					<th width="43px">状态</th>
 					<th>作者</th>
-					<th width="43px">版本</th>
-					<th width="94px">操作</th>
+					<th width="43px">版本</th> 
+                    <th width="43px">状态</th>
+                    <th width="43px">锁定</th>  
+					<th width="130px">操作</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -30,9 +31,10 @@
 					<td>{$vo.title}</td>
 					<td>{$vo.name}</td>
 					<td>{$vo.description}</td>
-					<td>{$vo.status_text|default="未安装"}</td>
 					<td><a target="_blank" href="{$vo.url|default='/'}">{$vo.author}</a></td>
-					<td>{$vo.version}</td>
+					<td>{$vo.version}</td> 
+                    <td>{$vo.status_text|default="未安装"}</td>
+                    <td>{$vo.is_locked_text|default="未知"}</td>
 					<td>
 						<empty name="vo.uninstall">
 							<?php
@@ -47,13 +49,20 @@
 							<?php if ($has_config): ?>
 								<a href="{:U('config',array('id'=>$vo['id']))}">设置</a>
 							<?php endif ?>
+                        <?php if ($vo['is_locked'] >=0): ?>
+							<eq name="vo.is_locked" value="0">
+								<a class="ajax-get" href="{:U('lock',array('id'=>$vo['id']))}">锁定</a>
+							<else />
+								<a class="ajax-get" href="{:U('unlock',array('id'=>$vo['id']))}">解锁</a>
+							</eq>
+						<?php endif ?>
 						<?php if ($vo['status'] >=0): ?>
 							<eq name="vo.status" value="0">
 								<a class="ajax-get" href="{:U('enable',array('id'=>$vo['id']))}">启用</a>
 							<else />
 								<a class="ajax-get" href="{:U('disable',array('id'=>$vo['id']))}">禁用</a>
 							</eq>
-						<?php endif ?>
+						<?php endif ?>   
 							{// <eq name="vo.author" value="thinkphp">}
 								<a class="ajax-get" href="{:U('uninstall?id='.$vo['id'])}">卸载</a>
 							{// </eq>}

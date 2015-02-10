@@ -51,7 +51,7 @@
                         }else{
                             $('#top-alert').find('button').click();
                         }
-                    },1500);
+                    },3000);
                 }
             });
 
@@ -132,7 +132,7 @@
                         }else{
                             $('#top-alert').find('button').click();
                         }
-                    },1500);
+                    },3000);
                 }
             });
         }
