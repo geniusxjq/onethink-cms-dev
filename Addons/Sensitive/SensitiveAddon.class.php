@@ -66,9 +66,11 @@ class SensitiveAddon extends Addon
 		
 	}
 
-    public function replaceSensitiveWords($content)
+    public function replaceSensitiveWords($param)
     {
-
+		
+		if(!$param||!$param["content"]) return "";
+		$content=$param["content"];
         $config = $this->getConfig();
         if ($config['is_open']) {
             $replace_words = S('replace_sensitive_words');
@@ -82,8 +84,9 @@ class SensitiveAddon extends Addon
             !empty($replace_words) && $content = strtr( $content, $replace_words);
 
         }
-
-        return  $content;
+		
+		echo $content;
+		
     }
 
 }

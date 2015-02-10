@@ -39,13 +39,13 @@
                             <td>{$vo.create_time|friendlyDate}</td>
 
 
-                            <td><a href="{:addons_url('Sensitive://Sensitive/editSensitive',array('id'=>$vo['id']))}">编辑</a>
+                            <td width="200"><a href="{:addons_url('Sensitive://Sensitive/editSensitive',array('id'=>$vo['id']))}">编辑</a>
                                 <if condition="$vo.status eq 1">
-                                    <a class="confirm ajax-get" href="{:addons_url('Sensitive://Sensitive/disable',array('id'=>$vo['id']))}">禁用</a>
+                                    <a class="ajax-get" href="{:addons_url('Sensitive://Sensitive/disable',array('id'=>$vo['id']))}">禁用</a>
                                     <else/>
-                                    <a class="confirm ajax-get" href="{:addons_url('Sensitive://Sensitive/enable',array('id'=>$vo['id']))}">启用</a>
+                                    <a class="ajax-get" href="{:addons_url('Sensitive://Sensitive/enable',array('id'=>$vo['id']))}">启用</a>
                                 </if>
-                                <a class="confirm ajax-get" href="{:addons_url('Sensitive://Sensitive/delSensitive',array('id'=>$vo['id']))}">删除</a>
+                                <a class="ajax-get" href="{:addons_url('Sensitive://Sensitive/delSensitive',array('id'=>$vo['id']))}">删除</a>
 
                             </td>
 

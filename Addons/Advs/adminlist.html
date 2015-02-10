@@ -26,11 +26,11 @@
 			<td>
 				<a href="{:addons_url('Advs://Advs/edit',array('id'=>$lv['id']))}">编辑</a>
 				<if condition="$lv.status eq 1">
-				<a class="confirm ajax-get" href="{:addons_url('Advs://Advs/forbidden',array('id'=>$lv['id']))}">禁用</a>
+				<a class="ajax-get" href="{:addons_url('Advs://Advs/forbidden',array('id'=>$lv['id']))}">禁用</a>
 				<else/>
-				<a class="confirm ajax-get" href="{:addons_url('Advs://Advs/off',array('id'=>$lv['id']))}">启用</a>
+				<a class="ajax-get" href="{:addons_url('Advs://Advs/off',array('id'=>$lv['id']))}">启用</a>
 				</if>
-				<a class="confirm ajax-get" href="{:addons_url('Advs://Advs/del',array('id'=>$lv['id']))}">删除</a>
+				<a class="ajax-get" href="{:addons_url('Advs://Advs/del',array('id'=>$lv['id']))}">删除</a>
 			</td>
 		</tr>
 		</volist>

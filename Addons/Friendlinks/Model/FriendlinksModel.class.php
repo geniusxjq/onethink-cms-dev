@@ -5,6 +5,7 @@ use Think\Model;
 /**
  * 分类模型
  */
+ 
 class FriendlinksModel extends Model{
 	
 	/* 自动完成规则 */
@@ -49,12 +50,12 @@ class FriendlinksModel extends Model{
 	}
 	
 	/* 禁用 */
-	public function forbidden($id){
+	public function off($id){
 		return $this->save(array('id'=>$id,'status'=>'0'));
 	}
 	
 	/* 启用 */
-	public function off($id){
+	public function on($id){
 		return $this->save(array('id'=>$id,'status'=>'1'));
 	}
 	

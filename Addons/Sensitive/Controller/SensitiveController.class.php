@@ -14,13 +14,13 @@ class SensitiveController extends AddonsController
 
     public function addSensitive()
     {
-
-
+		$this->meta_title = '新增敏感词';
         $this->display(T('Addons://Sensitive@Sensitive/edit'));
     }
 
     public function editSensitive()
     {
+		$this->meta_title = '编辑敏感词';
         $id = I('get.id', '');
         $current = U('/Admin/Addons/adminList/name/Advertising');
         $detail = D('Addons://Sensitive/Sensitive')->detail($id);
@@ -71,6 +71,7 @@ class SensitiveController extends AddonsController
      */
     public function batch()
     {
+		$this->meta_title = '批量添加敏感词';
         if(IS_POST){
             $titles = I('post.titles');
             $qian=array(" ","　","\t","\n","\r");$hou=array("","","","","");
@@ -112,7 +113,7 @@ class SensitiveController extends AddonsController
             }
             S('replace_sensitive_words',null);
             $this->success('成功启用该敏感词', Cookie('__forward__'));
-        } elseif ($status == 1) {
+        } elseif ($status == 0) {
             foreach ($ids as $id) {
                 D('Addons://Sensitive/Sensitive')->off($id);
             }
