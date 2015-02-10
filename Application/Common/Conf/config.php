@@ -47,6 +47,6 @@ return array(
     'DOCUMENT_MODEL_TYPE' => array(2 => '主题', 1 => '目录', 3 => '段落'),
 	
 	/*加载扩展函数文件*/
-	'LOAD_EXT_FILE'=>'time,array',
+	'LOAD_EXT_FILE'=>'time,parse',
 	
 );
