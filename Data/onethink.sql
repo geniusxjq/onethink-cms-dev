@@ -63,19 +63,12 @@ CREATE TABLE `onethink_action_log` (
   KEY `action_ip_ix` (`action_ip`),
   KEY `action_id_ix` (`action_id`),
   KEY `user_id_ix` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=66 DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED COMMENT='ĞĞÎªÈÕÖ¾±í';
+) ENGINE=MyISAM AUTO_INCREMENT=68 DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED COMMENT='ĞĞÎªÈÕÖ¾±í';
 
 #
 # Dumping data for table onethink_action_log
 #
 
-INSERT INTO `onethink_action_log` VALUES (60,1,1,2130706433,'member',1,'adminÔÚ2015-02-06 16:36µÇÂ¼ÁËºóÌ¨',1,1423211815);
-INSERT INTO `onethink_action_log` VALUES (61,1,1,2130706433,'member',1,'adminÔÚ2015-02-07 15:43µÇÂ¼ÁËºóÌ¨',1,1423295015);
-INSERT INTO `onethink_action_log` VALUES (62,1,1,2130706433,'member',1,'adminÔÚ2015-02-08 13:42µÇÂ¼ÁËºóÌ¨',1,1423374174);
-INSERT INTO `onethink_action_log` VALUES (63,1,1,2130706433,'member',1,'adminÔÚ2015-02-09 13:06µÇÂ¼ÁËºóÌ¨',1,1423458397);
-INSERT INTO `onethink_action_log` VALUES (64,1,1,2130706433,'member',1,'adminÔÚ2015-02-09 18:37µÇÂ¼ÁËºóÌ¨',1,1423478270);
-INSERT INTO `onethink_action_log` VALUES (65,1,1,2130706433,'member',1,'adminÔÚ2015-02-10 00:11µÇÂ¼ÁËºóÌ¨',1,1423498263);
-INSERT INTO `onethink_action_log` VALUES (66,10,1,2130706433,'Menu',124,'²Ù×÷url£º/admin.php?s=/Menu/add.html',1,1423502830);
 
 #
 # Source for table onethink_addons
@@ -93,33 +86,34 @@ CREATE TABLE `onethink_addons` (
   `version` varchar(20) DEFAULT '' COMMENT '°æ±¾ºÅ',
   `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '°²×°Ê±¼ä',
   `has_adminlist` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT 'ÊÇ·ñÓĞºóÌ¨ÁĞ±í',
+  `is_locked` tinyint(1) DEFAULT '0' COMMENT '²å¼şÊÇ·ñÒÑ±»Ëø¶¨',
   `sort` int(10) DEFAULT '0' COMMENT 'ÒÑ°²×°²å¼ş²Ëµ¥ÅÅĞò',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=105 DEFAULT CHARSET=utf8 COMMENT='²å¼ş±í';
+) ENGINE=MyISAM AUTO_INCREMENT=109 DEFAULT CHARSET=utf8 COMMENT='²å¼ş±í';
 
 #
 # Dumping data for table onethink_addons
 #
 
-INSERT INTO `onethink_addons` VALUES (2,'SiteStat','Õ¾µãÍ³¼ÆĞÅÏ¢','Í³¼ÆÕ¾µãµÄ»ù´¡ĞÅÏ¢',1,'{\"title\":\"\\u7cfb\\u7edf\\u4fe1\\u606f\",\"width\":\"1\",\"display\":\"1\",\"status\":\"0\"}','thinkphp','0.1',1379512015,0,0);
-INSERT INTO `onethink_addons` VALUES (3,'DevTeam','¿ª·¢ÍÅ¶ÓĞÅÏ¢','¿ª·¢ÍÅ¶Ó³ÉÔ±ĞÅÏ¢',1,'{\"title\":\"OneThink\\u5f00\\u53d1\\u56e2\\u961f\",\"width\":\"2\",\"display\":\"1\"}','thinkphp','0.1',1379512022,0,0);
-INSERT INTO `onethink_addons` VALUES (4,'SystemInfo','ÏµÍ³»·¾³ĞÅÏ¢','ÓÃÓÚÏÔÊ¾Ò»Ğ©·şÎñÆ÷µÄĞÅÏ¢',1,'{\"title\":\"\\u7cfb\\u7edf\\u4fe1\\u606f\",\"width\":\"2\",\"display\":\"1\"}','thinkphp','0.1',1379512036,0,0);
-INSERT INTO `onethink_addons` VALUES (5,'Editor','Ç°Ì¨±à¼­Æ÷','ÓÃÓÚÔöÇ¿ÕûÕ¾³¤ÎÄ±¾µÄÊäÈëºÍÏÔÊ¾',1,'{\"editor_type\":\"2\",\"editor_wysiwyg\":\"1\",\"editor_height\":\"300px\",\"editor_resize_type\":\"1\"}','thinkphp','0.1',1379830910,0,0);
-INSERT INTO `onethink_addons` VALUES (6,'Attachment','¸½¼ş','ÓÃÓÚÎÄµµÄ£ĞÍÉÏ´«¸½¼ş',1,'null','thinkphp','0.1',1379842319,1,1);
-INSERT INTO `onethink_addons` VALUES (9,'SocialComment','Í¨ÓÃÉç½»»¯ÆÀÂÛ','¼¯³ÉÁË¸÷ÖÖÉç½»»¯ÆÀÂÛ²å¼ş£¬ÇáËÉ¼¯³Éµ½ÏµÍ³ÖĞ¡£',1,'{\"comment_type\":\"1\",\"comment_uid_youyan\":\"\",\"comment_short_name_duoshuo\":\"\",\"comment_data_list_duoshuo\":\"\"}','thinkphp','0.1',1380273962,0,0);
-INSERT INTO `onethink_addons` VALUES (15,'EditorForAdmin','ºóÌ¨±à¼­Æ÷','ÓÃÓÚÔöÇ¿ÕûÕ¾³¤ÎÄ±¾µÄÊäÈëºÍÏÔÊ¾',1,'{\"editor_type\":\"2\",\"editor_wysiwyg\":\"1\",\"editor_height\":\"500px\",\"editor_resize_type\":\"1\"}','thinkphp','0.1',1383126253,0,0);
-INSERT INTO `onethink_addons` VALUES (43,'Water','Í¼Æ¬Ë®Ó¡','ÓÃÓÚÎªÉÏ´«µÄÍ¼Æ¬Ìí¼ÓË®Ó¡',1,'{\"switch\":\"1\",\"water\":\".\\/Uploads\\/water\\/water.png\",\"position\":\"9\"}','xjw129xjt','0.1',1422720236,0,0);
-INSERT INTO `onethink_addons` VALUES (45,'ReturnTop','·µ»Ø¶¥²¿','»Øµ½¶¥²¿ÃÀ»¯£¬Ëæ»ú»òÖ¸¶¨ÏÔÊ¾£¬100¿îÑùÊ½£¬Ã¿ÌìÒ»ÖÖ»»£¬ÌìÌì¶¼ÓÃĞÂÑùÊ½',1,'{\"random\":\"0\",\"current\":\"68\"}','thinkphp','0.1',1422723050,0,0);
-INSERT INTO `onethink_addons` VALUES (82,'Comment','ÆÀÂÛ¹¦ÄÜ','ÓÃÓÚ¸÷ÖÖÀàĞÍÎÄµµÆÀÂÛ',1,'null','Wolixli','0.1',1422871179,1,3);
-INSERT INTO `onethink_addons` VALUES (84,'BaiduShare','°Ù¶È·ÖÏí','ÓÃ»§½«ÍøÕ¾ÄÚÈİ·ÖÏíµ½µÚÈı·½ÍøÕ¾£¬µÚÈı·½ÍøÕ¾µÄÓÃ»§µã»÷×¨ÓĞµÄ·ÖÏíÁ´½Ó£¬´ÓµÚÈı·½ÍøÕ¾´øÀ´Éç»á»¯Á÷Á¿¡£',1,'{\"openbutton\":\"0\",\"buttonlist\":[\"mshare\",\"qzone\",\"tsina\",\"renren\",\"tqq\",\"tieba\"],\"button_size\":\"1\",\"openimg\":\"0\",\"imglist\":[\"mshare\",\"qzone\",\"tsina\",\"renren\",\"tqq\",\"tieba\"],\"img_size\":\"1\",\"openselect\":\"0\",\"selectlist\":[\"mshare\",\"qzone\",\"tsina\",\"renren\",\"tqq\",\"tieba\"]}','jesuspan','0.1',1422871419,0,0);
-INSERT INTO `onethink_addons` VALUES (91,'Unslider','½¹µãÍ¼','½¹µãÍ¼',1,'{\"title\":\"Uslider\",\"display\":\"1\"}','cepljxiongjun','0.1',1422885933,0,0);
-INSERT INTO `onethink_addons` VALUES (94,'SyncLogin','µÚÈı·½ÕËºÅÍ¬²½µÇÂ½','µÚÈı·½ÕËºÅÍ¬²½µÇÂ½',1,'{\"type\":null,\"meta\":\"\",\"QqKEY\":\"\",\"QqSecret\":\"\",\"SinaKEY\":\"\",\"SinaSecret\":\"\"}','yidian','0.1',1423064815,0,0);
-INSERT INTO `onethink_addons` VALUES (95,'Mail','ÓÊ¼ş¶©ÔÄ','ÓÊ¼ş¶©ÔÄ²å¼ş',1,'null','xjw129xjt','0.1.1',1423065015,1,2);
-INSERT INTO `onethink_addons` VALUES (96,'Friendlinks','ÓÑÇéÁ´½Ó','ÓÑÇéÁ´½Ó',1,'{\"random\":\"1\"}','geniusxjq(app880.com)','0.1',1423065141,1,5);
-INSERT INTO `onethink_addons` VALUES (100,'Guestbook','ÁôÑÔ°å','ÕâÊÇÒ»¸ö¼òµ¥µÄÁôÑÔ°å',1,'{\"display\":\"1\",\"messages_check\":\"1\"}','geniusxjq(ap880.com)','0.2',1423131727,1,4);
-INSERT INTO `onethink_addons` VALUES (102,'Schedule','¼Æ»®ÈÎÎñ','Ö´ĞĞ¼Æ»®ÈÎÎñ²å¼ş',1,'{\"random\":\"1\"}','iszhang','0.1',1423148478,1,6);
-INSERT INTO `onethink_addons` VALUES (103,'Advs','¹ã¸æ¹ÜÀí','¹ã¸æ²å¼ş',1,'null','onep2p','0.1',1423235238,1,7);
-INSERT INTO `onethink_addons` VALUES (104,'Advertising','¹ã¸æÎ»ÖÃ','¹ã¸æÎ»²å¼ş',1,'null','onep2p','0.1',1423235264,1,8);
+INSERT INTO `onethink_addons` VALUES (2,'SiteStat','Õ¾µãÍ³¼ÆĞÅÏ¢','Í³¼ÆÕ¾µãµÄ»ù´¡ĞÅÏ¢',1,'{\"title\":\"\\u7cfb\\u7edf\\u4fe1\\u606f\",\"width\":\"1\",\"display\":\"1\",\"status\":\"0\"}','thinkphp','0.1',1379512015,0,1,0);
+INSERT INTO `onethink_addons` VALUES (3,'DevTeam','¿ª·¢ÍÅ¶ÓĞÅÏ¢','¿ª·¢ÍÅ¶Ó³ÉÔ±ĞÅÏ¢',1,'{\"title\":\"OneThink\\u5f00\\u53d1\\u56e2\\u961f\",\"width\":\"2\",\"display\":\"1\"}','thinkphp','0.1',1379512022,0,1,0);
+INSERT INTO `onethink_addons` VALUES (4,'SystemInfo','ÏµÍ³»·¾³ĞÅÏ¢','ÓÃÓÚÏÔÊ¾Ò»Ğ©·şÎñÆ÷µÄĞÅÏ¢',1,'{\"title\":\"\\u7cfb\\u7edf\\u4fe1\\u606f\",\"width\":\"2\",\"display\":\"1\"}','thinkphp','0.1',1379512036,0,1,0);
+INSERT INTO `onethink_addons` VALUES (5,'Editor','Ç°Ì¨±à¼­Æ÷','ÓÃÓÚÔöÇ¿ÕûÕ¾³¤ÎÄ±¾µÄÊäÈëºÍÏÔÊ¾',1,'{\"editor_type\":\"2\",\"editor_wysiwyg\":\"1\",\"editor_height\":\"300px\",\"editor_resize_type\":\"1\"}','thinkphp','0.1',1379830910,0,1,0);
+INSERT INTO `onethink_addons` VALUES (6,'Attachment','¸½¼ş','ÓÃÓÚÎÄµµÄ£ĞÍÉÏ´«¸½¼ş',1,'null','thinkphp','0.1',1379842319,1,1,1);
+INSERT INTO `onethink_addons` VALUES (9,'SocialComment','Í¨ÓÃÉç½»»¯ÆÀÂÛ','¼¯³ÉÁË¸÷ÖÖÉç½»»¯ÆÀÂÛ²å¼ş£¬ÇáËÉ¼¯³Éµ½ÏµÍ³ÖĞ¡£',1,'{\"comment_type\":\"1\",\"comment_uid_youyan\":\"\",\"comment_short_name_duoshuo\":\"\",\"comment_data_list_duoshuo\":\"\"}','thinkphp','0.1',1380273962,0,1,0);
+INSERT INTO `onethink_addons` VALUES (15,'EditorForAdmin','ºóÌ¨±à¼­Æ÷','ÓÃÓÚÔöÇ¿ÕûÕ¾³¤ÎÄ±¾µÄÊäÈëºÍÏÔÊ¾',1,'{\"editor_type\":\"2\",\"editor_wysiwyg\":\"1\",\"editor_height\":\"500px\",\"editor_resize_type\":\"1\"}','thinkphp','0.1',1383126253,0,1,0);
+INSERT INTO `onethink_addons` VALUES (82,'Comment','ÆÀÂÛ¹¦ÄÜ','ÓÃÓÚ¸÷ÖÖÀàĞÍÎÄµµÆÀÂÛ',1,'null','Wolixli','0.1',1422871179,1,0,3);
+INSERT INTO `onethink_addons` VALUES (84,'BaiduShare','°Ù¶È·ÖÏí','ÓÃ»§½«ÍøÕ¾ÄÚÈİ·ÖÏíµ½µÚÈı·½ÍøÕ¾£¬µÚÈı·½ÍøÕ¾µÄÓÃ»§µã»÷×¨ÓĞµÄ·ÖÏíÁ´½Ó£¬´ÓµÚÈı·½ÍøÕ¾´øÀ´Éç»á»¯Á÷Á¿¡£',1,'{\"openbutton\":\"0\",\"buttonlist\":[\"mshare\",\"qzone\",\"tsina\",\"renren\",\"tqq\",\"tieba\"],\"button_size\":\"1\",\"openimg\":\"0\",\"imglist\":[\"mshare\",\"qzone\",\"tsina\",\"renren\",\"tqq\",\"tieba\"],\"img_size\":\"1\",\"openselect\":\"0\",\"selectlist\":[\"mshare\",\"qzone\",\"tsina\",\"renren\",\"tqq\",\"tieba\"]}','jesuspan','0.1',1422871419,0,0,0);
+INSERT INTO `onethink_addons` VALUES (91,'Unslider','½¹µãÍ¼','½¹µãÍ¼',1,'{\"title\":\"Uslider\",\"display\":\"1\"}','cepljxiongjun','0.1',1422885933,0,0,0);
+INSERT INTO `onethink_addons` VALUES (94,'SyncLogin','µÚÈı·½ÕËºÅÍ¬²½µÇÂ½','µÚÈı·½ÕËºÅÍ¬²½µÇÂ½',1,'{\"type\":null,\"meta\":\"\",\"QqKEY\":\"\",\"QqSecret\":\"\",\"SinaKEY\":\"\",\"SinaSecret\":\"\"}','yidian','0.1',1423064815,0,0,0);
+INSERT INTO `onethink_addons` VALUES (95,'Mail','ÓÊ¼ş¶©ÔÄ','ÓÊ¼ş¶©ÔÄ²å¼ş',1,'null','xjw129xjt','0.1.1',1423065015,1,1,2);
+INSERT INTO `onethink_addons` VALUES (96,'Friendlinks','ÓÑÇéÁ´½Ó','ÓÑÇéÁ´½Ó',1,'{\"random\":\"1\"}','geniusxjq(app880.com)','0.1',1423065141,1,0,5);
+INSERT INTO `onethink_addons` VALUES (100,'Guestbook','ÁôÑÔ°å','ÕâÊÇÒ»¸ö¼òµ¥µÄÁôÑÔ°å',1,'{\"display\":\"1\",\"messages_check\":\"1\"}','geniusxjq(ap880.com)','0.2',1423131727,1,0,4);
+INSERT INTO `onethink_addons` VALUES (102,'Schedule','¼Æ»®ÈÎÎñ','Ö´ĞĞ¼Æ»®ÈÎÎñ²å¼ş',1,'{\"random\":\"1\"}','iszhang','0.1',1423148478,1,0,6);
+INSERT INTO `onethink_addons` VALUES (103,'Advs','¹ã¸æ¹ÜÀí','¹ã¸æ²å¼ş',1,'null','onep2p','0.1',1423235238,1,0,8);
+INSERT INTO `onethink_addons` VALUES (104,'Advertising','¹ã¸æÎ»ÖÃ','¹ã¸æÎ»²å¼ş',1,'null','onep2p','0.1',1423235264,1,0,7);
+INSERT INTO `onethink_addons` VALUES (105,'ReturnTop','·µ»Ø¶¥²¿','»Øµ½¶¥²¿ÃÀ»¯£¬Ëæ»ú»òÖ¸¶¨ÏÔÊ¾£¬100¿îÑùÊ½£¬Ã¿ÌìÒ»ÖÖ»»£¬ÌìÌì¶¼ÓÃĞÂÑùÊ½',1,'{\"random\":\"0\",\"current\":\"68\"}','thinkphp','0.1',1423562780,0,0,0);
+INSERT INTO `onethink_addons` VALUES (108,'Water','Í¼Æ¬Ë®Ó¡','ÓÃÓÚÎªÉÏ´«µÄÍ¼Æ¬Ìí¼ÓË®Ó¡',1,'{\"switch\":\"1\",\"water\":\"\",\"position\":\"9\"}','xjw129xjt','0.1',1423563901,0,1,0);
 
 #
 # Source for table onethink_advertising
@@ -776,7 +770,7 @@ CREATE TABLE `onethink_document` (
 #
 
 INSERT INTO `onethink_document` VALUES (5,1,'','tt',2,0,'',0,0,2,2,0,0,22,1,0,0,0,0,0,0,1422970946,1422970946,3);
-INSERT INTO `onethink_document` VALUES (6,1,'','01',2,0,'',0,0,2,2,0,0,27,1,0,0,16,0,0,0,1422981600,1423297290,1);
+INSERT INTO `onethink_document` VALUES (6,1,'','01',2,0,'',0,0,2,2,0,0,27,1,0,0,17,0,0,0,1422981600,1423297290,1);
 INSERT INTO `onethink_document` VALUES (7,1,'','01',2,0,'',0,0,2,2,0,0,27,1,0,0,0,0,0,0,1422981607,1422981607,3);
 
 #
@@ -921,10 +915,10 @@ INSERT INTO `onethink_hooks` VALUES (5,'documentDetailBefore','Ò³ÃæÄÚÈİÇ°ÏÔÊ¾ÓÃ¹
 INSERT INTO `onethink_hooks` VALUES (6,'documentSaveComplete','±£´æÎÄµµÊı¾İºóµÄÀ©Õ¹¹³×Ó',2,0,'Attachment',1);
 INSERT INTO `onethink_hooks` VALUES (7,'documentEditFormContent','Ìí¼Ó±à¼­±íµ¥µÄÄÚÈİÏÔÊ¾¹³×Ó',1,0,'Editor',1);
 INSERT INTO `onethink_hooks` VALUES (8,'adminArticleEdit','ºóÌ¨ÄÚÈİ±à¼­Ò³±à¼­Æ÷',1,1378982734,'EditorForAdmin',1);
-INSERT INTO `onethink_hooks` VALUES (13,'AdminIndex','Ê×Ò³Ğ¡¸ñ×Ó¸öĞÔ»¯ÏÔÊ¾',1,1382596073,'SiteStat,SystemInfo,DevTeam,Water,Mail,Advertising',1);
+INSERT INTO `onethink_hooks` VALUES (13,'AdminIndex','Ê×Ò³Ğ¡¸ñ×Ó¸öĞÔ»¯ÏÔÊ¾',1,1382596073,'SiteStat,SystemInfo,DevTeam,Mail,Advertising,Water',1);
 INSERT INTO `onethink_hooks` VALUES (14,'topicComment','ÆÀÂÛÌá½»·½Ê½À©Õ¹¹³×Ó¡£',1,1380163518,'Editor',1);
 INSERT INTO `onethink_hooks` VALUES (16,'app_begin','Ó¦ÓÃ¿ªÊ¼',2,1384481614,'Schedule',1);
-INSERT INTO `onethink_hooks` VALUES (27,'pageFooter','Ò³Ãæfooter¹³×Ó£¬Ò»°ãÓÃÓÚ¼ÓÔØ²å¼şJSÎÄ¼şºÍJS´úÂë',1,1422719676,'ReturnTop,Unslider,Mail,Friendlinks',1);
+INSERT INTO `onethink_hooks` VALUES (27,'pageFooter','Ò³Ãæfooter¹³×Ó£¬Ò»°ãÓÃÓÚ¼ÓÔØ²å¼şJSÎÄ¼şºÍJS´úÂë',1,1422719676,'Unslider,Mail,Friendlinks,ReturnTop',1);
 INSERT INTO `onethink_hooks` VALUES (29,'dealPicture','´¦ÀíÉÏ´«Í¼Æ¬µÄ¹³×Ó£¬ÔÚÏµÍ³µÄUpload.class.phpÍ¼Æ¬ÉÏ´«¹ı³ÌÖĞµ÷ÓÃ£¬¶ÔÉÏ´«µÄÍ¼Æ¬½øĞĞ¶îÍâµÄ´¦Àí¡£',2,1422726029,'Water',1);
 INSERT INTO `onethink_hooks` VALUES (56,'Unslider','Unslider½¹µãÍ¼µÄUnslider¹³×Ó',1,1422885933,'Unslider',1);
 INSERT INTO `onethink_hooks` VALUES (59,'SyncLogin','SyncLoginµÚÈı·½ÕËºÅÍ¬²½µÇÂ½µÄSyncLogin¹³×Ó',1,1423064815,'SyncLogin',1);
@@ -1053,7 +1047,7 @@ CREATE TABLE `onethink_member` (
 # Dumping data for table onethink_member
 #
 
-INSERT INTO `onethink_member` VALUES (1,'admin',0,'0000-00-00','',20,31,0,1422599239,2130706433,1423498263,1);
+INSERT INTO `onethink_member` VALUES (1,'admin',0,'0000-00-00','',20,32,0,1422599239,2130706433,1423546742,1);
 INSERT INTO `onethink_member` VALUES (2,'xjq',0,'0000-00-00','',10,2,0,0,2130706433,1422699744,1);
 INSERT INTO `onethink_member` VALUES (3,'geniusxjq',0,'0000-00-00','',20,7,2130706433,1422700152,2130706433,1423068443,1);
 
@@ -1076,7 +1070,7 @@ CREATE TABLE `onethink_menu` (
   PRIMARY KEY (`id`),
   KEY `pid` (`pid`),
   KEY `status` (`status`)
-) ENGINE=MyISAM AUTO_INCREMENT=124 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=125 DEFAULT CHARSET=utf8;
 
 #
 # Dumping data for table onethink_menu
@@ -1277,8 +1271,6 @@ CREATE TABLE `onethink_schedule` (
 # Dumping data for table onethink_schedule
 #
 
-INSERT INTO `onethink_schedule` VALUES (13,'aa','ONCE','','','*','2015-02-10 12:00:00','2015-02-10 11:59:59',NULL,'');
-INSERT INTO `onethink_schedule` VALUES (14,'ff','ONCE','','','Jan,Feb,Mar,May,Aug,Sep,Nov,Dec','2015-02-10 12:00:00','2015-02-10 11:59:59',NULL,'');
 
 #
 # Source for table onethink_sync_login
@@ -1368,7 +1360,7 @@ CREATE TABLE `onethink_ucenter_member` (
 # Dumping data for table onethink_ucenter_member
 #
 
-INSERT INTO `onethink_ucenter_member` VALUES (1,'admin','ecfb4272feb1d1fd11fc719c45b5e21d','836692464@qq.com','',1422599239,2130706433,1423498263,2130706433,1422599239,1);
+INSERT INTO `onethink_ucenter_member` VALUES (1,'admin','ecfb4272feb1d1fd11fc719c45b5e21d','836692464@qq.com','',1422599239,2130706433,1423546742,2130706433,1422599239,1);
 INSERT INTO `onethink_ucenter_member` VALUES (2,'xjq','bbe81237a2de1471f322ae25b0132dfc','app880@foxmail.com','',1422698522,2130706433,1422699744,2130706433,1422698522,1);
 INSERT INTO `onethink_ucenter_member` VALUES (3,'geniusxjq','bbe81237a2de1471f322ae25b0132dfc','geniusxjq@126.com','',1422699641,2130706433,1423068443,2130706433,1422699641,1);
 
