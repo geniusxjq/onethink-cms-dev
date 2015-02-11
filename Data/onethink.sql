@@ -939,28 +939,6 @@ INSERT INTO `onethink_hooks` VALUES (69,'app_end','应用结束',2,1423674478,'Sched
 INSERT INTO `onethink_hooks` VALUES (70,'Friendlinks','Friendlinks友情链接的Friendlinks钩子',1,1423674889,'Friendlinks',1);
 
 #
-# Source for table onethink_listtmp
-#
-
-DROP TABLE IF EXISTS `onethink_listtmp`;
-CREATE TABLE `onethink_listtmp` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(200) CHARACTER SET utf8 NOT NULL,
-  `url` text CHARACTER SET utf8 NOT NULL,
-  `source` text CHARACTER SET utf8 NOT NULL,
-  `sourceurl` text CHARACTER SET utf8 NOT NULL,
-  `dates` int(10) NOT NULL,
-  `st` int(1) NOT NULL,
-  `zt` int(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-#
-# Dumping data for table onethink_listtmp
-#
-
-
-#
 # Source for table onethink_mail_history
 #
 
