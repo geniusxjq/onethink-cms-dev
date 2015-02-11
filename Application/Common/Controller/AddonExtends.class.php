@@ -164,8 +164,8 @@ abstract class AddonExtends{
 	
 	*/
 	
-	public function existAddon($addon_name=''){
-		
+	public function isInstalled($addon_name=''){
+				
 		if(!$addon_name) return false;
 		
 		$model=M("Addons");

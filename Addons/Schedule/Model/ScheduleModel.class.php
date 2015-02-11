@@ -6,6 +6,7 @@ use Think\Model;
 /**
  * Schedule模型
  */
+ 
 class ScheduleModel extends Model{
 	private $MONTH_ARRAY 	= array('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec');
 	private $WEEK_ARRAY  	= array('Mon','Tue','Wed','Thu','Fri','Sat','Sun');
@@ -83,18 +84,29 @@ class ScheduleModel extends Model{
 		}
 		
 		if(strtoupper($schedule['schedule_type']) == 'ONCE') {
+			
 			//ONCE类型的计划任务，将end_datetime设置为当前时间
+			
 			$schedule['end_datetime'] = date('Y-m-d H:i:s');
+						
 		}else {
+			
 			//非ONCE类型的计划任务， 防止由程序执行导致的启动时间的漂移
+			
 			if(in_array($schedule['schedule_type'], array('MINUTE', 'HOURLY'))) {
+				
 				//将last_run_time设置为当前时间（秒数设为0）
+				
 				$schedule['last_run_time'] = date('Y-m-d H:i:s',$this->setSecondToZero());
+				
 			}else {
+				
 				//将last_run_time设置为当前日期+预定时间
+				
 				$now_date = date('Y-m-d');
 				$fixed_time = date('H:i:s', strtotime($schedule['start_datetime']));
 				$schedule['last_run_time'] = $now_date . ' ' . $fixed_time;
+				
 			}
 		}
 		$this->saveSchedule($schedule);
@@ -193,7 +205,20 @@ class ScheduleModel extends Model{
 		//更新到数据库
 		if( $this->isValidSchedule($schedule) ) {
 			
-			$data['last_run_time'] = $schedule['last_run_time'];
+			if(strtoupper($schedule['schedule_type']) == 'ONCE') {
+				
+				//ONCE类型的计划任务，将end_datetime和last_run_time设为相同
+				
+				$data['end_datetime'] = $schedule['end_datetime'];
+				
+				$data['last_run_time'] = $schedule['end_datetime'];
+			
+			}else{
+				
+				$data['last_run_time'] = $schedule['last_run_time'];
+				
+			}
+			
 			$map['id'] = $schedule['id'];
 			$res = $this->where($map)->save($data);
 			$this->cleanCache();

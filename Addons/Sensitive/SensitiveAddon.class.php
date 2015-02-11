@@ -67,12 +67,28 @@ class SensitiveAddon extends Addon
 		
 	}
 	
-	//过滤敏感词
+	/*
+	
+	过滤敏感词（外部调用的方法，非钩子）
+	
+	方法已经在公共函数文件"Common/Common/parse.php"中的"parseContent"公共方法中调用
+	
+	@param array $param 传入的内容
+	
+	格式：
+	
+	$param=array('content'=>'');
+	
+	*/
 	
 	 public function parseSensitiveWords($param=array())
     {
 		
 		if(!$param||!$param["content"]) return "";
+		
+		if(!$this->isInstalled($this->info['name'])) //如果未安装则直接返回内容（不做处理）
+		return $param["content"];
+		
 		$content=$param["content"];
         $config = $this->getConfig();
         if ($config['is_open']) {
@@ -92,13 +108,4 @@ class SensitiveAddon extends Addon
 		
 	}
 	
-	//过滤敏感词钩子
-
-    public function replaceSensitiveWords($param=array())
-    {
-		
-		echo $this->parseSensitiveWords($param);
-		
-    }
-
 }

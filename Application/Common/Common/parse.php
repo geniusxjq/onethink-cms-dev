@@ -1,19 +1,17 @@
 <?php
 
+// +----------------------------------------------------------------------
+// | Author: genisuxjq <app880@foxmail.com> <http://www.app880.com>
+// +----------------------------------------------------------------------
+
 /*
-
-解析文本内容（主要用于内容的过滤。如敏感词过滤）
-
-@param $content string 要解析的内容
-
+ 解析文本内容（主要用于内容的过滤。如敏感词过滤）
+ @param $content string 要解析的内容
 */
 
 function parseContent($content){
 	
-	/*
-	调用敏感词过滤插件类(SensitiveAddon)进行敏感此过滤
-	*/
-	
+	/*调用敏感词过滤插件类(SensitiveAddon)进行敏感词过滤*/
 	$class=get_addon_class("Sensitive");
 	
 	if(class_exists($class)){
@@ -23,10 +21,7 @@ function parseContent($content){
 		$content=$class->parseSensitiveWords(array('content'=>$content));
 		
 	}
-	
-	/*
-	敏感词过滤 END
-	*/
+	/*敏感词过滤 END*/
 	
 	return $content;
 
@@ -57,7 +52,7 @@ function getSubByKey($pArray, $pKey = "", $pCondition = "")
     }
 }
 
-// 获取字串首字母
+/*获取字串首字母*/
 
 function getFirstLetter($s0) {
     $firstchar_ord = ord(strtoupper($s0{0}));

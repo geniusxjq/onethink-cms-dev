@@ -34,25 +34,25 @@ use Common\Controller\Addon;
 										   						
 			'install_sql'=>"DROP TABLE IF EXISTS `onethink_comment`;
 			CREATE TABLE `onethink_comment` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `pid` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '回复别人评论的',
-  `model_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '是哪个文档模型的',
-  `cid` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '内容id,name和cid来定位是哪个内容的',
-  `comment` text COMMENT '评论内容',
-  `digg` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '赞数（顶）',
-  `com_ip` bigint(20) NOT NULL DEFAULT '0' COMMENT '评论IP',
-  `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '添加时间',
-  `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否被删除',
-  `uid` int(10) unsigned DEFAULT NULL COMMENT '是哪位大仙回复的,0为非网站用户',
-  `uname` varchar(200) DEFAULT NULL COMMENT '非网站用户使用的名称',
-  `uemail` varchar(200) DEFAULT NULL COMMENT '非网站用户使用的邮箱',
-  `uurl` varchar(200) DEFAULT NULL COMMENT '非网站用户使用网站地址',
-  PRIMARY KEY (`id`),
-  KEY `uid` (`uid`),
-  KEY `model_id` (`model_id`),
-  KEY `cid` (`cid`)
-)  ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='评论功能表';
-",
+			`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+			`pid` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '回复别人评论的',
+			`model_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '是哪个文档模型的',
+			`cid` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '内容id,name和cid来定位是哪个内容的',
+			`comment` text COMMENT '评论内容',
+			`digg` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '赞数（顶）',
+			`com_ip` bigint(20) NOT NULL DEFAULT '0' COMMENT '评论IP',
+			`create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '添加时间',
+			`status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否被删除',
+			`uid` int(10) unsigned DEFAULT NULL COMMENT '是哪位大仙回复的,0为非网站用户',
+			`uname` varchar(200) DEFAULT NULL COMMENT '非网站用户使用的名称',
+			`uemail` varchar(200) DEFAULT NULL COMMENT '非网站用户使用的邮箱',
+			`uurl` varchar(200) DEFAULT NULL COMMENT '非网站用户使用网站地址',
+			PRIMARY KEY (`id`),
+			KEY `uid` (`uid`),
+			KEY `model_id` (`model_id`),
+			KEY `cid` (`cid`)
+			)  ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='评论功能表';
+			",
 			  
 			'uninstall_sql'=>"DROP TABLE IF EXISTS `onethink_comment`;"
         );
@@ -88,6 +88,7 @@ use Common\Controller\Addon;
 
         //实现的documentDetailAfter钩子方法
         public function documentDetailAfter($info = array()){
+			
 			if(empty($info) || empty($info['id']) ||  empty($info['model_id'])){ //数据不正确
 				return ;
 			}
@@ -95,15 +96,13 @@ use Common\Controller\Addon;
 			/* 获取当评论 */
 			$commenDao = D('Addons://Comment/Comment');
 			$map = array('model_id' => $info['model_id'],'cid' => $info['id'], 'status' => 1);
-
 			$allcomments = $commenDao->where($map)->order('create_time DESC, id DESC')->select();
 			$comments = list_to_tree($allcomments, 'id', 'pid', 'reply', 0);
 			$comments_number = $commenDao->where($map)->order('create_time DESC, id DESC')->count();
 			$this->assign('comments',   $comments);
 			$this->assign('comments_number',   $comments_number);
 			$this->display(T('Addons://Comment@Content/comment'));
+			
         }
-
-
 
     }
