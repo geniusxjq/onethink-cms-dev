@@ -155,6 +155,30 @@ abstract class AddonExtends{
 		
         $model->where($condition)->delete();
     }
+	
+	/*
+	
+	判断插件是否已经安装
+	
+	@param $addon_name string  插件名称(name)
+	
+	*/
+	
+	public function addon_install_has($addon_name=''){
+		
+		if(!$addon_name) return false;
+		
+		$model=M("Addons");
+		
+		$map=array(
+				   
+			'name'=>$addon_name
+				   
+		);
+		
+		return ($model->where($map)->find())?true:false;
+		
+	}
 
 	/*
 	
@@ -172,10 +196,8 @@ abstract class AddonExtends{
 	) 
 	
 	*/
-	public function addon_install($install_info=''){
+	public function addon_install($install_info=array()){
 		
-		if($install_info=='') $install_info=array();
-
 		/* 先判断插件需要的钩子是否存在 */
 		if($install_info['hooks']){
 			
@@ -199,21 +221,23 @@ abstract class AddonExtends{
 	}
 	
 	/*
+	
 	卸载插件自带的SQL数据库（表）
+	
 	* @param array $install_info 安装插件用到的配置参数，如下：
 
 	array(
 		  
-		  hooks=>''，// 需要删除的钩子（如果没有可以不填）
+		  hooks=>''，// @string 需要创建的钩子（如果没有可以不填，如果要指定钩子类型则在钩子后面加上“冒号+钩子类型编号<ID>。如：hookName:1）（可选）
 		  
-		  sql=>'',//要执行的SQL语句（可选）
+		  install_sql=>'',//@string 安装时执行的SQL语句（可选）
+		  
+		  uninstall_sql=>'',//@string 卸载时执行的SQL语句（可选）
 	) 
 	
 	*/
-	public function addon_uninstall($install_info=''){
-		
-		if($install_info=='') $install_info=array();
-		
+	public function addon_uninstall($install_info=array()){
+				
 		//删除钩子
 		if($install_info['hooks']){
 			

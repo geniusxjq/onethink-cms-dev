@@ -8,7 +8,7 @@ use Common\Controller\Addon;
  * 敏感词插件
  * @author quick
  */
- 
+
 class SensitiveAddon extends Addon
 {
 
@@ -17,14 +17,13 @@ class SensitiveAddon extends Addon
         'title' => '敏感词',
         'description' => '敏感词过滤插件',
         'status' => 1,
-        'author' => 'xjw129xjt',
+        'author' => 'geniusxjq(app880.com)',
+		'url'=>"http://app880.com",
         'version' => '0.1'
     );
 	
 	public $addon_install_info=array(
-									 
-		'hooks'=>"replaceSensitiveWords:2",
-		
+									 		
 		'install_sql'=>"DROP TABLE IF EXISTS `onethink_sensitive`;
 		CREATE TABLE IF NOT EXISTS `onethink_sensitive` (
 		`id` int(11) NOT NULL AUTO_INCREMENT,
@@ -65,8 +64,10 @@ class SensitiveAddon extends Addon
 		return $this->addon_uninstall($this->addon_install_info);
 		
 	}
-
-    public function replaceSensitiveWords($param)
+	
+	//过滤敏感词
+	
+	 public function parseSensitiveWords($param=array())
     {
 		
 		if(!$param||!$param["content"]) return "";
@@ -85,7 +86,16 @@ class SensitiveAddon extends Addon
 
         }
 		
-		echo $content;
+		return $content;
+		
+	}
+	
+	//过滤敏感词钩子
+
+    public function replaceSensitiveWords($param=array())
+    {
+		
+		echo $this->parseSensitiveWords($param);
 		
     }
 

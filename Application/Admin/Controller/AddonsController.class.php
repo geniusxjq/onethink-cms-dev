@@ -735,8 +735,7 @@ str;
     }
 	
 	/**
-     * 已安装插件菜单排序
-     * @author huajie <banhuajie@163.com>
+     * 已安装插件后台菜单排序
      */
     public function sort(){
         if(IS_GET){
@@ -748,7 +747,7 @@ str;
                 $map['id'] = array('in',$ids);
             }
 			
-            $list = M('Addons')->where($map)->field('id,title')->order('sort asc,id asc')->select();
+            $list = M('Addons')->where($map)->field('id,title')->order('sort desc,id asc')->select();
 
             $this->assign('list', $list);
             $this->meta_title = '已安装插件菜单排序';
@@ -756,8 +755,9 @@ str;
         }elseif (IS_POST){
             $ids = I('post.ids');
             $ids = explode(',', $ids);
+			$len=sizeof($ids);
             foreach ($ids as $key=>$value){
-                $res = M('Addons')->where(array('id'=>$value))->setField('sort', $key+1);
+                $res = M('Addons')->where(array('id'=>$value))->setField('sort', $len-$key);
             }
             if($res !== false){
                 $this->success('排序成功！');

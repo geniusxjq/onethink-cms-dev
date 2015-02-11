@@ -44,6 +44,18 @@ class GuestbookModel extends Model{
             'is_show'=>3,// 1-始终显示 2-新增显示 3-编辑显示 0-不显示
             'value'=>0,//默认值
         ),
+		'nickname'=>array(
+            'name'=>'nickname',
+            'title'=>'昵称',
+            'type'=>'string',
+            'is_show'=>3,
+        ),
+		'content'=>array(
+            'name'=>'content',
+            'title'=>'留言内容',
+            'type'=>'textarea',
+            'is_show'=>3,
+        ),
         'is_pass'=>array(
             'name'=>'is_pass',
             'title'=>'是否通过',

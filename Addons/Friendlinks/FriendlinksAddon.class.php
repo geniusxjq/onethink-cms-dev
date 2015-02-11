@@ -50,7 +50,7 @@ use Think\Db;
         		),
         		'model'=>'Friendlinks',
         		'order'=>'level desc,id asc',
-				//'search_enable'=>'false',//是否显示搜索框
+				
         );
 		
         public $custom_adminlist = 'adminlist.html';

@@ -42,7 +42,7 @@
  * to an SMTP server.
  * original author: Chris Ryan
  */
-namespace Vendor;
+namespace Vendor\PHPMailer;
 class SMTP {
   /**
    *  SMTP server port

@@ -1,5 +1,37 @@
 <?php
 
+/*
+
+解析文本内容（主要用于内容的过滤。如敏感词过滤）
+
+@param $content string 要解析的内容
+
+*/
+
+function parseContent($content){
+	
+	/*
+	调用敏感词过滤插件类(SensitiveAddon)进行敏感此过滤
+	*/
+	
+	$class=get_addon_class("Sensitive");
+	
+	if(class_exists($class)){
+		
+		$class=new $class();	
+		
+		$content=$class->parseSensitiveWords(array('content'=>$content));
+		
+	}
+	
+	/*
+	敏感词过滤 END
+	*/
+	
+	return $content;
+
+}
+
 /**
  * 取一个二维数组中的每个数组的固定的键知道的值来形成一个新的一维数组
  * @param $pArray 一个二维数组
@@ -25,54 +57,3 @@ function getSubByKey($pArray, $pKey = "", $pCondition = "")
     }
 }
 
-/**
- * 限制字符串长度
- * @param        $str
- * @param int $length
- * @param string $ext
- * @return string
- */
-function getShort($str, $length = 40, $ext = '')
-{
-    $str = htmlspecialchars($str);
-    $str = strip_tags($str);
-    $str = htmlspecialchars_decode($str);
-    $strlenth = 0;
-    $out = '';
-    preg_match_all("/[\x01-\x7f]|[\xc2-\xdf][\x80-\xbf]|[\xe0-\xef][\x80-\xbf]{2}|[\xf0-\xff][\x80-\xbf]{3}/", $str, $match);
-    foreach ($match[0] as $v) {
-        preg_match("/[\xe0-\xef][\x80-\xbf]{2}/", $v, $matchs);
-        if (!empty($matchs[0])) {
-            $strlenth += 1;
-        } elseif (is_numeric($v)) {
-            //$strlenth +=  0.545;  // 字符像素宽度比例 汉字为1
-            $strlenth += 0.5; // 字符字节长度比例 汉字为1
-        } else {
-            //$strlenth +=  0.475;  // 字符像素宽度比例 汉字为1
-            $strlenth += 0.5; // 字符字节长度比例 汉字为1
-        }
-
-        if ($strlenth > $length) {
-            $output .= $ext;
-            break;
-        }
-
-        $output .= $v;
-    }
-    return $output;
-}
-
-
-/**带省略号的限制字符串长
- * @param $str
- * @param $num
- * @return string
- */
-function getShortSp($str, $num)
-{
-    if (utf8_strlen($str) > $num) {
-        $tag = '...';
-    }
-    $str = getShort($str, $num) . $tag;
-    return $str;
-}

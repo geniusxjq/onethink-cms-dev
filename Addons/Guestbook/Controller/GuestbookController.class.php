@@ -35,10 +35,10 @@ class GuestbookController extends AddonsController{
 		if($result){
 			
 			//$this->success('留言已提交！');
-			$this->ajaxReturn('成功记录');
+			$this->ajaxReturn('留言已提交！');
 		}else{
 			//$this->error('留言失败！');
-			$this->ajaxReturn('失败记录');
+			$this->ajaxReturn('留言失败！');
 		}
 	}
 }

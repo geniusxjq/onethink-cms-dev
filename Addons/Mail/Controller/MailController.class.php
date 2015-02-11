@@ -20,6 +20,7 @@ use Admin\Controller\AddonsController;
  * @package Addons\Mail\Controller
  * @author:xjw129xjt xjt@ourstu.com
  */
+
 class MailController extends AddonsController
 {
 
@@ -332,7 +333,7 @@ class MailController extends AddonsController
 		$reply_email = C('MAIL_REPLY_EMAIL');
 		$reply_name = C('MAIL_REPLY_NAME');
 		//require_once('./ThinkPHP/Library/Vendor/PHPMailer/phpmailer.class.php');增加命名空间，可以注释掉此行
-		$mail = new \Vendor\PHPMailer(); //实例化PHPMailer
+		$mail = new \Vendor\PHPMailer\PHPMailer(); //实例化PHPMailer
 		$mail->CharSet = 'UTF-8'; //设定邮件编码，默认ISO-8859-1，如果发中文此项必须设置，否则乱码
 		$mail->IsSMTP(); // 设定使用SMTP服务
 		$mail->SMTPDebug = 0; // 关闭SMTP调试功能

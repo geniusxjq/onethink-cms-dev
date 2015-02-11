@@ -43,7 +43,7 @@ class CommentModel extends Model{
     );
 
 	protected function _after_find(&$result,$options) {
-		$result['create_time_text'] = date('Y-m-d H:i:s', $result['create_time']);
+		$result['create_time_text'] = friendlyDate($result['create_time']);
 		$result['ip'] = long2ip($result['com_ip']);
 
 		 

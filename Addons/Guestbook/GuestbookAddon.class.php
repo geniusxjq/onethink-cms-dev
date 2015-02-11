@@ -7,7 +7,7 @@ use Think\Model;
  * 留言板插件
  * @author 马剑威
  */
-
+ 
     class GuestbookAddon extends Addon{
 
         public $info = array(
@@ -15,7 +15,7 @@ use Think\Model;
             'title'=>'留言板',
             'description'=>'这是一个简单的留言板',
             'status'=>1,
-            'author'=>'geniusxjq(ap880.com)',
+            'author'=>'geniusxjq(app880.com)',
 			'url'=>'http://app880.com',
             'version'=>'0.2',
         );
@@ -30,7 +30,7 @@ use Think\Model;
                 'contact:联系方式',
                 'content:留言内容',
                 'r_content:回复内容',
-                'starttime|time_format:留言时间',
+                'starttime|friendlyDate:留言时间',
                 'is_reply:是否回复',
                 'is_pass:是否通过',
                 'id:操作:[EDIT]|编辑,[DELETE]|删除'
