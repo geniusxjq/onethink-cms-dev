@@ -18,8 +18,9 @@ class MailAddon extends Addon
         'title' => '邮件订阅',
         'description' => '邮件订阅插件',
         'status' => 1,
-        'author' => 'xjw129xjt',
-        'version' => '0.1.1'
+        'author' => 'geniusxjq(app880.com)',
+		'url'=>'http://app880.com',
+        'version' => '0.1'
     );
 
     /**
@@ -80,11 +81,11 @@ class MailAddon extends Addon
 	);
 
 	public function install(){
-		return $this->addon_install($this->addon_install_info);
+		return $this->installAddon($this->addon_install_info);
 	}
 
 	public function uninstall(){
-		return $this->addon_uninstall($this->addon_install_info);
+		return $this->uninstallAddon($this->addon_install_info);
 	}
 
     //实现的钩子

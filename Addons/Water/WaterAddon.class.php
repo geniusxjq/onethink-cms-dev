@@ -11,7 +11,8 @@ class WaterAddon extends Addon
         'title' => '图片水印',
         'description' => '用于为上传的图片添加水印',
         'status' => 1,
-        'author' => 'xjw129xjt',
+        'author' => 'geniusxjq(app880.com)',
+		'url'=>'http://app880.com',
         'version' => '0.1',
     );
 	public $addon_install_info = array(
@@ -21,12 +22,12 @@ class WaterAddon extends Addon
 	
     public function install()
     {
-		return $this->addon_install($this->addon_install_info);
+		return $this->installAddon($this->addon_install_info);
     }
 
     public function uninstall()
     {
-		return $this->addon_uninstall();
+		return $this->uninstallAddon();
     }
 	
 	//图片处理钩子

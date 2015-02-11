@@ -25,7 +25,7 @@ abstract class AddonExtends{
 	  
 	  */
 	  
-	  public function read_sql_file($file){
+	  public function readSqlFile($file){
 		  
 		  return Storage::read($file);
 		  
@@ -41,7 +41,7 @@ abstract class AddonExtends{
 	   * @return array
 	   */
 	   
-	  public function execute_sql($sql,$sql_db_prefix='onethink_',$stop = true,$db_charset = 'utf-8') {
+	  public function executeSql($sql,$sql_db_prefix='onethink_',$stop = true,$db_charset = 'utf-8') {
 		  
 		  if(!$sql) return true;
 
@@ -164,18 +164,14 @@ abstract class AddonExtends{
 	
 	*/
 	
-	public function addon_install_has($addon_name=''){
+	public function existAddon($addon_name=''){
 		
 		if(!$addon_name) return false;
 		
 		$model=M("Addons");
 		
-		$map=array(
-				   
-			'name'=>$addon_name
-				   
-		);
-		
+		$map['name']=$addon_name;
+				   		
 		return ($model->where($map)->find())?true:false;
 		
 	}
@@ -196,7 +192,7 @@ abstract class AddonExtends{
 	) 
 	
 	*/
-	public function addon_install($install_info=array()){
+	public function installAddon($install_info=array()){
 		
 		/* 先判断插件需要的钩子是否存在 */
 		if($install_info['hooks']){
@@ -214,9 +210,9 @@ abstract class AddonExtends{
 		}
 
 		//读取插件sql文件
-		$sqldata =$install_info['install_sql']?$install_info['install_sql']:$this->read_sql_file($this->addon_path.'/install.sql');
+		$sqldata =$install_info['install_sql']?$install_info['install_sql']:$this->readSqlFile($this->addon_path.'/install.sql');
 		
-		return $this->execute_sql($sqldata);
+		return $this->executeSql($sqldata);
 		
 	}
 	
@@ -236,7 +232,7 @@ abstract class AddonExtends{
 	) 
 	
 	*/
-	public function addon_uninstall($install_info=array()){
+	public function uninstallAddon($install_info=array()){
 				
 		//删除钩子
 		if($install_info['hooks']){
@@ -253,9 +249,9 @@ abstract class AddonExtends{
 		
 		//读取插件sql文件
 					
-		$sqldata =$install_info['uninstall_sql']?$install_info['uninstall_sql']:$this->read_sql_file($this->addon_path.'/uninstall.sql');
+		$sqldata =$install_info['uninstall_sql']?$install_info['uninstall_sql']:$this->readSqlFile($this->addon_path.'/uninstall.sql');
 				
-		return $this->execute_sql($sqldata);
+		return $this->executeSql($sqldata);
 		
 	}
 	

@@ -15,7 +15,8 @@ use Common\Controller\Addon;
             'title'=>'计划任务',
             'description'=>'执行计划任务插件',
             'status'=>0,
-            'author'=>'iszhang',
+            'author' => 'geniusxjq(app880.com)',
+			'url'=>'http://app880.com',
             'version'=>'0.1'
         );
 
@@ -64,11 +65,11 @@ use Common\Controller\Addon;
 		);
 
         public function install(){
-        	return $this->addon_install($this->addon_install_info);
+        	return $this->installAddon($this->addon_install_info);
         }
 
         public function uninstall(){
-            return $this->addon_uninstall($this->addon_install_info);
+            return $this->uninstallAddon($this->addon_install_info);
         }
 
         //实现的app_begin钩子方法

@@ -39,11 +39,11 @@ class SyncLoginAddon extends Addon{
     );
 
     public function install(){ 
-       return $this->addon_install($this->addon_install_info);
+       return $this->installAddon($this->addon_install_info);
     }
 
     public function uninstall(){
-       return $this->addon_uninstall($this->addon_install_info);
+       return $this->uninstallAddon($this->addon_install_info);
     }
 
     //登录按钮钩子

@@ -23,7 +23,9 @@ class SensitiveAddon extends Addon
     );
 	
 	public $addon_install_info=array(
-									 		
+		
+		'hooks'=>"replaceSensitiveWords",
+		
 		'install_sql'=>"DROP TABLE IF EXISTS `onethink_sensitive`;
 		CREATE TABLE IF NOT EXISTS `onethink_sensitive` (
 		`id` int(11) NOT NULL AUTO_INCREMENT,
@@ -55,13 +57,13 @@ class SensitiveAddon extends Addon
 
 	public function install(){
 		
-		return $this->addon_install($this->addon_install_info);
+		return $this->installAddon($this->addon_install_info);
 		
 	}
 	
 	public function uninstall(){
 		
-		return $this->addon_uninstall($this->addon_install_info);
+		return $this->uninstallAddon($this->addon_install_info);
 		
 	}
 	
