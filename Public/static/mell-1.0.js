@@ -1283,7 +1283,7 @@ Mell.Cookie={
 	
 	//读取cookie
 
-	get:function (name,path){
+	get:function (name){
 		
 		var start = Mell.Doc.cookie.indexOf(name + "=");
 		
@@ -1307,9 +1307,10 @@ Mell.Cookie={
 	
 	//添加cookie
 
-	set:function(name,value,hours,path){
+	set:function(name,value,hours,path,domain,is_secure){
 	
-		var str = name + "=" + escape(value)+(path? ";path="+path:";path=/;");
+		var str = name + "=" + escape(value)+(path? ";path="+path:";path=/")
+		+(domain?";domain="+domain:"")+(is_secure?";secure=true":"");
 		
 		if(hours > 0){//为0时不设定过期时间，浏览器关闭时cookie自动消失
 		
@@ -1331,13 +1332,14 @@ Mell.Cookie={
 	
 	//移除cookie
 
-	remove:function(name,path){
+	remove:function(name,path,domain,is_secure){
 		
 	   var date=new Date();
 	   
 	   date.setTime(date.getTime()-10000);
 	   
-	   Mell.Doc.cookie=name+"=null; expire="+date.toGMTString()+(path? ";path="+path:";path=/;");
+	   Mell.Doc.cookie=name+"=null; expire="+date.toGMTString()+(path? ";path="+path:";path=/")
+	   +(domain?";domain="+domain:"")+(is_secure?";secure=true":"");
 	   
 	   return arguments.callee;
 		   
@@ -2886,7 +2888,7 @@ Mell.Event={
 		
 	},
 	
-	off:function(o,types,selector,fn){//关闭事件
+	off:function(o,types,selector,fn){//移除事件
 						
 		Mell.MapCall(o,function(o){
 					
@@ -3508,7 +3510,7 @@ Mell.Event={
 			
 		},
 						
-		//停止全部
+		//阻止全部
 		
 		stopAll:function(e){
 			
