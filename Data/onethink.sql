@@ -63,7 +63,7 @@ CREATE TABLE `onethink_action_log` (
   KEY `action_ip_ix` (`action_ip`),
   KEY `action_id_ix` (`action_id`),
   KEY `user_id_ix` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=79 DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED COMMENT='行为日志表';
+) ENGINE=MyISAM AUTO_INCREMENT=81 DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED COMMENT='行为日志表';
 
 #
 # Dumping data for table onethink_action_log
@@ -81,6 +81,7 @@ INSERT INTO `onethink_action_log` VALUES (76,6,1,2130706433,'config',38,'操作url
 INSERT INTO `onethink_action_log` VALUES (77,6,1,2130706433,'config',38,'操作url：/admin.php?s=/Config/edit.html',1,1423723355);
 INSERT INTO `onethink_action_log` VALUES (78,1,1,2130706433,'member',1,'admin在2015-02-12 18:18登录了后台',1,1423736300);
 INSERT INTO `onethink_action_log` VALUES (79,1,1,2130706433,'member',1,'admin在2015-02-13 00:35登录了后台',1,1423758903);
+INSERT INTO `onethink_action_log` VALUES (80,1,3,2130706433,'member',3,'geniusxjq在2015-02-13 01:17登录了后台',1,1423761472);
 
 #
 # Source for table onethink_addons
@@ -102,7 +103,7 @@ CREATE TABLE `onethink_addons` (
   `is_locked` tinyint(1) DEFAULT '0' COMMENT '插件是否已被锁定',
   `sort` int(10) DEFAULT '0' COMMENT '已安装插件菜单排序',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=130 DEFAULT CHARSET=utf8 COMMENT='插件表';
+) ENGINE=MyISAM AUTO_INCREMENT=132 DEFAULT CHARSET=utf8 COMMENT='插件表';
 
 #
 # Dumping data for table onethink_addons
@@ -113,7 +114,7 @@ INSERT INTO `onethink_addons` VALUES (3,'DevTeam','开发团队信息','开发团队成员信
 INSERT INTO `onethink_addons` VALUES (4,'SystemInfo','系统环境信息','用于显示一些服务器的信息',1,'{\"title\":\"\\u7cfb\\u7edf\\u4fe1\\u606f\",\"width\":\"2\",\"display\":\"1\"}','thinkphp','','0.1',1379512036,0,1,0);
 INSERT INTO `onethink_addons` VALUES (5,'Editor','前台编辑器','用于增强整站长文本的输入和显示',1,'{\"editor_type\":\"2\",\"editor_wysiwyg\":\"1\",\"editor_height\":\"300px\",\"editor_resize_type\":\"1\"}','thinkphp','','0.1',1379830910,0,1,0);
 INSERT INTO `onethink_addons` VALUES (6,'Attachment','附件','用于文档模型上传附件',1,'null','thinkphp','','0.1',1379842319,1,1,9);
-INSERT INTO `onethink_addons` VALUES (9,'SocialComment','通用社交化评论','集成了各种社交化评论插件，轻松集成到系统中。',1,'{\"comment_type\":\"1\",\"comment_uid_youyan\":\"\",\"comment_short_name_duoshuo\":\"\",\"comment_data_list_duoshuo\":\"\"}','thinkphp','','0.1',1380273962,0,1,0);
+INSERT INTO `onethink_addons` VALUES (9,'SocialComment','通用社交化评论','集成了各种社交化评论插件，轻松集成到系统中。',0,'{\"comment_type\":\"1\",\"comment_uid_youyan\":\"\",\"comment_short_name_duoshuo\":\"\",\"comment_data_list_duoshuo\":\"\"}','thinkphp','','0.1',1380273962,0,1,0);
 INSERT INTO `onethink_addons` VALUES (15,'EditorForAdmin','后台编辑器','用于增强整站长文本的输入和显示',1,'{\"editor_type\":\"2\",\"editor_wysiwyg\":\"1\",\"editor_height\":\"500px\",\"editor_resize_type\":\"1\"}','thinkphp','','0.1',1383126253,0,1,0);
 INSERT INTO `onethink_addons` VALUES (84,'BaiduShare','百度分享','用户将网站内容分享到第三方网站，第三方网站的用户点击专有的分享链接，从第三方网站带来社会化流量。',1,'{\"openbutton\":\"0\",\"buttonlist\":[\"mshare\",\"qzone\",\"tsina\",\"renren\",\"tqq\",\"tieba\"],\"button_size\":\"1\",\"openimg\":\"0\",\"imglist\":[\"mshare\",\"qzone\",\"tsina\",\"renren\",\"tqq\",\"tieba\"],\"img_size\":\"1\",\"openselect\":\"0\",\"selectlist\":[\"mshare\",\"qzone\",\"tsina\",\"renren\",\"tqq\",\"tieba\"]}','jesuspan','','0.1',1422871419,0,0,0);
 INSERT INTO `onethink_addons` VALUES (91,'Unslider','焦点图','焦点图',1,'{\"title\":\"Uslider\",\"display\":\"1\"}','cepljxiongjun','','0.1',1422885933,0,0,0);
@@ -124,7 +125,6 @@ INSERT INTO `onethink_addons` VALUES (105,'ReturnTop','返回顶部','回到顶部美化，
 INSERT INTO `onethink_addons` VALUES (108,'Water','图片水印','用于为上传的图片添加水印',1,'{\"switch\":\"1\",\"water\":\"\",\"position\":\"9\"}','xjw129xjt','','0.1',1423563901,0,1,0);
 INSERT INTO `onethink_addons` VALUES (113,'Guestbook','留言板','这是一个简单的留言板',1,'{\"display\":\"1\",\"messages_check\":\"1\"}','geniusxjq(app880.com)','http://app880.com','0.2',1423640701,1,0,2);
 INSERT INTO `onethink_addons` VALUES (114,'Sensitive','敏感词','敏感词过滤插件',1,'{\"is_open\":\"1\"}','geniusxjq(app880.com)','http://app880.com','0.1',1423640787,1,1,6);
-INSERT INTO `onethink_addons` VALUES (116,'Comment','评论功能','用于各种类型文档评论',1,'null','Wolixli','','0.1',1423641535,1,0,3);
 INSERT INTO `onethink_addons` VALUES (118,'Mail','邮件订阅','邮件订阅插件',1,'null','geniusxjq(app880.com)','http://app880.com','0.1',1423650031,1,1,8);
 INSERT INTO `onethink_addons` VALUES (122,'Friendlinks','友情链接','友情链接',1,'{\"random\":\"1\"}','geniusxjq(app880.com)','http://app880.com','0.1',1423674889,1,1,1);
 INSERT INTO `onethink_addons` VALUES (123,'Schedule','计划任务','执行计划任务插件',1,'{\"random\":\"1\"}','geniusxjq(app880.com)','http://app880.com','0.1',1423675029,1,1,7);
@@ -652,39 +652,6 @@ INSERT INTO `onethink_channel` VALUES (2,0,'博客','Article/index?category=blog',
 INSERT INTO `onethink_channel` VALUES (3,0,'官网','http://www.onethink.cn',3,1379475154,1387163458,1,0);
 
 #
-# Source for table onethink_comment
-#
-
-DROP TABLE IF EXISTS `onethink_comment`;
-CREATE TABLE `onethink_comment` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `pid` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '回复别人评论的',
-  `model_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '是哪个文档模型的',
-  `cid` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '内容id,name和cid来定位是哪个内容的',
-  `comment` text COMMENT '评论内容',
-  `digg` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '赞数（顶）',
-  `com_ip` bigint(20) NOT NULL DEFAULT '0' COMMENT '评论IP',
-  `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '添加时间',
-  `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否被删除',
-  `uid` int(10) unsigned DEFAULT NULL COMMENT '是哪位大仙回复的,0为非网站用户',
-  `uname` varchar(200) DEFAULT NULL COMMENT '非网站用户使用的名称',
-  `uemail` varchar(200) DEFAULT NULL COMMENT '非网站用户使用的邮箱',
-  `uurl` varchar(200) DEFAULT NULL COMMENT '非网站用户使用网站地址',
-  PRIMARY KEY (`id`),
-  KEY `uid` (`uid`),
-  KEY `model_id` (`model_id`),
-  KEY `cid` (`cid`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-
-#
-# Dumping data for table onethink_comment
-#
-
-INSERT INTO `onethink_comment` VALUES (1,0,2,6,'草你妈',1,2130706433,1423663793,1,NULL,'哈哈','836692464@qq.com','');
-INSERT INTO `onethink_comment` VALUES (2,0,2,6,'&lt;script&gt;alert(1)&lt;/script&gt;',0,2130706433,1423667731,1,NULL,'gag','836692464@qq.com','');
-INSERT INTO `onethink_comment` VALUES (3,0,2,6,'sdfsdf',0,2130706433,1423667776,1,NULL,'sgsdg','836692464@qq.com','');
-
-#
 # Source for table onethink_config
 #
 
@@ -782,15 +749,16 @@ CREATE TABLE `onethink_document` (
   PRIMARY KEY (`id`),
   KEY `idx_category_status` (`category_id`,`status`),
   KEY `idx_status_type_pid` (`status`,`uid`,`pid`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='文档模型基础表';
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='文档模型基础表';
 
 #
 # Dumping data for table onethink_document
 #
 
 INSERT INTO `onethink_document` VALUES (5,1,'','tt',2,0,'',0,0,2,2,0,0,22,1,0,0,0,0,0,0,1422970946,1422970946,3);
-INSERT INTO `onethink_document` VALUES (6,1,'','01',2,0,'',0,0,2,2,0,0,27,1,0,0,36,0,0,0,1422981600,1423297290,1);
+INSERT INTO `onethink_document` VALUES (6,1,'','01',2,0,'',0,0,2,2,0,0,27,1,0,0,38,0,0,0,1422981600,1423297290,1);
 INSERT INTO `onethink_document` VALUES (7,1,'','01',2,0,'',0,0,2,2,0,0,27,1,0,0,0,0,0,0,1422981607,1422981607,3);
+INSERT INTO `onethink_document` VALUES (8,1,'','02',2,0,'',0,0,2,2,0,0,0,1,0,0,1,0,0,0,1423761610,1423761610,1);
 
 #
 # Source for table onethink_document_article
@@ -813,6 +781,7 @@ CREATE TABLE `onethink_document_article` (
 INSERT INTO `onethink_document_article` VALUES (5,0,'<img src=\"/Uploads/Editor/2015-02-03/54d0d02d0a95e.jpg\" alt=\"\" /><img src=\"/Uploads/Editor/2015-02-03/54d0d02e69007.jpg\" alt=\"\" /><img src=\"/Uploads/Editor/2015-02-03/54d0d030273a5.jpg\" alt=\"\" /><img src=\"/Uploads/Editor/2015-02-03/54d0d032161f3.jpg\" alt=\"\" />','',0);
 INSERT INTO `onethink_document_article` VALUES (6,0,'01<img src=\"/Public/static/kindeditor/plugins/emoticons/images/6.gif\" border=\"0\" alt=\"\" />','',0);
 INSERT INTO `onethink_document_article` VALUES (7,0,'01','',0);
+INSERT INTO `onethink_document_article` VALUES (8,0,'02','',0);
 
 #
 # Source for table onethink_document_download
@@ -921,7 +890,7 @@ CREATE TABLE `onethink_hooks` (
   `status` tinyint(1) unsigned NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=MyISAM AUTO_INCREMENT=82 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=84 DEFAULT CHARSET=utf8;
 
 #
 # Dumping data for table onethink_hooks
@@ -929,7 +898,7 @@ CREATE TABLE `onethink_hooks` (
 
 INSERT INTO `onethink_hooks` VALUES (1,'pageHeader','页面header钩子，一般用于加载插件CSS文件和代码',1,0,'Unslider',1);
 INSERT INTO `onethink_hooks` VALUES (3,'documentEditForm','添加编辑表单的 扩展内容钩子',1,0,'Attachment',1);
-INSERT INTO `onethink_hooks` VALUES (4,'documentDetailAfter','文档末尾显示',1,0,'Attachment,SocialComment,BaiduShare,Comment',1);
+INSERT INTO `onethink_hooks` VALUES (4,'documentDetailAfter','文档末尾显示',1,1423761366,'Attachment,SocialComment,BaiduShare',1);
 INSERT INTO `onethink_hooks` VALUES (5,'documentDetailBefore','页面内容前显示用钩子',1,0,'',1);
 INSERT INTO `onethink_hooks` VALUES (6,'documentSaveComplete','保存文档数据后的扩展钩子',2,0,'Attachment',1);
 INSERT INTO `onethink_hooks` VALUES (7,'documentEditFormContent','添加编辑表单的内容显示钩子',1,0,'Editor',1);
@@ -1049,7 +1018,7 @@ CREATE TABLE `onethink_member` (
 
 INSERT INTO `onethink_member` VALUES (1,'admin',0,'0000-00-00','',30,40,0,1422599239,2130706433,1423758903,1);
 INSERT INTO `onethink_member` VALUES (2,'xjq',0,'0000-00-00','',10,2,0,0,2130706433,1422699744,1);
-INSERT INTO `onethink_member` VALUES (3,'geniusxjq',0,'0000-00-00','',20,7,2130706433,1422700152,2130706433,1423068443,1);
+INSERT INTO `onethink_member` VALUES (3,'geniusxjq',0,'0000-00-00','',30,8,2130706433,1422700152,2130706433,1423761472,1);
 
 #
 # Source for table onethink_menu
@@ -1384,7 +1353,7 @@ CREATE TABLE `onethink_ucenter_member` (
 
 INSERT INTO `onethink_ucenter_member` VALUES (1,'admin','ecfb4272feb1d1fd11fc719c45b5e21d','836692464@qq.com','',1422599239,2130706433,1423758903,2130706433,1422599239,1);
 INSERT INTO `onethink_ucenter_member` VALUES (2,'xjq','bbe81237a2de1471f322ae25b0132dfc','app880@foxmail.com','',1422698522,2130706433,1422699744,2130706433,1422698522,1);
-INSERT INTO `onethink_ucenter_member` VALUES (3,'geniusxjq','bbe81237a2de1471f322ae25b0132dfc','geniusxjq@126.com','',1422699641,2130706433,1423068443,2130706433,1422699641,1);
+INSERT INTO `onethink_ucenter_member` VALUES (3,'geniusxjq','bbe81237a2de1471f322ae25b0132dfc','geniusxjq@126.com','',1422699641,2130706433,1423761472,2130706433,1422699641,1);
 
 #
 # Source for table onethink_ucenter_setting
