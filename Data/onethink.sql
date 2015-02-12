@@ -63,7 +63,7 @@ CREATE TABLE `onethink_action_log` (
   KEY `action_ip_ix` (`action_ip`),
   KEY `action_id_ix` (`action_id`),
   KEY `user_id_ix` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=73 DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED COMMENT='行为日志表';
+) ENGINE=MyISAM AUTO_INCREMENT=79 DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED COMMENT='行为日志表';
 
 #
 # Dumping data for table onethink_action_log
@@ -74,6 +74,12 @@ INSERT INTO `onethink_action_log` VALUES (69,1,1,2130706433,'member',1,'admin在2
 INSERT INTO `onethink_action_log` VALUES (70,1,1,2130706433,'member',1,'admin在2015-02-11 16:33登录了后台',1,1423643598);
 INSERT INTO `onethink_action_log` VALUES (71,1,1,2130706433,'member',1,'admin在2015-02-11 18:19登录了后台',1,1423649949);
 INSERT INTO `onethink_action_log` VALUES (72,1,1,2130706433,'member',1,'admin在2015-02-11 21:34登录了后台',1,1423661674);
+INSERT INTO `onethink_action_log` VALUES (73,1,1,2130706433,'member',1,'admin在2015-02-12 12:54登录了后台',1,1423716844);
+INSERT INTO `onethink_action_log` VALUES (74,6,1,2130706433,'config',38,'操作url：/admin.php?s=/Config/edit.html',1,1423721695);
+INSERT INTO `onethink_action_log` VALUES (75,6,1,2130706433,'config',38,'操作url：/admin.php?s=/Config/edit.html',1,1423723280);
+INSERT INTO `onethink_action_log` VALUES (76,6,1,2130706433,'config',38,'操作url：/admin.php?s=/Config/edit.html',1,1423723294);
+INSERT INTO `onethink_action_log` VALUES (77,6,1,2130706433,'config',38,'操作url：/admin.php?s=/Config/edit.html',1,1423723355);
+INSERT INTO `onethink_action_log` VALUES (78,1,1,2130706433,'member',1,'admin在2015-02-12 18:18登录了后台',1,1423736300);
 
 #
 # Source for table onethink_addons
@@ -95,7 +101,7 @@ CREATE TABLE `onethink_addons` (
   `is_locked` tinyint(1) DEFAULT '0' COMMENT '插件是否已被锁定',
   `sort` int(10) DEFAULT '0' COMMENT '已安装插件菜单排序',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=124 DEFAULT CHARSET=utf8 COMMENT='插件表';
+) ENGINE=MyISAM AUTO_INCREMENT=129 DEFAULT CHARSET=utf8 COMMENT='插件表';
 
 #
 # Dumping data for table onethink_addons
@@ -121,6 +127,7 @@ INSERT INTO `onethink_addons` VALUES (116,'Comment','评论功能','用于各种类型文档
 INSERT INTO `onethink_addons` VALUES (118,'Mail','邮件订阅','邮件订阅插件',1,'null','geniusxjq(app880.com)','http://app880.com','0.1',1423650031,1,1,8);
 INSERT INTO `onethink_addons` VALUES (122,'Friendlinks','友情链接','友情链接',1,'{\"random\":\"1\"}','geniusxjq(app880.com)','http://app880.com','0.1',1423674889,1,0,1);
 INSERT INTO `onethink_addons` VALUES (123,'Schedule','计划任务','执行计划任务插件',1,'{\"random\":\"1\"}','geniusxjq(app880.com)','http://app880.com','0.1',1423675029,1,0,7);
+INSERT INTO `onethink_addons` VALUES (129,'Wechat','微信','微信插件',1,'{\"url\":\"http:\\/\\/localhost\\/admin.php?s=\\/Home\\/Addons\\/execute\\/_addons\\/Wechat\\/_controller\\/Wechat\\/_action\\/index\\/ukey\\/f0ZIYMyJENn1Xmg.html\",\"ukey\":\"f0ZIYMyJENn1Xmg\",\"token\":\"UdaJRz6YeW4N10AQTkmIpcHFyviqXb\",\"appid\":\"\",\"appsecret\":\"\",\"codelogin\":\"0\",\"codeloginlocation\":null,\"default\":null,\"subscribe\":null,\"button\":null}','huay1','','1.0',1423741404,1,0,0);
 
 #
 # Source for table onethink_advertising
@@ -731,7 +738,7 @@ INSERT INTO `onethink_config` VALUES (34,'DENY_VISIT',3,'超管专限控制器方法',0,'
 INSERT INTO `onethink_config` VALUES (35,'REPLY_LIST_ROWS',0,'回复列表每页条数',2,'','',1386645376,1387178083,1,'10',0);
 INSERT INTO `onethink_config` VALUES (36,'ADMIN_ALLOW_IP',2,'后台允许访问IP',4,'','多个用逗号分隔，如果不配置表示不限制IP访问',1387165454,1387165553,1,'',12);
 INSERT INTO `onethink_config` VALUES (37,'SHOW_PAGE_TRACE',4,'是否显示页面Trace',4,'0:关闭\r\n1:开启','是否显示页面Trace信息',1387165685,1387165685,1,'1',1);
-INSERT INTO `onethink_config` VALUES (38,'MAIL_TYPE',4,'邮件类型',5,'SMTP模块发送\r\nMail()函数发送','邮件发送方式。Mail()函数方式发送，不用填写下面SMTP的信息',1410491198,1422870935,1,'0',4);
+INSERT INTO `onethink_config` VALUES (38,'MAIL_TYPE',4,'邮件方式',5,'0:SMTP模块发送','邮件发送方式。目前只支持SMTP方式',1410491198,1423723355,1,'0',4);
 INSERT INTO `onethink_config` VALUES (39,'MAIL_SMTP_HOST',1,'SMTP服务器',5,'','邮箱服务器名称【如：smtp.qq.com】',1410491317,1422687078,1,'smtp.qq.com',5);
 INSERT INTO `onethink_config` VALUES (40,'MAIL_SMTP_PORT',0,'SMTP服务器端口',5,'','端口一般为25',1410491384,1410491384,1,'25',6);
 INSERT INTO `onethink_config` VALUES (41,'MAIL_SMTP_USER',1,'SMTP服务器用户名',5,'','邮箱用户名',1410491508,1410941682,1,'836692464@qq.com',7);
@@ -781,7 +788,7 @@ CREATE TABLE `onethink_document` (
 #
 
 INSERT INTO `onethink_document` VALUES (5,1,'','tt',2,0,'',0,0,2,2,0,0,22,1,0,0,0,0,0,0,1422970946,1422970946,3);
-INSERT INTO `onethink_document` VALUES (6,1,'','01',2,0,'',0,0,2,2,0,0,27,1,0,0,34,0,0,0,1422981600,1423297290,1);
+INSERT INTO `onethink_document` VALUES (6,1,'','01',2,0,'',0,0,2,2,0,0,27,1,0,0,35,0,0,0,1422981600,1423297290,1);
 INSERT INTO `onethink_document` VALUES (7,1,'','01',2,0,'',0,0,2,2,0,0,27,1,0,0,0,0,0,0,1422981607,1422981607,3);
 
 #
@@ -913,7 +920,7 @@ CREATE TABLE `onethink_hooks` (
   `status` tinyint(1) unsigned NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=MyISAM AUTO_INCREMENT=71 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=80 DEFAULT CHARSET=utf8;
 
 #
 # Dumping data for table onethink_hooks
@@ -937,6 +944,8 @@ INSERT INTO `onethink_hooks` VALUES (63,'Advs','Advs广告管理的Advs钩子',1,142323
 INSERT INTO `onethink_hooks` VALUES (66,'GuestbookDisplay','Guestbook留言板的GuestbookDisplay钩子',1,1423640701,'Guestbook',1);
 INSERT INTO `onethink_hooks` VALUES (69,'app_end','应用结束',2,1423674478,'Schedule',1);
 INSERT INTO `onethink_hooks` VALUES (70,'Friendlinks','Friendlinks友情链接的Friendlinks钩子',1,1423674889,'Friendlinks',1);
+INSERT INTO `onethink_hooks` VALUES (80,'WechatAdminLogin','后台登陆页面钩子，用于微信二维码登陆',1,1423741404,'Wechat',1);
+INSERT INTO `onethink_hooks` VALUES (81,'WechatIndexLogin','前台登陆页面钩子，用于微信二维码登陆',1,1423741404,'Wechat',1);
 
 #
 # Source for table onethink_mail_history
@@ -1037,7 +1046,7 @@ CREATE TABLE `onethink_member` (
 # Dumping data for table onethink_member
 #
 
-INSERT INTO `onethink_member` VALUES (1,'admin',0,'0000-00-00','',30,37,0,1422599239,2130706433,1423661674,1);
+INSERT INTO `onethink_member` VALUES (1,'admin',0,'0000-00-00','',30,39,0,1422599239,2130706433,1423736300,1);
 INSERT INTO `onethink_member` VALUES (2,'xjq',0,'0000-00-00','',10,2,0,0,2130706433,1422699744,1);
 INSERT INTO `onethink_member` VALUES (3,'geniusxjq',0,'0000-00-00','',20,7,2130706433,1422700152,2130706433,1423068443,1);
 
@@ -1255,13 +1264,12 @@ CREATE TABLE `onethink_schedule` (
   `last_run_time` datetime DEFAULT NULL COMMENT '最近执行时间',
   `info` varchar(255) DEFAULT NULL COMMENT '对计划任务的简要描述',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 #
 # Dumping data for table onethink_schedule
 #
 
-INSERT INTO `onethink_schedule` VALUES (2,'addons/UserService/send_mail','ONCE','','','','2015-02-12 01:30:00','2015-02-12 01:42:48','2015-02-12 01:42:48','');
 
 #
 # Source for table onethink_sensitive
@@ -1373,7 +1381,7 @@ CREATE TABLE `onethink_ucenter_member` (
 # Dumping data for table onethink_ucenter_member
 #
 
-INSERT INTO `onethink_ucenter_member` VALUES (1,'admin','ecfb4272feb1d1fd11fc719c45b5e21d','836692464@qq.com','',1422599239,2130706433,1423661674,2130706433,1422599239,1);
+INSERT INTO `onethink_ucenter_member` VALUES (1,'admin','ecfb4272feb1d1fd11fc719c45b5e21d','836692464@qq.com','',1422599239,2130706433,1423736300,2130706433,1422599239,1);
 INSERT INTO `onethink_ucenter_member` VALUES (2,'xjq','bbe81237a2de1471f322ae25b0132dfc','app880@foxmail.com','',1422698522,2130706433,1422699744,2130706433,1422698522,1);
 INSERT INTO `onethink_ucenter_member` VALUES (3,'geniusxjq','bbe81237a2de1471f322ae25b0132dfc','geniusxjq@126.com','',1422699641,2130706433,1423068443,2130706433,1422699641,1);
 
@@ -1428,6 +1436,27 @@ CREATE TABLE `onethink_userdata` (
 
 #
 # Dumping data for table onethink_userdata
+#
+
+
+#
+# Source for table onethink_wechat_message
+#
+
+DROP TABLE IF EXISTS `onethink_wechat_message`;
+CREATE TABLE `onethink_wechat_message` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号',
+  `msgid` int(64) unsigned NOT NULL COMMENT '信息ID',
+  `type` varchar(100) NOT NULL COMMENT '信息类型',
+  `content` text NOT NULL COMMENT '信息内容',
+  `user` varchar(250) NOT NULL COMMENT '用户名&标识',
+  `time` int(10) unsigned NOT NULL COMMENT '接收时间',
+  `is_reply` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否回复',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+#
+# Dumping data for table onethink_wechat_message
 #
 
 

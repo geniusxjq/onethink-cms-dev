@@ -4,30 +4,38 @@
 // | Author: genisuxjq <app880@foxmail.com> <http://www.app880.com>
 // +----------------------------------------------------------------------
 
-/**
+	/**
  * 用常规方式发送邮件。
  */
- 
 function sendMail($to = '', $subject = '', $body = '', $name = '', $attachment = null){
-	
+
 	$from_email = C('MAIL_SMTP_USER');
 	$from_name =  C('WEB_SITE_NAME');
 	$reply_email = C('MAIL_REPLY_EMAIL');
 	$reply_name = C('MAIL_REPLY_NAME');
+	$mail_type=C('MAIL_TYPE');
+	$mail_host = C('MAIL_SMTP_HOST'); // SMTP 服务器
+	$mail_port = C('MAIL_SMTP_PORT'); // SMTP服务器的端口号
+	$mail_username = C('MAIL_SMTP_USER'); // SMTP服务器用户名
+	$mail_password = C('MAIL_SMTP_PASS'); // SMTP服务器密码
 	
+	//如果SMTP方式下服务器信息不完整则不执行发送
+	if($mail_type==0&&(!$mail_host||!$mail_port||!$mail_username||!$mail_password)){
+	  
+		return false;
+	
+	}
+
 	$mail = new \Vendor\PHPMailer\PHPMailer(); //实例化PHPMailer
 	$mail->CharSet = 'UTF-8'; //设定邮件编码，默认ISO-8859-1，如果发中文此项必须设置，否则乱码
 	$mail->IsSMTP(); // 设定使用SMTP服务
 	$mail->SMTPDebug = 0; // 关闭SMTP调试功能
-	// 1 = errors and messages
-	// 2 = messages only
 	$mail->SMTPAuth = true; // 启用 SMTP 验证功能
-
 	$mail->SMTPSecure = ''; // 使用安全协议
-	$mail->Host = C('MAIL_SMTP_HOST'); // SMTP 服务器
-	$mail->Port = C('MAIL_SMTP_PORT'); // SMTP服务器的端口号
-	$mail->Username = C('MAIL_SMTP_USER'); // SMTP服务器用户名
-	$mail->Password = C('MAIL_SMTP_PASS'); // SMTP服务器密码
+	$mail->Host =$mail_host; // SMTP 服务器
+	$mail->Port = $mail_port; // SMTP服务器的端口号
+	$mail->Username =$mail_username; // SMTP服务器用户名
+	$mail->Password =$mail_password; // SMTP服务器密码
 	
 	$replyEmail = $reply_email?$reply_email:$from_email;
 	$replyName = $reply_name?$reply_name:$from_name;
