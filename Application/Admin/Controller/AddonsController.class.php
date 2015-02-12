@@ -350,6 +350,7 @@ str;
 	
 	/**
 	* 锁定插件
+	*@author geniusxjq app880.com
 	*/
     public function lock(){
         $id     =   I('id');
@@ -362,6 +363,7 @@ str;
 	
 	/**
 	* 解锁插件
+	*@author geniusxjq app880.com
 	*/
     public function unlock(){
         $id     =   I('id');

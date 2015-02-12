@@ -80,6 +80,7 @@ INSERT INTO `onethink_action_log` VALUES (75,6,1,2130706433,'config',38,'操作url
 INSERT INTO `onethink_action_log` VALUES (76,6,1,2130706433,'config',38,'操作url：/admin.php?s=/Config/edit.html',1,1423723294);
 INSERT INTO `onethink_action_log` VALUES (77,6,1,2130706433,'config',38,'操作url：/admin.php?s=/Config/edit.html',1,1423723355);
 INSERT INTO `onethink_action_log` VALUES (78,1,1,2130706433,'member',1,'admin在2015-02-12 18:18登录了后台',1,1423736300);
+INSERT INTO `onethink_action_log` VALUES (79,1,1,2130706433,'member',1,'admin在2015-02-13 00:35登录了后台',1,1423758903);
 
 #
 # Source for table onethink_addons
@@ -101,7 +102,7 @@ CREATE TABLE `onethink_addons` (
   `is_locked` tinyint(1) DEFAULT '0' COMMENT '插件是否已被锁定',
   `sort` int(10) DEFAULT '0' COMMENT '已安装插件菜单排序',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=129 DEFAULT CHARSET=utf8 COMMENT='插件表';
+) ENGINE=MyISAM AUTO_INCREMENT=130 DEFAULT CHARSET=utf8 COMMENT='插件表';
 
 #
 # Dumping data for table onethink_addons
@@ -125,8 +126,8 @@ INSERT INTO `onethink_addons` VALUES (113,'Guestbook','留言板','这是一个简单的留
 INSERT INTO `onethink_addons` VALUES (114,'Sensitive','敏感词','敏感词过滤插件',1,'{\"is_open\":\"1\"}','geniusxjq(app880.com)','http://app880.com','0.1',1423640787,1,1,6);
 INSERT INTO `onethink_addons` VALUES (116,'Comment','评论功能','用于各种类型文档评论',1,'null','Wolixli','','0.1',1423641535,1,0,3);
 INSERT INTO `onethink_addons` VALUES (118,'Mail','邮件订阅','邮件订阅插件',1,'null','geniusxjq(app880.com)','http://app880.com','0.1',1423650031,1,1,8);
-INSERT INTO `onethink_addons` VALUES (122,'Friendlinks','友情链接','友情链接',1,'{\"random\":\"1\"}','geniusxjq(app880.com)','http://app880.com','0.1',1423674889,1,0,1);
-INSERT INTO `onethink_addons` VALUES (123,'Schedule','计划任务','执行计划任务插件',1,'{\"random\":\"1\"}','geniusxjq(app880.com)','http://app880.com','0.1',1423675029,1,0,7);
+INSERT INTO `onethink_addons` VALUES (122,'Friendlinks','友情链接','友情链接',1,'{\"random\":\"1\"}','geniusxjq(app880.com)','http://app880.com','0.1',1423674889,1,1,1);
+INSERT INTO `onethink_addons` VALUES (123,'Schedule','计划任务','执行计划任务插件',1,'{\"random\":\"1\"}','geniusxjq(app880.com)','http://app880.com','0.1',1423675029,1,1,7);
 INSERT INTO `onethink_addons` VALUES (129,'Wechat','微信','微信插件',1,'{\"url\":\"http:\\/\\/localhost\\/admin.php?s=\\/Home\\/Addons\\/execute\\/_addons\\/Wechat\\/_controller\\/Wechat\\/_action\\/index\\/ukey\\/f0ZIYMyJENn1Xmg.html\",\"ukey\":\"f0ZIYMyJENn1Xmg\",\"token\":\"UdaJRz6YeW4N10AQTkmIpcHFyviqXb\",\"appid\":\"\",\"appsecret\":\"\",\"codelogin\":\"0\",\"codeloginlocation\":null,\"default\":null,\"subscribe\":null,\"button\":null}','huay1','','1.0',1423741404,1,0,0);
 
 #
@@ -788,7 +789,7 @@ CREATE TABLE `onethink_document` (
 #
 
 INSERT INTO `onethink_document` VALUES (5,1,'','tt',2,0,'',0,0,2,2,0,0,22,1,0,0,0,0,0,0,1422970946,1422970946,3);
-INSERT INTO `onethink_document` VALUES (6,1,'','01',2,0,'',0,0,2,2,0,0,27,1,0,0,35,0,0,0,1422981600,1423297290,1);
+INSERT INTO `onethink_document` VALUES (6,1,'','01',2,0,'',0,0,2,2,0,0,27,1,0,0,36,0,0,0,1422981600,1423297290,1);
 INSERT INTO `onethink_document` VALUES (7,1,'','01',2,0,'',0,0,2,2,0,0,27,1,0,0,0,0,0,0,1422981607,1422981607,3);
 
 #
@@ -920,7 +921,7 @@ CREATE TABLE `onethink_hooks` (
   `status` tinyint(1) unsigned NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=MyISAM AUTO_INCREMENT=80 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=82 DEFAULT CHARSET=utf8;
 
 #
 # Dumping data for table onethink_hooks
@@ -1046,7 +1047,7 @@ CREATE TABLE `onethink_member` (
 # Dumping data for table onethink_member
 #
 
-INSERT INTO `onethink_member` VALUES (1,'admin',0,'0000-00-00','',30,39,0,1422599239,2130706433,1423736300,1);
+INSERT INTO `onethink_member` VALUES (1,'admin',0,'0000-00-00','',30,40,0,1422599239,2130706433,1423758903,1);
 INSERT INTO `onethink_member` VALUES (2,'xjq',0,'0000-00-00','',10,2,0,0,2130706433,1422699744,1);
 INSERT INTO `onethink_member` VALUES (3,'geniusxjq',0,'0000-00-00','',20,7,2130706433,1422700152,2130706433,1423068443,1);
 
@@ -1381,7 +1382,7 @@ CREATE TABLE `onethink_ucenter_member` (
 # Dumping data for table onethink_ucenter_member
 #
 
-INSERT INTO `onethink_ucenter_member` VALUES (1,'admin','ecfb4272feb1d1fd11fc719c45b5e21d','836692464@qq.com','',1422599239,2130706433,1423736300,2130706433,1422599239,1);
+INSERT INTO `onethink_ucenter_member` VALUES (1,'admin','ecfb4272feb1d1fd11fc719c45b5e21d','836692464@qq.com','',1422599239,2130706433,1423758903,2130706433,1422599239,1);
 INSERT INTO `onethink_ucenter_member` VALUES (2,'xjq','bbe81237a2de1471f322ae25b0132dfc','app880@foxmail.com','',1422698522,2130706433,1422699744,2130706433,1422698522,1);
 INSERT INTO `onethink_ucenter_member` VALUES (3,'geniusxjq','bbe81237a2de1471f322ae25b0132dfc','geniusxjq@126.com','',1422699641,2130706433,1423068443,2130706433,1422699641,1);
 
