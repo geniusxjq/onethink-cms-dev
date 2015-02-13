@@ -53,6 +53,9 @@ class AddonsModel extends Model {
 		$addons			=	array();
 		$where['name']	=	array('in',$dirs);
 		$list			=	$this->where($where)->field(true)->select();
+		$max_id=$this->max('id');
+		$max_id=$max_id?$max_id+1:0;
+		
 		foreach($list as $addon){
 			$addon['uninstall'] = 0;
 			$addons[$addon['name']] = $addon;
@@ -67,6 +70,7 @@ class AddonsModel extends Model {
                 $obj    =   new $class;
 				$addons[$value]	= $obj->info;
 				if($addons[$value]){
+					$addons[$value]['id']=$max_id;
 					$addons[$value]['uninstall'] = 1;
                     unset($addons[$value]['status']);
 				}
@@ -74,7 +78,8 @@ class AddonsModel extends Model {
         }
         int_to_string($addons, array('status'=>array(-1=>'损坏', 0=>'禁用', 1=>'启用', null=>'未安装')));
 		int_to_string($addons, array('is_locked'=>array(0=>'未锁定',1=>'锁定', null=>'未知')));//插件锁定后禁止删除
-		$addons = list_sort_by($addons,'uninstall','desc');
+		$addons = list_sort_by($addons,'id','desc');
+		
         return $addons;
     }
 
