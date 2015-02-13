@@ -234,6 +234,7 @@ str;
      * 插件列表
      */
     public function index(){
+		
         $this->meta_title = '插件列表';
         $list       =   D('Addons')->getList();
         $request    =   (array)I('request.');
