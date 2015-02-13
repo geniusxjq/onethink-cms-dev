@@ -95,15 +95,85 @@ abstract class AddonExtends{
 		  return true;
 		  
 	  } 
+	  
+   /*
+	 将钩子配置信息转换为二维数组
+	 @param $info multiType 要转换的数据；
+	 @return array(array($key=>$vaule),array($key=>$vaule)...);
+   */
+   
+	public function hooksInfoToArray($info){
+		
+		$result=array();
+		
+		if($info){
+			
+			$temp_arr=array(
+				
+			  'name'=>'',
+			  
+			  'type'=>'',
+			  
+			  'description'=>'',
+			  				
+			);
+			
+			if(is_array($info)){
+				
+				$hooks=$info;
+				
+				foreach($hooks as $key=>$value){
+					
+					if(is_string($key)){
+						
+						$result[]=array_merge($temp_arr,$hooks);
+						
+						break;
+						
+					}	
+					
+					if(is_int($key)&&is_array($value)){
+						
+						$result[]=array_merge($temp_arr,$value);
+						
+						continue;
+						
+					}
+																
+				}
+				
+			}else{
+				
+				$hooks=explode(',',$info);
+					
+				foreach($hooks as $hook_name){
+					
+					$_arr=array();
+														
+					list($_arr['name'],$_arr['type'],$_arr['description'])=explode(':',$hook_name);
+					
+					$result[]=array_merge($temp_arr,$_arr);
+					
+					continue;
+																
+				}
+
+			}
+						
+		}
+		
+		return $result;
+		 
+	}
     
     /**
      * 获取插件所需的钩子是否存在，没有则新增
-     * @param string $hook_name  钩子名称
-     * @param string $addons_name 插件名称
-     * @param string $addons_description  插件简介
+     * @param string $hook_name 钩子名称
+     * @param string $hook_description= 钩子简介
 	 * @param int $hook_type  钩子类型（默认为1）
+	 * @param string $addons_name 插件名称
      */
-    public function addHook($hook_name='',$addon_description='',$hook_type=1,$addon_name=''){
+    public function addHook($hook_name='',$hook_description='',$hook_type=1,$addon_name=''){
 		
 		if(!$hook_name) return;
 		
@@ -117,7 +187,7 @@ abstract class AddonExtends{
 			
             $data['name'] = $hook_name;
 			
-            $data['description'] = $addon_description;
+            $data['description'] = $hook_description;
 			
             $data['type'] = $hook_type;
 			
@@ -197,13 +267,17 @@ abstract class AddonExtends{
 		/* 先判断插件需要的钩子是否存在 */
 		if($install_info['hooks']){
 			
-			$hooks=explode(',',$install_info['hooks']);
-			
-			foreach($hooks as $hook_name){
+			$hooks=$this->hooksInfoToArray($install_info['hooks']);
+						
+			foreach($hooks as $key=>$value){
 				
-				list($hk_name,$hk_type)=explode(':',$hook_name);
-											
-				$this->addHook($hk_name,$this->info['name'].''.$this->info['title'].'的'.$hk_name.'钩子',$hk_type?$hk_type:1);
+				$_name=$value['name'];
+				
+				$_description=$value['description']?$value['description']:($this->info['name'].'('.$this->info['title'].')的'.$value['name'].'钩子');
+				
+				$_type=$value['type']?$value['type']:1;
+															
+				$this->addHook($_name,$_description,$_type);
 			
 			}
 		
@@ -233,15 +307,15 @@ abstract class AddonExtends{
 	
 	*/
 	public function uninstallAddon($install_info=array()){
-				
+			
 		//删除钩子
 		if($install_info['hooks']){
 			
-			$hooks=explode(',',$install_info['hooks']);
+			$hooks=$this->hooksInfoToArray($install_info['hooks']);
 			
-			foreach($hooks as $hook_name){
-							
-				$this->deleteHook($hook_name);
+			foreach($hooks as $key=>$value){
+															
+				$this->deleteHook($value['name']);
 			
 			}
 		
