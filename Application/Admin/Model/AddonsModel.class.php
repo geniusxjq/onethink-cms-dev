@@ -74,7 +74,7 @@ class AddonsModel extends Model {
         }
         int_to_string($addons, array('status'=>array(-1=>'损坏', 0=>'禁用', 1=>'启用', null=>'未安装')));
 		int_to_string($addons, array('is_locked'=>array(0=>'未锁定',1=>'锁定', null=>'未知')));//插件锁定后禁止删除
-        $addons = list_sort_by($addons,'uninstall','desc');
+		$addons = list_sort_by($addons,'uninstall','desc');
         return $addons;
     }
 

@@ -22,7 +22,7 @@ use Think\Db;
 		
 		public $addon_install_info = array(
 										   
-			'hooks'=>'Friendlinks',
+			'hooks'=>'Friendlinks:1:调用（显示）友情链接的钩子',
 						
 			'install_sql'=>"DROP TABLE IF EXISTS `onethink_friendlinks`;
 			  CREATE TABLE IF NOT EXISTS `onethink_friendlinks` (
@@ -68,7 +68,7 @@ use Think\Db;
         }
 
         //实现的pageFooter钩子方法
-        public function pageFooter($param){
+        public function Friendlinks($param){
         	
 			$list = D('Addons://Friendlinks/Friendlinks')->linkList();
 			$this->assign('list',$list);

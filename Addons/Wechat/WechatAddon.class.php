@@ -21,6 +21,16 @@ class WechatAddon extends Addon{
 	);
 	
 	public $addon_install_info = array(
+									   
+		'hooks'=>array(array(
+			'name' => 'WechatAdminLogin',
+			'description' => '后台登陆页面钩子，用于微信二维码登陆',
+			'type' => 1,
+		),array(
+			'name' => 'WechatIndexLogin',
+			'description' => '前台登陆页面钩子，用于微信二维码登陆',
+			'type' => 1,
+		)),
 									   					
 		'install_sql'=>"DROP TABLE IF EXISTS `onethink_wechat_message`;
 		  CREATE TABLE `onethink_wechat_message` (
@@ -34,7 +44,7 @@ class WechatAddon extends Addon{
 			PRIMARY KEY (`id`)
 		  )  ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='微信插件的消息表';",
 		  
-		'uninstall_sql'=>"DROP TABLE IF EXISTS `onethink_wechat_message`;"
+		'uninstall_sql'=>"DROP TABLE IF EXISTS `onethink_wechat_message`;",
 	);
 
 	public $custom_config = 'wechat_config.html';
@@ -67,33 +77,9 @@ class WechatAddon extends Addon{
 		}else{
 			S($this->saveconfig_cache_list,null);
 		}
+						
+		return $this->installAddon($this->addon_install_info);
 		
-		//添加钩子
-		$WechatHooksList = array(array(
-			'name' => 'WechatAdminLogin',
-			'description' => '后台登陆页面钩子，用于微信二维码登陆',
-			'type' => 1,
-		),array(
-			'name' => 'WechatIndexLogin',
-			'description' => '前台登陆页面钩子，用于微信二维码登陆',
-			'type' => 1,
-		));
-		
-		foreach($WechatHooksList as $arr){
-		
-			$this->addHook($arr['name'],$arr['description'],$arr['type']);
-		
-		}
-
-		if(!$this->installAddon($this->addon_install_info)){
-			
-			$this->uninstall();
-			
-			return false;
-			
-		}
-		
-		return true;
 	}
 
 	public function uninstall(){
@@ -107,11 +93,8 @@ class WechatAddon extends Addon{
 		}else{
 			S($this->saveconfig_cache_list,null);
 		}
-		
-		//删除的钩子
-		$WechatHooksList =array('hooks'=>'WechatAdminLogin,WechatIndexLogin');
-				
-		return $this->uninstallAddon(array_merge($this->addon_install_info,$WechatHooksList));
+						
+		return $this->uninstallAddon($this->addon_install_info);
 		
 	}
 

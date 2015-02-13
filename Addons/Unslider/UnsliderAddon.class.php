@@ -28,15 +28,16 @@ use Common\Controller\Addon;
         );
 		
 		public $addon_install_info = array(
-				'hooks'=>'Unslider'						   
+				'hooks'=>'Unslider:1:图片轮播（焦点图）插件钩子'						   
 		);
 
         public function install(){
-             return $this->installAddon($this->$addon_install_info);
+             return $this->installAddon($this->addon_install_info);
         }
 
         public function uninstall(){
-            return $this->uninstallAddon($this->$addon_install_info);
+			
+            return $this->uninstallAddon($this->addon_install_info);
         }
 
         //实现的AdminIndex钩子方法

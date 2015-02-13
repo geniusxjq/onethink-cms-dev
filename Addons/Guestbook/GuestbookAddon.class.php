@@ -39,7 +39,7 @@ use Think\Model;
 		
 		public $addon_install_info = array(
 										   
-			'hooks'=>'GuestbookDisplay',
+			'hooks'=>'Guestbook:1:调用（显示）留言板的钩子',
 						
 			'install_sql'=>"DROP TABLE IF EXISTS `onethink_guestbook`;
 			CREATE TABLE IF NOT EXISTS `onethink_guestbook` (
@@ -69,7 +69,7 @@ use Think\Model;
 			
         }
 
-        public function GuestbookDisplay($param)
+        public function Guestbook($param)
         {
             $config = $this->getConfig();
 			

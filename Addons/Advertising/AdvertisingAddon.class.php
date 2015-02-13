@@ -37,9 +37,7 @@ use Think\Db;
         public $custom_adminlist = 'adminlist.html';
 		
 		public $addon_install_info = array(
-										   
-			'hooks'=>"Advs",
-										   						
+										   										   						
 			'install_sql'=>"DROP TABLE IF EXISTS `onethink_advertising`;
 			CREATE TABLE IF NOT EXISTS `onethink_advertising` (
 			`id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
@@ -66,8 +64,4 @@ use Think\Db;
 			
         }
 
-        //实现的广告钩子
-        public function AdminIndex($param){
-        	
-        }        
 }

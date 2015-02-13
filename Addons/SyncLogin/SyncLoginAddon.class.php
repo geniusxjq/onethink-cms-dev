@@ -9,7 +9,7 @@ use Common\Controller\Addon;
 
 
 class SyncLoginAddon extends Addon{
-
+	
     public $info = array(
         'name' => 'SyncLogin',
         'title' => '第三方账号同步登陆',
@@ -21,7 +21,7 @@ class SyncLoginAddon extends Addon{
 	
 	public $addon_install_info = array(
 									   
-			'hooks'=>"SyncLogin", 
+			'hooks'=>"SyncLogin:1:调用第三方账号同步登陆的钩子", 
 										   						
 			'install_sql'=>"DROP TABLE IF EXISTS onethink_sync_login;
 			CREATE TABLE `onethink_sync_login` (

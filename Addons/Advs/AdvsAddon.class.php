@@ -40,7 +40,7 @@ use Think\Db;
  
 		public $addon_install_info = array(
 										   
-			'hooks'=>"Advs",
+			'hooks'=>"Advs:1:调用广告的钩子",
 										   						
 			'install_sql'=>"DROP TABLE IF EXISTS `onethink_advs`;
 			CREATE TABLE IF NOT EXISTS `onethink_advs` (
