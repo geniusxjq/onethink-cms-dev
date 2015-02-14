@@ -16,7 +16,7 @@
 
 	<div class="pass-message">
 		<volist name="listdb" id="rs">
-			<p>{$rs.nickname} {$rs.starttime|time_format}</p>
+			<p>{$rs.nickname} {$rs.starttime|friendly_time}</p>
             <p>{$rs.content}</p>
             
             <if condition="$rs.r_content neq null">

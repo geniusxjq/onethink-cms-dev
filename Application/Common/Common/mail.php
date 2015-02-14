@@ -7,7 +7,7 @@
 	/**
  * 用常规方式发送邮件。
  */
-function sendMail($to = '', $subject = '', $body = '', $name = '', $attachment = null){
+function send_mail($to = '', $subject = '', $body = '', $name = '', $attachment = null){
 
 	$from_email = C('MAIL_SMTP_USER');
 	$from_name =  C('WEB_SITE_NAME');

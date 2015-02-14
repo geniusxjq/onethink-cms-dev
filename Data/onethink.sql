@@ -63,7 +63,7 @@ CREATE TABLE `onethink_action_log` (
   KEY `action_ip_ix` (`action_ip`),
   KEY `action_id_ix` (`action_id`),
   KEY `user_id_ix` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=81 DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED COMMENT='行为日志表';
+) ENGINE=MyISAM AUTO_INCREMENT=84 DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED COMMENT='行为日志表';
 
 #
 # Dumping data for table onethink_action_log
@@ -84,6 +84,7 @@ INSERT INTO `onethink_action_log` VALUES (79,1,1,2130706433,'member',1,'admin在2
 INSERT INTO `onethink_action_log` VALUES (80,1,3,2130706433,'member',3,'geniusxjq在2015-02-13 01:17登录了后台',1,1423761472);
 INSERT INTO `onethink_action_log` VALUES (81,1,1,2130706433,'member',1,'admin在2015-02-13 15:53登录了后台',1,1423813986);
 INSERT INTO `onethink_action_log` VALUES (82,1,1,2130706433,'member',1,'admin在2015-02-13 18:43登录了后台',1,1423824189);
+INSERT INTO `onethink_action_log` VALUES (83,1,1,2130706433,'member',1,'admin在2015-02-14 13:29登录了后台',1,1423891748);
 
 #
 # Source for table onethink_addons
@@ -105,7 +106,7 @@ CREATE TABLE `onethink_addons` (
   `is_locked` tinyint(1) DEFAULT '0' COMMENT '插件是否已被锁定',
   `sort` int(10) DEFAULT '0' COMMENT '已安装插件菜单排序',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=132 DEFAULT CHARSET=utf8 COMMENT='插件表';
+) ENGINE=MyISAM AUTO_INCREMENT=149 DEFAULT CHARSET=utf8 COMMENT='插件表';
 
 #
 # Dumping data for table onethink_addons
@@ -145,7 +146,7 @@ CREATE TABLE `onethink_advertising` (
   `height` char(20) NOT NULL DEFAULT '' COMMENT '广告位置高度',
   `status` tinyint(2) NOT NULL DEFAULT '1' COMMENT '状态（0：禁用，1：正常）',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 #
 # Dumping data for table onethink_advertising
@@ -891,7 +892,7 @@ CREATE TABLE `onethink_hooks` (
   `status` tinyint(1) unsigned NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=MyISAM AUTO_INCREMENT=84 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=98 DEFAULT CHARSET=utf8;
 
 #
 # Dumping data for table onethink_hooks
@@ -1017,7 +1018,7 @@ CREATE TABLE `onethink_member` (
 # Dumping data for table onethink_member
 #
 
-INSERT INTO `onethink_member` VALUES (1,'admin',0,'0000-00-00','',30,42,0,1422599239,2130706433,1423824189,1);
+INSERT INTO `onethink_member` VALUES (1,'admin',0,'0000-00-00','',30,43,0,1422599239,2130706433,1423891748,1);
 INSERT INTO `onethink_member` VALUES (2,'xjq',0,'0000-00-00','',10,2,0,0,2130706433,1422699744,1);
 INSERT INTO `onethink_member` VALUES (3,'geniusxjq',0,'0000-00-00','',30,8,2130706433,1422700152,2130706433,1423761472,1);
 
@@ -1253,7 +1254,7 @@ CREATE TABLE `onethink_sensitive` (
   `status` tinyint(4) NOT NULL,
   `create_time` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 #
 # Dumping data for table onethink_sensitive
@@ -1263,6 +1264,7 @@ INSERT INTO `onethink_sensitive` VALUES (1,'草你妈',1,1423663669);
 INSERT INTO `onethink_sensitive` VALUES (2,'操你妹',1,1423663710);
 INSERT INTO `onethink_sensitive` VALUES (3,'操你奶奶',1,1423663710);
 INSERT INTO `onethink_sensitive` VALUES (4,'草你娘',1,1423663710);
+INSERT INTO `onethink_sensitive` VALUES (5,'他奶奶',1,1423895656);
 
 #
 # Source for table onethink_sync_login
@@ -1352,7 +1354,7 @@ CREATE TABLE `onethink_ucenter_member` (
 # Dumping data for table onethink_ucenter_member
 #
 
-INSERT INTO `onethink_ucenter_member` VALUES (1,'admin','ecfb4272feb1d1fd11fc719c45b5e21d','836692464@qq.com','',1422599239,2130706433,1423824189,2130706433,1422599239,1);
+INSERT INTO `onethink_ucenter_member` VALUES (1,'admin','ecfb4272feb1d1fd11fc719c45b5e21d','836692464@qq.com','',1422599239,2130706433,1423891748,2130706433,1422599239,1);
 INSERT INTO `onethink_ucenter_member` VALUES (2,'xjq','bbe81237a2de1471f322ae25b0132dfc','app880@foxmail.com','',1422698522,2130706433,1422699744,2130706433,1422698522,1);
 INSERT INTO `onethink_ucenter_member` VALUES (3,'geniusxjq','bbe81237a2de1471f322ae25b0132dfc','geniusxjq@126.com','',1422699641,2130706433,1423761472,2130706433,1422699641,1);
 

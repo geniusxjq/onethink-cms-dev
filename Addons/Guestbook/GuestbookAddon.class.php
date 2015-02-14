@@ -30,7 +30,7 @@ use Think\Model;
                 'contact:联系方式',
                 'content:留言内容',
                 'r_content:回复内容',
-                'starttime|friendlyDate:留言时间',
+                'starttime|friendly_time:留言时间',
                 'is_reply:是否回复',
                 'is_pass:是否通过',
                 'id:操作:[EDIT]|编辑,[DELETE]|删除'

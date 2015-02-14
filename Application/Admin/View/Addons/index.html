@@ -6,13 +6,26 @@
 		<h2>插件列表</h2>
 	</div>
     <div class="cf">
-    
-		<div class="fl">
-            <div>
-                <a href="{:U('create')}" class="btn">快速创建</a><a href="{:U('sort')}" class="btn">已装插件后台 [菜单排序]</a>
-            </div>
-        </div>
-        
+      <div class="fl">
+			<div class="tools"> 
+            <a href="{:U('create')}" class="btn">快速创建</a><a href="{:U('sort')}" class="btn">已装插件后台 [菜单排序]</a>
+			</div>
+		</div>
+
+        <!-- 高级搜索 -->
+		<div class="search-form fr cf">
+        <select name="key">
+            <option value="title">名称</option>
+            <option value="name">标识</option>
+            <option value="description">描述</option>
+            <option value="author">作者</option>
+            </select>
+			<div class="sleft">   
+				<input type="text" name="word" class="search-input" value="{:I('word')}" placeholder="请输入关键字">
+				<a class="sch-btn" href="javascript:;" id="search" url="{:U('index')}"><i class="btn-search"></i></a>
+			</div>
+         
+		</div>
     </div>
 
 	<!-- 数据列表 -->
@@ -88,4 +101,39 @@
     <div class="page">
         {$_page}
     </div>
+</block>
+<block name="script">
+	<script type="text/javascript">
+		$(function(){
+
+	        //搜索功能
+			$('.search-form').find('select').val("{:I('key')}"||"title");
+			$("#search").click(function(){
+				var url = $(this).attr('url');
+		        var query  = $('.search-form').find('input').serialize();
+				query+="&"+$('.search-form').find('select').serialize();
+		        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+		        query = query.replace(/^&/g,'');
+		        if( url.indexOf('?')>0 ){
+		            url += '&' + query;
+		        }else{
+		            url += '?' + query;
+		        }
+				window.location.href = url;
+			});
+			$('.data-table th:last').attr('width',70);
+		    //回车自动提交
+		    $('.search-form').find('input').keyup(function(event){
+		        if(event.keyCode===13){
+		            $("#search").click();
+		        }
+    		});
+		})
+	</script>
+    <script type="text/javascript">
+		$(function(){
+			//导航高亮
+			highlight_subnav('{:U('Addons/index')}');
+		})
+	</script>
 </block>

@@ -23,9 +23,7 @@ class SensitiveAddon extends Addon
     );
 	
 	public $addon_install_info=array(
-		
-		'hooks'=>"replaceSensitiveWords",
-		
+				
 		'install_sql'=>"DROP TABLE IF EXISTS `onethink_sensitive`;
 		CREATE TABLE IF NOT EXISTS `onethink_sensitive` (
 		`id` int(11) NOT NULL AUTO_INCREMENT,
