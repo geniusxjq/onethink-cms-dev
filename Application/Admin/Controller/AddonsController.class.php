@@ -235,19 +235,31 @@ str;
      */
     public function index(){
 		
-        $this->meta_title = '插件列表';
-        $list       =   D('Addons')->getList();
-        $request    =   (array)I('request.');
-        $total      =   $list? count($list) : 1 ;
-        $listRows   =   C('LIST_ROWS') > 0 ? C('LIST_ROWS') : 10;
-        $page       =   new \Think\Page($total, $listRows, $request);
-        $voList     =   array_slice($list, $page->firstRow, $page->listRows);
-        $p          =   $page->show();
+		$this->meta_title = '插件列表';
+        $list = D('Addons')->getList();
+		
+		$list=array_filter($list,function($v){ 
+			
+			$key=I('get.key',''); 
+			
+			$word=I('get.word',''); 
+			
+			if(!$key||!$word||strpos(strtolower($v[$key]),strtolower($word))>-1) return true; else return false;
+			
+		});
+		
+        $request = (array)I('request.');
+        $total = $list? count($list) : 1 ;
+        $listRows = C('LIST_ROWS') > 0 ? C('LIST_ROWS') : 10;
+        $page = new \Think\Page($total, $listRows, $request);
+        $voList = array_slice($list, $page->firstRow, $page->listRows);
+        $p = $page->show();
         $this->assign('_list', $voList);
         $this->assign('_page', $p? $p: '');
         // 记录当前列表页的cookie
         Cookie('__forward__',$_SERVER['REQUEST_URI']);
         $this->display();
+		
     }
 
     /**
