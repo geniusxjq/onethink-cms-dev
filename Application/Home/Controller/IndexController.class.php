@@ -16,76 +16,9 @@ use OT\DataDictionary;
  */
 class IndexController extends HomeController {
 	
-	public function hooksInfoToArray($info){
-		
-		$result=array();
-		
-		if($info){
-			
-			$temp_arr=array(
-				
-			  'name'=>'',
-			  
-			  'type'=>'',
-			  
-			  'description'=>'',
-			  				
-			);
-			
-			if(is_array($info)){
-				
-				$hooks=$info;
-				
-				foreach($hooks as $key=>$value){
-					
-					if(is_string($key)){
-						
-						$result[]=array_merge($temp_arr,$hooks);
-						
-						break;
-						
-					}	
-					
-					if(is_int($key)&&is_array($value)){
-						
-						$result[]=array_merge($temp_arr,$value);
-						
-						continue;
-						
-					}
-																
-				}
-				
-			}else{
-				
-				$hooks=explode(',',$info);
-					
-				foreach($hooks as $hook_name){
-					
-					$_arr=array();
-														
-					list($_arr['name'],$_arr['type'],$_arr['description'])=explode(':',$hook_name);
-					
-					$result[]=array_merge($temp_arr,$_arr);
-					
-					continue;
-																
-				}
-
-			}
-						
-		}
-		
-		return $result;
-		 
-	}
-
 	//系统首页
     public function index(){
-		
-		dump($this->hooksInfoToArray("hooks"));
-		
-		return ;
+				
         $category = D('Category')->getTree();
         $lists    = D('Document')->lists(null);
 
