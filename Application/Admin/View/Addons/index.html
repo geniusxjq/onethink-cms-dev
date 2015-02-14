@@ -33,22 +33,22 @@
 		<table>
 			<thead>
 				<tr>
-					<th>名称</th>
-					<th>标识</th>
+					<th >名称</th>
+					<th  >标识</th>
 					<th >描述</th>
-					<th>作者</th>
-					<th width="43px">版本</th> 
-                    <th width="43px">状态</th>
-                    <th width="43px">锁定</th>  
-					<th width="130px">操作</th>
+					<th width="45px">作者</th>
+					<th width="45px">版本</th> 
+                    <th width="45px">状态</th>
+                    <th width="45px">锁定</th>  
+					<th >操作</th>
 				</tr>
 			</thead>
 			<tbody>
 				<notempty name="_list">
 				<volist name="_list" id="vo">
 				<tr>
-					<td>{$vo.title}</td>
-					<td>{$vo.name}</td>
+					<td >{$vo.title}</td>
+					<td >{$vo.name}</td>
 					<td>{$vo.description}</td>
 					<td><a target="_blank" href="{$vo.url|default='/'}">{$vo.author}</a></td>
 					<td>{$vo.version}</td> 

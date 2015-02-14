@@ -1,17 +1,13 @@
 <?php
 // +----------------------------------------------------------------------
-// | OneThink [ WE CAN DO IT JUST THINK IT ]
-// +----------------------------------------------------------------------
-// | Copyright (c) 2013 http://www.onethink.cn All rights reserved.
-// +----------------------------------------------------------------------
-// | Author: yangweijie <yangweijiester@gmail.com> <code-tech.diandian.com>
+// | Author: geniusxjq <app880.com>
 // +----------------------------------------------------------------------
 
 namespace Common\Controller;
 use Think\Storage;
 /**
  * 插件类扩展//二次开发自定义的新功能函数（非系统自带）
- * @author yangweijie <yangweijiester@gmail.com>
+ * @author geniusxjq <app880.com>
  */
 abstract class AddonExtends{
 	
@@ -167,7 +163,7 @@ abstract class AddonExtends{
 	}
     
     /**
-     * 获取插件所需的钩子是否存在，没有则新增
+     * 添加钩子（不存在时添加）
      * @param string $hook_name 钩子名称
      * @param string $hook_description= 钩子简介
 	 * @param int $hook_type  钩子类型（默认为1）
@@ -206,7 +202,7 @@ abstract class AddonExtends{
     }
     
     /**
-     * 删除钩子
+     * 删除钩子（只在钩子为唯一（独立）钩子时才删除）
      * @param string $hook_name  钩子名称
      */
     public function deleteHook($hook_name){
@@ -254,12 +250,17 @@ abstract class AddonExtends{
 
 	array(
 		  
-		  hooks=>''，// @string 需要创建的钩子（如果没有可以不填，如果要指定钩子类型则在钩子后面加上“冒号+钩子类型编号<ID>。如：hookName:1）（可选）
+		  'hooks'=>''，// multitype 需要创建的钩子（可选）		  
 		  
-		  install_sql=>'',//@string 安装时执行的SQL语句（可选）
+		  'install_sql'=>'',//string 安装时执行的SQL语句（可选）
 		  
-		  uninstall_sql=>'',//@string 卸载时执行的SQL语句（可选）
+		  'uninstall_sql'=>'',//string 卸载时执行的SQL语句（可选）
 	) 
+	
+	'hooks' 格式如：		  	 
+	1."hook:typeID:description"  
+	2.array('name'=>'name','type'=>typeId,'description'=>'description');
+	3.array(array('name'=>'name','type'=>typeId,'description'=>'description'));
 	
 	*/
 	public function installAddon($install_info=array()){
@@ -295,17 +296,22 @@ abstract class AddonExtends{
 	卸载插件自带的SQL数据库（表）
 	
 	* @param array $install_info 安装插件用到的配置参数，如下：
-
+	
 	array(
 		  
-		  hooks=>''，// @string 需要创建的钩子（如果没有可以不填，如果要指定钩子类型则在钩子后面加上“冒号+钩子类型编号<ID>。如：hookName:1）（可选）
+		  'hooks'=>''，// multitype 需要创建的钩子（可选）		  
 		  
-		  install_sql=>'',//@string 安装时执行的SQL语句（可选）
+		  'install_sql'=>'',//string 安装时执行的SQL语句（可选）
 		  
-		  uninstall_sql=>'',//@string 卸载时执行的SQL语句（可选）
+		  'uninstall_sql'=>'',//string 卸载时执行的SQL语句（可选）
 	) 
 	
-	*/
+	'hooks' 格式如：		  	 
+	1."hook:typeID:description"  
+	2.array('name'=>'name','type'=>typeId,'description'=>'description');
+	3.array(array('name'=>'name','type'=>typeId,'description'=>'description'));
+	
+	*/ 
 	public function uninstallAddon($install_info=array()){
 			
 		//删除钩子
