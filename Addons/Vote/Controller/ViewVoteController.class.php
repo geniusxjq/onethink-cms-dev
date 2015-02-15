@@ -15,7 +15,7 @@ class ViewVoteController extends AddonsController
 	public function index()
 	{
 		$id = I('get.id');
-		$list = M('vote')->order('id desc')->find();
+		$list = M('vote')->where('id=' . $id)->order('id desc')->find();
 		$options = $list["options"];
 		$options = json_decode($options, true);
 		$this->assign("id",$list['id']);

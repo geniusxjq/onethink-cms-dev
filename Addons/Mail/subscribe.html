@@ -54,7 +54,7 @@
                 alert('请输入正确的邮箱格式');
             }
             else {
-                $.post("{:addons_url('Mail://Mail/subscribe')}", {email_address: email_address}, function (res) {
+                $.post("{:addons_url('Mail://MailRss/subScribe')}", {email_address: email_address}, function (res) {
                     if (res.status) {
                         alert(res.info);
                         $('#email_address').val('');

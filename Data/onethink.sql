@@ -63,12 +63,15 @@ CREATE TABLE `onethink_action_log` (
   KEY `action_ip_ix` (`action_ip`),
   KEY `action_id_ix` (`action_id`),
   KEY `user_id_ix` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=86 DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED COMMENT='行为日志表';
+) ENGINE=MyISAM AUTO_INCREMENT=87 DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED COMMENT='行为日志表';
 
 #
 # Dumping data for table onethink_action_log
 #
 
+INSERT INTO `onethink_action_log` VALUES (86,1,1,2130706433,'member',1,'admin在2015-02-15 20:53登录了后台',1,1424004819);
+INSERT INTO `onethink_action_log` VALUES (87,6,1,2130706433,'config',0,'操作url：/admin.php?s=/Config/del.html',1,1424014673);
+INSERT INTO `onethink_action_log` VALUES (88,6,1,2130706433,'config',0,'操作url：/admin.php?s=/Config/del.html',1,1424014794);
 
 #
 # Source for table onethink_addons
@@ -668,42 +671,42 @@ CREATE TABLE `onethink_config` (
 # Dumping data for table onethink_config
 #
 
-INSERT INTO `onethink_config` VALUES (1,'WEB_SITE_TITLE',1,'网站标题',1,'','网站标题前台显示标题',1378898976,1379235274,1,'OneThink',2);
-INSERT INTO `onethink_config` VALUES (2,'WEB_SITE_DESCRIPTION',2,'网站描述',1,'','网站搜索引擎描述',1378898976,1379235841,1,'OneThink内容管理框架',3);
-INSERT INTO `onethink_config` VALUES (3,'WEB_SITE_KEYWORD',2,'网站关键字',1,'','网站搜索引擎关键字',1378898976,1381390100,1,'ThinkPHP,OneThink',5);
-INSERT INTO `onethink_config` VALUES (4,'WEB_SITE_CLOSE',4,'关闭站点',1,'0:关闭,1:开启','站点关闭后其他用户不能访问，管理员可以正常访问',1378898976,1379235296,1,'1',4);
-INSERT INTO `onethink_config` VALUES (9,'CONFIG_TYPE_LIST',3,'配置类型列表',4,'','主要用于数据解析和页面表单的生成',1378898976,1379235348,1,'0:数字\r\n1:字符\r\n2:文本\r\n3:数组\r\n4:枚举',2);
-INSERT INTO `onethink_config` VALUES (10,'WEB_SITE_ICP',1,'网站备案号',1,'','设置在网站底部显示的备案号，如“沪ICP备12007941号-2',1378900335,1379235859,1,'',6);
-INSERT INTO `onethink_config` VALUES (11,'DOCUMENT_POSITION',3,'文档推荐位',2,'','文档推荐位，推荐到多个位置KEY值相加即可',1379053380,1379235329,1,'1:列表推荐\r\n2:频道推荐\r\n4:首页推荐',3);
-INSERT INTO `onethink_config` VALUES (12,'DOCUMENT_DISPLAY',3,'文档可见性',2,'','文章可见性仅影响前台显示，后台不收影响',1379056370,1379235322,1,'0:所有人可见\r\n1:仅注册会员可见\r\n2:仅管理员可见',4);
-INSERT INTO `onethink_config` VALUES (13,'COLOR_STYLE',4,'后台色系',1,'default_color:默认\r\nblue_color:紫罗兰','后台颜色风格',1379122533,1379235904,1,'blue_color',7);
-INSERT INTO `onethink_config` VALUES (20,'CONFIG_GROUP_LIST',3,'配置分组',4,'','配置分组',1379228036,1384418383,1,'1:基本\r\n2:内容\r\n3:用户\r\n4:系统\r\n5:邮箱',4);
-INSERT INTO `onethink_config` VALUES (21,'HOOKS_TYPE',3,'钩子的类型',4,'','类型 1-用于扩展显示内容，2-用于扩展业务处理',1379313397,1379313407,1,'1:视图\r\n2:控制器',6);
-INSERT INTO `onethink_config` VALUES (22,'AUTH_CONFIG',3,'Auth配置',4,'','自定义Auth.class.php类配置',1379409310,1379409564,1,'AUTH_ON:1\r\nAUTH_TYPE:2',8);
-INSERT INTO `onethink_config` VALUES (23,'OPEN_DRAFTBOX',4,'是否开启草稿功能',2,'0:关闭草稿功能\r\n1:开启草稿功能\r\n','新增文章时的草稿功能配置',1379484332,1379484591,1,'1',1);
-INSERT INTO `onethink_config` VALUES (24,'DRAFT_AUTOSAVE_INTERVAL',0,'自动保存草稿时间',2,'','自动保存草稿的时间间隔，单位：秒',1379484574,1422631047,1,'60',2);
-INSERT INTO `onethink_config` VALUES (25,'LIST_ROWS',0,'后台每页记录数',2,'','后台数据每页显示记录数',1379503896,1380427745,1,'10',10);
-INSERT INTO `onethink_config` VALUES (26,'USER_ALLOW_REGISTER',4,'是否允许用户注册',3,'0:关闭注册\r\n1:允许注册','是否开放用户注册',1379504487,1379504580,1,'1',3);
-INSERT INTO `onethink_config` VALUES (27,'CODEMIRROR_THEME',4,'预览插件的CodeMirror主题',4,'3024-day:3024 day\r\n3024-night:3024 night\r\nambiance:ambiance\r\nbase16-dark:base16 dark\r\nbase16-light:base16 light\r\nblackboard:blackboard\r\ncobalt:cobalt\r\neclipse:eclipse\r\nelegant:elegant\r\nerlang-dark:erlang-dark\r\nlesser-dark:lesser-dark\r\nmidnight:midnight','详情见CodeMirror官网',1379814385,1384740813,1,'ambiance',3);
-INSERT INTO `onethink_config` VALUES (28,'DATA_BACKUP_PATH',1,'数据库备份根路径',4,'','路径必须以 / 结尾',1381482411,1381482411,1,'./Data/',5);
-INSERT INTO `onethink_config` VALUES (29,'DATA_BACKUP_PART_SIZE',0,'数据库备份卷大小',4,'','该值用于限制压缩后的分卷最大长度。单位：B；建议设置20M',1381482488,1381729564,1,'20971520',7);
-INSERT INTO `onethink_config` VALUES (30,'DATA_BACKUP_COMPRESS',4,'数据库备份文件是否启用压缩',4,'0:不压缩\r\n1:启用压缩','压缩备份文件需要PHP环境支持gzopen,gzwrite函数',1381713345,1381729544,1,'1',9);
-INSERT INTO `onethink_config` VALUES (31,'DATA_BACKUP_COMPRESS_LEVEL',4,'数据库备份文件压缩级别',4,'1:普通\r\n4:一般\r\n9:最高','数据库备份文件的压缩级别，该配置在开启压缩时生效',1381713408,1381713408,1,'9',10);
-INSERT INTO `onethink_config` VALUES (32,'DEVELOP_MODE',4,'开启开发者模式',4,'0:关闭\r\n1:开启','是否开启开发者模式',1383105995,1383291877,1,'1',11);
-INSERT INTO `onethink_config` VALUES (33,'ALLOW_VISIT',3,'不受限控制器方法',0,'','',1386644047,1422704535,1,'0:article/draftbox\r\n1:article/mydocument\r\n2:Category/tree\r\n3:Index/verify\r\n4:file/upload\r\n5:file/download\r\n6:user/updatePassword\r\n7:user/updateNickname\r\n8:user/submitPassword\r\n9:user/submitNickname\r\n10:file/uploadpicture',0);
-INSERT INTO `onethink_config` VALUES (34,'DENY_VISIT',3,'超管专限控制器方法',0,'','仅超级管理员可访问的控制器方法',1386644141,1386644659,1,'0:Addons/addhook\r\n1:Addons/edithook\r\n2:Addons/delhook\r\n3:Addons/updateHook\r\n4:Admin/getMenus\r\n5:Admin/recordList\r\n6:AuthManager/updateRules\r\n7:AuthManager/tree',0);
-INSERT INTO `onethink_config` VALUES (35,'REPLY_LIST_ROWS',0,'回复列表每页条数',2,'','',1386645376,1387178083,1,'10',0);
-INSERT INTO `onethink_config` VALUES (36,'ADMIN_ALLOW_IP',2,'后台允许访问IP',4,'','多个用逗号分隔，如果不配置表示不限制IP访问',1387165454,1387165553,1,'',12);
-INSERT INTO `onethink_config` VALUES (37,'SHOW_PAGE_TRACE',4,'是否显示页面Trace',4,'0:关闭\r\n1:开启','是否显示页面Trace信息',1387165685,1387165685,1,'1',1);
-INSERT INTO `onethink_config` VALUES (38,'MAIL_TYPE',4,'邮件方式',5,'0:SMTP模块发送','邮件发送方式。目前只支持SMTP方式',1410491198,1423723355,1,'0',4);
-INSERT INTO `onethink_config` VALUES (39,'MAIL_SMTP_HOST',1,'SMTP服务器',5,'','邮箱服务器名称【如：smtp.qq.com】',1410491317,1422687078,1,'smtp.qq.com',5);
-INSERT INTO `onethink_config` VALUES (40,'MAIL_SMTP_PORT',0,'SMTP服务器端口',5,'','端口一般为25',1410491384,1410491384,1,'25',6);
-INSERT INTO `onethink_config` VALUES (41,'MAIL_SMTP_USER',1,'SMTP服务器用户名',5,'','邮箱用户名',1410491508,1410941682,1,'836692464@qq.com',7);
-INSERT INTO `onethink_config` VALUES (42,'MAIL_SMTP_PASS',1,'SMTP服务器密码',5,'邮箱密码','密码',1410491656,1410941695,1,'',8);
-INSERT INTO `onethink_config` VALUES (43,'MAIL_SMTP_CE',1,'邮件发送测试',5,'','发送测试邮件用的，测试你的邮箱配置成功没有',1410491698,1410937656,1,'836692464@qq.com',3);
-INSERT INTO `onethink_config` VALUES (44,'MAIL_REPLY_EMAIL',1,'发件人邮箱',5,'','发件人邮箱，默认使用SMTP服务器用户名',1410925495,1422687971,1,'app880@foxmail.com',2);
-INSERT INTO `onethink_config` VALUES (45,'MAIL_REPLY_NAME',1,'发件人名称',5,'','发件人名称，默认使用网站名称【WEB_SITE_TITLE 网站标题】',1422685995,1422688174,1,'嘘嘘',1);
-INSERT INTO `onethink_config` VALUES (46,'WEB_SITE_NAME',0,'网站名称',1,'','网站名称',1422687631,1422687631,1,'app880.com',1);
+INSERT INTO `onethink_config` VALUES (1,'WEB_SITE_TITLE',1,'网站标题',1,'','网站标题前台显示标题',1378898976,1379235274,1,'OneThink',10);
+INSERT INTO `onethink_config` VALUES (2,'WEB_SITE_DESCRIPTION',2,'网站描述',1,'','网站搜索引擎描述',1378898976,1379235841,1,'OneThink内容管理框架',14);
+INSERT INTO `onethink_config` VALUES (3,'WEB_SITE_KEYWORD',2,'网站关键字',1,'','网站搜索引擎关键字',1378898976,1381390100,1,'ThinkPHP,OneThink',23);
+INSERT INTO `onethink_config` VALUES (4,'WEB_SITE_CLOSE',4,'关闭站点',1,'0:关闭,1:开启','站点关闭后其他用户不能访问，管理员可以正常访问',1378898976,1379235296,1,'1',19);
+INSERT INTO `onethink_config` VALUES (9,'CONFIG_TYPE_LIST',3,'配置类型列表',4,'','主要用于数据解析和页面表单的生成',1378898976,1379235348,1,'0:数字\r\n1:字符\r\n2:文本\r\n3:数组\r\n4:枚举',11);
+INSERT INTO `onethink_config` VALUES (10,'WEB_SITE_ICP',1,'网站备案号',1,'','设置在网站底部显示的备案号，如“沪ICP备12007941号-2',1378900335,1379235859,1,'',26);
+INSERT INTO `onethink_config` VALUES (11,'DOCUMENT_POSITION',3,'文档推荐位',2,'','文档推荐位，推荐到多个位置KEY值相加即可',1379053380,1379235329,1,'1:列表推荐\r\n2:频道推荐\r\n4:首页推荐',15);
+INSERT INTO `onethink_config` VALUES (12,'DOCUMENT_DISPLAY',3,'文档可见性',2,'','文章可见性仅影响前台显示，后台不收影响',1379056370,1379235322,1,'0:所有人可见\r\n1:仅注册会员可见\r\n2:仅管理员可见',20);
+INSERT INTO `onethink_config` VALUES (13,'COLOR_STYLE',4,'后台色系',1,'default_color:默认\r\nblue_color:紫罗兰','后台颜色风格',1379122533,1379235904,1,'blue_color',29);
+INSERT INTO `onethink_config` VALUES (20,'CONFIG_GROUP_LIST',3,'配置分组',4,'','配置分组',1379228036,1384418383,1,'1:基本\r\n2:内容\r\n3:用户\r\n4:系统\r\n5:邮箱',21);
+INSERT INTO `onethink_config` VALUES (21,'HOOKS_TYPE',3,'钩子的类型',4,'','类型 1-用于扩展显示内容，2-用于扩展业务处理',1379313397,1379313407,1,'1:视图\r\n2:控制器',27);
+INSERT INTO `onethink_config` VALUES (22,'AUTH_CONFIG',3,'Auth配置',4,'','自定义Auth.class.php类配置',1379409310,1379409564,1,'AUTH_ON:1\r\nAUTH_TYPE:2',32);
+INSERT INTO `onethink_config` VALUES (23,'OPEN_DRAFTBOX',4,'是否开启草稿功能',2,'0:关闭草稿功能\r\n1:开启草稿功能\r\n','新增文章时的草稿功能配置',1379484332,1379484591,1,'1',6);
+INSERT INTO `onethink_config` VALUES (24,'DRAFT_AUTOSAVE_INTERVAL',0,'自动保存草稿时间',2,'','自动保存草稿的时间间隔，单位：秒',1379484574,1422631047,1,'60',12);
+INSERT INTO `onethink_config` VALUES (25,'LIST_ROWS',0,'后台每页记录数',2,'','后台数据每页显示记录数',1379503896,1380427745,1,'10',35);
+INSERT INTO `onethink_config` VALUES (26,'USER_ALLOW_REGISTER',4,'是否允许用户注册',3,'0:关闭注册\r\n1:允许注册','是否开放用户注册',1379504487,1379504580,1,'1',16);
+INSERT INTO `onethink_config` VALUES (27,'CODEMIRROR_THEME',4,'预览插件的CodeMirror主题',4,'3024-day:3024 day\r\n3024-night:3024 night\r\nambiance:ambiance\r\nbase16-dark:base16 dark\r\nbase16-light:base16 light\r\nblackboard:blackboard\r\ncobalt:cobalt\r\neclipse:eclipse\r\nelegant:elegant\r\nerlang-dark:erlang-dark\r\nlesser-dark:lesser-dark\r\nmidnight:midnight','详情见CodeMirror官网',1379814385,1384740813,1,'ambiance',17);
+INSERT INTO `onethink_config` VALUES (28,'DATA_BACKUP_PATH',1,'数据库备份根路径',4,'','路径必须以 / 结尾',1381482411,1381482411,1,'./Data/',24);
+INSERT INTO `onethink_config` VALUES (29,'DATA_BACKUP_PART_SIZE',0,'数据库备份卷大小',4,'','该值用于限制压缩后的分卷最大长度。单位：B；建议设置20M',1381482488,1381729564,1,'20971520',30);
+INSERT INTO `onethink_config` VALUES (30,'DATA_BACKUP_COMPRESS',4,'数据库备份文件是否启用压缩',4,'0:不压缩\r\n1:启用压缩','压缩备份文件需要PHP环境支持gzopen,gzwrite函数',1381713345,1381729544,1,'1',34);
+INSERT INTO `onethink_config` VALUES (31,'DATA_BACKUP_COMPRESS_LEVEL',4,'数据库备份文件压缩级别',4,'1:普通\r\n4:一般\r\n9:最高','数据库备份文件的压缩级别，该配置在开启压缩时生效',1381713408,1381713408,1,'9',36);
+INSERT INTO `onethink_config` VALUES (32,'DEVELOP_MODE',4,'开启开发者模式',4,'0:关闭\r\n1:开启','是否开启开发者模式',1383105995,1383291877,1,'1',37);
+INSERT INTO `onethink_config` VALUES (33,'ALLOW_VISIT',3,'不受限控制器方法',0,'','',1386644047,1422704535,1,'0:article/draftbox\r\n1:article/mydocument\r\n2:Category/tree\r\n3:Index/verify\r\n4:file/upload\r\n5:file/download\r\n6:user/updatePassword\r\n7:user/updateNickname\r\n8:user/submitPassword\r\n9:user/submitNickname\r\n10:file/uploadpicture',3);
+INSERT INTO `onethink_config` VALUES (34,'DENY_VISIT',3,'超管专限控制器方法',0,'','仅超级管理员可访问的控制器方法',1386644141,1386644659,1,'0:Addons/addhook\r\n1:Addons/edithook\r\n2:Addons/delhook\r\n3:Addons/updateHook\r\n4:Admin/getMenus\r\n5:Admin/recordList\r\n6:AuthManager/updateRules\r\n7:AuthManager/tree',4);
+INSERT INTO `onethink_config` VALUES (35,'REPLY_LIST_ROWS',0,'回复列表每页条数',2,'','',1386645376,1387178083,1,'10',5);
+INSERT INTO `onethink_config` VALUES (36,'ADMIN_ALLOW_IP',2,'后台允许访问IP',4,'','多个用逗号分隔，如果不配置表示不限制IP访问',1387165454,1387165553,1,'',38);
+INSERT INTO `onethink_config` VALUES (37,'SHOW_PAGE_TRACE',4,'是否显示页面Trace',4,'0:关闭\r\n1:开启','是否显示页面Trace信息',1387165685,1387165685,1,'1',7);
+INSERT INTO `onethink_config` VALUES (38,'MAIL_TYPE',4,'邮件方式',5,'0:SMTP模块发送','邮件发送方式。目前只支持SMTP方式',1410491198,1423723355,1,'0',22);
+INSERT INTO `onethink_config` VALUES (39,'MAIL_SMTP_HOST',1,'SMTP服务器',5,'','邮箱服务器名称【如：smtp.qq.com】',1410491317,1422687078,1,'smtp.qq.com',25);
+INSERT INTO `onethink_config` VALUES (40,'MAIL_SMTP_PORT',0,'SMTP服务器端口',5,'','端口一般为25',1410491384,1410491384,1,'25',28);
+INSERT INTO `onethink_config` VALUES (41,'MAIL_SMTP_USER',1,'SMTP服务器用户名',5,'','邮箱用户名',1410491508,1410941682,1,'836692464@qq.com',31);
+INSERT INTO `onethink_config` VALUES (42,'MAIL_SMTP_PASS',1,'SMTP服务器密码',5,'邮箱密码','密码',1410491656,1410941695,1,'',33);
+INSERT INTO `onethink_config` VALUES (43,'MAIL_SMTP_CE',1,'邮件发送测试',5,'','发送测试邮件用的，测试你的邮箱配置成功没有',1410491698,1410937656,1,'app880@foxmail.com',18);
+INSERT INTO `onethink_config` VALUES (44,'MAIL_REPLY_EMAIL',1,'发件人邮箱',5,'','发件人邮箱，默认使用SMTP服务器用户名',1410925495,1422687971,1,'app880@foxmail.com',13);
+INSERT INTO `onethink_config` VALUES (45,'MAIL_REPLY_NAME',1,'发件人名称',5,'','发件人名称，默认使用网站名称【WEB_SITE_TITLE 网站标题】',1422685995,1422688174,1,'嘘嘘',8);
+INSERT INTO `onethink_config` VALUES (46,'WEB_SITE_NAME',0,'网站名称',1,'','网站名称',1422687631,1422687631,1,'app880.com',9);
 
 #
 # Source for table onethink_document
@@ -745,9 +748,9 @@ CREATE TABLE `onethink_document` (
 #
 
 INSERT INTO `onethink_document` VALUES (5,1,'','tt',2,0,'',0,0,2,2,0,0,22,1,0,0,0,0,0,0,1422970946,1422970946,3);
-INSERT INTO `onethink_document` VALUES (6,1,'','01',2,0,'',0,0,2,2,0,0,27,1,0,0,48,0,0,0,1422981600,1423297290,1);
+INSERT INTO `onethink_document` VALUES (6,1,'','01',2,0,'',0,0,2,2,0,0,27,1,0,0,49,0,0,0,1422981600,1423297290,1);
 INSERT INTO `onethink_document` VALUES (7,1,'','01',2,0,'',0,0,2,2,0,0,27,1,0,0,0,0,0,0,1422981607,1422981607,3);
-INSERT INTO `onethink_document` VALUES (8,1,'','02',2,0,'',0,0,2,2,0,0,0,1,0,0,4,0,0,0,1423761610,1423761610,1);
+INSERT INTO `onethink_document` VALUES (8,1,'','02',2,0,'',0,0,2,2,0,0,0,1,0,0,6,0,0,0,1423761600,1424006587,1);
 
 #
 # Source for table onethink_document_article
@@ -770,7 +773,7 @@ CREATE TABLE `onethink_document_article` (
 INSERT INTO `onethink_document_article` VALUES (5,0,'<img src=\"/Uploads/Editor/2015-02-03/54d0d02d0a95e.jpg\" alt=\"\" /><img src=\"/Uploads/Editor/2015-02-03/54d0d02e69007.jpg\" alt=\"\" /><img src=\"/Uploads/Editor/2015-02-03/54d0d030273a5.jpg\" alt=\"\" /><img src=\"/Uploads/Editor/2015-02-03/54d0d032161f3.jpg\" alt=\"\" />','',0);
 INSERT INTO `onethink_document_article` VALUES (6,0,'01<img src=\"/Public/static/kindeditor/plugins/emoticons/images/6.gif\" border=\"0\" alt=\"\" />','',0);
 INSERT INTO `onethink_document_article` VALUES (7,0,'01','',0);
-INSERT INTO `onethink_document_article` VALUES (8,0,'02','',0);
+INSERT INTO `onethink_document_article` VALUES (8,0,'<img src=\"/Public/static/kindeditor/plugins/emoticons/images/11.gif\" border=\"0\" alt=\"\" />02&nbsp; {:hook(\'Vote\')}','',0);
 
 #
 # Source for table onethink_document_download
@@ -962,6 +965,7 @@ CREATE TABLE `onethink_mail_list` (
 # Dumping data for table onethink_mail_list
 #
 
+INSERT INTO `onethink_mail_list` VALUES (1,'836692464@qq.com',1,1424018069);
 
 #
 # Source for table onethink_mail_token
@@ -1006,7 +1010,7 @@ CREATE TABLE `onethink_member` (
 # Dumping data for table onethink_member
 #
 
-INSERT INTO `onethink_member` VALUES (1,'admin',0,'0000-00-00','',30,45,0,1422599239,2130706433,1423982309,1);
+INSERT INTO `onethink_member` VALUES (1,'admin',0,'0000-00-00','',40,46,0,1422599239,2130706433,1424004819,1);
 INSERT INTO `onethink_member` VALUES (2,'xjq',0,'0000-00-00','',10,2,0,0,2130706433,1422699744,1);
 INSERT INTO `onethink_member` VALUES (3,'geniusxjq',0,'0000-00-00','',30,8,2130706433,1422700152,2130706433,1423761472,1);
 
@@ -1342,7 +1346,7 @@ CREATE TABLE `onethink_ucenter_member` (
 # Dumping data for table onethink_ucenter_member
 #
 
-INSERT INTO `onethink_ucenter_member` VALUES (1,'admin','ecfb4272feb1d1fd11fc719c45b5e21d','836692464@qq.com','',1422599239,2130706433,1423982309,2130706433,1422599239,1);
+INSERT INTO `onethink_ucenter_member` VALUES (1,'admin','ecfb4272feb1d1fd11fc719c45b5e21d','836692464@qq.com','',1422599239,2130706433,1424004819,2130706433,1422599239,1);
 INSERT INTO `onethink_ucenter_member` VALUES (2,'xjq','bbe81237a2de1471f322ae25b0132dfc','app880@foxmail.com','',1422698522,2130706433,1422699744,2130706433,1422698522,1);
 INSERT INTO `onethink_ucenter_member` VALUES (3,'geniusxjq','bbe81237a2de1471f322ae25b0132dfc','geniusxjq@126.com','',1422699641,2130706433,1423761472,2130706433,1422699641,1);
 
@@ -1415,14 +1419,14 @@ CREATE TABLE `onethink_vote` (
   `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `voteconfig` char(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 #
 # Dumping data for table onethink_vote
 #
 
-INSERT INTO `onethink_vote` VALUES (7,'我帅吗?','','[{\"id\":\"0\",\"value\":\"  \\u5e05\",\"num\":1,\"percent\":\"0\"},{\"id\":\"1\",\"value\":\"  \\u5f88\\u5e05\",\"num\":\"0\",\"percent\":\"0\"},{\"id\":\"2\",\"value\":\"  \\u975e\\u5e38\\u5e05\",\"num\":\"0\",\"percent\":\"0\"},{\"id\":\"3\",\"value\":\"  \\u4e00\\u822c\",\"num\":\"0\",\"percent\":\"0\"},{\"id\":\"4\",\"value\":\"  \\u5410\\u4e86\",\"num\":1,\"percent\":\"0\"}]','',1423997412,1423995307,'1');
-INSERT INTO `onethink_vote` VALUES (8,'02','02','[{\"id\":\"0\",\"value\":\"02\",\"num\":\"0\",\"percent\":\"0\"},{\"id\":\"1\",\"value\":\"02\",\"num\":\"0\",\"percent\":\"0\"},{\"id\":\"2\",\"value\":\"02\",\"num\":\"0\",\"percent\":\"0\"}]','',0,1423998571,'1');
+INSERT INTO `onethink_vote` VALUES (9,'02','ha','[{\"id\":\"0\",\"value\":\"01\",\"num\":1,\"percent\":\"0\"},{\"id\":\"1\",\"value\":\"02\",\"num\":\"0\",\"percent\":\"0\"},{\"id\":\"2\",\"value\":\"03\",\"num\":\"0\",\"percent\":\"0\"}]','',1424019178,1424005548,'1');
+INSERT INTO `onethink_vote` VALUES (10,'01','01','[{\"id\":\"0\",\"value\":\"01\",\"num\":\"0\",\"percent\":\"0\"},{\"id\":\"1\",\"value\":\"02\",\"num\":\"0\",\"percent\":\"0\"},{\"id\":\"2\",\"value\":\"01\",\"num\":\"0\",\"percent\":\"0\"}]','01',0,1424016320,'1');
 
 #
 # Source for table onethink_wechat_message
