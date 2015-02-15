@@ -122,7 +122,7 @@ abstract class AddonExtends{
 	 
    */
    
-	public function dataToArrayList($data,$array_temp=null,$list_delimiter=",",$value_delimiter=":"){
+	public function toArrayList($data,$array_temp=null,$list_delimiter=",",$value_delimiter=":"){
 		
 		$result=array();
 		
@@ -305,7 +305,7 @@ abstract class AddonExtends{
 		/* 先判断插件需要的钩子是否存在 */
 		if($install_info['hooks']){
 			
-			$hooks=$this->dataToArrayList($install_info['hooks'],array('name'=>'','type'=>'','description'=>''));
+			$hooks=$this->toArrayList($install_info['hooks'],array('name'=>'','type'=>'','description'=>''));
 						
 			foreach($hooks as $key=>$value){
 				
@@ -354,7 +354,7 @@ abstract class AddonExtends{
 		//删除钩子
 		if($install_info['hooks']){
 			
-			$hooks=$this->dataToArrayList($install_info['hooks'],array('name'=>'','type'=>'','description'=>''));
+			$hooks=$this->toArrayList($install_info['hooks'],array('name'=>'','type'=>'','description'=>''));
 			
 			foreach($hooks as $key=>$value){
 															
