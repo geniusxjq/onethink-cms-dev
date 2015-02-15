@@ -122,7 +122,7 @@ abstract class AddonExtends{
 	 
    */
    
-	public function toArrayList($data,$array_temp=null,$list_delimiter=",",$value_delimiter=":"){
+	public function toArrayList($data,$array_temp='',$list_delimiter=",",$value_delimiter=":"){
 		
 		$result=array();
 		
