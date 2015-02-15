@@ -1,5 +1,11 @@
 <?php
 
+/*
++--------------------------------
+@Autor geniusxjq <app880.com>
++--------------------------------
+*/
+
 namespace Addons\Water;
 
 use Common\Controller\Addon;
@@ -30,15 +36,38 @@ class WaterAddon extends Addon
 		return $this->uninstallAddon();
     }
 	
-	//图片处理钩子
+	/*
+	图片处理钩子
+	@param $param 传入参数
+	
+	格式:
+	
+	array(
+		  
+		'Path'=>'path',//文件路径
+		
+		'Water-Off'=>true,//是否关闭水印.'true'关闭/不设置或'false'不关闭 (在某些情况下想关闭(不使用)水印功能时可以单独设置)
+		
+	);
+	
+	关闭方式: 
+	
+	在实例化上传类的配置中加入'Water-Off=>true'即可,如下:
+		
+	$config = array('Water-Off'=>true);
+	
+    $upload = new \Think\Upload($config);// 实例化上传类
+	
+	*/
+	
     public function dealPicture($param)
     {
 		
 		if(!$param) return $param;
 		
-		if(!$param['path']) return $param;
+		if(!$param['Path']) return $param;
 		
-		if($param['waterAddonOff']&&$param['waterAddonOff']==true){//判断是否启用水印功能
+		if($param['Water-Off']&&$param['Water-Off']==true){//判断是否启用水印功能
 			
 			return $param;
 			
