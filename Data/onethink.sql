@@ -63,16 +63,21 @@ CREATE TABLE `onethink_action_log` (
   KEY `action_ip_ix` (`action_ip`),
   KEY `action_id_ix` (`action_id`),
   KEY `user_id_ix` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=90 DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED COMMENT='ÐÐÎªÈÕÖ¾±í';
+) ENGINE=MyISAM AUTO_INCREMENT=129 DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED COMMENT='ÐÐÎªÈÕÖ¾±í';
 
 #
 # Dumping data for table onethink_action_log
 #
 
-INSERT INTO `onethink_action_log` VALUES (86,1,1,2130706433,'member',1,'adminÔÚ2015-02-15 20:53µÇÂ¼ÁËºóÌ¨',1,1424004819);
-INSERT INTO `onethink_action_log` VALUES (87,6,1,2130706433,'config',0,'²Ù×÷url£º/admin.php?s=/Config/del.html',1,1424014673);
-INSERT INTO `onethink_action_log` VALUES (88,6,1,2130706433,'config',0,'²Ù×÷url£º/admin.php?s=/Config/del.html',1,1424014794);
-INSERT INTO `onethink_action_log` VALUES (89,1,1,2130706433,'member',1,'adminÔÚ2015-02-16 14:25µÇÂ¼ÁËºóÌ¨',1,1424067926);
+INSERT INTO `onethink_action_log` VALUES (120,1,1,2130706433,'member',1,'adminÔÚ2015-02-17 15:19µÇÂ¼ÁËºóÌ¨',1,1424157551);
+INSERT INTO `onethink_action_log` VALUES (121,1,1,2130706433,'member',1,'adminÔÚ2015-02-17 15:33µÇÂ¼ÁËºóÌ¨',1,1424158422);
+INSERT INTO `onethink_action_log` VALUES (122,1,1,2130706433,'member',1,'adminÔÚ2015-02-17 17:17µÇÂ¼ÁËºóÌ¨',1,1424164625);
+INSERT INTO `onethink_action_log` VALUES (123,1,1,2130706433,'member',1,'adminÔÚ2015-02-17 19:45µÇÂ¼ÁËºóÌ¨',1,1424173532);
+INSERT INTO `onethink_action_log` VALUES (124,1,1,2130706433,'member',1,'adminÔÚ2015-02-17 21:53µÇÂ¼ÁËºóÌ¨',1,1424181197);
+INSERT INTO `onethink_action_log` VALUES (125,10,1,2130706433,'Menu',27,'²Ù×÷url£º/admin.php?s=/Menu/edit.html',1,1424185127);
+INSERT INTO `onethink_action_log` VALUES (126,10,1,2130706433,'Menu',27,'²Ù×÷url£º/admin.php?s=/Menu/edit.html',1,1424186044);
+INSERT INTO `onethink_action_log` VALUES (127,10,1,2130706433,'Menu',27,'²Ù×÷url£º/admin.php?s=/Menu/edit.html',1,1424186456);
+INSERT INTO `onethink_action_log` VALUES (128,1,1,2130706433,'member',1,'adminÔÚ2015-02-17 23:27µÇÂ¼ÁËºóÌ¨',1,1424186851);
 
 #
 # Source for table onethink_addons
@@ -94,7 +99,7 @@ CREATE TABLE `onethink_addons` (
   `is_locked` tinyint(1) DEFAULT '0' COMMENT '²å¼þÊÇ·ñÒÑ±»Ëø¶¨',
   `sort` int(10) DEFAULT '0' COMMENT 'ÒÑ°²×°²å¼þ²Ëµ¥ÅÅÐò',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=164 DEFAULT CHARSET=utf8 COMMENT='²å¼þ±í';
+) ENGINE=MyISAM AUTO_INCREMENT=165 DEFAULT CHARSET=utf8 COMMENT='²å¼þ±í';
 
 #
 # Dumping data for table onethink_addons
@@ -104,26 +109,27 @@ INSERT INTO `onethink_addons` VALUES (2,'SiteStat','Õ¾µãÍ³¼ÆÐÅÏ¢','Í³¼ÆÕ¾µãµÄ»ù´
 INSERT INTO `onethink_addons` VALUES (3,'DevTeam','¿ª·¢ÍÅ¶ÓÐÅÏ¢','¿ª·¢ÍÅ¶Ó³ÉÔ±ÐÅÏ¢',1,'{\"title\":\"OneThink\\u5f00\\u53d1\\u56e2\\u961f\",\"width\":\"2\",\"display\":\"1\"}','thinkphp','','0.1',1379512022,0,1,0);
 INSERT INTO `onethink_addons` VALUES (4,'SystemInfo','ÏµÍ³»·¾³ÐÅÏ¢','ÓÃÓÚÏÔÊ¾Ò»Ð©·þÎñÆ÷µÄÐÅÏ¢',1,'{\"title\":\"\\u7cfb\\u7edf\\u4fe1\\u606f\",\"width\":\"2\",\"display\":\"1\"}','thinkphp','','0.1',1379512036,0,1,0);
 INSERT INTO `onethink_addons` VALUES (5,'Editor','Ç°Ì¨±à¼­Æ÷','ÓÃÓÚÔöÇ¿ÕûÕ¾³¤ÎÄ±¾µÄÊäÈëºÍÏÔÊ¾',1,'{\"editor_type\":\"2\",\"editor_wysiwyg\":\"1\",\"editor_height\":\"300px\",\"editor_resize_type\":\"1\"}','thinkphp','','0.1',1379830910,0,1,0);
-INSERT INTO `onethink_addons` VALUES (6,'Attachment','¸½¼þ','ÓÃÓÚÎÄµµÄ£ÐÍÉÏ´«¸½¼þ',1,'null','thinkphp','','0.1',1379842319,1,1,9);
+INSERT INTO `onethink_addons` VALUES (6,'Attachment','¸½¼þ','ÓÃÓÚÎÄµµÄ£ÐÍÉÏ´«¸½¼þ',1,'null','thinkphp','','0.1',1379842319,1,1,12);
 INSERT INTO `onethink_addons` VALUES (9,'SocialComment','Í¨ÓÃÉç½»»¯ÆÀÂÛ','¼¯³ÉÁË¸÷ÖÖÉç½»»¯ÆÀÂÛ²å¼þ£¬ÇáËÉ¼¯³Éµ½ÏµÍ³ÖÐ¡£',0,'{\"comment_type\":\"1\",\"comment_uid_youyan\":\"\",\"comment_short_name_duoshuo\":\"\",\"comment_data_list_duoshuo\":\"\"}','thinkphp','','0.1',1380273962,0,1,0);
 INSERT INTO `onethink_addons` VALUES (15,'EditorForAdmin','ºóÌ¨±à¼­Æ÷','ÓÃÓÚÔöÇ¿ÕûÕ¾³¤ÎÄ±¾µÄÊäÈëºÍÏÔÊ¾',1,'{\"editor_type\":\"2\",\"editor_wysiwyg\":\"1\",\"editor_height\":\"500px\",\"editor_resize_type\":\"1\"}','thinkphp','','0.1',1383126253,0,1,0);
 INSERT INTO `onethink_addons` VALUES (108,'Water','Í¼Æ¬Ë®Ó¡','ÓÃÓÚÎªÉÏ´«µÄÍ¼Æ¬Ìí¼ÓË®Ó¡',1,'{\"switch\":\"1\",\"water\":\"\",\"position\":\"9\"}','xjw129xjt','','0.1',1423563901,0,1,0);
-INSERT INTO `onethink_addons` VALUES (114,'Sensitive','Ãô¸Ð´Ê','Ãô¸Ð´Ê¹ýÂË²å¼þ',1,'{\"is_open\":\"1\"}','geniusxjq(app880.com)','http://app880.com','0.1',1423640787,1,1,4);
-INSERT INTO `onethink_addons` VALUES (118,'Mail','ÓÊ¼þ¶©ÔÄ','ÓÊ¼þ¶©ÔÄ²å¼þ',1,'null','geniusxjq(app880.com)','http://app880.com','0.1',1423650031,1,1,8);
-INSERT INTO `onethink_addons` VALUES (123,'Schedule','¼Æ»®ÈÎÎñ','Ö´ÐÐ¼Æ»®ÈÎÎñ²å¼þ',1,'{\"random\":\"1\"}','geniusxjq(app880.com)','http://app880.com','0.1',1423675029,1,1,7);
-INSERT INTO `onethink_addons` VALUES (135,'Friendlinks','ÓÑÇéÁ´½Ó','ÓÑÇéÁ´½Ó',1,'{\"random\":\"1\"}','geniusxjq(app880.com)','http://app880.com','0.1',1423825560,1,1,2);
+INSERT INTO `onethink_addons` VALUES (114,'Sensitive','Ãô¸Ð´Ê','Ãô¸Ð´Ê¹ýÂË²å¼þ',1,'{\"is_open\":\"1\"}','geniusxjq(app880.com)','http://app880.com','0.1',1423640787,1,1,7);
+INSERT INTO `onethink_addons` VALUES (118,'Mail','ÓÊ¼þ¶©ÔÄ','ÓÊ¼þ¶©ÔÄ²å¼þ',1,'null','geniusxjq(app880.com)','http://app880.com','0.1',1423650031,1,1,11);
+INSERT INTO `onethink_addons` VALUES (123,'Schedule','¼Æ»®ÈÎÎñ','Ö´ÐÐ¼Æ»®ÈÎÎñ²å¼þ',1,'{\"random\":\"1\"}','geniusxjq(app880.com)','http://app880.com','0.1',1423675029,1,1,10);
+INSERT INTO `onethink_addons` VALUES (135,'Friendlinks','ÓÑÇéÁ´½Ó','ÓÑÇéÁ´½Ó',1,'{\"random\":\"1\"}','geniusxjq(app880.com)','http://app880.com','0.1',1423825560,1,1,4);
 INSERT INTO `onethink_addons` VALUES (136,'Advs','¹ã¸æ¹ÜÀí','¹ã¸æ²å¼þ',1,'null','onep2p','','0.1',1423825694,1,1,5);
 INSERT INTO `onethink_addons` VALUES (137,'Advertising','¹ã¸æÎ»ÖÃ','¹ã¸æÎ»²å¼þ',1,'null','onep2p','','0.1',1423825700,1,1,6);
 INSERT INTO `onethink_addons` VALUES (140,'SyncLogin','µÚÈý·½ÕËºÅÍ¬²½µÇÂ½','µÚÈý·½ÕËºÅÍ¬²½µÇÂ½',1,'{\"type\":[\"Qq\"],\"meta\":\"\",\"QqKEY\":\"\",\"QqSecret\":\"\",\"SinaKEY\":\"\",\"SinaSecret\":\"\"}','yidian','','0.1',1423825967,0,0,0);
 INSERT INTO `onethink_addons` VALUES (143,'ReturnTop','·µ»Ø¶¥²¿','»Øµ½¶¥²¿ÃÀ»¯£¬Ëæ»ú»òÖ¸¶¨ÏÔÊ¾£¬100¿îÑùÊ½£¬Ã¿ÌìÒ»ÖÖ»»£¬ÌìÌì¶¼ÓÃÐÂÑùÊ½',1,'{\"random\":\"0\",\"current\":\"68\"}','thinkphp','','0.1',1423826511,0,0,0);
 INSERT INTO `onethink_addons` VALUES (147,'BaiduShare','°Ù¶È·ÖÏí','ÓÃ»§½«ÍøÕ¾ÄÚÈÝ·ÖÏíµ½µÚÈý·½ÍøÕ¾£¬µÚÈý·½ÍøÕ¾µÄÓÃ»§µã»÷×¨ÓÐµÄ·ÖÏíÁ´½Ó£¬´ÓµÚÈý·½ÍøÕ¾´øÀ´Éç»á»¯Á÷Á¿¡£',1,'{\"openbutton\":\"0\",\"buttonlist\":[\"mshare\",\"qzone\",\"tsina\",\"renren\",\"tqq\",\"tieba\"],\"button_size\":\"1\",\"openimg\":\"0\",\"imglist\":[\"mshare\",\"qzone\",\"tsina\",\"renren\",\"tqq\",\"tieba\"],\"img_size\":\"1\",\"openselect\":\"0\",\"selectlist\":[\"mshare\",\"qzone\",\"tsina\",\"renren\",\"tqq\",\"tieba\"]}','jesuspan','','0.1',1423837279,0,0,0);
 INSERT INTO `onethink_addons` VALUES (151,'Wechat','Î¢ÐÅ','Î¢ÐÅ²å¼þ',1,'{\"url\":\"http:\\/\\/localhost\\/admin.php?s=\\/Home\\/Addons\\/execute\\/_addons\\/Wechat\\/_controller\\/Wechat\\/_action\\/index\\/ukey\\/VNSrn2MJcatu9vs.html\",\"ukey\":\"VNSrn2MJcatu9vs\",\"token\":\"4fkgsny7jYp06d5G9cbahoIltFJOVA\",\"appid\":\"\",\"appsecret\":\"\",\"codelogin\":\"0\",\"codeloginlocation\":null,\"default\":null,\"subscribe\":null,\"button\":null}','huay1','','1.0',1423925643,1,0,1);
-INSERT INTO `onethink_addons` VALUES (153,'Guestbook','ÁôÑÔ°å','ÕâÊÇÒ»¸ö¼òµ¥µÄÁôÑÔ°å',1,'{\"display\":\"1\",\"messages_check\":\"1\"}','geniusxjq(app880.com)','http://app880.com','0.2',1423925886,1,0,3);
+INSERT INTO `onethink_addons` VALUES (153,'Guestbook','ÁôÑÔ°å','ÕâÊÇÒ»¸ö¼òµ¥µÄÁôÑÔ°å',1,'{\"display\":\"1\",\"messages_check\":\"1\"}','geniusxjq(app880.com)','http://app880.com','0.2',1423925886,1,0,2);
 INSERT INTO `onethink_addons` VALUES (154,'Fancybox','Í¼Æ¬µ¯³ö²¥·Å','ÈÃÎÄÕÂÄÚÈÝÒ³µÄÍ¼Æ¬ÓÐµ¯³öÍ¼Æ¬²¥·ÅµÄÐ§¹û',1,'{\"group\":\"1\",\"transitionIn\":\"fade\",\"transitionOut\":\"fade\",\"padding\":\"10\",\"hideOnContentClick\":\"true\",\"easingIn\":\"easeOutCubic\"}','che1988','','0.1',1423975760,0,0,0);
 INSERT INTO `onethink_addons` VALUES (157,'Unslider','½¹µãÍ¼','½¹µãÍ¼',0,'{\"title\":\"Uslider\",\"display\":\"1\"}','cepljxiongjun','','0.1',1423988274,0,0,0);
-INSERT INTO `onethink_addons` VALUES (158,'Vote','Î¢Í¶Æ±','Ö§³Öµ¥Ñ¡¡¢¶àÑ¡µÄÐ¡Í¶Æ±²å¼þ¡£¿ÉÒÔÓÃÀ´ÊÕ¼¯ÓÃ»§¶ÔÄ³¼¸¸öÑ¡ÏîµÄÒâ¼û¡£',1,'{\"defaultid\":\"0\",\"display\":\"1\"}','Microrain','','1.0',1423990253,1,0,0);
+INSERT INTO `onethink_addons` VALUES (158,'Vote','Î¢Í¶Æ±','Ö§³Öµ¥Ñ¡¡¢¶àÑ¡µÄÐ¡Í¶Æ±²å¼þ¡£¿ÉÒÔÓÃÀ´ÊÕ¼¯ÓÃ»§¶ÔÄ³¼¸¸öÑ¡ÏîµÄÒâ¼û¡£',1,'{\"defaultid\":\"0\",\"display\":\"1\"}','Microrain','','1.0',1423990253,1,0,3);
 INSERT INTO `onethink_addons` VALUES (159,'Support','QQ¿Í·þ','ÍøÕ¾QQ¿Í·þ²å¼þ',1,'{\"random\":\"1\",\"QqKEY\":\"\",\"AnliKEY\":\"\",\"sinaKEY\":\"\"}','¸ßÁú','','0.1',1424068041,0,0,0);
-INSERT INTO `onethink_addons` VALUES (163,'ImportData','Êý¾Ýµ¼Èë','ÕâÊÇÒ»¸öÓÃÓÚ´ÓÆäËû²©¿Íµ¼Èëµ½OneThinkµÄºóÌ¨²å¼þ£¬Ä¿Ç°Ö§³ÖWordPress,Ö÷Òªµ¼Èë·ÖÀàºÍÎÄÕÂ£¡',1,'null','ITÍ¯ÀÏ','','0.1',1424068706,1,0,0);
+INSERT INTO `onethink_addons` VALUES (163,'ImportData','Êý¾Ýµ¼Èë','ÕâÊÇÒ»¸öÓÃÓÚ´ÓÆäËû²©¿Íµ¼Èëµ½OneThinkµÄºóÌ¨²å¼þ£¬Ä¿Ç°Ö§³ÖWordPress,Ö÷Òªµ¼Èë·ÖÀàºÍÎÄÕÂ£¡',1,'null','ITÍ¯ÀÏ','','0.1',1424068706,1,0,8);
+INSERT INTO `onethink_addons` VALUES (164,'Diyform','×Ô¶¨Òå±íµ¥','¼òµ¥µÄ×Ô¶¨Òå±íµ¥',1,'{\"key\":\"Xgs4YBmIANG7iHeQTF03XmR9SqWxRESw\",\"open_verify\":\"1\"}','·²ÈË','','0.1',1424187451,1,0,9);
 
 #
 # Source for table onethink_advertising
@@ -289,10 +295,7 @@ INSERT INTO `onethink_auth_extend` VALUES (1,1,1);
 INSERT INTO `onethink_auth_extend` VALUES (1,1,2);
 INSERT INTO `onethink_auth_extend` VALUES (1,2,1);
 INSERT INTO `onethink_auth_extend` VALUES (1,2,2);
-INSERT INTO `onethink_auth_extend` VALUES (1,3,1);
 INSERT INTO `onethink_auth_extend` VALUES (1,3,2);
-INSERT INTO `onethink_auth_extend` VALUES (1,4,1);
-INSERT INTO `onethink_auth_extend` VALUES (1,37,1);
 
 #
 # Source for table onethink_auth_group
@@ -314,8 +317,8 @@ CREATE TABLE `onethink_auth_group` (
 # Dumping data for table onethink_auth_group
 #
 
-INSERT INTO `onethink_auth_group` VALUES (1,'admin',1,'Ä¬ÈÏÓÃ»§×é','',1,'1,2,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,79,80,81,82,83,84,86,87,88,89,90,91,92,93,94,95,96,97,100,102,103,105,106');
-INSERT INTO `onethink_auth_group` VALUES (2,'admin',1,'²âÊÔÓÃ»§','²âÊÔÓÃ»§',1,'1,2,5,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,79,80,82,83,84,88,89,90,91,92,93,96,97,100,102,103,195');
+INSERT INTO `onethink_auth_group` VALUES (1,'admin',1,'Ä¬ÈÏÓÃ»§×é','',1,'2,7,8,9,10,11,12,13,14,15,16,17,18,79,211,217');
+INSERT INTO `onethink_auth_group` VALUES (2,'admin',1,'²âÊÔÓÃ»§','²âÊÔÓÃ»§',1,'232,2,7,8,9,10,11,12,13,14,15,16,17,18,79,211,217');
 
 #
 # Source for table onethink_auth_group_access
@@ -334,7 +337,7 @@ CREATE TABLE `onethink_auth_group_access` (
 # Dumping data for table onethink_auth_group_access
 #
 
-INSERT INTO `onethink_auth_group_access` VALUES (3,2);
+INSERT INTO `onethink_auth_group_access` VALUES (3,1);
 
 #
 # Source for table onethink_auth_rule
@@ -351,7 +354,7 @@ CREATE TABLE `onethink_auth_rule` (
   `condition` varchar(300) NOT NULL DEFAULT '' COMMENT '¹æÔò¸½¼ÓÌõ¼þ',
   PRIMARY KEY (`id`),
   KEY `module` (`module`,`status`,`type`)
-) ENGINE=MyISAM AUTO_INCREMENT=220 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=233 DEFAULT CHARSET=utf8;
 
 #
 # Dumping data for table onethink_auth_rule
@@ -573,6 +576,9 @@ INSERT INTO `onethink_auth_rule` VALUES (216,'admin',1,'Admin/Category/operate/t
 INSERT INTO `onethink_auth_rule` VALUES (217,'admin',1,'Admin/article/index','ÎÄµµÁÐ±í',1,'');
 INSERT INTO `onethink_auth_rule` VALUES (218,'admin',1,'Admin/think/lists','Êý¾ÝÁÐ±í',1,'');
 INSERT INTO `onethink_auth_rule` VALUES (219,'admin',1,'Admin/Addons/sort','ÒÑ°²×°²å¼þ²Ëµ¥ÅÅÐò',1,'');
+INSERT INTO `onethink_auth_rule` VALUES (220,'admin',1,'Admin/AuthManager/accessUser','Ç°Ì¨È¨ÏÞ¹ÜÀí',1,'');
+INSERT INTO `onethink_auth_rule` VALUES (221,'admin',1,'Admin/AuthManager/addNode','ÐÂÔöÇ°Ì¨È¨ÏÞ½Úµã',1,'');
+INSERT INTO `onethink_auth_rule` VALUES (232,'Home',1,'01','01',1,'');
 
 #
 # Source for table onethink_category
@@ -711,6 +717,69 @@ INSERT INTO `onethink_config` VALUES (43,'MAIL_SMTP_CE',1,'ÓÊ¼þ·¢ËÍ²âÊÔ',5,'','·
 INSERT INTO `onethink_config` VALUES (44,'MAIL_REPLY_EMAIL',1,'·¢¼þÈËÓÊÏä',5,'','·¢¼þÈËÓÊÏä£¬Ä¬ÈÏÊ¹ÓÃSMTP·þÎñÆ÷ÓÃ»§Ãû',1410925495,1422687971,1,'app880@foxmail.com',13);
 INSERT INTO `onethink_config` VALUES (45,'MAIL_REPLY_NAME',1,'·¢¼þÈËÃû³Æ',5,'','·¢¼þÈËÃû³Æ£¬Ä¬ÈÏÊ¹ÓÃÍøÕ¾Ãû³Æ¡¾WEB_SITE_TITLE ÍøÕ¾±êÌâ¡¿',1422685995,1422688174,1,'ÐêÐê',8);
 INSERT INTO `onethink_config` VALUES (46,'WEB_SITE_NAME',0,'ÍøÕ¾Ãû³Æ',1,'','ÍøÕ¾Ãû³Æ',1422687631,1422687631,1,'app880.com',9);
+
+#
+# Source for table onethink_diyform
+#
+
+DROP TABLE IF EXISTS `onethink_diyform`;
+CREATE TABLE `onethink_diyform` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Ö÷¼ü',
+  `diyname` varchar(200) NOT NULL DEFAULT '' COMMENT '×Ô¶¨Òå±íµ¥Ãû³Æ',
+  `posttemplate` varchar(200) NOT NULL DEFAULT '' COMMENT '·¢²¼Ä£°å',
+  `viewtemplate` varchar(200) NOT NULL DEFAULT '' COMMENT 'ÄÚÈÝÄ£°å',
+  `listtemplate` varchar(200) NOT NULL DEFAULT '' COMMENT 'ÁÐ±íÄ£°å',
+  `table_name` varchar(50) NOT NULL DEFAULT '' COMMENT 'Êý¾Ý±íÃû',
+  `public` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT 'Ç°Ì¨ÁÐ±íºÍÄÚÈÝÒ³¹«¿ª£º0£º²»¹«¿ª£¬1£º¹«¿ªÉóºËµÄ£¬2£º¹«¿ªËùÓÐµÄ',
+  `field_sort` text NOT NULL COMMENT '±íµ¥×Ö¶ÎÅÅÐò',
+  `field_group` varchar(255) NOT NULL DEFAULT '1:»ù´¡	' COMMENT '×Ö¶Î·Ö×é',
+  `list_grid` text NOT NULL,
+  `list_row` smallint(2) unsigned NOT NULL DEFAULT '10',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='×Ô¶¨Òå±íµ¥';
+
+#
+# Dumping data for table onethink_diyform
+#
+
+INSERT INTO `onethink_diyform` VALUES (1,'ÓÃ»§×ÊÁÏ','','','','user_profile',2,'{\"1\":[\"1\"]}','1:»ù´¡\t','id:ID\r\nqq:QQ',10);
+
+#
+# Source for table onethink_diyform_fields
+#
+
+DROP TABLE IF EXISTS `onethink_diyform_fields`;
+CREATE TABLE `onethink_diyform_fields` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) NOT NULL DEFAULT '' COMMENT '×Ö¶ÎÃû',
+  `title` varchar(100) NOT NULL DEFAULT '' COMMENT '×Ö¶Î×¢ÊÍ',
+  `field` varchar(100) NOT NULL DEFAULT '' COMMENT '×Ö¶Î¶¨Òå',
+  `type` varchar(20) NOT NULL DEFAULT '' COMMENT 'Êý¾ÝÀàÐÍ',
+  `value` varchar(100) NOT NULL DEFAULT '' COMMENT '×Ö¶ÎÄ¬ÈÏÖµ',
+  `remark` varchar(100) NOT NULL DEFAULT '' COMMENT '±¸×¢',
+  `is_show` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT 'ÊÇ·ñÏÔÊ¾',
+  `extra` varchar(255) NOT NULL DEFAULT '' COMMENT '²ÎÊý',
+  `form_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '×Ô¶¨Òå±íµ¥id',
+  `is_must` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT 'ÊÇ·ñ±ØÌî',
+  `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '×´Ì¬',
+  `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '¸üÐÂÊ±¼ä',
+  `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '´´½¨Ê±¼ä',
+  `validate_rule` varchar(255) NOT NULL DEFAULT '',
+  `validate_time` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `error_info` varchar(100) NOT NULL DEFAULT '',
+  `validate_type` varchar(25) NOT NULL DEFAULT '',
+  `auto_rule` varchar(100) NOT NULL DEFAULT '',
+  `auto_time` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `auto_type` varchar(25) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  KEY `form_id` (`form_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='×Ô¶¨Òå±íµ¥×Ö¶Î±í';
+
+#
+# Dumping data for table onethink_diyform_fields
+#
+
+INSERT INTO `onethink_diyform_fields` VALUES (1,'qq','qq','VarChar(30)','textarea','','ÓÃ»§qq',1,'',1,0,1,1424188059,1424187562,'',3,'','function','',3,'function');
 
 #
 # Source for table onethink_document
@@ -1009,9 +1078,9 @@ CREATE TABLE `onethink_member` (
 # Dumping data for table onethink_member
 #
 
-INSERT INTO `onethink_member` VALUES (1,'admin',0,'0000-00-00','',40,47,0,1422599239,2130706433,1424067926,1);
-INSERT INTO `onethink_member` VALUES (2,'xjq',0,'0000-00-00','',10,2,0,0,2130706433,1422699744,1);
-INSERT INTO `onethink_member` VALUES (3,'geniusxjq',0,'0000-00-00','',30,8,2130706433,1422700152,2130706433,1423761472,1);
+INSERT INTO `onethink_member` VALUES (1,'admin',0,'0000-00-00','',50,59,0,1422599239,2130706433,1424186851,1);
+INSERT INTO `onethink_member` VALUES (2,'xjq',0,'0000-00-00','',20,6,0,0,2130706433,1424148677,-1);
+INSERT INTO `onethink_member` VALUES (3,'geniusxjq',0,'0000-00-00','',40,24,2130706433,1422700152,2130706433,1424151332,1);
 
 #
 # Source for table onethink_menu
@@ -1032,7 +1101,7 @@ CREATE TABLE `onethink_menu` (
   PRIMARY KEY (`id`),
   KEY `pid` (`pid`),
   KEY `status` (`status`)
-) ENGINE=MyISAM AUTO_INCREMENT=125 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=136 DEFAULT CHARSET=utf8;
 
 #
 # Dumping data for table onethink_menu
@@ -1150,6 +1219,8 @@ INSERT INTO `onethink_menu` VALUES (121,'ÅÅÐò',76,0,'Channel/sort',1,'','',0,1);
 INSERT INTO `onethink_menu` VALUES (122,'Êý¾ÝÁÐ±í',58,0,'think/lists',1,'','',0,1);
 INSERT INTO `onethink_menu` VALUES (123,'ÉóºËÁÐ±í',3,0,'Article/examine',1,'','',0,1);
 INSERT INTO `onethink_menu` VALUES (124,'ÒÑ°²×°²å¼þ²Ëµ¥ÅÅÐò',44,0,'Addons/sort',1,'ÒÑ°²×°²å¼þ²Ëµ¥ÅÅÐò','',0,1);
+INSERT INTO `onethink_menu` VALUES (125,'Ç°Ì¨È¨ÏÞ¹ÜÀí',27,0,'AuthManager/accessUser',0,'','',0,0);
+INSERT INTO `onethink_menu` VALUES (126,'ÐÂÔöÇ°Ì¨È¨ÏÞ½Úµã',27,0,'AuthManager/addNode',0,'','',0,0);
 
 #
 # Source for table onethink_model
@@ -1188,6 +1259,36 @@ CREATE TABLE `onethink_model` (
 INSERT INTO `onethink_model` VALUES (1,'document','»ù´¡ÎÄµµ',0,'',1,'{\"1\":[\"1\",\"2\",\"3\",\"4\",\"5\",\"6\",\"7\",\"8\",\"9\",\"10\",\"11\",\"12\",\"13\",\"14\",\"15\",\"16\",\"17\",\"18\",\"19\",\"20\",\"21\",\"22\"]}','1:»ù´¡','','','','','','id:±àºÅ\r\ntitle:±êÌâ:[EDIT]\r\ntype:ÀàÐÍ\r\nupdate_time:×îºó¸üÐÂ\r\nstatus:×´Ì¬\r\nview:ä¯ÀÀ\r\nid:²Ù×÷:[EDIT]|±à¼­,[DELETE]|É¾³ý',0,'','',1383891233,1384507827,1,'MyISAM');
 INSERT INTO `onethink_model` VALUES (2,'article','ÎÄÕÂ',1,'',1,'{\"1\":[\"3\",\"24\",\"2\",\"5\"],\"2\":[\"9\",\"13\",\"19\",\"10\",\"12\",\"16\",\"17\",\"26\",\"20\",\"14\",\"11\",\"25\"]}','1:»ù´¡,2:À©Õ¹','','','','','','',0,'','',1383891243,1422705220,1,'MyISAM');
 INSERT INTO `onethink_model` VALUES (3,'download','ÏÂÔØ',1,'',1,'{\"1\":[\"3\",\"28\",\"30\",\"32\",\"2\",\"5\",\"31\"],\"2\":[\"13\",\"10\",\"27\",\"9\",\"12\",\"16\",\"17\",\"19\",\"11\",\"20\",\"14\",\"29\"]}','1:»ù´¡,2:À©Õ¹','','','','','','',0,'','',1383891252,1387260449,1,'MyISAM');
+
+#
+# Source for table onethink_module
+#
+
+DROP TABLE IF EXISTS `onethink_module`;
+CREATE TABLE `onethink_module` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) NOT NULL COMMENT 'Ä£¿éÃû',
+  `alias` varchar(30) NOT NULL COMMENT 'ÖÐÎÄÃû',
+  `version` varchar(20) NOT NULL COMMENT '°æ±¾ºÅ',
+  `is_com` tinyint(4) NOT NULL COMMENT 'ÊÇ·ñÉÌÒµ°æ',
+  `show_nav` tinyint(4) NOT NULL COMMENT 'ÊÇ·ñÏÔÊ¾ÔÚµ¼º½À¸ÖÐ',
+  `summary` varchar(200) NOT NULL COMMENT '¼ò½é',
+  `developer` varchar(50) NOT NULL COMMENT '¿ª·¢Õß',
+  `website` varchar(200) NOT NULL COMMENT 'ÍøÖ·',
+  `entry` varchar(50) NOT NULL COMMENT 'Ç°Ì¨Èë¿Ú',
+  `is_setup` tinyint(4) NOT NULL DEFAULT '1' COMMENT 'ÊÇ·ñÒÑ°²×°',
+  `sort` int(11) NOT NULL COMMENT 'Ä£¿éÅÅÐò',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`),
+  KEY `name_2` (`name`)
+) ENGINE=MyISAM AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='Ä£¿é¹ÜÀí±í';
+
+#
+# Dumping data for table onethink_module
+#
+
+INSERT INTO `onethink_module` VALUES (24,'Group','Èº×é','1.0.0',0,1,'Èº×éÄ£¿é£¬ÔÊÐíÓÃ»§½¨Á¢×Ô¼ºµÄÈ¦×Ó','','','Group/index/index',1,0);
+INSERT INTO `onethink_module` VALUES (25,'Home','Ö÷Ò³','1.0.0',0,1,'Ê×Ò³Ä£¿é£¬Ö÷ÒªÓÃÓÚÕ¹Ê¾ÍøÕ¾ÄÚÈÝ','','','Home/index/index',1,0);
 
 #
 # Source for table onethink_picture
@@ -1345,9 +1446,9 @@ CREATE TABLE `onethink_ucenter_member` (
 # Dumping data for table onethink_ucenter_member
 #
 
-INSERT INTO `onethink_ucenter_member` VALUES (1,'admin','ecfb4272feb1d1fd11fc719c45b5e21d','836692464@qq.com','',1422599239,2130706433,1424067926,2130706433,1422599239,1);
-INSERT INTO `onethink_ucenter_member` VALUES (2,'xjq','bbe81237a2de1471f322ae25b0132dfc','app880@foxmail.com','',1422698522,2130706433,1422699744,2130706433,1422698522,1);
-INSERT INTO `onethink_ucenter_member` VALUES (3,'geniusxjq','bbe81237a2de1471f322ae25b0132dfc','geniusxjq@126.com','',1422699641,2130706433,1423761472,2130706433,1422699641,1);
+INSERT INTO `onethink_ucenter_member` VALUES (1,'admin','ecfb4272feb1d1fd11fc719c45b5e21d','836692464@qq.com','',1422599239,2130706433,1424186851,2130706433,1422599239,1);
+INSERT INTO `onethink_ucenter_member` VALUES (2,'xjq','bbe81237a2de1471f322ae25b0132dfc','app880@foxmail.com','',1422698522,2130706433,1424148677,2130706433,1422698522,1);
+INSERT INTO `onethink_ucenter_member` VALUES (3,'geniusxjq','bbe81237a2de1471f322ae25b0132dfc','geniusxjq@126.com','',1422699641,2130706433,1424151332,2130706433,1422699641,1);
 
 #
 # Source for table onethink_ucenter_setting
@@ -1387,6 +1488,25 @@ CREATE TABLE `onethink_url` (
 
 
 #
+# Source for table onethink_user_profile
+#
+
+DROP TABLE IF EXISTS `onethink_user_profile`;
+CREATE TABLE `onethink_user_profile` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Ö÷¼ü',
+  `create_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '´´½¨Ê±¼ä',
+  `ifcheck` tinyint(1) NOT NULL DEFAULT '0',
+  `qq` varchar(30) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+#
+# Dumping data for table onethink_user_profile
+#
+
+INSERT INTO `onethink_user_profile` VALUES (1,1424187708,1,'');
+
+#
 # Source for table onethink_userdata
 #
 
@@ -1424,8 +1544,6 @@ CREATE TABLE `onethink_vote` (
 # Dumping data for table onethink_vote
 #
 
-INSERT INTO `onethink_vote` VALUES (9,'02','ha','[{\"id\":\"0\",\"value\":\"01\",\"num\":1,\"percent\":\"0\"},{\"id\":\"1\",\"value\":\"02\",\"num\":\"0\",\"percent\":\"0\"},{\"id\":\"2\",\"value\":\"03\",\"num\":\"0\",\"percent\":\"0\"}]','',1424019178,1424005548,'1');
-INSERT INTO `onethink_vote` VALUES (10,'01','01','[{\"id\":\"0\",\"value\":\"01\",\"num\":\"0\",\"percent\":\"0\"},{\"id\":\"1\",\"value\":\"02\",\"num\":\"0\",\"percent\":\"0\"},{\"id\":\"2\",\"value\":\"01\",\"num\":\"0\",\"percent\":\"0\"}]','01',0,1424016320,'1');
 
 #
 # Source for table onethink_wechat_message
