@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>{$meta_title}|{:C('WEB_SITE_TITLE')}</title>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Admin/css/base.css" media="all">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Admin/css/common.css" media="all">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Admin/css/module.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Admin/css/style.css" media="all">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Admin/css/default_color.css" media="all">
+ <!--[if lt IE 9]>
+<script type="text/javascript" src="__STATIC__/jquery-1.10.2.min.js"></script>
+<![endif]--><!--[if gte IE 9]><!-->
+<script type="text/javascript" src="__STATIC__/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/js/jquery.mousewheel.js"></script>
+<!--<![endif]-->
+<script type="text/javascript" src="__PUBLIC__/Admin/js/common.js"></script>
+</head>
+
+<body>
+	<div class="main-title cf">
+		<h2>
+			{$form.diyname}-><a href='{:addons_url("Diyform://HomeDiyform/index", array("form_id" => $form_id))}'>返回列表</a>
+		</h2>
+	</div>
+	<!-- 标签页导航 -->
+<div class="tab-wrap">
+	<div class="tab-content">
+		<!-- 基础文档模型 -->
+        <div id="tab" class="tab-pane tab in">
+        	<table>
+            <volist name="info" id="content">
+            	<switch name="key">
+                	<case value="id">
+                        <tr>
+                            <th>ID:</th>
+                            <td class="controls">
+                                {$content}
+                            </td>
+                        </tr>
+                    </case>
+                	<case value="create_at">
+                        <tr>
+                            <th>发布时间:</th>
+                            <td>
+                                {$content|time_format}
+                            </td>
+                        </tr>
+                    </case>
+                    <default/>
+                    <php>$field = $fields[$key];</php>
+                    <tr>
+                        <th class="item-label">
+                        <present name="field.title">
+                            {$field['title']}
+                        <else />
+                        {$key}
+                        </present>
+                         :</th>
+                        <td>
+                            <switch name="field.type">
+                                
+                                <case value="num|string|textarea|editor">
+                                    {$content}
+                                </case>
+                                <case value="date">
+                                    {$content|time_format=###,"Y-m-d"}
+                                </case>
+                                <case value="datetime">
+                                    {$content|time_format}
+                                </case>
+                                <case value="bool|select|radio|checkbox">
+                                        <volist name=":parse_diyform_field_attr($field['extra'])" id="vo">
+                                            <eq name="content" value="$key">{$vo}</eq>
+                                        </volist>
+                                </case>
+                                <default/>
+                                {$content}
+                            </switch>
+                        </td>
+                    </tr>
+                </switch>
+            </volist>
+            </table>
+        </div>
+	</div>
+</div>
+</body>
+</html>

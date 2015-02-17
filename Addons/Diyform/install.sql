@@ -1,0 +1,40 @@
+CREATE TABLE IF NOT EXISTS `xy_diyform` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `diyname` varchar(200) NOT NULL DEFAULT '' COMMENT '自定义表单名称',
+  `posttemplate` varchar(200) NOT NULL DEFAULT '' COMMENT '发布模板',
+  `viewtemplate` varchar(200) NOT NULL DEFAULT '' COMMENT '内容模板',
+  `listtemplate` varchar(200) NOT NULL DEFAULT '' COMMENT '列表模板',
+  `table_name` varchar(50) NOT NULL DEFAULT '' COMMENT '数据表名',
+  `public` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '前台列表和内容页公开：0：不公开，1：公开审核的，2：公开所有的',
+  `field_sort` text NOT NULL COMMENT '表单字段排序',
+  `field_group` varchar(255) NOT NULL DEFAULT '1:基础	' COMMENT '字段分组',
+  `list_grid` text NOT NULL,
+  `list_row` smallint(2) unsigned NOT NULL DEFAULT '10',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='自定义表单' AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `xy_diyform_fields` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) NOT NULL DEFAULT '' COMMENT '字段名',
+  `title` varchar(100) NOT NULL DEFAULT '' COMMENT '字段注释',
+  `field` varchar(100) NOT NULL DEFAULT '' COMMENT '字段定义',
+  `type` varchar(20) NOT NULL DEFAULT '' COMMENT '数据类型',
+  `value` varchar(100) NOT NULL DEFAULT '' COMMENT '字段默认值',
+  `remark` varchar(100) NOT NULL DEFAULT '' COMMENT '备注',
+  `is_show` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '是否显示',
+  `extra` varchar(255) NOT NULL DEFAULT '' COMMENT '参数',
+  `form_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '自定义表单id',
+  `is_must` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否必填',
+  `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '状态',
+  `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
+  `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `validate_rule` varchar(255) NOT NULL DEFAULT '',
+  `validate_time` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `error_info` varchar(100) NOT NULL DEFAULT '',
+  `validate_type` varchar(25) NOT NULL DEFAULT '',
+  `auto_rule` varchar(100) NOT NULL DEFAULT '',
+  `auto_time` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `auto_type` varchar(25) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  KEY `form_id` (`form_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='自定义表单字段表' AUTO_INCREMENT=1 ;

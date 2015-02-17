@@ -1,0 +1,81 @@
+<extend name="Public/base" />
+
+<block name="body">
+	<!-- 标题栏 -->
+	<div class="main-title">
+		<h2>{$title}内容列表</h2>
+	</div>
+
+	<div class="cf">
+		<div class="fl">
+			<div class="tools">
+				<button class="btn ajax-post" target-form="ids" url='{:addons_url("Diyform://Diyform/setIfcheck", array("form_id" => $form_id))}'>审 核</button>
+				<button class="btn ajax-post confirm" target-form="ids" url='{:addons_url("Diyform://Diyform/del", array("form_id" => $form_id))}'>删 除</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- 数据列表 -->
+	<div class="data-table table-striped">
+        <!-- 数据列表 -->
+        <table>
+            <thead>
+                <tr>
+                    <th width="50">
+                        <input class="check-all" type="checkbox">序号
+                    </th>
+                    <volist name="list_grid" id="vo">
+                        <th>{$vo.title}</th>
+                    </volist>
+                  <th style="width:150px;">状态</th>
+                    <th style="width:150px;">添加时间</th>
+                     <th style="width:150px;">操作</th>
+               </tr>
+            </thead>
+            <tbody>
+                <volist name="_list" id="lv" key="vo">
+                <tr>
+                    <td><input class="ids" type="checkbox" value="{$lv.id}" name="ids[]">{$lv.id}</td>
+                    <volist name="list_grid" id="lk">
+                        <td>{:get_diyform_field($lv, $lk, $form_id)}</td>
+                    </volist>
+                   	<td><if condition='$lv.ifcheck eq 1'>已审核<else/>未审核</if></td>
+                   	<td>{$lv.create_at|time_format}</td>
+                   	<td><a href='{:addons_url("Diyform://Diyform/del", array("form_id" => $form_id, "ids" => $lv["id"]))}'>删除</a></td>
+                </tr>
+                </volist>
+            </tbody>
+        </table>
+	</div>
+	<!-- 分页 -->
+    <div class="page">
+        {$_page}
+    </div>
+</block>
+<block name="script">
+	<script type="text/javascript">
+		$(function(){
+
+	        //搜索功能
+			$("#search").click(function(){
+				var url = $(this).attr('url');
+		        var query  = $('.search-form').find('input').serialize();
+		        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+		        query = query.replace(/^&/g,'');
+		        if( url.indexOf('?')>0 ){
+		            url += '&' + query;
+		        }else{
+		            url += '?' + query;
+		        }
+				window.location.href = url;
+			});
+			$('.data-table th:last').attr('width',70);
+		    //回车自动提交
+		    $('.search-form').find('input').keyup(function(event){
+		        if(event.keyCode===13){
+		            $("#search").click();
+		        }
+    		});
+		})
+	</script>
+</block>

@@ -1,0 +1,28 @@
+<!-- 数据列表 -->
+<table>
+    <thead>
+        <tr>
+            <th width="50">
+                <input class="check-all" type="checkbox">序号
+            </th>
+            <th>表单名称</th>
+            <th>数据表名</th>
+            <th>表单URL</th>
+            <th style="width:250px;">操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        <volist name="_list" id="lv" key="vo">
+        <tr>
+            <td><input class="ids" type="checkbox" value="{$lv.id}" name="ids[]">{$lv.id}</td>
+            <td><a href="{:addons_url('Diyform://Diyform/form_data_list', array('form_id' => $lv['id']))}">{$lv.diyname}</a></td>
+            <td>{$lv.table_name}</td>
+            <td>
+            列表：<code><php><literal>echo '{:addons_url("Diyform://HomeDiyform/index", array("form_id" => '.$lv['id'].'))}';</literal></php></code><br>
+            发布：<code><php><literal>echo '{:addons_url("Diyform://HomeDiyform/post", array("form_id" => '.$lv['id'].'))}';</literal></php></code>
+            </td>
+            <td><a href="{:addons_url('Diyform://Diyform/form_data_list', array('form_id' => $lv['id']))}">数据</a> <a href="{:addons_url('Diyform://DiyformFields/index', array('form_id' => $lv['id']))}">字段管理</a> <a href="{:addons_url('Diyform://Diyform/edit', array('id' => $lv['id']))}">编辑</a> <a href="{:addons_url('Diyform://Diyform/del', array('id' => $lv['id']))}">删除</a> <a href="{:addons_url('Diyform://HomeDiyform/post', array('form_id' => $lv['id']))}" target="_blank">表单预览</a></td>
+        </tr>
+        </volist>
+    </tbody>
+</table>
