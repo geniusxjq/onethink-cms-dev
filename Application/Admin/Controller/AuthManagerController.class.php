@@ -485,7 +485,6 @@ class AuthManagerController extends AdminController{
 
         }else{
 			
-			$a_id = I('get.group_id',0);
 			$this->updateRules();
 			$auth_group = M('AuthGroup')->where(array('status' => array('egt', '0'), 'module' => array('neq', ''), 'type' => AuthGroupModel::TYPE_ADMIN))->getfield('id,id,title,rules');
 			
@@ -496,7 +495,7 @@ class AuthManagerController extends AdminController{
 			$map = array('module' => array('neq', 'admin'), 'type' => AuthRuleModel::RULE_URL, 'status' => 1);
 			$child_rules = M('AuthRule')->where($map)->getField('name,id');
 	
-			$group = M('AuthGroup')->find($a_id);
+			$group = M('AuthGroup')->find(I('get.group_id',0));
 			$this->assign('main_rules', $main_rules);
 			$this->assign('auth_rules', $child_rules);
 			$this->assign('node_list', $node_list);
