@@ -155,11 +155,18 @@ class AuthManagerController extends AdminController{
             sort($_POST['rules']);
             $_POST['rules']  = implode( ',' , array_unique($_POST['rules']));
         }
-        $_POST['module'] =  'admin';
+        $_POST['module'] = 'admin';
         $_POST['type']   =  AuthGroupModel::TYPE_ADMIN;
-        $AuthGroup       =  D('AuthGroup');
+        
+		$AuthGroup       =  D('AuthGroup');
+		$old_group = $AuthGroup->find($_POST['id']);
+        
+		$_POST['rules']= $this->getMergedRules($old_group['rules'],$_POST['rules'], 'eq');
+		
         $data = $AuthGroup->create();
+		
         if ( $data ) {
+			
             if ( empty($data['id']) ) {
                 $r = $AuthGroup->add();
             }else{
@@ -168,13 +175,13 @@ class AuthManagerController extends AdminController{
             if($r===false){
                 $this->error('操作失败'.$AuthGroup->getError());
             } else{
-                $this->success('操作成功!',U('index'));
+                $this->success('操作成功!');
             }
         }else{
             $this->error('操作失败'.$AuthGroup->getError());
         }
-    }
-
+    }   
+	
     /**
      * 状态修改
      * @author 朱亚杰 <zhuyajie@topthink.net>
@@ -366,5 +373,200 @@ class AuthManagerController extends AdminController{
             $this->error('操作失败');
         }
     }
+	
+	/*
+	+-----------------------------------
+	前台权限节点管理部分
+	+------------------------------------
+	*/
+	
+	/*
+	*添加权限节点
+	*@author geniusxjq <app880.com>
+	*/
+	public function addNode()
+    {
+        if (empty($this->auth_group)) {
+            $this->assign('auth_group', array('title' => null, 'id' => null, 'description' => null, 'rules' => null,));//排除notice信息
+        }
+        if (IS_POST) {
+            $Rule = D('AuthRule');
+            $data = $Rule->create();
+            if ($data) {
+                if (intval($data['id']) == 0) {
+                    $id = $Rule->add();
+                } else {
+                    $Rule->save($data);
+                    $id = $data['id'];
+                }
 
+                if ($id) {
+                    // S('DB_CONFIG_DATA',null);
+                    //记录行为
+                    $this->success('编辑成功');
+                } else {
+                    $this->error('编辑失败');
+                }
+            } else {
+                $this->error($Rule->getError());
+            }
+        } else {
+            $a_id = I('id', 0, 'intval');
+            if ($a_id == 0) {
+                $info['module']=I('module','');
+            }else{
+                $info = D('AuthRule')->find($a_id);
+            }
+
+            $this->assign('info', $info);
+            $modules = D('Module')->getModules();
+            $this->assign('Modules', $modules);
+            $this->meta_title = '新增前台权限节点';
+            $this->display();
+        }
+
+    }
+	
+	/*
+	*删除权限节点
+	*@author geniusxjq <app880.com>
+	*/
+    public function deleteNode(){
+        $a_id=I('id',0,'intval');
+        if($a_id>0){
+           $result=   M('AuthRule')->where(array('id'=>$a_id))->delete();
+            if($result){
+                $this->success('删除成功。');
+            }else{
+                $this->error('删除失败。');
+            }
+        }else{
+            $this->error('必须选择节点。');
+        }
+    }
+	
+	/*
+	*用户前台权限节点管理页面/权限保存
+	*@author geniusxjq <app880.com>
+	*/
+	
+    public function accessUser()
+    {
+
+        if (IS_POST) {
+			
+			$a_id = I('post.id',0);
+			
+            $a_rules = I('post.rules', '');
+            
+			$AuthGroup=M('AuthGroup');
+			
+			$a_old_rule=$AuthGroup->find($a_id);
+			
+			$_POST['rules'] = $this->getMergedRules($a_old_rule['rules'], $a_rules);
+						
+			$data=$AuthGroup->create(); 
+			
+			if($data){
+								
+				$res=$AuthGroup->save();
+					
+				if($res===false){
+					
+					$this->error('保存失败');
+				
+				} else{
+					
+					$this->success('保存成功');
+					
+				}
+				
+			}else{
+				
+				$this->error('操作失败');
+				
+			}
+
+        }else{
+			
+			$a_id = I('get.group_id',0);
+			$this->updateRules();
+			$auth_group = M('AuthGroup')->where(array('status' => array('egt', '0'), 'module' => array('neq', ''), 'type' => AuthGroupModel::TYPE_ADMIN))->getfield('id,id,title,rules');
+			
+			$node_list =$this->getNodeListFromModule(D('Module')->getModules());
+		
+			$map = array('module' => array('neq', 'admin'), 'type' => AuthRuleModel::RULE_MAIN, 'status' => 1);
+			$main_rules = M('AuthRule')->where($map)->getField('name,id');
+			$map = array('module' => array('neq', 'admin'), 'type' => AuthRuleModel::RULE_URL, 'status' => 1);
+			$child_rules = M('AuthRule')->where($map)->getField('name,id');
+	
+			$group = M('AuthGroup')->find($a_id);
+			$this->assign('main_rules', $main_rules);
+			$this->assign('auth_rules', $child_rules);
+			$this->assign('node_list', $node_list);
+			$this->assign('auth_group', $auth_group);
+			$this->assign('this_group', $group);
+			$this->meta_title = '用户前台授权';
+			$this->display('');
+			
+		}
+    }
+	
+	/*
+	*合并新的规则/删除全部非Admin（后台管理）模块下的权限，排除老的权限的影响
+	*@author geniusxjq <app880.com>
+	*/
+
+    private function getMergedRules($old_rules, $rules, $isAdmin = 'neq')
+    {
+        $old_rules=is_array($old_rules)?$old_rules:explode(',',$old_rules);
+		
+		$rules=is_array($rules)?$rules:explode(',',$rules);
+		
+		$map = array('module' => array($isAdmin, 'admin'), 'status' => 1);
+        
+		$otherRules = M('AuthRule')->where($map)->field('id')->select();
+				
+        $other_rules_array = get_sub_by_key($otherRules,'id');
+
+        /*
+		1.删除全部非Admin模块下的权限，排除老的权限的影响
+        2.合并新的规则
+		*/
+        foreach ($other_rules_array as $key => $v) {
+			
+            if (in_array($v, $old_rules)) {
+				
+                $key_search = array_search($v, $old_rules);
+				
+                if ($key_search !== false)
+				
+                    array_splice($old_rules, $key_search, 1);
+					
+            }
+        }
+
+        return implode(',',array_filter(array_unique(array_merge($old_rules, $rules)),function($v){ return $v?true:false; }));
+
+    }
+	
+	//预处理规则，去掉未安装的模块
+    private function getNodeListFromModule($modules)
+    {
+        $node_list = array();
+        foreach ($modules as $module) {
+			
+            if ($module['is_setup']) {
+
+                $node = array('name' => $module['name'], 'alias' => $module['alias']);
+                $map = array('module' => $module['name'], 'type' => AuthRuleModel::RULE_URL, 'status' => 1);
+
+                $node['child'] = M('AuthRule')->where($map)->select();
+                $node_list[] = $node;
+            }
+
+        }
+        return $node_list;
+    }
+	
 }

@@ -17,7 +17,7 @@ function friendly_time($time,$precision=false) {
 	
 	$date=new \Org\Util\Date();
 	
-	//如果为时间戳那么就将七转换成日期格式
+	//如果为时间戳那么就将其转换成日期格式
 	!preg_match("/[^\d]+/",$time)&&$time=time_format($time);
 	
 	return $date->timeDiff($time,$precision);

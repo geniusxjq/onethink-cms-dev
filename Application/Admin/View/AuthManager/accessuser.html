@@ -3,26 +3,28 @@
 <block name="body">
 	<div class="tab-wrap">
 		<ul class="tab-nav nav">
-			<li class="current"><a href="javascript:;">管理后台授权</a></li>
-            <li><a href="{:U('AuthManager/accessUser',array('group_name'=>I('group_name') ,'group_id'=> I('group_id')))}">用户前台授权</a></li>
+			<li><a href="{:U('AuthManager/access',array('group_name'=>I('group_name') ,'group_id'=> I('group_id')))}">管理后台授权</a></li>
+            <li class="current"><a href="javascript:;">用户前台授权</a></li>
             <li><a href="{:U('AuthManager/category',array('group_name'=>I('group_name') ,'group_id'=> I('group_id')))}">内容分类授权</a></li>
 			<li><a href="{:U('AuthManager/user',array('group_name'=>I('group_name') ,'group_id'=> I('group_id')))}">成员授权</a></li>
 			<li class="fr">
 				<select name="group">
 					<volist name="auth_group" id="vo">
-						<option value="{:U('AuthManager/access',array('group_id'=>$vo['id'],'group_name'=>$vo['title']))}" <eq name="vo['id']" value="$this_group['id']">selected</eq> >{$vo.title}</option>
+						<option value="{:U('AuthManager/accessUser',array('group_id'=>$vo['id'],'group_name'=>$vo['title']))}" <eq name="vo['id']" value="$this_group['id']">selected</eq> >{$vo.title}</option>
 					</volist>
 				</select>
+                
 			</li>
 		</ul>
 		<div class="tab-content">
 			<!-- 访问授权 -->
 			<div class="tab-pane in">
-				<form action="{:U('AuthManager/writeGroup')}" enctype="application/x-www-form-urlencoded" method="POST" class="form-horizontal auth-form">
+				<form action="__SELF__" enctype="application/x-www-form-urlencoded" method="POST" class="form-horizontal auth-form">
+
 					<volist name="node_list" id="node" >
 						<dl class="checkmod">
 							<dt class="hd">
-								<label class="checkbox"><input class="auth_rules rules_all" type="checkbox" name="rules[]" value="<?php echo $main_rules[$node['url']] ?>">{$node.title}管理</label>
+								<label class="checkbox"><input class="auth_rules rules_all" type="checkbox" name="rules[]" value="<?php echo $main_rules[$node['url']] ?>">{$node.alias}模块</label>
 							</dt>
 							<dd class="bd">
 								<present name="node['child']">
@@ -30,8 +32,9 @@
                                     <div class="rule_check">
                                         <div>
                                             <label class="checkbox" <notempty name="child['tip']">title='{$child.tip}'</notempty>>
-                                           <input class="auth_rules rules_row" type="checkbox" name="rules[]" value="<?php echo $auth_rules[$child['url']] ?>"/>{$child.title}
-                                            </label>
+                                           <input class="auth_rules rules_row" type="checkbox" name="rules[]" value="{$child.id}"/>{$child.title}
+                                            </label><a target="_self" href="{:U('addnode',array('id'=>$child['id']))}">[编辑]</a>
+                                            <a target="_self" href="{:U('deletenode',array('id'=>$child['id']))}">[删除]</a>
                                         </div>
                                        <notempty name="child['operator']">
                                            <span class="divsion">&nbsp;</span>
@@ -46,7 +49,8 @@
                                        </notempty>
 				                    </div>
 								</volist>
-								</present>
+
+								</present><a target="_self" href="{:U('addnode',array('module'=>$node['name']))}">[新增节点]</a>
 							</dd>
 						</dl>
 					</volist>

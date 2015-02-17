@@ -7,6 +7,8 @@
 // | Author: 麦当苗儿 <zuojiazi@vip.qq.com> <http://www.zjzit.cn>
 // +----------------------------------------------------------------------
 
+use Admin\Model\AuthRuleModel;
+
 // OneThink常量定义
 const ONETHINK_VERSION    = '1.1.141212';
 const ONETHINK_ADDON_PATH = './Addons/';
@@ -68,6 +70,7 @@ function check_auth($rule, $type = AuthRuleModel::RULE_URL )
     if (!$Auth) {
         $Auth = new \Think\Auth();
     }
+	//dump($_SESSION['_AUTH_LIST_'.$uid.$t]);
     if (!$Auth->check($rule, is_login(), $type)) {
         return false;
     }
