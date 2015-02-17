@@ -454,16 +454,12 @@ class AuthManagerController extends AdminController{
     {
 
         if (IS_POST) {
-			
-			$a_id = I('post.id',0);
-			
-            $a_rules = I('post.rules', '');
-            
+						            
 			$AuthGroup=M('AuthGroup');
 			
-			$a_old_rule=$AuthGroup->find($a_id);
+			$a_old_rule=$AuthGroup->find(I('post.id',0));
 			
-			$_POST['rules'] = $this->getMergedRules($a_old_rule['rules'], $a_rules);
+			$_POST['rules'] = $this->getMergedRules($a_old_rule['rules'], I('post.rules',''));
 						
 			$data=$AuthGroup->create(); 
 			
@@ -473,7 +469,7 @@ class AuthManagerController extends AdminController{
 					
 				if($res===false){
 					
-					$this->error('保存失败');
+					$this->error('保存失败'.$AuthGroup->getError());
 				
 				} else{
 					
@@ -483,7 +479,7 @@ class AuthManagerController extends AdminController{
 				
 			}else{
 				
-				$this->error('操作失败');
+				$this->error('操作失败'.$AuthGroup->getError());
 				
 			}
 
