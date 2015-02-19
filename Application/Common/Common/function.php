@@ -70,7 +70,6 @@ function check_auth($rule, $type = AuthRuleModel::RULE_URL )
     if (!$Auth) {
         $Auth = new \Think\Auth();
     }
-	//dump($_SESSION['_AUTH_LIST_'.$uid.$t]);
     if (!$Auth->check($rule, is_login(), $type)) {
         return false;
     }

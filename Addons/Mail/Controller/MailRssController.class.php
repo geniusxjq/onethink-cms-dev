@@ -33,14 +33,14 @@ class MailRssController extends AddonsController
 				D('MailToken')->where(array('token' => $token))->delete();
 				
 				if ($res) {
-					$this->success('取消订阅成功', U('Home/Index/index'));
+					$this->success('取消订阅成功', U(C('DEFAULT_MODULE').'/Index/index'));
 				} else {
-					$this->error('取消订阅失败', U('Home/Index/index'));
+					$this->error('取消订阅失败', U(C('DEFAULT_MODULE').'/Index/index'));
 				}
 				
 			}else{
 			
-				$this->error('取消订阅失败', U('Home/Index/index'));
+				$this->error('取消订阅失败', U(C('DEFAULT_MODULE').'/Index/index'));
 			
 			}
 			
@@ -53,13 +53,13 @@ class MailRssController extends AddonsController
         $match = preg_match("/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/", $email_address);
 
         if( $email_address =='' || !$match){
-            $this->error('邮箱格式不正确');
+            $this->error('邮箱格式不正确',U(C('DEFAULT_MODULE').'/Index/index'));
         }
 
         $check = D('MailList')->where(array('address' => $email_address))->find();
         if ($check) {
              if($check['status']){
-                    $this->error('该邮箱已经存在');
+                    $this->error('该邮箱已经存在',U(C('DEFAULT_MODULE').'/Index/index'));
                 }
                 else{
                     $res = D('MailList')->where(array('address'=>$email_address))->setField('status', 1);
@@ -70,9 +70,9 @@ class MailRssController extends AddonsController
 
         }
         if ($res) {
-            $this->success('订阅成功.');
+            $this->success('订阅成功',U(C('DEFAULT_MODULE').'/Index/index'));
         } else {
-            $this->error(' 订阅失败');
+            $this->error(' 订阅失败',U(C('DEFAULT_MODULE').'/Index/index'));
         }
     }
 

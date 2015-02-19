@@ -1,8 +1,0 @@
-diyform插件说明
-1. 需要改动 \Application\Admin\Controller\AddonsController.class.php 668行
-	把 $this->display($addon->addon_path . $template);
-	改成 $this->display(T($template));
-
-	因为上面那样没办法定位到自己的模板，只能放到指定目录下面去(/ □ \)
-
-做的比较仓促，有什么问题可以反馈到邮箱：fanren3150@qq.com，谢谢
