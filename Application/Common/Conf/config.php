@@ -12,14 +12,19 @@
  * 所有系统级别的配置
  */
 return array(
+			 
     /* 模块相关配置 */
     'AUTOLOAD_NAMESPACE' => array('Addons' => ONETHINK_ADDON_PATH), //扩展模块列表
     'DEFAULT_MODULE'     => 'Home',
     'MODULE_DENY_LIST'   => array('Common','User','Admin','Install'),
-    'MODULE_ALLOW_LIST'  => array('Home'),
+    //'MODULE_ALLOW_LIST'  => array('Home','Ucenter','People'),
 
     /* 系统数据加密设置 */
     'DATA_AUTH_KEY' => 'T-S4uQAb%(Kx}$WhJ*8VfX9k|e;L,]d!2N{5Rp"l', //默认数据加密KEY
+	
+	/* 数据缓存设置 */
+    'DATA_CACHE_PREFIX' => 'onethink_', // 缓存前缀
+    'DATA_CACHE_TYPE'   => 'File', // 数据缓存类型
 
     /* 用户相关设置 */
     'USER_MAX_CACHE'     => 1000, //最大缓存用户数
@@ -45,8 +50,8 @@ return array(
 
     /* 文档模型配置 (文档模型核心配置，请勿更改) */
     'DOCUMENT_MODEL_TYPE' => array(2 => '主题', 1 => '目录', 3 => '段落'),
-	
+
 	/*加载扩展函数文件*/
-	'LOAD_EXT_FILE'=>'time,parse,mail',
+	'LOAD_EXT_FILE'=>'router,time,parse,mail,upload,template',
 	
 );

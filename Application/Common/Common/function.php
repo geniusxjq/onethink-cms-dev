@@ -77,6 +77,8 @@ function check_auth($rule, $type = AuthRuleModel::RULE_URL )
 
 }
 
+
+
 /**
  * 字符串转换为数组，主要用于把分隔符调整到第二个参数
  * @param  string $str  要分割的字符串
@@ -398,8 +400,17 @@ function addons_url($url, $param = array()){
         '_action'     => $action,
     );
     $params = array_merge($params, $param); //添加额外参数
-
-    return U('Addons/execute', $params);
+	
+	if(strtolower(MODULE_NAME)=="admin"){//区分前台和后台
+		
+		return U('Admin/Addons/execute', $params);
+	
+	}else{
+		
+		return U('Home/Addons/execute', $params);
+		
+	}
+	
 }
 
 /**
@@ -1052,4 +1063,22 @@ function check_category_model($info){
     $cate   =   get_category($info['category_id']);
     $array  =   explode(',', $info['pid'] ? $cate['model_sub'] : $cate['model']);
     return in_array($info['model_id'], $array);
+}
+
+/**
+ * 获取导航URL
+ * @param  string $url 导航URL
+ * @return string      解析或的url
+ * @author 麦当苗儿 <zuojiazi@vip.qq.com>
+ */
+function get_nav_url($url){
+    switch ($url) {
+        case 'http://' === substr($url, 0, 7):
+        case '#' === substr($url, 0, 1):
+            break;        
+        default:
+            $url = U($url);
+            break;
+    }
+    return $url;
 }

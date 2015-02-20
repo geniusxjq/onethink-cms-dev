@@ -16,10 +16,6 @@ return array(
    'URL_ROUTER_ON'=>true,	
    
    'URL_ROUTE_RULES'=>array(
-		
-		//投票插件路由
-		'Vote/:id' =>'home/addons/execute?_addons=Vote&_controller=ViewVote&_action=index',
-		'ViewVote/:id' =>'home/addons/execute?_addons=Vote&_controller=ViewVote&_action=ViewVoteResult',
     ),
    
 );

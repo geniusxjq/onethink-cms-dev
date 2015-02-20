@@ -15,6 +15,17 @@ if(version_compare(PHP_VERSION,'5.3.0','<'))  die('require PHP > 5.3.0 !');
  */
 define('APP_DEBUG', true );
 
+/*开发时用于自动生成模块文件*/
+
+//define('BIND_MODULE','Ucenter');
+//创建控制器
+//define('BUILD_CONTROLLER_LIST','Index,Config,Base');
+
+//创建模型
+//define('BUILD_MODEL_LIST','User');
+
+/*开发时用于自动生成模块文件 END*/
+
 /**
  * 应用目录设置
  * 安全期间，建议安装调试完成后移动到非WEB目录
@@ -25,11 +36,7 @@ if(!is_file(APP_PATH . 'User/Conf/config.php')){
 	header('Location: ./install.php');
 	exit;
 }
-
-/**
- * 缓存目录设置
- * 此目录必须可写，建议移动到非WEB目录
- */
+ 
 define ( 'RUNTIME_PATH', './Runtime/' );
 
 /**

@@ -17,7 +17,7 @@ return array(
     'TAGLIB_PRE_LOAD'     =>    'OT\\TagLib\\Article,OT\\TagLib\\Think',
         
     /* 主题设置 */
-    'DEFAULT_THEME' =>  'light',//'default',  // 默认模板主题名称
+    'DEFAULT_THEME' => 'default',  // 默认模板主题名称
 
     /* 数据缓存设置 */
     'DATA_CACHE_PREFIX' => 'onethink_', // 缓存前缀
@@ -94,6 +94,4 @@ return array(
         'hash'     => true, //是否生成hash编码
         'callback' => false, //检测文件是否存在回调函数，如果存在返回文件信息数组
     ), //附件上传配置（文件上传类配置）
-   /*加载扩展函数文件*/
-	'LOAD_EXT_CONFIG'=>'router',
 );

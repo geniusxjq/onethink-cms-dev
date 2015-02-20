@@ -1,20 +1,25 @@
 <?php
 // +----------------------------------------------------------------------
-// | OneThink [ WE CAN DO IT JUST THINK IT ]
+// | Copyright (c) 2015 http://www.ap880.com All rights reserved.
 // +----------------------------------------------------------------------
-// | Copyright (c) 2013 http://www.onethink.cn All rights reserved.
-// +----------------------------------------------------------------------
-// | Author: 麦当苗儿 <zuojiazi@vip.qq.com> <http://www.zjzit.cn>
+// | Author: geniusxjq <app880.com>
 // +----------------------------------------------------------------------
 
-namespace Home\Controller;
+namespace Ucenter\Controller;
+use Common\Controller\BaseController;
 use User\Api\UserApi;
 
 /**
  * 用户控制器
- * 包括用户中心，用户登录及注册
+ *用于登录/注册等
  */
-class UserController extends HomeController {
+class MemberController extends BaseController {
+	
+	public function _initialize(){
+		
+		parent::_initialize();
+		
+	}
 
 	/* 用户中心首页 */
 	public function index(){
@@ -68,7 +73,7 @@ class UserController extends HomeController {
 				$Member = D('Member');
 				if($Member->login($uid)){ //登录用户
 					//TODO:跳转到登录前页面
-					$this->success('登录成功！',U('Home/Index/index'));
+					$this->success('登录成功！',U('Index/index'));
 				} else {
 					$this->error($Member->getError());
 				}
@@ -91,9 +96,9 @@ class UserController extends HomeController {
 	public function logout(){
 		if(is_login()){
 			D('Member')->logout();
-			$this->success('退出成功！', U('User/login'));
+			$this->success('退出成功！', U('login'));
 		} else {
-			$this->redirect('User/login');
+			$this->redirect('login');
 		}
 	}
 
@@ -133,7 +138,7 @@ class UserController extends HomeController {
      */
     public function profile(){
 		if ( !is_login() ) {
-			$this->error( '您还没有登陆',U('User/login') );
+			$this->error( '您还没有登陆',U('login') );
 		}
         if ( IS_POST ) {
             //获取参数
