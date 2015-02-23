@@ -11,7 +11,7 @@ use User\Api\UserApi;
 
 /**
  * 用户控制器
- *用于登录/注册等
+ *用于登录/注册/会员展示等
  */
 class MemberController extends BaseController {
 	
@@ -21,9 +21,9 @@ class MemberController extends BaseController {
 		
 	}
 
-	/* 用户中心首页 */
+	/* 会员中心首页 */
 	public function index(){
-		
+		$this->display();
 	}
 
 	/* 注册页面 */

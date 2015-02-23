@@ -25,7 +25,15 @@ class UcenterController extends BaseController {
 		
 		if(!UID){
 			
-			$this->redirect('Member/login');
+			if(IS_POST){
+				
+				$this->error('请登录后再操作！',U('Member/login'));
+				
+			}else{
+			
+				$this->redirect('Member/login');
+			
+			}
 			
 		}
 		
