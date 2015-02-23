@@ -36,18 +36,19 @@
 		<tr style="border-top:1px solid #ccc;">
 			<td rowspan="3" valign="top" class="headimg"  style="padding-top:10px;"><img src="__IMG__/default.png" class="img-rounded"></td>
 			<td class="form-inline"  style="padding-top:10px;">
-			   <if condition="is_login()">
-			  <label class="sr-only" for="uname">我是 ： <a href="javascript:void(0);">{:get_username()}</a></label>
-			   <else/>
-				<label class="sr-only" for="uname">昵称* ：</label>
-				<input type="text" class="" name="uname" id="uname" placeholder="请输入您的昵称">
-				<label class="sr-only" for="uemail">邮箱* ：</label>
-				<input type="text" class="" name="uemail" id="uemail"  placeholder="请输入您的邮箱">
-			   </if>
-			</td>
+			   <p>
+			     <if condition="is_login()">
+			       <label class="sr-only" for="uname">我是 ： <a href="javascript:void(0);">{:get_username()}</a></label>
+			       <else/>
+			       <label class="sr-only" for="uname">&nbsp;&nbsp; 昵称* ：</label>
+			       <input type="text" class="" name="uname" id="uname" placeholder="请输入您的昵称">
+			       <label class="sr-only" for="uemail"> &nbsp;&nbsp;邮箱* ：</label>
+			       <input type="text" class="" name="uemail" id="uemail"  placeholder="请输入您的邮箱">
+		         </if>
+	        </p></td>
 		</tr>
 		<tr>
-			<td><textarea rows="3" name="comment" id="comment" class="" style="width:100%;"></textarea></td>
+			<td><textarea rows="5" name="comment" id="comment" class="" style="width:100%;"></textarea></td>
 		</tr>
 		<tr>
 			<td>

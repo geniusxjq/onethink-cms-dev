@@ -93,7 +93,7 @@ class SensitiveAddon extends Addon
             $replace_words = S('replace_sensitive_words');
             if(empty($replace_words)){
                 $words = D('Sensitive')->where(array('status'=>1))->select();
-                $words = getSubByKey($words,'title');
+                $words = get_sub_by_key($words,'title');
                 $replace_words = array_combine($words, array_fill(0, count($words), '***'));
                 S('replace_sensitive_words',$replace_words);
             }

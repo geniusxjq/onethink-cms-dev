@@ -44,7 +44,7 @@ class CommentModel extends Model{
 
 	protected function _after_find(&$result,$options) {
 		
-		$result['create_time_text'] = friendly_date($result['create_time']);
+		$result['create_time_text'] = friendly_time($result['create_time']);
 		$result['ip'] = long2ip($result['com_ip']);
 		$result['comment']=parse_content($result['comment']);//过滤文本
 

@@ -63,7 +63,7 @@ CREATE TABLE `onethink_action_log` (
   KEY `action_ip_ix` (`action_ip`),
   KEY `action_id_ix` (`action_id`),
   KEY `user_id_ix` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=129 DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED COMMENT='行为日志表';
+) ENGINE=MyISAM AUTO_INCREMENT=197 DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED COMMENT='行为日志表';
 
 #
 # Dumping data for table onethink_action_log
@@ -78,6 +78,74 @@ INSERT INTO `onethink_action_log` VALUES (125,10,1,2130706433,'Menu',27,'操作url
 INSERT INTO `onethink_action_log` VALUES (126,10,1,2130706433,'Menu',27,'操作url：/admin.php?s=/Menu/edit.html',1,1424186044);
 INSERT INTO `onethink_action_log` VALUES (127,10,1,2130706433,'Menu',27,'操作url：/admin.php?s=/Menu/edit.html',1,1424186456);
 INSERT INTO `onethink_action_log` VALUES (128,1,1,2130706433,'member',1,'admin在2015-02-17 23:27登录了后台',1,1424186851);
+INSERT INTO `onethink_action_log` VALUES (129,1,1,2130706433,'member',1,'admin在2015-02-18 08:41登录了后台',1,1424220092);
+INSERT INTO `onethink_action_log` VALUES (130,7,1,2130706433,'model',4,'操作url：/admin.php?s=/Model/update.html',1,1424221521);
+INSERT INTO `onethink_action_log` VALUES (131,8,1,2130706433,'attribute',33,'操作url：/admin.php?s=/Attribute/update.html',1,1424222398);
+INSERT INTO `onethink_action_log` VALUES (132,7,1,2130706433,'model',4,'操作url：/admin.php?s=/Model/update.html',1,1424222476);
+INSERT INTO `onethink_action_log` VALUES (133,8,1,2130706433,'attribute',34,'操作url：/admin.php?s=/Model/generate.html',1,1424222572);
+INSERT INTO `onethink_action_log` VALUES (134,7,1,2130706433,'model',6,'操作url：/admin.php?s=/Model/update.html',1,1424222843);
+INSERT INTO `onethink_action_log` VALUES (135,8,1,2130706433,'attribute',35,'操作url：/admin.php?s=/Attribute/update.html',1,1424222997);
+INSERT INTO `onethink_action_log` VALUES (136,8,1,2130706433,'attribute',36,'操作url：/admin.php?s=/Attribute/update.html',1,1424223175);
+INSERT INTO `onethink_action_log` VALUES (137,7,1,2130706433,'model',6,'操作url：/admin.php?s=/Model/update.html',1,1424223274);
+INSERT INTO `onethink_action_log` VALUES (138,7,1,2130706433,'model',6,'操作url：/admin.php?s=/Model/update.html',1,1424223513);
+INSERT INTO `onethink_action_log` VALUES (139,8,1,2130706433,'attribute',37,'操作url：/admin.php?s=/Attribute/update.html',1,1424223701);
+INSERT INTO `onethink_action_log` VALUES (140,8,1,2130706433,'attribute',36,'操作url：/admin.php?s=/Attribute/update.html',1,1424223846);
+INSERT INTO `onethink_action_log` VALUES (141,7,1,2130706433,'model',6,'操作url：/admin.php?s=/Model/update.html',1,1424224095);
+INSERT INTO `onethink_action_log` VALUES (142,7,1,2130706433,'model',6,'操作url：/admin.php?s=/Model/update.html',1,1424224134);
+INSERT INTO `onethink_action_log` VALUES (143,8,1,2130706433,'attribute',38,'操作url：/admin.php?s=/Attribute/update.html',1,1424224320);
+INSERT INTO `onethink_action_log` VALUES (144,7,1,2130706433,'model',6,'操作url：/admin.php?s=/Model/update.html',1,1424224343);
+INSERT INTO `onethink_action_log` VALUES (145,7,1,2130706433,'model',6,'操作url：/admin.php?s=/Model/update.html',1,1424224367);
+INSERT INTO `onethink_action_log` VALUES (146,8,1,2130706433,'attribute',39,'操作url：/admin.php?s=/Attribute/update.html',1,1424224536);
+INSERT INTO `onethink_action_log` VALUES (147,8,1,2130706433,'attribute',39,'操作url：/admin.php?s=/Attribute/update.html',1,1424224624);
+INSERT INTO `onethink_action_log` VALUES (148,8,1,2130706433,'attribute',39,'操作url：/admin.php?s=/Attribute/update.html',1,1424224674);
+INSERT INTO `onethink_action_log` VALUES (149,7,1,2130706433,'model',6,'操作url：/admin.php?s=/Model/update.html',1,1424224738);
+INSERT INTO `onethink_action_log` VALUES (150,8,1,2130706433,'attribute',40,'操作url：/admin.php?s=/Model/generate.html',1,1424224858);
+INSERT INTO `onethink_action_log` VALUES (151,8,1,2130706433,'attribute',41,'操作url：/admin.php?s=/Model/generate.html',1,1424224858);
+INSERT INTO `onethink_action_log` VALUES (152,8,1,2130706433,'attribute',42,'操作url：/admin.php?s=/Model/generate.html',1,1424224858);
+INSERT INTO `onethink_action_log` VALUES (153,8,1,2130706433,'attribute',43,'操作url：/admin.php?s=/Model/generate.html',1,1424224858);
+INSERT INTO `onethink_action_log` VALUES (154,8,1,2130706433,'attribute',44,'操作url：/admin.php?s=/Model/generate.html',1,1424224858);
+INSERT INTO `onethink_action_log` VALUES (155,11,1,2130706433,'category',2,'操作url：/admin.php?s=/Category/edit.html',1,1424239790);
+INSERT INTO `onethink_action_log` VALUES (156,8,1,2130706433,'attribute',39,'操作url：/admin.php?s=/Attribute/update.html',1,1424239574);
+INSERT INTO `onethink_action_log` VALUES (157,7,1,2130706433,'model',6,'操作url：/admin.php?s=/Model/update.html',1,1424239791);
+INSERT INTO `onethink_action_log` VALUES (158,8,1,2130706433,'attribute',45,'操作url：/admin.php?s=/Attribute/update.html',1,1424240217);
+INSERT INTO `onethink_action_log` VALUES (159,7,1,2130706433,'model',6,'操作url：/admin.php?s=/Model/update.html',1,1424240250);
+INSERT INTO `onethink_action_log` VALUES (160,7,1,2130706433,'model',6,'操作url：/admin.php?s=/Model/update.html',1,1424240326);
+INSERT INTO `onethink_action_log` VALUES (161,8,1,2130706433,'attribute',36,'操作url：/admin.php?s=/Attribute/update.html',1,1424240493);
+INSERT INTO `onethink_action_log` VALUES (162,8,1,2130706433,'attribute',36,'操作url：/admin.php?s=/Attribute/update.html',1,1424240611);
+INSERT INTO `onethink_action_log` VALUES (163,8,1,2130706433,'attribute',36,'操作url：/admin.php?s=/Attribute/update.html',1,1424240689);
+INSERT INTO `onethink_action_log` VALUES (164,8,1,2130706433,'attribute',37,'操作url：/admin.php?s=/Attribute/update.html',1,1424240749);
+INSERT INTO `onethink_action_log` VALUES (165,8,1,2130706433,'attribute',45,'操作url：/admin.php?s=/Attribute/update.html',1,1424240767);
+INSERT INTO `onethink_action_log` VALUES (166,8,1,2130706433,'attribute',35,'操作url：/admin.php?s=/Attribute/update.html',1,1424240910);
+INSERT INTO `onethink_action_log` VALUES (167,8,1,2130706433,'attribute',35,'操作url：/admin.php?s=/Attribute/update.html',1,1424240953);
+INSERT INTO `onethink_action_log` VALUES (168,8,1,2130706433,'attribute',37,'操作url：/admin.php?s=/Attribute/update.html',1,1424240968);
+INSERT INTO `onethink_action_log` VALUES (169,8,1,2130706433,'attribute',46,'操作url：/admin.php?s=/Attribute/update.html',1,1424241068);
+INSERT INTO `onethink_action_log` VALUES (170,7,1,2130706433,'model',6,'操作url：/admin.php?s=/Model/update.html',1,1424241099);
+INSERT INTO `onethink_action_log` VALUES (171,7,1,2130706433,'model',6,'操作url：/admin.php?s=/Model/update.html',1,1424241154);
+INSERT INTO `onethink_action_log` VALUES (172,7,1,2130706433,'model',6,'操作url：/admin.php?s=/Model/update.html',1,1424241310);
+INSERT INTO `onethink_action_log` VALUES (173,7,1,2130706433,'model',6,'操作url：/admin.php?s=/Model/update.html',1,1424241364);
+INSERT INTO `onethink_action_log` VALUES (174,7,1,2130706433,'model',6,'操作url：/admin.php?s=/Model/update.html',1,1424241803);
+INSERT INTO `onethink_action_log` VALUES (175,7,1,2130706433,'model',6,'操作url：/admin.php?s=/Model/update.html',1,1424241897);
+INSERT INTO `onethink_action_log` VALUES (176,8,1,2130706433,'attribute',47,'操作url：/admin.php?s=/Attribute/update.html',1,1424242022);
+INSERT INTO `onethink_action_log` VALUES (177,7,1,2130706433,'model',6,'操作url：/admin.php?s=/Model/update.html',1,1424242066);
+INSERT INTO `onethink_action_log` VALUES (178,7,1,2130706433,'model',6,'操作url：/admin.php?s=/Model/update.html',1,1424242138);
+INSERT INTO `onethink_action_log` VALUES (179,7,1,2130706433,'model',6,'操作url：/admin.php?s=/Model/update.html',1,1424242546);
+INSERT INTO `onethink_action_log` VALUES (180,7,1,2130706433,'model',6,'操作url：/admin.php?s=/Model/update.html',1,1424242595);
+INSERT INTO `onethink_action_log` VALUES (181,7,1,2130706433,'model',6,'操作url：/admin.php?s=/Model/update.html',1,1424242667);
+INSERT INTO `onethink_action_log` VALUES (182,7,1,2130706433,'model',6,'操作url：/admin.php?s=/Model/update.html',1,1424242907);
+INSERT INTO `onethink_action_log` VALUES (183,7,1,2130706433,'model',6,'操作url：/admin.php?s=/Model/update.html',1,1424242967);
+INSERT INTO `onethink_action_log` VALUES (184,1,1,2130706433,'member',1,'admin在2015-02-19 14:48登录了后台',1,1424328523);
+INSERT INTO `onethink_action_log` VALUES (185,1,3,2130706433,'member',3,'geniusxjq在2015-02-19 20:28登录了后台',1,1424348892);
+INSERT INTO `onethink_action_log` VALUES (186,1,1,2130706433,'member',1,'admin在2015-02-19 23:27登录了后台',1,1424359653);
+INSERT INTO `onethink_action_log` VALUES (187,1,3,2130706433,'member',3,'geniusxjq在2015-02-20 10:12登录了后台',1,1424398363);
+INSERT INTO `onethink_action_log` VALUES (188,1,4,2130706433,'member',4,'xjq123在2015-02-20 10:20登录了后台',1,1424398807);
+INSERT INTO `onethink_action_log` VALUES (189,1,3,2130706433,'member',3,'geniusxjq在2015-02-20 10:28登录了后台',1,1424399281);
+INSERT INTO `onethink_action_log` VALUES (190,1,1,2130706433,'member',1,'admin在2015-02-20 11:51登录了后台',1,1424404301);
+INSERT INTO `onethink_action_log` VALUES (191,9,1,2130706433,'channel',1,'操作url：/admin.php?s=/Channel/edit.html',1,1424404763);
+INSERT INTO `onethink_action_log` VALUES (192,9,1,2130706433,'channel',2,'操作url：/admin.php?s=/Channel/edit.html',1,1424404779);
+INSERT INTO `onethink_action_log` VALUES (193,9,1,2130706433,'channel',1,'操作url：/admin.php?s=/Channel/edit.html',1,1424406781);
+INSERT INTO `onethink_action_log` VALUES (194,9,1,2130706433,'channel',0,'操作url：/admin.php?s=/Channel/del/id/3.html',1,1424406795);
+INSERT INTO `onethink_action_log` VALUES (195,1,1,2130706433,'member',1,'admin在2015-02-20 18:59登录了后台',1,1424429960);
+INSERT INTO `onethink_action_log` VALUES (196,1,1,2130706433,'member',1,'admin在2015-02-23 18:45登录了后台',1,1424688334);
 
 #
 # Source for table onethink_addons
@@ -99,7 +167,7 @@ CREATE TABLE `onethink_addons` (
   `is_locked` tinyint(1) DEFAULT '0' COMMENT '插件是否已被锁定',
   `sort` int(10) DEFAULT '0' COMMENT '已安装插件菜单排序',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=165 DEFAULT CHARSET=utf8 COMMENT='插件表';
+) ENGINE=MyISAM AUTO_INCREMENT=167 DEFAULT CHARSET=utf8 COMMENT='插件表';
 
 #
 # Dumping data for table onethink_addons
@@ -129,7 +197,7 @@ INSERT INTO `onethink_addons` VALUES (157,'Unslider','焦点图','焦点图',0,'{\"tit
 INSERT INTO `onethink_addons` VALUES (158,'Vote','微投票','支持单选、多选的小投票插件。可以用来收集用户对某几个选项的意见。',1,'{\"defaultid\":\"0\",\"display\":\"1\"}','Microrain','','1.0',1423990253,1,0,3);
 INSERT INTO `onethink_addons` VALUES (159,'Support','QQ客服','网站QQ客服插件',1,'{\"random\":\"1\",\"QqKEY\":\"\",\"AnliKEY\":\"\",\"sinaKEY\":\"\"}','高龙','','0.1',1424068041,0,0,0);
 INSERT INTO `onethink_addons` VALUES (163,'ImportData','数据导入','这是一个用于从其他博客导入到OneThink的后台插件，目前支持WordPress,主要导入分类和文章！',1,'null','IT童老','','0.1',1424068706,1,0,8);
-INSERT INTO `onethink_addons` VALUES (164,'Diyform','自定义表单','简单的自定义表单',1,'{\"key\":\"Xgs4YBmIANG7iHeQTF03XmR9SqWxRESw\",\"open_verify\":\"1\"}','凡人','','0.1',1424187451,1,0,9);
+INSERT INTO `onethink_addons` VALUES (166,'Comment','评论功能','用于各种类型文档评论',1,'null','Wolixli','','0.1',1424688364,1,0,0);
 
 #
 # Source for table onethink_advertising
@@ -234,7 +302,7 @@ CREATE TABLE `onethink_attribute` (
   `auto_type` varchar(25) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `model_id` (`model_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 COMMENT='模型属性表';
+) ENGINE=MyISAM AUTO_INCREMENT=48 DEFAULT CHARSET=utf8 COMMENT='模型属性表';
 
 #
 # Dumping data for table onethink_attribute
@@ -578,7 +646,6 @@ INSERT INTO `onethink_auth_rule` VALUES (218,'admin',1,'Admin/think/lists','数据
 INSERT INTO `onethink_auth_rule` VALUES (219,'admin',1,'Admin/Addons/sort','已安装插件菜单排序',1,'');
 INSERT INTO `onethink_auth_rule` VALUES (220,'admin',1,'Admin/AuthManager/accessUser','前台权限管理',1,'');
 INSERT INTO `onethink_auth_rule` VALUES (221,'admin',1,'Admin/AuthManager/addNode','新增前台权限节点',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (232,'Home',1,'01','01',1,'');
 
 #
 # Source for table onethink_category
@@ -624,7 +691,7 @@ CREATE TABLE `onethink_category` (
 #
 
 INSERT INTO `onethink_category` VALUES (1,'blog','博客',0,0,10,'','','','','','','','2,3','2','2,1',0,0,1,0,0,'1','',1379474947,1382701539,1,0,'');
-INSERT INTO `onethink_category` VALUES (2,'default_blog','默认分类',1,1,10,'','','','','','','','2,3','2','2,1,3',0,1,1,0,1,'1','',1379475028,1386839751,1,0,'');
+INSERT INTO `onethink_category` VALUES (2,'default_blog','默认分类',1,1,10,'','','','','','','','2,3','2','2,1,3',0,2,1,0,1,'1','',1379475028,1424239790,1,0,'');
 
 #
 # Source for table onethink_channel
@@ -649,9 +716,39 @@ CREATE TABLE `onethink_channel` (
 # Dumping data for table onethink_channel
 #
 
-INSERT INTO `onethink_channel` VALUES (1,0,'首页','Index/index',1,1379475111,1379923177,1,0);
-INSERT INTO `onethink_channel` VALUES (2,0,'博客','Article/index?category=blog',2,1379475131,1379483713,1,0);
-INSERT INTO `onethink_channel` VALUES (3,0,'官网','http://www.onethink.cn',3,1379475154,1387163458,1,0);
+INSERT INTO `onethink_channel` VALUES (1,0,'首页','Home/Index/index',1,1379475111,1424406781,1,0);
+INSERT INTO `onethink_channel` VALUES (2,0,'博客','Home/Article/index?category=blog',2,1379475131,1424404779,1,0);
+
+#
+# Source for table onethink_comment
+#
+
+DROP TABLE IF EXISTS `onethink_comment`;
+CREATE TABLE `onethink_comment` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `pid` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '被回复评论的ID',
+  `model_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '是哪个文档模型的',
+  `cid` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '内容id,name和cid来定位是哪个内容的',
+  `comment` text COMMENT '评论内容',
+  `digg` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '赞数（顶）',
+  `com_ip` bigint(20) NOT NULL DEFAULT '0' COMMENT '评论IP',
+  `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '添加时间',
+  `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否被删除',
+  `uid` int(10) unsigned DEFAULT NULL COMMENT '是哪位回复的,0为非网站用户',
+  `uname` varchar(200) DEFAULT NULL COMMENT '非网站用户使用的名称',
+  `uemail` varchar(200) DEFAULT NULL COMMENT '非网站用户使用的邮箱',
+  `uurl` varchar(200) DEFAULT NULL COMMENT '非网站用户使用网站地址',
+  PRIMARY KEY (`id`),
+  KEY `uid` (`uid`),
+  KEY `model_id` (`model_id`),
+  KEY `cid` (`cid`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+#
+# Dumping data for table onethink_comment
+#
+
+INSERT INTO `onethink_comment` VALUES (1,0,2,2,'sfsdf',1,2130706433,1424688430,1,NULL,'sdfsdf','836692464@qq.com','');
 
 #
 # Source for table onethink_config
@@ -719,69 +816,6 @@ INSERT INTO `onethink_config` VALUES (45,'MAIL_REPLY_NAME',1,'发件人名称',5,'','
 INSERT INTO `onethink_config` VALUES (46,'WEB_SITE_NAME',0,'网站名称',1,'','网站名称',1422687631,1422687631,1,'app880.com',9);
 
 #
-# Source for table onethink_diyform
-#
-
-DROP TABLE IF EXISTS `onethink_diyform`;
-CREATE TABLE `onethink_diyform` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `diyname` varchar(200) NOT NULL DEFAULT '' COMMENT '自定义表单名称',
-  `posttemplate` varchar(200) NOT NULL DEFAULT '' COMMENT '发布模板',
-  `viewtemplate` varchar(200) NOT NULL DEFAULT '' COMMENT '内容模板',
-  `listtemplate` varchar(200) NOT NULL DEFAULT '' COMMENT '列表模板',
-  `table_name` varchar(50) NOT NULL DEFAULT '' COMMENT '数据表名',
-  `public` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '前台列表和内容页公开：0：不公开，1：公开审核的，2：公开所有的',
-  `field_sort` text NOT NULL COMMENT '表单字段排序',
-  `field_group` varchar(255) NOT NULL DEFAULT '1:基础	' COMMENT '字段分组',
-  `list_grid` text NOT NULL,
-  `list_row` smallint(2) unsigned NOT NULL DEFAULT '10',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='自定义表单';
-
-#
-# Dumping data for table onethink_diyform
-#
-
-INSERT INTO `onethink_diyform` VALUES (1,'用户资料','','','','user_profile',2,'{\"1\":[\"1\"]}','1:基础\t','id:ID\r\nqq:QQ',10);
-
-#
-# Source for table onethink_diyform_fields
-#
-
-DROP TABLE IF EXISTS `onethink_diyform_fields`;
-CREATE TABLE `onethink_diyform_fields` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(30) NOT NULL DEFAULT '' COMMENT '字段名',
-  `title` varchar(100) NOT NULL DEFAULT '' COMMENT '字段注释',
-  `field` varchar(100) NOT NULL DEFAULT '' COMMENT '字段定义',
-  `type` varchar(20) NOT NULL DEFAULT '' COMMENT '数据类型',
-  `value` varchar(100) NOT NULL DEFAULT '' COMMENT '字段默认值',
-  `remark` varchar(100) NOT NULL DEFAULT '' COMMENT '备注',
-  `is_show` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '是否显示',
-  `extra` varchar(255) NOT NULL DEFAULT '' COMMENT '参数',
-  `form_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '自定义表单id',
-  `is_must` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否必填',
-  `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '状态',
-  `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
-  `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
-  `validate_rule` varchar(255) NOT NULL DEFAULT '',
-  `validate_time` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `error_info` varchar(100) NOT NULL DEFAULT '',
-  `validate_type` varchar(25) NOT NULL DEFAULT '',
-  `auto_rule` varchar(100) NOT NULL DEFAULT '',
-  `auto_time` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `auto_type` varchar(25) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`),
-  KEY `form_id` (`form_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='自定义表单字段表';
-
-#
-# Dumping data for table onethink_diyform_fields
-#
-
-INSERT INTO `onethink_diyform_fields` VALUES (1,'qq','qq','VarChar(30)','textarea','','用户qq',1,'',1,0,1,1424188059,1424187562,'',3,'','function','',3,'function');
-
-#
 # Source for table onethink_document
 #
 
@@ -814,13 +848,14 @@ CREATE TABLE `onethink_document` (
   PRIMARY KEY (`id`),
   KEY `idx_category_status` (`category_id`,`status`),
   KEY `idx_status_type_pid` (`status`,`uid`,`pid`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='文档模型基础表';
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='文档模型基础表';
 
 #
 # Dumping data for table onethink_document
 #
 
 INSERT INTO `onethink_document` VALUES (1,1,'','01',2,0,'',0,0,2,2,0,0,0,1,0,0,0,0,0,0,1424071613,1424071613,-1);
+INSERT INTO `onethink_document` VALUES (2,1,'','test',2,0,'',0,0,2,2,0,0,0,1,0,0,14,0,0,0,1424408160,1424409596,1);
 
 #
 # Source for table onethink_document_article
@@ -841,6 +876,7 @@ CREATE TABLE `onethink_document_article` (
 #
 
 INSERT INTO `onethink_document_article` VALUES (1,0,'<em>01</em>','',0);
+INSERT INTO `onethink_document_article` VALUES (2,0,'<img src=\"/Uploads/Editor/2015-02-20/54e6c3d3b547d.jpg\" alt=\"\" />app880.com<img src=\"/Public/static/kindeditor/plugins/emoticons/images/13.gif\" border=\"0\" alt=\"\" />','',0);
 
 #
 # Source for table onethink_document_download
@@ -958,7 +994,7 @@ CREATE TABLE `onethink_hooks` (
 
 INSERT INTO `onethink_hooks` VALUES (1,'pageHeader','页面header钩子，一般用于加载插件CSS文件和代码',1,1423988201,'Unslider',1);
 INSERT INTO `onethink_hooks` VALUES (3,'documentEditForm','添加编辑表单的 扩展内容钩子',1,0,'Attachment',1);
-INSERT INTO `onethink_hooks` VALUES (4,'documentDetailAfter','文档末尾显示',1,1423983209,'Attachment,SocialComment,BaiduShare',1);
+INSERT INTO `onethink_hooks` VALUES (4,'documentDetailAfter','文档末尾显示',1,1423983209,'Attachment,SocialComment,BaiduShare,Comment',1);
 INSERT INTO `onethink_hooks` VALUES (5,'documentDetailBefore','页面内容前显示用钩子',1,0,'',1);
 INSERT INTO `onethink_hooks` VALUES (6,'documentSaveComplete','保存文档数据后的扩展钩子',2,0,'Attachment',1);
 INSERT INTO `onethink_hooks` VALUES (7,'documentEditFormContent','添加编辑表单的内容显示钩子',1,0,'Editor',1);
@@ -1072,15 +1108,16 @@ CREATE TABLE `onethink_member` (
   `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '会员状态',
   PRIMARY KEY (`uid`),
   KEY `status` (`status`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='会员表';
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='会员表';
 
 #
 # Dumping data for table onethink_member
 #
 
-INSERT INTO `onethink_member` VALUES (1,'admin',0,'0000-00-00','',50,59,0,1422599239,2130706433,1424186851,1);
+INSERT INTO `onethink_member` VALUES (1,'admin',0,'0000-00-00','',70,65,0,1422599239,2130706433,1424688334,1);
 INSERT INTO `onethink_member` VALUES (2,'xjq',0,'0000-00-00','',20,6,0,0,2130706433,1424148677,-1);
-INSERT INTO `onethink_member` VALUES (3,'geniusxjq',0,'0000-00-00','',40,24,2130706433,1422700152,2130706433,1424151332,1);
+INSERT INTO `onethink_member` VALUES (3,'geniusxjq',0,'0000-00-00','',50,27,2130706433,1422700152,2130706433,1424399281,1);
+INSERT INTO `onethink_member` VALUES (4,'xjq123',0,'0000-00-00','',10,1,2130706433,1424398807,2130706433,1424398807,1);
 
 #
 # Source for table onethink_menu
@@ -1250,7 +1287,7 @@ CREATE TABLE `onethink_model` (
   `status` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '状态',
   `engine_type` varchar(25) NOT NULL DEFAULT 'MyISAM' COMMENT '数据库引擎',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='文档模型表';
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='文档模型表';
 
 #
 # Dumping data for table onethink_model
@@ -1440,15 +1477,16 @@ CREATE TABLE `onethink_ucenter_member` (
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`),
   KEY `status` (`status`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='用户表';
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='用户表';
 
 #
 # Dumping data for table onethink_ucenter_member
 #
 
-INSERT INTO `onethink_ucenter_member` VALUES (1,'admin','ecfb4272feb1d1fd11fc719c45b5e21d','836692464@qq.com','',1422599239,2130706433,1424186851,2130706433,1422599239,1);
+INSERT INTO `onethink_ucenter_member` VALUES (1,'admin','ecfb4272feb1d1fd11fc719c45b5e21d','836692464@qq.com','',1422599239,2130706433,1424688334,2130706433,1422599239,1);
 INSERT INTO `onethink_ucenter_member` VALUES (2,'xjq','bbe81237a2de1471f322ae25b0132dfc','app880@foxmail.com','',1422698522,2130706433,1424148677,2130706433,1422698522,1);
-INSERT INTO `onethink_ucenter_member` VALUES (3,'geniusxjq','bbe81237a2de1471f322ae25b0132dfc','geniusxjq@126.com','',1422699641,2130706433,1424151332,2130706433,1422699641,1);
+INSERT INTO `onethink_ucenter_member` VALUES (3,'geniusxjq','bbe81237a2de1471f322ae25b0132dfc','geniusxjq@126.com','',1422699641,2130706433,1424399281,2130706433,1422699641,1);
+INSERT INTO `onethink_ucenter_member` VALUES (4,'xjq123','bbe81237a2de1471f322ae25b0132dfc','fafasfasdfsdf@126.com','',1424398787,2130706433,1424398807,2130706433,1424398787,1);
 
 #
 # Source for table onethink_ucenter_setting
@@ -1486,25 +1524,6 @@ CREATE TABLE `onethink_url` (
 # Dumping data for table onethink_url
 #
 
-
-#
-# Source for table onethink_user_profile
-#
-
-DROP TABLE IF EXISTS `onethink_user_profile`;
-CREATE TABLE `onethink_user_profile` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `create_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
-  `ifcheck` tinyint(1) NOT NULL DEFAULT '0',
-  `qq` varchar(30) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
-
-#
-# Dumping data for table onethink_user_profile
-#
-
-INSERT INTO `onethink_user_profile` VALUES (1,1424187708,1,'');
 
 #
 # Source for table onethink_userdata

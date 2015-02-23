@@ -1,15 +1,7 @@
 <?php
+
 /**
- * Onethink 评论插件，功能演示版本
- * @copyright   
- * @author      Wolix Li <wolixli@gmail.com>
- * @link        
- * 各位叔叔大爷、婶婶大娘、哥哥姐姐、弟弟妹妹们行行好，如果哪位走在网路上可怜我四十几岁的小乞丐，可顺便给我打点零花钱，
- * 半年在家呆着没挣着钱，快过年了，没钱给小孩子们包红包、没钱给老人们孝敬槽子糕，也没钱给我那可怜的老婆买新衣服。
- * 一块两块不嫌少，10万八万的不嫌多，美元、日元都可以，最欢迎人民币，我的支付宝账号和 paypal的账号都是： wolix@139.com
- * 专业组团定制互联网php产品，联系QQ: 4118814
- * 现在做雷锋也留名，请不要再叫我雷锋了，叫我“老李”就行了！
- * 2014/1/14
+ * @author genisuxjq <app880.com>
  **/
 namespace Addons\Comment;
 use Common\Controller\Addon;
@@ -35,7 +27,7 @@ use Common\Controller\Addon;
 			'install_sql'=>"DROP TABLE IF EXISTS `onethink_comment`;
 			CREATE TABLE `onethink_comment` (
 			`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-			`pid` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '回复别人评论的',
+			`pid` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '被回复评论的ID',
 			`model_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '是哪个文档模型的',
 			`cid` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '内容id,name和cid来定位是哪个内容的',
 			`comment` text COMMENT '评论内容',
@@ -43,7 +35,7 @@ use Common\Controller\Addon;
 			`com_ip` bigint(20) NOT NULL DEFAULT '0' COMMENT '评论IP',
 			`create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '添加时间',
 			`status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否被删除',
-			`uid` int(10) unsigned DEFAULT NULL COMMENT '是哪位大仙回复的,0为非网站用户',
+			`uid` int(10) unsigned DEFAULT NULL COMMENT '是哪位回复的,0为非网站用户',
 			`uname` varchar(200) DEFAULT NULL COMMENT '非网站用户使用的名称',
 			`uemail` varchar(200) DEFAULT NULL COMMENT '非网站用户使用的邮箱',
 			`uurl` varchar(200) DEFAULT NULL COMMENT '非网站用户使用网站地址',
