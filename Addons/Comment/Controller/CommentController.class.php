@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * @author genisuxjq <app880.com>
  **/
@@ -48,7 +48,7 @@ class CommentController extends AddonsController{
 		$return['info']   = '';
 		$id = I('post.id',0);
 		if(empty($id)){
-			$return['info']   = '顶失败失败！不必到顶什么！';
+			$return['info']   = '顶失败失败！不知道顶什么！';
 			/* 返回JSON数据 */
 			$this->ajaxReturn($return);
 			exit;
