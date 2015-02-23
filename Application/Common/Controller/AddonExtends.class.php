@@ -118,7 +118,7 @@ abstract class AddonExtends{
 			  				
 	);
 	 
-	 调用 InfoToArrayList($data,$array_temp,",",":");  那么调用时就会按分隔符，解析成二维数组'ArrayList'。
+	 调用 toArrayList($data,$array_temp,",",":");  那么调用时就会按分隔符，解析成二维数组'ArrayList'。
 	 
    */
    
