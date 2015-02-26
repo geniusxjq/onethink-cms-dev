@@ -11,7 +11,7 @@
 
 namespace Addons\ImportData\Controller;
 
-use Home\Controller\AddonsController;
+use Admin\Controller\AddonsController;
 
 class ImportController extends AddonsController
 {

@@ -81,11 +81,11 @@ class WaterAddon extends Addon
 					$water = $config['water'];
 				}
 				else{
-					$water ='./'.$this->addon_path.'water.png';
+					$water =$this->addon_path.'water.png';
 				}
 				$water_open=file_exists($water);
 				$picture_open=file_exists($param['path']);
-				require_once('./'.$this->addon_path."WaterMark.class.php");
+				require_once($this->addon_path."WaterMark.class.php");
 				if($water_open&&$picture_open)
 				{
 					$watermark=new \WaterMark($param['path'],$config['position']);
