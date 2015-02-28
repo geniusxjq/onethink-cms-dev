@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>{$mate_title}</title>
+  <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+  <script src="__ADDONROOT__/js/jquery.min.js"></script>
+  <script src="__ADDONROOT__/js/jquery.Jcrop.js"></script>
+  <link rel="stylesheet" href="__ADDONROOT__/main.css" type="text/css" />
+  <link rel="stylesheet" href="__ADDONROOT__/css/jquery.Jcrop.css" type="text/css" />
+
+<script type="text/javascript">
+
+  $(function(){
+			 
+	   var pcnt = $('#preview-container'),
+        pimg=$('#preview'),
+        xs = pcnt.width(),
+        ys= pcnt.height();
+
+	  $('#cropbox').Jcrop({
+		aspectRatio: xs/ys,
+		onChange: updatePreview,
+		onSelect: updatePreview
+	  });
+
+	  function updateCoords(c)
+	  {
+		$('#x').val(c.x);
+		$('#y').val(c.y);
+		$('#w').val(c.w);
+		$('#h').val(c.h);
+	  };
+  
+	  function updatePreview(coords)
+	  {
+		  var rx = xs / coords.w;
+		  var ry = ys / coords.h;
+	  
+		  pimg.css({
+			  width: Math.round(rx * 500) + 'px',
+			  height: Math.round(ry * 370) + 'px',
+			  marginLeft: '-' + Math.round(rx * coords.x) + 'px',
+			  marginTop: '-' + Math.round(ry * coords.y) + 'px'
+		  });
+		  
+		  updateCoords(coords);
+	  }
+  
+  });
+
+</script>
+<style type="text/css">
+  .jcrop-holder > div > div ,.preview-container {
+	  border-radius: 50%;
+  }
+  #target {
+    background-color: #ccc;
+    width: 500px;
+    height: 370px;
+    font-size: 24px;
+    display: block;
+  }
+
+/* The Javascript code will set the aspect ratio of the crop
+   area based on the size of the thumbnail preview,
+   specified here */
+.preview-container {
+  width: 128px;
+  height: 128px;
+  overflow: hidden;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="container">
+<div class="row">
+<div class="span12">
+<div class="jc-demo-box">
+
+		<!-- This is the image we're attaching Jcrop to -->
+		<img src="__ADDONROOT__/img/pool.jpg" id="cropbox" />
+    <div id="preview-container" class="preview-container"> <img src="__ADDONROOT__/img/pool.jpg"  id="preview" class="jcrop-preview" alt="Preview" /> </div>
+
+		<!-- This is the form that our event handler fills -->
+<form action="" method="post" onSubmit="return checkCoords();">
+			<input type="hidden" id="x" name="x" />
+			<input type="hidden" id="y" name="y" />
+			<input type="hidden" id="w" name="w" />
+			<input type="hidden" id="h" name="h" />
+			<input type="submit" value="Crop Image" class="btn btn-large btn-inverse" />
+  </form>
+</div>
+	</div>
+	</div>
+	</div>
+	</body>
+
+</html>

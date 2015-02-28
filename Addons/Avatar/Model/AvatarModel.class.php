@@ -1,12 +1,12 @@
 <?php
 
-namespace Addons\Avator\Model;
+namespace Addons\Avatar\Model;
 use Think\Model;
 
 /**
- * Avator模型
+ * Avatar模型
  */
-class AvatorModel extends Model{
+class AvatarModel extends Model{
     public $model = array(
         'title'=>'',//新增[title]、编辑[title]、删除[title]的提示
         'template_add'=>'',//自定义新增模板自定义html edit.html 会读取插件根目录的模板
