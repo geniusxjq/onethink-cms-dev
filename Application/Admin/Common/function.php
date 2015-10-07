@@ -143,6 +143,7 @@ function get_attribute_type($type=''){
         'checkbox'  =>  array('多选','varchar(100) NOT NULL'),
         'editor'    =>  array('编辑器','text NOT NULL'),
         'picture'   =>  array('上传图片','int(10) UNSIGNED NOT NULL'),
+		'pictures'   =>  array('上传多图','varchar(255) NOT NULL'),/*【多图上传插件扩展字段属性】*/
         'file'      =>  array('上传附件','int(10) UNSIGNED NOT NULL'),
     );
     return $type?$_type[$type][0]:$_type;

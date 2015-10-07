@@ -134,6 +134,9 @@
 							    }
 								</script>
                             </case>
+                            <case value="pictures">
+                            {:hook('UploadImages', array('name'=>$field['name'],'value'=>$data[$field['name']]))}
+                            </case>
                             <case value="file">
 								<div class="controls">
 									<input type="file" id="upload_file_{$field.name}">
