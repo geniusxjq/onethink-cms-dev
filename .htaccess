@@ -46,23 +46,7 @@ Options -Indexes
   RewriteRule ^(.*)$ index.php/$1 [QSA,PT,L]
   
   ##默认情况 END ##
-  
-  ##防盗链##
-
-  #用于防盗链的图片不做重写处理，允许连接。
-   
-  RewriteCond %{REQUEST_FILENAME} !logo.png [NC]
-  
-  #不匹配以下条件的直接跳转到下面的规则指定的文件
- 
-  RewriteCond %{HTTP_REFERER} !localhost [NC]
-  
-  #上面不匹配则执行以下规则(重写到防盗链指定的图片文件或其它文件)
-  
-  RewriteRule ^(.*)\.(png|gif|jpg|swf)$ /logo.png [R,NC]
-  
-  ##防盗链 END ##
-  
+    
 </IfModule>
 
 ##缓存提速##
