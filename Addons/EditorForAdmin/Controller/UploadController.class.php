@@ -14,6 +14,13 @@ use Think\Upload;
 class UploadController extends AddonsController{
 
 	public $uploader = null;
+	
+	/*水印*/
+	public function dealWater($path){
+		
+		hook("dealPicture",$path);
+		
+	}
 
 	/* 上传图片 */
 	public function upload(){
@@ -40,6 +47,7 @@ class UploadController extends AddonsController{
 		$img = $this->upload();
 		/* 记录附件信息 */
 		if($img){
+			$this->dealWater($img['fullpath']);
 			$return['url'] = $img['fullpath'];
 			unset($return['info'], $return['data']);
 		} else {
@@ -56,6 +64,7 @@ class UploadController extends AddonsController{
 
 		$img = $this->upload();
 		$return = array();
+		$this->dealWater($img['fullpath']);
 		$return['url'] = $img['fullpath'];
 		$title = htmlspecialchars($_POST['pictitle'], ENT_QUOTES);
 		$return['title'] = $title;

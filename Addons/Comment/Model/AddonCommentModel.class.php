@@ -176,7 +176,7 @@ class AddonCommentModel extends Model{
 	
 	if($addon_config['comment_show_notcheck']==0){
 	
-	$map = array('status'=> 1);
+	$map = array_merge(array('status'=> 1),$map);
 	
 	}
 	

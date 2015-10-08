@@ -200,12 +200,7 @@ class Upload {
                 if(empty($imginfo) || ($ext == 'gif' && empty($imginfo['bits']))){
                     $this->error = '非法图像文件！';
                     continue;
-                }else{
-					
-					//【图片处理钩子《Water水印插件等，用于挂载一些针对图片上传后进行额外处理的的插件》】
-					hook("dealPicture",array('Path'=>$file['tmp_name'],'Water-Off'=>$this->config['Water-Off']));
-					
-				}
+                }
 				
             }
 

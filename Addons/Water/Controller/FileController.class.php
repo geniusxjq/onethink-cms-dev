@@ -21,7 +21,7 @@ class FileController extends AddonsController
             'autoSub'    =>    true,
             'subName'    =>    '',
             'replace'=> true,
-			'Water-Off'=>true,//关闭钩子的水印插件功能只针对当前插件定义（在钩子参数中定义）
+			'water-off'=>true,//关闭钩子的水印插件功能只针对当前插件定义（在钩子参数中定义）
         );
         $upload = new \Think\Upload($config);// 实例化上传类
         $info   =   $upload->upload($_FILES);
