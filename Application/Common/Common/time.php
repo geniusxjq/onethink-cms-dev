@@ -8,8 +8,7 @@
  * 友好的时间显示
  *
  * @param int    $time 待显示的时间
- * @param string $type  类型. normal | mohu | full | ymd | other
- * @param string $alt   已失效
+ * @param string $precision 精度
  * @return string
  */
  

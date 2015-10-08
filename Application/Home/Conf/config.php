@@ -64,10 +64,6 @@ return array(
         '__JS__'     => __ROOT__ . '/Public/' . MODULE_NAME . '/js',
     ),
 
-    /* SESSION 和 COOKIE 配置 */
-    'SESSION_PREFIX' => 'onethink_home', //session前缀
-    'COOKIE_PREFIX'  => 'onethink_home_', // Cookie前缀 避免冲突
-
     /**
      * 附件相关配置
      * 附件是规划在插件中的，所以附件的配置暂时写到这里

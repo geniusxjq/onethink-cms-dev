@@ -58,6 +58,8 @@ return array(
         'bucket'=>'',
         'rename'=>false
     ),
+	
+	/*七牛云存储实例*/
     'UPLOAD_QINIU_CONFIG'=>array(
         'accessKey'=>'__ODsglZwwjRJNZHAu7vtcEf-zgIxdQAY-QqVrZD',
         'secrectKey'=>'Z9-RahGtXhKeTUYy9WCnLbQ98ZuZ_paiaoBjByKv',

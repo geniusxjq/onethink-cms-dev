@@ -20,7 +20,11 @@ return array(
 
     /* 系统数据加密设置 */
     'DATA_AUTH_KEY' => '[AUTH_KEY]', //默认数据加密KEY
-
+	
+    /* 数据缓存设置 */
+    'DATA_CACHE_PREFIX' => 'onethink_', // 缓存前缀
+    'DATA_CACHE_TYPE'   => 'File', // 数据缓存类型
+    
     /* 用户相关设置 */
     'USER_MAX_CACHE'     => 1000, //最大缓存用户数
     'USER_ADMINISTRATOR' => 1, //管理员用户ID
@@ -45,4 +49,15 @@ return array(
 
     /* 文档模型配置 (文档模型核心配置，请勿更改) */
     'DOCUMENT_MODEL_TYPE' => array(2 => '主题', 1 => '目录', 3 => '段落'),
+    
+    /*加载扩展函数文件*/
+	'LOAD_EXT_FILE'=>'time,parse,mail',
+	
+	/*加载扩展配置文件*/
+	'LOAD_EXT_CONFIG'=>'upload',
+	
+	/* SESSION 和 COOKIE 配置 */
+    'SESSION_PREFIX' => 'onethink_home', //session前缀
+    'COOKIE_PREFIX' => 'onethink_home_', // Cookie前缀 避免冲突
+
 );

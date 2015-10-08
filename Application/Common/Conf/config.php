@@ -12,7 +12,7 @@
  * 所有系统级别的配置
  */
 return array(
-			 
+			 			 
     /* 模块相关配置 */
     'AUTOLOAD_NAMESPACE' => array('Addons' => ONETHINK_ADDON_PATH), //扩展模块列表
     'DEFAULT_MODULE'     => 'Home',
@@ -55,6 +55,10 @@ return array(
 	'LOAD_EXT_FILE'=>'time,parse,mail',
 	
 	/*加载扩展配置文件*/
-	/*'LOAD_EXT_CONFIG'=>'template,upload',*/
+	'LOAD_EXT_CONFIG'=>'upload',
+	
+	/* SESSION 和 COOKIE 配置 */
+    'SESSION_PREFIX' => 'onethink_home', //session前缀
+    'COOKIE_PREFIX' => 'onethink_home_', // Cookie前缀 避免冲突
 	
 );
