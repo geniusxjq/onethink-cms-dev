@@ -6,9 +6,9 @@
     <?php foreach ($addon_comment_data['list'] as $item) { ?>
     <div class="comment-wrapper comment-id-{$item['id']}" data-pid={$item['pid']}>
         <div class="card<?php if ($item['invalid'] == 1) {echo ' invalid';} ?>">
-            <div class="nickname">{$item['username']}</div>
+            <div class="nickname">{$item['username']==''?'游客':$item['username']}</div>
             <div class="datetime">{:time_format($item['create_time'])}</div>
-            <div class="quote" data-pid="{$item['id']}"><a href="#quote">引用</a></div>
+            <div class="quote" data-pid="{$item['id']}"><a href="#quote">回复</a></div>
             <div class="clear"></div>
         </div>
         <div class="comment-content">{$item['content']}</div>

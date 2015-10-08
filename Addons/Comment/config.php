@@ -17,6 +17,18 @@ return array(
       ),
     'value' => '1',
     ),
+  
+    'comment_show_notcheck' => array(
+    'title' => '显示未审核评论',
+    'tip'   => '显示未审核评论开关',
+    'type'  => 'radio',
+    'options' => array(
+      '0' => '关闭',
+      '1' => '开启',
+      ),
+    'value' => '1',
+    ),
+  
   'comment_verify' => array(
     'title'   => '使用验证码',
     'type'    => 'radio',

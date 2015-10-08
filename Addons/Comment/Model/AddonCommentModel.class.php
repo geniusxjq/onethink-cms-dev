@@ -17,13 +17,6 @@ class AddonCommentModel extends Model{
   );
 
   public $_fields = array(
-    'document-search' =>array(
-      'name'    => 'document-search-input',
-      'title'   => '搜索文档',
-      'type'    => 'string',
-      'remark'  => '文档ID或关键字',
-      'is_show' => 1
-    ),
     'id'  =>array(
       'name'    => 'id',//字段名
       'title'   => 'ID',//显示标题
@@ -176,7 +169,17 @@ class AddonCommentModel extends Model{
    * @return array 评论列表
    **/
   public function getComments($id, $per_page = 100) {
-    $map = array('did'=> $id, 'update_time'=> array('elt', NOW_TIME), 'status'=> 1);
+	 // 获得插件配置
+    $addon_config = get_addon_config('Comment');
+	
+    $map = array('did'=> $id, 'update_time'=> array('elt', NOW_TIME));
+	
+	if($addon_config['comment_show_notcheck']==0){
+	
+	$map = array('status'=> 1);
+	
+	}
+	
     $var_page = C('VAR_PAGE') ? C('VAR_PAGE') : 'p';
     $comments = $this->_thisModel->where($map)->page((int)I('GET.'.$var_page, 1), $per_page)->order('create_time desc')->getField('id, pid, pids, username, content, create_time');
     unset($map);
@@ -293,32 +296,6 @@ class AddonCommentModel extends Model{
     }
     return false;
   }
-
-  public function searchDocument($limit = 5) {
-    $q = I('post.q', null);
-    if ($q == null || empty($q)) {
-      return array();
-    }
-    $Document = M('Document');
-    if (preg_match('/^\d+$/', $q)) {
-      // 按照id搜索
-      $map = array('id' => $q);
-      $result = $Document->where($map)->limit($limit)->order('id desc')->select();
-    }
-    else {
-      // 按照关键字搜索
-      $map = array('title' => array('like', '%'.$q.'%')); // like的性能差，待优化
-      $result = $Document->where($map)->limit($limit)->order('id desc')->select();
-    }
-    // 获得所有文档模型
-    $Model = M('Model');
-    $models = $Model->limit(1000)->getField('id, name'); // 似乎这样省sql，待优化
-    foreach ($result as &$r) {
-      $r['document_url'] = U('Article/edit', array('id'=>$r['id'], 'model'=>$r['model_id'], 'cate_id'=>$r['category_id'])); // Home/Article/detail/id/1.html
-    }
-    return $result;
-  }
-
   /**
    * 返回错误信息
    * @return string 错误
@@ -414,8 +391,7 @@ class AddonCommentModel extends Model{
   public function checkUser($id) {
     if ($id === 0)
       return true;
-    $Member = D('Admin/Member');
-    $nickname = $Member->getNickName($id);
+    $nickname = get_nickname($id);
     return $nickname ? $nickname : false;
   }
 
@@ -570,10 +546,9 @@ class AddonCommentModel extends Model{
   public function getNickName($uid = null) {
     $uid = $uid == null ? is_login() : $uid;
     if ($uid == 0) {
-      return '游客';
+      return '';
     }
-    $Member = D('Admin/Member');
-    $nickname = $Member->getNickName($uid);
+    $nickname = get_nickname($uid);
     return $nickname;
   }
 

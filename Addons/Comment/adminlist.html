@@ -1,12 +1,3 @@
-      <div class="search-document-content-form search-form">
-        <div class="sleft">
-          <input type="text" name="did" class="search-input" placeholder="输入文档ID" value="{$addon_searchs['did']|default=''}" /><a class="btn" href="#" url="{:U('adminList', 'name=Comment', false)}">搜索</a>
-        </div>
-        <div class="clear"></div>
-      </div>
-      <?php if (isset($addon_searchs['document_title'])) { ?>
-      <div class="searched-document-title"><a href="{$addon_searchs['document_edit_url']}" target="_blank">《{$addon_searchs['document_title']}》</a> 的评论</div>
-      <?php } ?>
       <table>
         <thead>
           <tr>
