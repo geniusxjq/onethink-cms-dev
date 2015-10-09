@@ -488,7 +488,7 @@ class CommentModel extends Model{
    **/
   public function checkVerify($verify_code) {
     $Verify = new \Think\Verify();
-    return $Verify->check($verify_code, '');
+    return $Verify->check($verify_code, '#comment_addon_verify_code#');
   }
 
   /**

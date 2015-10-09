@@ -15,6 +15,8 @@ use User\Api\UserApi;
  */
 class MemberController extends BaseController {
 	
+	private $verify_code_id='#ucenter_member_verify_code#';
+	
 	public function _initialize(){
 		
 		parent::_initialize();
@@ -33,7 +35,7 @@ class MemberController extends BaseController {
         }
 		if(IS_POST){ //注册用户
 			/* 检测验证码 */
-			if(!check_verify($verify)){
+			if(!check_verify($verify,$this->verify_code_id)){
 				$this->error('验证码输入错误！');
 			}
 
@@ -61,7 +63,7 @@ class MemberController extends BaseController {
 	public function login($username = '', $password = '', $verify = ''){
 		if(IS_POST){ //登录验证
 			/* 检测验证码 */
-			if(!check_verify($verify)){
+			if(!check_verify($verify,$this->verify_code_id)){
 				$this->error('验证码输入错误！');
 			}
 
@@ -105,7 +107,7 @@ class MemberController extends BaseController {
 	/* 验证码，用于登录和注册 */
 	public function verify(){
 		$verify = new \Think\Verify();
-		$verify->entry(1);
+		$verify->entry($this->verify_code_id);
 	}
 
 	/**
