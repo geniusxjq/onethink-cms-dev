@@ -10,10 +10,6 @@ use Common\Controller\Addon;
 
 class CommentAddon extends Addon{
 
-  private $tableName;
-  private $extendTableIpList;
-  private $addonRoot;
-
   public $info = array(
     'name'      => 'Comment',
     'title'     => '评论',
@@ -21,10 +17,30 @@ class CommentAddon extends Addon{
     'status'    => 1,
     'author'    => 'leoding86@msn.com',
     'version'     => '0.8.0630Beta'
+  );	
+  
+  public $addon_install_info=array(
+				
+  'install_sql'=>"DROP TABLE IF EXISTS `onethink_comment`;
+	CREATE TABLE IF NOT EXISTS `onethink_comment` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`pid` INT NOT NULL DEFAULT 0,
+	`pids` TEXT NOT NULL,
+	`did` INT NOT NULL DEFAULT 0,
+	`uid` INT NOT NULL DEFAULT 0,
+	`username` VARCHAR(100) NOT NULL DEFAULT '',
+	`content` TEXT NOT NULL,
+	`status` INT NOT NULL DEFAULT 0,
+	`create_time` INT(10) NOT NULL DEFAULT 0000000000,
+	`update_time` INT(10) NULL DEFAULT 0000000000,
+	PRIMARY KEY (`id`)
+	) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ",
+	
+	'uninstall_sql'=>"DROP TABLE IF EXISTS `onethink_comment`;",
   );
 
   public $admin_list = array(
-    'model'   => "AddonComment",   //要查的表
+    'model'   => "Comment",   //要查的表
     'fields'  => '*',               //要查的字段
     'map'     => '',                //查询条件, 如果需要可以再插件类的构造方法里动态重置这个属性
     'order'   => 'id desc',         //排序,
@@ -40,106 +56,40 @@ class CommentAddon extends Addon{
 
   public $custom_adminlist = 'adminlist.html' ;
 
-  public function __construct() {
-    parent::__construct();
-    $this->tableName = C('DB_PREFIX') . "addon_comment";
-    $this->extendTableIpList = C('DB_PREFIX') . "addon_comment_iplist";
-    $this->addonRoot = __ROOT__.'/Addons/Comment';
-    // 填充状态占位符
-    $this->assign('meta_title_suffix', $this->info['title']);
-    $addon_searchs = array();
-    if ($did = I('get.did')) {
-      $Document = M('Document');
-      if ($detail = $Document->where(array('id' => $did))->find()) {
-        $Model = M('Model');
-        $model = $Model->field('name')->where(array('id'=>$detail['model_id']))->find();
-        $addon_searchs['document_title'] = $detail['title'];
-        $addon_searchs['document_edit_url'] = U($model['name'].'/edit', array('id'=>$detail['id'], 'name'=>'Comment'));
-      }
-      $addon_searchs['did'] = $did;
-      $this->admin_list['map'] = array('did'=>$did);
-    }
-    $this->assign('addon_searchs', $addon_searchs);
-  }
-
-  // 安装插件
   public function install(){
-    $Model = new \Think\Model(); // 实例一个模型
-    // 创建数据表
-    $query = "DROP TABLE IF EXISTS `" . $this->tableName . "`;
-      CREATE TABLE `" . $this->tableName . "` (
-      `id` INT NOT NULL AUTO_INCREMENT,
-      `pid` INT NOT NULL DEFAULT 0,
-      `pids` TEXT NOT NULL,
-      `did` INT NOT NULL DEFAULT 0,
-      `uid` INT NOT NULL DEFAULT 0,
-      `username` VARCHAR(100) NOT NULL DEFAULT '',
-      `content` TEXT NOT NULL,
-      `status` INT NOT NULL DEFAULT 0,
-      `create_time` INT(10) NOT NULL DEFAULT 0000000000,
-      `update_time` INT(10) NULL DEFAULT 0000000000,
-      PRIMARY KEY (`id`));";
-    $Model->execute($query); // 执行创建语句
-    $result = $Model->query("SHOW TABLES IN `".C('DB_NAME')."` LIKE '".$this->tableName."';");
-    if (count($result) != 1) {
-      return false;
-    }
-    $query = "DROP TABLE IF EXISTS `" . $this->extendTableIpList . "`;
-      CREATE TABLE `".$this->extendTableIpList."` (
-      `id` INT NOT NULL AUTO_INCREMENT,
-      `ip` VARCHAR(128) NOT NULL,
-      `last_comment_time` INT(10) NOT NULL DEFAULT 0,
-      `status` INT NOT NULL DEFAULT 1,
-      PRIMARY KEY (`id`),
-      UNIQUE INDEX `ip_UNIQUE` (`ip` ASC))
-      ENGINE = MyISAM;";
-    $Model->execute($query);
-    $result = $Model->query("SHOW TABLES IN `".C('DB_NAME')."` LIKE '".$this->extendTableIpList."';");
-    if (count($result) != 1) {
-      $query = "DROP TABLE IF EXISTS `" . $this->tableName . "`;";
-      $Model->execute($query);
-      return false;
-    }
-    return true;
+	  
+	  return $this->installAddon($this->addon_install_info);
+	  
   }
-
-
-  // 卸载插件
+  
   public function uninstall(){
-    $Model = new \Think\Model();
-    // 删除数据表
-    $query = "DROP TABLE IF EXISTS `".$this->tableName."`;";
-    $result = $Model->execute($query);
-    if ($result === false) {
-      return false;
-    }
-    $query = "DROP TABLE IF EXISTS `".$this->extendTableIpList."`;";
-    $result = $Model->execute($query);
-    if ($result === false) {
-      return false;
-    }
-    return true;
+	  
+	  return $this->uninstallAddon($this->addon_install_info);
+	  
   }
 
   //实现的documentDetailAfter钩子方法
   public function documentDetailAfter($param){
+	  
     $addon_comment_data = array('nickname' => '' ,'form' => array('did' => '', 'pid' => ''));
     $addon_config = $this->getConfig();
     $this->assign('addon_comment_config', $addon_config);
-    if (($member_id = is_login()) == 0) {
+	
+    if (!is_login()) {
       // 未登录
       $addon_comment_data['nickname'] = '游客';
       $addon_comment_data['form']['did'] = $param['id'];
     }
     else {
       // 已登录
-      $Member = D('Admin/Member');
-      $addon_comment_data['nickname'] = $Member->getNickName($member_id);
+      $addon_comment_data['nickname'] =get_nickname();
       $addon_comment_data['form']['did'] = $param['id'];
     }
+	
     $addon_comment_data['form']['pid'] = 0;
 
-    $Comment = D('Addons://Comment/AddonComment');
+    $Comment = D('Addons://Comment/Comment');
+	
     if ($addon_config['comment_per_page'] > 0) {
       $addon_comment_data['list'] = $Comment->getComments($param['id'], $addon_config['comment_per_page']);
     }
@@ -169,12 +119,12 @@ class CommentAddon extends Addon{
 
   // 加载插件Css样式
   public function pageHeader() {
-    echo '<link href="'.$this->addonRoot.'/Public/comments.css" rel="stylesheet">';
+    echo '<link href="'. __ROOT__ . '/Addons/'.$this->getName().'/Public/comments.css" rel="stylesheet">';
   }
 
   // 加载插件js
   public function pageFooter() {
-    echo '<script type="text/javascript" src="'.$this->addonRoot.'/Public/comments.js"></script>';
+    echo '<script type="text/javascript" src="'. __ROOT__ . '/Addons/'.$this->getName().'/Public/comments.js"></script>';
   }
 
 }

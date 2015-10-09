@@ -6,8 +6,9 @@ use Think\Model;
 /**
  * Comment模型
  */
-class AddonCommentModel extends Model{
-
+ 
+class CommentModel extends Model{
+	
   public $model = array(
     'title'         => '',            //新增[title]、编辑[title]、删除[title]的提示
     'template_add'  => 'View/edit.html',     //自定义新增模板自定义html edit.html 会读取插件根目录的模板
@@ -136,7 +137,7 @@ class AddonCommentModel extends Model{
     parent::__construct();
     $this->_fields['create_time']['value'] = time();
     $this->_fields['update_time']['value'] = time();
-    $this->_thisModel = D('AddonComment');
+    $this->_thisModel = D('Comment');
   }
 
   /**
@@ -258,7 +259,7 @@ class AddonCommentModel extends Model{
       array('pid', 'checkParent', 'PID错误', self::MUST_VALIDATE, 'callback'),
       array('did', 'checkDocument', '此文档被删除或禁用', self::MUST_VALIDATE, 'callback'),
       array('content', 'require', '评论内容不能为空', self::MUST_VALIDATE),
-      array('content', '5,100', '评论内容长度5-100字', self::MUST_VALIDATE, 'length'),
+      array('content', 'checkContentLength','评论内容长度超出限制', self::MODEL_BOTH, 'callback'),
     );
     $auto = array(
       array('username', 'getNickName', self::MODEL_BOTH, 'callback'),
@@ -382,6 +383,21 @@ class AddonCommentModel extends Model{
     list($year, $month, $day, $hour, $minute) = $this->filteDate($date);
     return mktime(intval($hour), intval($minute), 0, intval($month), intval($day), intval($year));
   }
+  
+   /**
+   *检查评论长度 
+   * @param int $uid
+   * @return string
+   **/
+	public function checkContentLength($content) {
+		// 获得插件配置
+		$addon_config = get_addon_config('Comment');
+		$len=$addon_config['comment_max_length']?$addon_config['comment_max_length']:150;
+		if(strlen($content)>intval($len)){
+			return false;
+		}
+		return true;
+	}
 
   /**
    * 检查评论用户
@@ -546,7 +562,7 @@ class AddonCommentModel extends Model{
   public function getNickName($uid = null) {
     $uid = $uid == null ? is_login() : $uid;
     if ($uid == 0) {
-      return '';
+      return '游客';
     }
     $nickname = get_nickname($uid);
     return $nickname;
@@ -569,5 +585,4 @@ class AddonCommentModel extends Model{
       }
     }
   }
-
 }

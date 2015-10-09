@@ -20,11 +20,11 @@ return array(
   
     'comment_show_notcheck' => array(
     'title' => '显示未审核评论',
-    'tip'   => '显示未审核评论开关',
+    'tip'   => '是否显示未审核的评论',
     'type'  => 'radio',
     'options' => array(
-      '0' => '关闭',
-      '1' => '开启',
+      '0' => '否',
+      '1' => '是',
       ),
     'value' => '1',
     ),
@@ -38,6 +38,12 @@ return array(
       ),
     'value'   => '1',
     'tip'     => '提交评论时使用验证码'
+    ),
+    'comment_max_length' => array(
+    'title'   => '评论字数限制',
+    'type'    => 'text',
+    'value'   => '150',
+    'tip'     => '评论最大字数限制',
     ),
   'comment_per_page' => array(
     'title'   => '每页显示评论条数',

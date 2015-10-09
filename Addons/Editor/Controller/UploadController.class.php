@@ -17,9 +17,8 @@ class UploadController extends AddonsController{
 	
 	/*水印*/
 	public function dealWater($path){
-		
+		/*钩子调用水印插件*/
 		hook("dealPicture",$path);
-		
 	}
 
 	/* 上传图片 */
@@ -35,6 +34,8 @@ class UploadController extends AddonsController{
 			$url = C('EDITOR_UPLOAD.rootPath').$info['imgFile']['savepath'].$info['imgFile']['savename'];
 			$url = str_replace('./', '/', $url);
 			$info['fullpath'] = __ROOT__.$url;
+			/*水印*/
+			$this->dealWater($info['fullpath']);
 		}
 		session('upload_error', $this->uploader->getError());
 		return $info;
@@ -47,7 +48,6 @@ class UploadController extends AddonsController{
 		$img = $this->upload();
 		/* 记录附件信息 */
 		if($img){
-			$this->dealWater($img['fullpath']);
 			$return['url'] = $img['fullpath'];
 			unset($return['info'], $return['data']);
 		} else {
@@ -61,10 +61,8 @@ class UploadController extends AddonsController{
 
 	//ueditor编辑器上传图片处理
 	public function ue_upimg(){
-
 		$img = $this->upload();
 		$return = array();
-		$this->dealWater($img['fullpath']);
 		$return['url'] = $img['fullpath'];
 		$title = htmlspecialchars($_POST['pictitle'], ENT_QUOTES);
 		$return['title'] = $title;

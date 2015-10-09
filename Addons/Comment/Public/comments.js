@@ -33,7 +33,7 @@
         $(this).hide();
         setPID(0);
     });
-    $('.addon-comment-form input.submit-comment').on('click', function(){
+    $('.addon-comment-form form').on('submit', function(){
         var $form = $('.addon-comment-form form');
         var url = $form.attr('action');
         var data = {};
@@ -50,6 +50,8 @@
                 commentMessage(r.info, false);
             }
         }, 'json');
+		
+		return false;
     });
 
     $('.verify-code img').eq(0).parent('div').on('click', function(){
@@ -70,8 +72,8 @@
 
     function commentMessage(message, refresh) {
         alert(message);
-        if (refresh)
-            window.location.reload();
+        if (refresh) window.location.reload();
+		return false;
     }
 
     function setPID(id) {
