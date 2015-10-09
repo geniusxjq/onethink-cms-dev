@@ -5,8 +5,8 @@ return array(
         'title'=>'开启同步登录：',
         'type'=>'checkbox',
         'options'=>array(
-            'Qq'=>'Qq',
-            'Sina'=>'Sina',
+            'qq'=>'QQ',
+            'sina'=>'Sina',
         ),
     ),
     'meta'=>array(//配置在表单中的键名 ,这个会是config[title]
