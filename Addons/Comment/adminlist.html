@@ -22,6 +22,31 @@
       </table>
       <script type="text/javascript">
       (function($){
+		// 请求评论对应的文档名称，没有相关钩子
+        var $commentsDocumentIds = $('.comment-document-id');
+        var documentIds = [];
+        for (var i = 0, l = $commentsDocumentIds.length; i < l; i++) {
+          var $commentDocumentId = $commentsDocumentIds.eq(i);
+          var documentId = $commentDocumentId.text();
+          $commentDocumentId.addClass('comment-document-id-'+documentId);
+          documentIds[documentId] = documentId;
+        }
+        if (documentIds.length > 0) {
+          var url = "{:addons_url('Comment://Comment/getDocumentsTitle')}";
+          var data = {};
+          data.ids = '';
+          for (var id in documentIds) {
+            data.ids += documentIds[id] + ',';
+          }
+          $.post(url, data, function(r){
+            // 填充标题
+            if (r.status != 1) 
+              return alert(r.info);
+            for (var id in r.data) {
+              $('.comment-document-id-'+id).text(r.data[id]);
+            }
+          });
+        }
         // 显示评论状态 开始
         var $commentsDocumentStatus = $('.comment-document-status');
         var commentStatusUrl = "{:addons_url('Comment://Comment/status')}";

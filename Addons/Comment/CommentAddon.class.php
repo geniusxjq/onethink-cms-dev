@@ -113,7 +113,7 @@ class CommentAddon extends Addon{
       $template_name = 'default';
     }
 
-    $this->display('View/'.$template_name.'/documentComments');
+    $this->display('View/'.$template_name.'/comment');
 
   }
 

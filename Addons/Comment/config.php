@@ -61,22 +61,6 @@ return array(
     'value'   => '0',
     'tip'     => '登录用户才可以评论'
     ),
-  'comment_frequency' => array(
-    'title'   => '评论频率',
-    'type'    => 'text',
-    'value'   => '30',
-    'tip'     => '两次评论的间隔多少秒'
-    ),
-  'comment_frequency_strict' => array(
-    'title'   => '评论频率严格模式',
-    'type'    => 'radio',
-    'options' => array(
-      '0' => '否',
-      '1' => '是'
-      ),
-    'value'   => '1',
-    'tip'     => '即使提交评论失败也会记录最后提交时间'
-    ),
   'comment_template' => array(
     'title'   => '评论主题模版',
     'tip'     => '主题模版的目录名称，默认为default',
