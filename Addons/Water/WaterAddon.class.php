@@ -65,7 +65,7 @@ class WaterAddon extends Addon
 		
 		if(!$path) return $path;
 		
-		if(substr($path,0,2)!=='./'){
+		if(substr($path,0,1)=='/'){
 			
 			$path='.'.$path;
 			

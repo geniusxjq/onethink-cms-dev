@@ -71,5 +71,5 @@ class UploadController extends AddonsController{
 		/* 返回JSON数据 */
 		$this->ajaxReturn($return);
 	}
-
+	
 }
