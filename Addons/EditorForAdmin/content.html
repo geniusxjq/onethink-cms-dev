@@ -56,6 +56,9 @@
 				window.UEDITOR_CONFIG.scaleEnabled = <eq name="addons_config.editor_resize_type" value="1">true<else />false</eq>;
 				window.UEDITOR_CONFIG.imageUrl = '{:addons_url("EditorForAdmin://Upload/ue_upimg")}';
 				window.UEDITOR_CONFIG.imagePath = '';
+				/*图片在线管理的处理（暂时不启用待优化）*/
+				//window.UEDITOR_CONFIG.imageManagerUrl='{:addons_url("EditorForAdmin://Upload/ue_img_manager")}';
+				//window.UEDITOR_CONFIG.imageManagerPath='';
 				window.UEDITOR_CONFIG.imageFieldName = 'imgFile';
 				UE.getEditor('editor_id_{$addons_data.name}');
 			</script>
