@@ -4,7 +4,7 @@
  *  解析Wordpress的XML文件
  */
 
-namespace Addons\Import2OneThink\Tool;
+namespace Addons\ImportData\Tool;
 
 class ParsersTool
 {
@@ -486,7 +486,7 @@ class WXR_Parser_Regex
 
     function get_tag($string, $tag)
     {
-        preg_match("|<$tag.*?>(.*?)</$tag>|is", $string, $return);
+        preg_match("|<$tag.*?>(.*?)<$tag>|is", $string, $return);
         if (isset($return[1])) {
             if (substr($return[1], 0, 9) == '<![CDATA[') {
                 if (strpos($return[1], ']]]]><![CDATA[>') !== false) {

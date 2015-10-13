@@ -6,26 +6,20 @@
 // +----------------------------------------------------------------------
 
 namespace Ucenter\Controller;
-use Common\Controller\BaseController;
 use User\Api\UserApi;
 
 /**
  * 用户控制器
  *用于登录/注册/会员展示等
  */
-class MemberController extends BaseController {
+class PassportController extends UcenterController {
 	
-	private $verify_code_id='#ucenter_member_verify_code#';
-	
+	private $verify_code_id='#ucenter_passport_verify_code#';
+		
 	public function _initialize(){
 		
 		parent::_initialize();
 		
-	}
-
-	/* 会员中心首页 */
-	public function index(){
-		$this->display();
 	}
 
 	/* 注册页面 */
@@ -132,40 +126,5 @@ class MemberController extends BaseController {
 		}
 		return $error;
 	}
-
-
-    /**
-     * 修改密码提交
-     * @author huajie <banhuajie@163.com>
-     */
-    public function profile(){
-		if ( !is_login() ) {
-			$this->error( '您还没有登陆',U('login') );
-		}
-        if ( IS_POST ) {
-            //获取参数
-            $uid        =   is_login();
-            $password   =   I('post.old');
-            $repassword = I('post.repassword');
-            $data['password'] = I('post.password');
-            empty($password) && $this->error('请输入原密码');
-            empty($data['password']) && $this->error('请输入新密码');
-            empty($repassword) && $this->error('请输入确认密码');
-
-            if($data['password'] !== $repassword){
-                $this->error('您输入的新密码与确认密码不一致');
-            }
-
-            $Api = new UserApi();
-            $res = $Api->updateInfo($uid, $password, $data);
-            if($res['status']){
-                $this->success('修改密码成功！');
-            }else{
-                $this->error($res['info']);
-            }
-        }else{
-            $this->display();
-        }
-    }
 
 }

@@ -5,7 +5,6 @@
 // | Author: geniusxjq <app880.com>
 // +----------------------------------------------------------------------
 namespace Ucenter\Controller;
-
 use Common\Controller\BaseController;
 
 /**
@@ -15,32 +14,28 @@ use Common\Controller\BaseController;
 
 class UcenterController extends BaseController {
 	
-	public function _initialize(){
-		
-		// 获取当前用户ID
-		
-        if(defined('UID')) return ;
-		
-        define('UID',is_login());
-		
-		if(!UID){
-			
-			if(IS_POST){
-				
-				$this->error('请登录后再操作！',U('Member/login'));
-				
-			}else{
-			
-				$this->redirect('Member/login');
-			
-			}
-			
-		}
-		
-		parent::_initialize();
-				
+	/* 不用登录即可访问的公共控制器 */
+    protected $PUBLIC_CONTROLLER = array( 'Index','Passport');
+	
+	/* 空操作，用于输出404页面 */
+	public function _empty(){
+		$this->redirect('Index/index');
 	}
 	
-    public function index(){}
-	
+	public function _initialize(){
+		
+		$allow=$this->PUBLIC_CONTROLLER;
+		if ($allow&&in_array_case(CONTROLLER_NAME,$allow) ) {
+			parent::_initialize();
+            return false;
+        }
+		// 获取当前用户ID
+        if(defined('UID')) return ;
+        define('UID',is_login());
+		if(!UID){
+			$this->error('您还没有登录，请先登录！',U('Passport/login'));
+		}
+		parent::_initialize();
+		
+	}
 }

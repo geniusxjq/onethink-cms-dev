@@ -6,13 +6,12 @@
 // +----------------------------------------------------------------------
 
 namespace Ucenter\Controller;
-use Common\Controller\BaseController;
 
 /*
 *用户中心首页
 */
 
-class IndexController extends BaseController {
+class IndexController extends UcenterController {
 	
 	public function _initialize(){
 		
@@ -23,5 +22,4 @@ class IndexController extends BaseController {
     public function index(){
         $this->display();
     }
-	
 }
