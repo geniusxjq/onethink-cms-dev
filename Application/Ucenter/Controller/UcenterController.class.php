@@ -15,7 +15,7 @@ use Common\Controller\BaseController;
 class UcenterController extends BaseController {
 	
 	/* 不用登录即可访问的公共控制器 */
-    protected $PUBLIC_CONTROLLER = array( 'Index','Passport');
+    protected $_PUBLIC_CONTROLLER = array( 'Index','Passport');
 	
 	/* 空操作，用于输出404页面 */
 	public function _empty(){
@@ -24,7 +24,7 @@ class UcenterController extends BaseController {
 	
 	public function _initialize(){
 		
-		$allow=$this->PUBLIC_CONTROLLER;
+		$allow=$this->_PUBLIC_CONTROLLER;
 		if ($allow&&in_array_case(CONTROLLER_NAME,$allow) ) {
 			parent::_initialize();
             return false;
