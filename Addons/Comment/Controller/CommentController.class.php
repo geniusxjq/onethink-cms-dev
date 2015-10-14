@@ -113,7 +113,7 @@ class CommentController extends AddonsController{
      */
     public function verifyCode() {
         $Verify = new \Think\Verify();
-        $Verify->entry('#comment_addon_verify_code#');
+        $Verify->entry('#comment-addon-verify-code#');
     }
 
 }

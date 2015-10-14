@@ -10,11 +10,11 @@ use User\Api\UserApi;
 
 /**
  * 用户控制器
- *用于登录/注册/会员展示等
+ *用于登录/注册
  */
 class PassportController extends UcenterController {
 	
-	private $verify_code_id='#ucenter_passport_verify_code#';
+	private $_verifyCodeId='#ucenter-passport-verify-code#';
 		
 	public function _initialize(){
 		
@@ -29,7 +29,7 @@ class PassportController extends UcenterController {
         }
 		if(IS_POST){ //注册用户
 			/* 检测验证码 */
-			if(!check_verify($verify,$this->verify_code_id)){
+			if(!check_verify($verify,$this->_verifyCodeId)){
 				$this->error('验证码输入错误！');
 			}
 
@@ -57,7 +57,7 @@ class PassportController extends UcenterController {
 	public function login($username = '', $password = '', $verify = ''){
 		if(IS_POST){ //登录验证
 			/* 检测验证码 */
-			if(!check_verify($verify,$this->verify_code_id)){
+			if(!check_verify($verify,$this->_verifyCodeId)){
 				$this->error('验证码输入错误！');
 			}
 
@@ -101,11 +101,11 @@ class PassportController extends UcenterController {
 	/* 验证码，用于登录和注册 */
 	public function verify(){
 		$verify = new \Think\Verify();
-		$verify->entry($this->verify_code_id);
+		$verify->entry($this->_verifyCodeId);
 	}
 
 	/**
-	 * 获取用户注册错误信息
+	 * 获取错误信息
 	 * @param  integer $code 错误编码
 	 * @return string        错误信息
 	 */
