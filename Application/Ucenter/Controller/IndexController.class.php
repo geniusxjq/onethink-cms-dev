@@ -20,9 +20,6 @@ class IndexController extends UcenterController {
 	}
 	
     public function index(){
-		$a='im';
-		$str='我是{$a}';
-		$this->assign('text',$str);
         $this->display();
     }
 }
