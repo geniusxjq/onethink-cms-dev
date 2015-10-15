@@ -1,0 +1,28 @@
+    .subscribe_btn, .subscribe_btn_div {
+        z-index: 999;
+        position: fixed;
+        width: 48px;
+        bottom: 90px;
+        height: 30px;
+        line-height: 30px;
+        display: block;
+        right: 50px;
+        text-align: center;
+        background-color: rgb(158, 158, 158);
+        color: #fff
+    }
+
+    a.subscribe_btn:hover {
+        background-color: rgb(133, 133, 133);
+        color: #fff
+    }
+
+    #frame_subscribe {
+        position: absolute;
+        bottom: -24px;
+        right: 58px;
+        background-color: rgb(158, 158, 158);;
+        width: 300px;
+        padding: 10px 0 0px 10px;
+        display: none;
+    }

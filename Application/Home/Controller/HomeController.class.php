@@ -25,9 +25,6 @@ class HomeController extends BaseController {
 		
 		parent::_initialize();
 		
-        if(!C('WEB_SITE_CLOSE')){
-            $this->error('站点已经关闭，请稍后访问~');
-        }
     }
 
 	/* 用户登录检测 */

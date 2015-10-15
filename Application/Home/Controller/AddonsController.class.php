@@ -8,12 +8,11 @@
 // +----------------------------------------------------------------------
 
 namespace Home\Controller;
-use Common\Controller\BaseController;
 /**
  * 扩展控制器
  * 用于调度各个扩展的URL访问需求
  */
-class AddonsController extends BaseController{
+class AddonsController extends HomeController{
 
 	public function _initialize(){
 		parent::_initialize();
