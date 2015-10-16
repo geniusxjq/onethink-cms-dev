@@ -7,10 +7,10 @@
     <switch name="type">
     
       <case value="qq">
-           <a class="btn btn-info" href="<php>if(in_array('qq',$config['type'])){ echo addons_url('SyncLogin://Base/login',array('type'=>'qq'));}</php>">用QQ账号登录</a>  <a class="btn btn-danger " href="<php>if(in_array('sina',$config['type'])){ echo addons_url('SyncLogin://Base/login',array('type'=>'sina'));}</php>">用微博账号登录</a>
+           <a class="btn btn-info" href="<php>if(in_array('qq',$config['type'])){ echo addons_url('SyncLogin://Base/login',array('type'=>'qq'));}</php>">用QQ账号登录</a>  
       </case>
-      <case value="sina"> <a class="btn btn-info" href="<php>if(in_array('qq',$config['type'])){ echo addons_url('SyncLogin://Base/login',array('type'=>'qq'));}</php>">用QQ账号登录</a>
-        <a class="btn btn-danger " href="<php>if(in_array('sina',$config['type'])){ echo addons_url('SyncLogin://Base/login',array('type'=>'sina'));}</php>">用微博账号登录</a>  <a class="btn btn-danger " href="<php>if(in_array('sina',$config['type'])){ echo addons_url('SyncLogin://Base/login',array('type'=>'sina'));}</php>">用微博账号登录</a>
+      <case value="sina"> 
+        <a class="btn btn-danger " href="<php>if(in_array('sina',$config['type'])){ echo addons_url('SyncLogin://Base/login',array('type'=>'sina'));}</php>">用微博账号登录</a> 
       </case>
       
      </switch> 
