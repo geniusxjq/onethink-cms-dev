@@ -1,4 +1,10 @@
-.syncLogin a{
-	margin-right:8px;
-	margin-bottom:8px;
+.SyncLogin{
+	margin-top:8px;
+}
+.SyncLogin h4{
+}
+
+.SyncLogin a{
+	margin-right:10px;
+	margin-bottom:10px;
 }
