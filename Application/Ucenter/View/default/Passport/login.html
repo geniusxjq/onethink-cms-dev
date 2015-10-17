@@ -2,10 +2,9 @@
 
 <block name="header">
 <header class="jumbotron subhead" id="overview">
-  <div class="container text-left">
+  <div class="container">
     <h2>用户登录</h2>
     <p><span>还没有账号? <a href="{:U('register')}">立即注册</a></span></p>
-
   </div>
 </header>
 </block>
@@ -13,14 +12,14 @@
 <block name="body">
 <section>
 
-    <div class="container row col-md-12 center-block">
+    <div class="row col-md-12 center-block">
     
         <div class="col-md-4 ">
         
             <form class="form-horizontal" action="__SELF__" method="post">
               <div class="form-group">
                 <label class="form-label" for="inputEmail">用户名</label>
-                  <input type="text" id="inputEmail" class="form-control" placeholder="请输入用户名"  ajaxurl="checkUserNameUnique.html" errormsg="请填写1-16位用户名" nullmsg="请填写用户名" datatype="*1-16" value="" name="username">
+                  <input type="text" id="inputEmail" class="form-control" placeholder="请输入用户名"  errormsg="请填写1-16位用户名" nullmsg="请填写用户名" datatype="*1-16" value="" name="username">
               </div>
               <div class="form-group">
                 <label class="form-label" for="inputPassword">密码</label>
@@ -37,16 +36,14 @@
               </div>
               
               <div class="form-group">
-                
-               <div class="Validform_checktip alert alert-danger " style="display:none;"></div>
-                
-                <div class="checkbox"> 
-                <button type="submit" class="btn btn-info btn-lg">登 陆</button>
-                <label class="col-md-offset-1">
-                    <input type="checkbox"/> 自动登陆
-                  </label>
-                </div>
-                
+                <div class="Validform_checktip alert alert-danger " style="display:none;"></div>
+               <div class="checkbox"> 
+               <button type="submit" class="btn btn-info btn-lg">登 陆</button>
+                    <label class="col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
+                        <input type="checkbox"> 自动登陆
+                      </label>
+               </div>
+               
               </div>
               
             </form>  

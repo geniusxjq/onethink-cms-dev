@@ -97,7 +97,7 @@ class PassportController extends UcenterController {
 			$this->redirect('login');
 		}
 	}
-
+	
 	/* 验证码，用于登录和注册 */
 	public function verify(){
 		$verify = new \Think\Verify();

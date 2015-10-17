@@ -10,7 +10,7 @@ use User\Api\UserApi;
 用户信息配置
 */
 
-class AccountController extends UcenterController {
+class ProfileController extends UcenterController {
 	
 	public function _initialize(){
 		
