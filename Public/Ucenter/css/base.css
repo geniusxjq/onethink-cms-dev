@@ -14,6 +14,9 @@ html,body {
 body {
   position: relative;
   padding-top: 40px;
+  font-family: "Microsoft YaHei","Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  line-height: 20px;
 }
 
 /*居中
@@ -58,11 +61,81 @@ input[type='password']:focus,
 ----------------------------*/
 .form-label{
 	font-weight:normal;
+	color:ccc;
 }
 /**/
 .btn,.alert{
  border-radius: 0px;
 }
+
+/*
+----------------------------------------页面部分*/
+
+.navbar{
+	background-color:#FFF;
+	border:0px;
+  -webkit-box-shadow: 0 3px 3px 0 rgba(50,50,50,0.08);
+  -moz-box-shadow: 0 3px 3px 0 rgba(50,50,50,0.08);
+  box-shadow: 0 3px 3px 0 rgba(50,50,50,0.08);
+}
+.navbar-inverse .navbar-brand{
+  color: #333;
+  background-color: transparent;
+}
+
+.navbar-inverse .navbar-brand:hover,
+.navbar-inverse .navbar-brand:focus {
+  color:#111;
+  background-color: transparent;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover,
+.navbar-inverse .navbar-nav > li > a:focus {
+  color: #666;
+  background-color:#eee;
+}
+
+.navbar-toggle{
+ border-radius: 0px;
+ border:none;
+}
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+  color:#333;
+  background-color: #cdcdcd;
+}
+.navbar-inverse .navbar-toggle:hover,
+.navbar-inverse .navbar-toggle:focus {
+  background-color: #eee;
+}
+.navbar-inverse .navbar-toggle .icon-bar {
+  background-color: #888;
+}
+.navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover,
+.navbar-inverse .navbar-nav .open .dropdown-menu > li > a:focus {
+color: #666;
+}
+.navbar-collapse {
+  border:none;
+}
+.dropdown-menu {
+  border:none;
+  border-radius: 0px;
+  -webkit-box-shadow: 0 3px 3px 0 rgba(50,50,50,0.08);
+  -moz-box-shadow: 0 3px 3px 0 rgba(50,50,50,0.08);
+  box-shadow: 0 3px 3px 0 rgba(50,50,50,0.08);
+}
+.dropdown-menu > li > a{
+	color:#666;
+}
+.dropdown-menu > li:hover,
+.open .dropdown-menu > li:focus {
+	background-color:#eee;
+}
+
+.jumbotron {
+    background: url(../images/bg.jpg) center;
+}
+
 /* Footer
 -------------------------------------------------- */
 
@@ -87,4 +160,3 @@ input[type='password']:focus,
 .footer-links li:first-child {
   padding-left: 0;
 }
-
