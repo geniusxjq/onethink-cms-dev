@@ -14,15 +14,15 @@
 
     </ul>
 
-<div style="width: 500px;padding-bottom: 50px;">
-    <div class="form-item cf">
+<div class="form-horizontal">
+    <div class="form-item">
         <label class="item-label">邮件标题<span class="check-tips"></span></label>
         <div class="controls">
             <input type="text" class="text input-large" name="title" value="{$history.title}">
         </div>
     </div>
 
-    <div class="form-item cf">
+    <div class="form-item ">
         <label class="item-label">邮件内容<span class="check-tips"></span></label>
         <div class="controls">
             <label class="textarea">
@@ -32,14 +32,14 @@
         </div>
     </div>
 
-    <div class="form-item cf">
+    <div class="form-item ">
         <label class="item-label">发送时间<span class="check-tips"></span></label>
         <div class="controls">
             <input type="text" class="text input-large" name="create_time" value="{:date('Y-m-d H:i:s',$history['create_time'])}">
         </div>
     </div>
 
-    <div class="form-item cf">
+    <div class="form-item ">
         <label class="item-label">发送时间<span class="check-tips"></span></label>
         <div class="controls">
             <input type="text" class="text input-large" name="from" value="{$history.from}">

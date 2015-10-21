@@ -185,9 +185,11 @@ class MailController extends AddonsController
                 $data_token['email'] = $v;
                 D('MailToken')->add($data_token);
             }
-            $url = $server_host .addons_url('Mail://MailRss/unsubscribe', array('token' => $token));
+			
+			$url =addons_url('Mail://MailRss/unsubscribe', array('token' => $token),C('DEFAULT_MODULE'));
+            $url = $server_host.$url;
+			
             //发送邮件
-
             $body1 = $body . '<hr/><div style="float:right;margin-right: 20px;"><a href="' . $url . '">取消订阅</a></div>';
             $status = $this->send_mail($v, $title, $body1);
             //将发送情况和状态写入数据库
@@ -236,13 +238,17 @@ class MailController extends AddonsController
         return $str; 
     }
 
-    public function setStatus()
-    {
-        $ids = I('ids');
-        $status = I('get.status');
-        $builder = new AdminListBuilder();
-        $builder->doSetStatus('mail_history', $ids, $status);
-
+    public function delEmailHistory()
+    {   
+		$ids = I('ids');
+        $res = D('MailHistory')->where(array('id' => array('in', $ids)))->delete();
+		$res = D('MailHistoryLink')->where(array('mail_id' => array('in', $ids)))->delete();
+        if ($res) {
+            $this->success('删除成功');
+        } else {
+            $this->error('删除失败');
+        }
+		
     }
 
     /**

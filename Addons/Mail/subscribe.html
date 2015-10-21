@@ -3,7 +3,7 @@
     <a class="subscribe_btn" href="javascript:"> 订阅 </a>
     <div id="frame_subscribe">
     
-        <input id="email_address" name="email_address" type="text" class="form-control form_check pull-left"
+        <input id="email_address" name="email_address" type="text" class="form-control pull-left"
                style="width: 200px;" required>
         <button id="subscribe_submit_btn" class="btn btn-default" style="width: 70px;">提交</button>
         
@@ -24,7 +24,7 @@ $(function () {
 			alert('请输入正确的邮箱格式');
 		}
 		else {
-			$.post("{:addons_url('Mail://MailRss/subScribe')}", {email_address: email_address}, function (res) {
+			$.post("{:addons_url('Mail://MailRss/subScribe','',C('DEFAULT_MODULE'))}", {email_address: email_address}, function (res) {
 				if (res.status) {
 					alert(res.info);
 					$('#email_address').val('');

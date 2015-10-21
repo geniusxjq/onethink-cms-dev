@@ -378,15 +378,17 @@ function get_addon_config($name){
  * 插件显示内容里生成访问插件的url
  * @param string $url url
  * @param array $param 参数
+ * @param string $module_name 指定模块名（如果指定了模块名,则将默认的模块名替换） (@author geniusxjq <app880.com>)
  * @author 麦当苗儿 <zuojiazi@vip.qq.com>
  */
-function addons_url($url, $param = array()){
+function addons_url($url, $param = array(),$module_name=''){
     $url        = parse_url($url);
     $case       = C('URL_CASE_INSENSITIVE');
     $addons     = $case ? parse_name($url['scheme']) : $url['scheme'];
     $controller = $case ? parse_name($url['host']) : $url['host'];
     $action     = trim($case ? strtolower($url['path']) : $url['path'], '/');
-
+	$param=$param?$param:array();//(@author geniusxjq <app880.com>)
+	
     /* 解析URL带的参数 */
     if(isset($url['query'])){
         parse_str($url['query'], $query);
@@ -399,18 +401,16 @@ function addons_url($url, $param = array()){
         '_controller' => $controller,
         '_action'     => $action,
     );
+	
     $params = array_merge($params, $param); //添加额外参数
+	$url=U('Addons/execute', $params);
 	
-	if(strtolower(MODULE_NAME)=="admin"){//区分前台和后台
-		
-		return U('Admin/Addons/execute', $params);
-	
-	}else{
-		
-		return U('Home/Addons/execute', $params);
-		
+	//如果指定了模块名,则将默认的模块名替换。(@author geniusxjq <app880.com>)
+	if($module_name){
+		$url='/'.$module_name.substr($url,strpos($url,'/Addons'));
 	}
 	
+	return $url;
 }
 
 /**
