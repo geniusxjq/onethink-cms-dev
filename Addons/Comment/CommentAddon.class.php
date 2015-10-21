@@ -112,19 +112,19 @@ class CommentAddon extends Addon{
       $this->assign('addon_comment_error', '模版不存在，使用默认模版');
       $template_name = 'default';
     }
-
+	
     $this->display('View/'.$template_name.'/comment');
 
   }
 
   // 加载插件Css样式
   public function pageHeader() {
-    echo '<link href="'. __ROOT__ . '/Addons/'.$this->getName().'/Public/comments.css" rel="stylesheet">';
+    echo '<link href="'.substr($this->addon_path,1).'Public/comments.css" rel="stylesheet">';
   }
 
   // 加载插件js
   public function pageFooter() {
-    echo '<script type="text/javascript" src="'. __ROOT__ . '/Addons/'.$this->getName().'/Public/comments.js"></script>';
+    echo '<script type="text/javascript" src="'.substr($this->addon_path,1).'Public/comments.js"></script>';
   }
 
 }

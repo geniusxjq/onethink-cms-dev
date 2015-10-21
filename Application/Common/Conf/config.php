@@ -55,7 +55,7 @@ return array(
 	'LOAD_EXT_FILE'=>'time,parse,mail',
 	
 	/*加载扩展配置文件*/
-	'LOAD_EXT_CONFIG'=>'template,upload',
+	'LOAD_EXT_CONFIG'=>'upload',
 	
 	/* SESSION 和 COOKIE 配置 */
     'SESSION_PREFIX' => 'onethink_home', //session前缀

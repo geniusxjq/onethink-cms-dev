@@ -185,7 +185,7 @@ class MailController extends AddonsController
                 $data_token['email'] = $v;
                 D('MailToken')->add($data_token);
             }
-            $url = $server_host .addons_url('Mail://Mail/unsubscribe', array('token' => $token));
+            $url = $server_host .addons_url('Mail://MailRss/unsubscribe', array('token' => $token));
             //发送邮件
 
             $body1 = $body . '<hr/><div style="float:right;margin-right: 20px;"><a href="' . $url . '">取消订阅</a></div>';

@@ -79,7 +79,7 @@ class FileController extends AdminController {
 		   
 		  /*判断是否加水印*/
 		   if(I('get.water')=='yes'){
-			 hook("dealPicture",(C('PICTURE_UPLOAD.rootPath').$info['download']['savepath'].$info['download']['savename']));//钩子调用水印插件
+			   hook("dealPicture",(C('PICTURE_UPLOAD.rootPath').$info['download']['savepath'].$info['download']['savename']));//钩子调用水印插件
 		   }
 		   
         } else {
