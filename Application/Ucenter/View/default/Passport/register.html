@@ -42,8 +42,7 @@
             </div>
             
           <div class="form-group">
-            <div class="Validform_checktip alert alert-danger" style="display:none;"></div>
-              <button type="submit" class="btn btn-success btn-lg">注 册</button>
+              <button type="submit" class="btn btn-success btn-lg col-md-3 col-xs-5">注 册</button>
           </div>
         </form>
         </div>
@@ -79,9 +78,10 @@
 
     		function success(data){
     			if(data.status){
+					$.zui.messager.show('注册成功',{placement:'center',type:'success'});
     				window.location.href = data.url;
     			} else {
-    				self.find(".Validform_checktip").text(data.info).fadeIn();
+    				$.zui.messager.show(data.info,{placement:'center',type:'danger'});
     				//刷新验证码
     				$(".reloadverify").click();
     			}

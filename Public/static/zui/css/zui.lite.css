@@ -196,11 +196,6 @@ table {
 .modal-footer:after {
   clear: both;
 }
-.center-block {
-  display: block;
-  margin-right: auto;
-  margin-left: auto;
-}
 .pull-right {
   float: right !important;
 }
@@ -1672,6 +1667,12 @@ h6.header-dividing {
   padding-bottom: 9px;
   border-bottom: 1px solid #e5e5e5;
 }
+.center-block {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
 .btn {
   display: inline-block;
   padding: 5px 12px;

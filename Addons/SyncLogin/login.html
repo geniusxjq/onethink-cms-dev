@@ -1,16 +1,15 @@
 <link type="text/css" rel="stylesheet" href="__ADDONROOT__/css/login.css?t=1">
 <php>if(!empty($config['type'])){</php>
-<div class="row SyncLogin col-md-offset-1">
-<h4>第三方账号登录</h4>
+<div class="row SyncLogin">
 <volist name="config['type']" id="type">
 
     <switch name="type">
     
       <case value="qq">
-           <a class="btn btn-info btn-lg" href="<php>if(in_array('qq',$config['type'])){ echo addons_url('SyncLogin://Base/login',array('type'=>'qq'));}</php>"> <i class="fa  fa-qq "></i>&nbsp;用QQ账号登录</a>  
+           <a class="btn btn-info btn-lg" href="<php>if(in_array('qq',$config['type'])){ echo addons_url('SyncLogin://Base/login',array('type'=>'qq'),C('DEFAULT_MODULE'));}</php>"> <i class="icon-qq "></i>&nbsp;用QQ账号登录</a>  
       </case>
       <case value="sina"> 
-        <a class="btn btn-danger btn-lg " href="<php>if(in_array('sina',$config['type'])){ echo addons_url('SyncLogin://Base/login',array('type'=>'sina'));}</php>"><i class="fa  fa-weibo "></i>&nbsp;用微博账号登录</a> 
+        <a class="btn btn-danger btn-lg " href="<php>if(in_array('sina',$config['type'])){ echo addons_url('SyncLogin://Base/login',array('type'=>'sina'),C('DEFAULT_MODULE'));}</php>"><i class="icon-weibo "></i>&nbsp;用微博账号登录</a> 
       </case>
       
      </switch> 

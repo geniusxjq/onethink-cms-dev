@@ -196,11 +196,6 @@ table {
 .modal-footer:after {
   clear: both;
 }
-.center-block {
-  display: block;
-  margin-right: auto;
-  margin-left: auto;
-}
 .pull-right {
   float: right !important;
 }
@@ -1775,6 +1770,11 @@ h5.header-dividing,
 h6.header-dividing {
   padding-bottom: 9px;
   border-bottom: 1px solid #e5e5e5;
+}
+.center-block{
+	display:block;
+	margin-right:auto;
+	margin-left:auto;
 }
 .btn {
   display: inline-block;
@@ -8425,5 +8425,4 @@ body.article-content {
 .datatable.show-scroll-slide.scrolled-out .scrolled-out-shadow {
   right: -20px;
 }
-
 /*# sourceMappingURL=zui.css.map */
