@@ -1,0 +1,304 @@
+<extend name="Public/base" />
+
+<block name="style">
+<link href="__ADDONROOT__/css/base.css" rel="stylesheet" type="text/css">
+<link href="__STATIC__/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css">
+<php> if(C('COLOR_STYLE')=='blue_color') echo '<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">';</php>
+<link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+</block>
+
+<block name="body">
+	<div class="main-title cf">
+		<h2>新增计划</h2>
+	</div>
+
+	<!-- 标签页导航 -->
+	<div class="tab-wrap">
+		<div class="tab-content">
+			<!-- 表单 -->
+			<form id="form" action="{:addons_url('Schedule://Schedule/add')}" method="post" class="form-horizontal doc-modal-form">
+				<!-- 基础 -->
+				<div id="tab1" class="tab-pane in tab1">
+					<div class="form-item cf">
+						<label class="item-label">执行函数<span class="check-tips">（计划任务执行的函数，格式为：app/Model/method）</span></label>
+						<div class="controls">
+							<input type="text" class="text input-large" name="task_to_run" value="">
+						</div>
+					</div>
+                    	<div class="form-item cf">
+						<label class="item-label">开始时间 -- 结束时间<span class="check-tips">（任务启止时间。格式如：2015-02-09 21:50:00 ）</span></label>
+						<div class="controls">
+							<input type="text"  id="start_datetime" class="text input-mid" name="start_datetime" value=""> -- <input type="text"  id="end_datetime" class="text input-mid " name="end_datetime" value="">
+						</div>
+					</div>
+					<div class="form-item cf">
+						<label class="item-label">任务周期（类型）<span class="check-tips">（只执行一次，按分钟执行，按小时执行，按天执行，按周执行，按月执行。之一）</span></label>
+						<div class="controls">	
+                            <select name="schedule_type">
+                            <option value="ONCE" selected="selected">只执行一次</option>
+                            <option value="MINUTE">按分钟执行</option>
+                            <option value="HOURLY">按小时执行</option>
+                            <option value="DAILY">按天执行</option>
+                            <option value="WEEKLY">按周执行</option>
+                            <option value="MONTHLY">按月执行</option>
+                            </select>
+						</div>
+					</div>
+					<div class="form-item cf">
+						<label class="item-label">执行频率<span class="check-tips">（一个周期内执行任务的次数。类型为“按月执行“时必须，为“只执行一次“时无效；其他时为可选，默认为1次）</span></label>
+						<div class="controls">
+							<input type="text" class="text input-large" name="modifier" value="">
+						</div>
+					</div>
+					<div class="form-item cf">
+						<label class="item-label">指定周或月的一天或多天[dirlist]<span class="check-tips">（指定周或月的一天或多天。只与”按周执行“或”按月执行“共同使用时有效，其他时忽略。）</span></label>
+						<div class="controls">
+							<input type="text" class="text input-large" name="dirlist" value="">
+						</div>
+					</div>
+					<div class="form-item cf">
+						<label class="item-label">指定一年中的一个月或多个月[month]
+                        <span class="check-tips">(指定一年中的一个月或多个月.只在”按月执行“时有效，其他时忽略。当modifier=LASTDAY时必须，其他时可选。有效值：Jan-Dec，默认为每个月)</span>
+                        </label>
+						&nbsp; 
+                        <div class="controls">
+                        <input type="hidden"  name="month" id="month_input" value=""> 
+                        <span class="date_month_box" id="date_month_box">
+                        <b class="date_month_box_tab " date-value="*">每月</b>
+                        <b class="date_month_box_tab" date-value="Jan" >一月</b>
+                         <b class="date_month_box_tab" date-value="Feb" >二月</b>
+                          <b class="date_month_box_tab" date-value="Mar" >三月</b>
+                           <b class="date_month_box_tab" date-value="Apr" >四月</b>
+                          <b class="date_month_box_tab" date-value="May" >五月</b>
+                          <b class="date_month_box_tab" date-value="Jun" >六月</b>
+                           <b class="date_month_box_tab" date-value="Jul" >七月</b>
+                           <b class="date_month_box_tab" date-value="Aug" >八月</b>
+                            <b class="date_month_box_tab" date-value="Sep" >九月</b>
+                           <b class="date_month_box_tab" date-value="Oct" >十月</b>
+                            <b class="date_month_box_tab" date-value="Nov" >十一月</b>
+                            <b class="date_month_box_tab" date-value="Dec" >十二月</b>
+					  </span>
+					  </div>  
+                    
+                    </div> 
+				
+					<div class="form-item cf">
+						<label class="item-label">简介<span class="check-tips">（对计划任务的简要描述）</span></label>
+						<div class="controls">
+							<input type="text" class="text input-large" name="info" value="">
+						</div>
+					</div>																														
+
+				</div>
+
+				<!-- 按钮 -->
+				<div class="form-item cf">
+					<label class="item-label"></label>
+					<div class="controls edit_sort_btn">
+						<button class="btn submit-btn ajax-post no-refresh" type="submit" target-form="form-horizontal">确 定</button>
+						<a class="btn btn-return" href="{:U('addons/adminlist',array('name'=>Schedule))}">返 回</a>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</block>
+<block name="script">
+<script type="text/javascript" src="__STATIC__/daterangepicker/moment.js"></script>
+<script type="text/javascript" src="__STATIC__/daterangepicker/daterangepicker.js"></script>
+<script type="text/javascript" src="__STATIC__/mell/mell-1.0.js"></script>
+<script type="text/javascript" charset="utf-8">
+
+Mell.Ready(function(){
+					
+	var date_input_focus=null;
+	
+	function set_date_input_focus(o){
+		
+		date_input_focus=o;
+		
+	}
+	
+	function set_date_input_value(){
+		
+		var _date=$(date_input_focus).val();
+		
+		if(_date){
+			
+			_date.match(/(\d{4}-\d{2}-\d{2}\s{1}\d{2}:\d{2}:\d{2}\s{1})-(\s{1}\d{4}-\d{2}-\d{2}\s{1}\d{2}:\d{2}:\d{2})/g);
+				
+			Mell('start_datetime').value=RegExp.$1;
+			
+			Mell('end_datetime').value=RegExp.$2;
+		
+		}
+		
+	}
+	  
+	$('#start_datetime').daterangepicker({
+	  timePicker: true,
+	  timePickerIncrement: 5,
+	  format: 'YYYY-MM-DD HH:mm:ss',
+	  timePicker12Hour:false
+	});
+	
+	$('#end_datetime').daterangepicker({
+	  timePicker: true,
+	  timePickerIncrement: 5,
+	  format: 'YYYY-MM-DD HH:mm:ss',
+	  timePicker12Hour:false
+	});
+	
+	Mell.Event.on(document,"focus",
+		
+		"#start_datetime #end_datetime",
+		
+		function(){
+			
+			set_date_input_focus(this);
+																			
+		}
+		
+	)(document,"click",
+		
+		".applyBtn",
+		
+		function(){
+			
+			setTimeout(set_date_input_value,1);
+																			
+		}
+		
+	);
+	
+	var month_input=Mell("month_input");
+	
+	var date_month_box=Mell("date_month_box");
+	
+	var only_off_month=false;
+	
+	function set_toggle_month_input(mod){
+				
+		month_input.value="";
+		
+		var length_all=(Mell.ByClass(
+		
+		date_month_box,
+		
+		"date_month_box_tab date_month_box_tab_selected"
+		)||[]).length;
+		
+		var length=(Mell.ByClass(
+		
+		date_month_box,
+		
+		"date_month_box_tab_selected",
+					
+		function(o){
+			
+			var val=Mell.Attr.get(this,"date-value");
+							
+			if(val!="*"){
+				
+				var arr=month_input.value?(month_input.value).split(","):[];
+				
+				arr.push(val);
+				
+				month_input.value=arr.join(",");
+								
+			}
+			
+		}
+					
+		)||[]).length;
+		
+		if(length_all-1==length){
+			
+			Mell.Toggle.on(Mell.ByTag(date_month_box,"b")[0]);
+						
+		}
+		
+		if(mod==0){
+			
+			only_off_month=true;
+			
+			Mell.Toggle.off(Mell.ByTag(date_month_box,"b")[0]);
+			
+			only_off_month=false;
+			
+		}
+		
+	}
+	
+	function set_toggle_month_all(mod){
+		
+		if(only_off_month){
+			
+			return false;
+			
+		}
+							
+		Mell.ByClass(
+		
+		date_month_box,
+		
+		"date_month_box_tab date_month_box_tab_selected",
+					
+		function(o){
+			
+			if(Mell.Attr.get(this,"date-value")!="*"){
+				
+				mod==1?Mell.Toggle.on(this):Mell.Toggle.off(this);
+			
+			}
+			
+		}
+					
+		);
+		
+		month_input.value="*";
+		
+	}
+		
+	Mell.MapCall(Mell.ByTag(date_month_box,"b"),function(o){
+											  
+		var on_fn=function(){set_toggle_month_input(1)};
+		
+		var off_fn=function(){set_toggle_month_input(0)};
+		
+		if(Mell.Attr.get(this,"date-value")=="*"){
+			
+			on_fn=function(){set_toggle_month_all(1)};
+			
+			off_fn=function(){set_toggle_month_all(0)};
+			
+		}
+													  
+		Mell.ClassName.toggle(		
+		this,
+		
+		"date_month_box_tab_selected",
+		
+		on_fn,
+		
+		"date_month_box_tab",
+		
+		off_fn,
+		
+		true
+		
+		);
+					   
+	});
+	
+	Mell.Event.on(date_month_box,"click","b",function(){
+													  
+			Mell.Toggle(this);
+
+	});
+	
+});
+
+</script>
+</block>
+

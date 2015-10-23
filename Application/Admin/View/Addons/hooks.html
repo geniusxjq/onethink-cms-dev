@@ -1,0 +1,90 @@
+<extend name="Public/base" />
+
+<block name="body">
+	<!-- 标题栏 -->
+	<div class="main-title">
+		<h2>钩子列表</h2>
+	</div>
+	<div class="cf">
+		<?php if (IS_ROOT): ?>
+			<a class="btn" href="{:U('addhook')}">新 增</a>
+		<?php endif ?>
+        
+        <!-- 高级搜索 -->
+		<div class="search-form fr cf">
+			<div class="sleft">
+				<input type="text" name="name" class="search-input" value="{:I('name')}" placeholder="请输入钩子名称">
+				<a class="sch-btn" href="javascript:;" id="search" url="{:U('hooks')}"><i class="btn-search"></i></a>
+			</div>
+		</div>
+
+	</div>
+    
+        
+	<!-- 数据列表 -->
+	<div class="data-table table-striped">
+		<table>
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>名称</th>
+					<th>描述</th>
+					<th>类型</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<volist name="list" id="vo">
+					<tr>
+						<td>{$vo.id}</td>
+						<td><a href="{:U('edithook?id='.$vo['id'])}">{$vo.name}</a></td>
+						<td>{$vo.description}</td>
+						<td>{$vo.type_text}</td>
+						<td>
+							<a title="编辑" href="{:U('edithook?id='.$vo['id'])}">编辑</a>
+							<a class="confirm ajax-get" title="删除" href="{:U('delhook?id='.$vo['id'])}">删除</a>
+						</td>
+					</tr>
+				</volist>
+			</tbody>
+		</table>        
+	</div>
+	<!-- 分页 -->
+    <div class="page">
+        {$_page}
+    </div>
+</block>
+
+<block name="script">
+	<script type="text/javascript">
+		$(function(){
+
+	        //搜索功能
+			$("#search").click(function(){
+				var url = $(this).attr('url');
+		        var query  = $('.search-form').find('input').serialize();
+		        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+		        query = query.replace(/^&/g,'');
+		        if( url.indexOf('?')>0 ){
+		            url += '&' + query;
+		        }else{
+		            url += '?' + query;
+		        }
+				window.location.href = url;
+			});
+			$('.data-table th:last').attr('width',70);
+		    //回车自动提交
+		    $('.search-form').find('input').keyup(function(event){
+		        if(event.keyCode===13){
+		            $("#search").click();
+		        }
+    		});
+		})
+	</script>
+    <script type="text/javascript">
+		$(function(){
+			//导航高亮
+			highlight_subnav('{:U('Addons/hooks')}');
+		})
+	</script>
+</block>

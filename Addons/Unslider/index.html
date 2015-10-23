@@ -1,0 +1,15 @@
+<div class="banner">
+	<ul>
+		<volist name="list" id="data">
+		<li style="background-image: url('{$data.url_path}');">
+			<div class="inner">
+				<h1>{$data.title}</h1>
+				<p>{$data.description}</p>
+
+				<a class="btn btn-primary" href="{:U('Article/detail?id='.$data['id'])}">详情</a>
+			</div>
+		</li>
+		</volist>
+	</ul>
+</div>
+
