@@ -51,6 +51,7 @@ class SyncLoginAddon extends Addon{
     {
         $this->assign($param);
         $config = $this->getConfig();
+		 $this->assign('default_module',C('DEFAULT_MODULE'));
         $this->assign('config',$config);
         $this->display('login');
     }

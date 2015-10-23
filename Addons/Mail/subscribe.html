@@ -1,42 +1,46 @@
-<link type="text/css" rel="stylesheet" href="__ADDONROOT__/Public/subscribe.css">
-<div class="subscribe_btn_div">
-    <a class="subscribe_btn" href="javascript:"> 订阅 </a>
-    <div id="frame_subscribe">
-    
-        <input id="email_address" name="email_address" type="text" class="form-control pull-left"
-               style="width: 200px;" required>
-        <button id="subscribe_submit_btn" class="btn btn-default" style="width: 70px;">提交</button>
-        
-    </div>
+<link type="text/css" rel="stylesheet" href="__ADDONROOT__/Public/subscribe.css?T=8">
+<div id="subscribe_btn_box" class="subscribe_btn_box">
+<a id="subscribe_btn" class="subscribe_btn"> 订阅 </a>
 </div>
 <script type="text/javascript">
 
 $(function () {
 			
-	$('.subscribe_btn').click(function (e) {
-		$('#frame_subscribe').toggle();
-	})
-	$('#subscribe_submit_btn').click(function () {
-
-
+	$('#subscribe_btn').popover({
+		html:true,
+		container:'#subscribe_btn_box',
+		placement:'left',
+		content:'<div class="row subscribe_box"><div class="row col-md-9 col-xs-9"><input id="email_address" name="email_address" type="text" class="form-control"></div><div class="row col-md-3 col-xs-3"><button id="subscribe_submit_btn" type="button" class="btn btn-info col-md-10 pull-right">提交</button></div></div>',
+		
+		template:'<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
+		
+	
+	});
+		
+	$(document).on("click","#subscribe_submit_btn",function(){
 		var patterns = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
 		var email_address = $('#email_address').val();
 		if (email_address == '' || !patterns.test(email_address)) {
-			$.zui.messager.show('请输入正确的邮箱格式',{placement:'bottom-right',type:'danger'});
+			$.zui.messager.warning('请输入正确的邮箱格式',{placement:'bottom-right'});
+			return false;
 		}
-		else {
-			$.post("{:addons_url('Mail://MailRss/subScribe','',C('DEFAULT_MODULE'))}", {email_address: email_address}, function (res) {
-				if (res.status) {
-					$.zui.messager.show(res.info,{placement:'bottom-right',type:'success'});
-					$('#email_address').val('');
-					$('#frame_subscribe').hide();
-				} else {
-				   $.zui.messager.show(res.info,{placement:'bottom-right',type:'warning'});
-				}
-			}, 'json')
-		}
+		
+		$.post("{:addons_url('Mail://MailRss/subScribe','',C('DEFAULT_MODULE'))}",{email_address:email_address}, success, "json");
+		
+		return false;
 
-	})
+		function success(data){
+			if(data.status){
+				$.zui.messager.success(data.info,{placement:'bottom-right'});
+				$('#email_address').val('');
+				$('#subscribe_btn').popover('hide');
+			} else {
+				$.zui.messager.info(data.info,{placement:'bottom-right'});
+			}
+		}
+		
+	});
+
 })
 
 </script>

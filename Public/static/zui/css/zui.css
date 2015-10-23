@@ -7309,6 +7309,14 @@ pre code {
   background-color: rgba(0, 0, 0, .8);
   border-radius: 20px;
 }
+.messager.left {
+  left: 20px;
+  right:auto;
+}
+.messager.right {
+  left:auto;
+  right:20px;
+}
 .messager.top {
   top: 20px;
 }

@@ -15,7 +15,7 @@ html,body {
 body {
   position: relative;
   padding-top: 0px;
-  font-family:"Microsoft YaHei","黑体",Arial, Helvetica, sans-serif;
+  font-family:"Microsoft YaHei",Arial, Helvetica, sans-serif;
   font-size: 14px;
   line-height: 20px;
   background-color:#fff;
@@ -53,8 +53,6 @@ input[type='password']:focus,
 	font-size:14px;
 }
 .form-horizontal .control-label{
-	right:8px;
-	top:2px;
 }
 
 .form-horizontal .form-control{
