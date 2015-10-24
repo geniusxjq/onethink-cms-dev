@@ -18,6 +18,7 @@ body {
   font-family:"Microsoft YaHei",Arial, Helvetica, sans-serif;
   font-size: 14px;
   line-height: 20px;
+  color:333;
   background-color:#fff;
 }
 
@@ -27,7 +28,6 @@ body {
 input[type='text'],
 input[type='password'],
 textarea{
-  background-image: none;
   border-radius: 0px;
   border-color:#e5e5e5;
   -webkit-box-shadow:none;
@@ -48,23 +48,28 @@ input[type='password']:focus,
 /*表单 form
 ----------------------------*/
 .form-horizontal .form-label{
-	color:#666;
 	font-weight:100;
 	font-size:14px;
 }
 .form-horizontal .control-label{
+	font-weight:100;
 }
 
 .form-horizontal .form-control{
-	height:38px;
+	border-width:2px;
 }
+
 /*按钮/警告
 ------------------------------*/
 .btn,.alert{
-border:none;
+ border:none;
  border-radius: 0px;
 }
-
+/*Tooltip
+-------------------*/
+.tooltip-inner{
+	font-size:14px;
+}
 /****************************************************************************页面部分***************************************************/
 
 /*居中*/
@@ -77,7 +82,7 @@ border:none;
 
 .top-box{
 	height:100px;
-	line-height:100%;
+	background-color:#145ccd;
 }
 /*导航*/
 .navbar-inverse{
@@ -88,7 +93,7 @@ border:none;
 	top:5px;
 }
 .navbar-inverse .navbar-header .navbar-brand{
-	font-size:21px;
+	font-size:18px;
 }
 .navbar-inverse .navbar-header .navbar-brand,
 .navbar-inverse .navbar-nav > li{
@@ -146,3 +151,4 @@ header .container h2{
 .footer-links li:first-child {
   padding-left: 0;
 }
+

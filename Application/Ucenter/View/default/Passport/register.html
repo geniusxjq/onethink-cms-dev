@@ -1,7 +1,7 @@
 <extend name="Base/common" />
 <block name="header">
 <header>
-  <div class="container">
+  <div class="container text-center">
     <h2>用户注册</h2>
   </div>
 </header>
@@ -10,48 +10,44 @@
 <block name="body">
 
 <section>
-	<div class="row col-md-12 center-block">
+	<div class="row col-md-5 center-block">
     
-        <div id="register_box" class="col-md-4">
+        <div class="col-md-12">
         <form class="form-horizontal" action="__SELF__" method="post">
          
           <div class="form-group">
-            <label class="form-label" for="inputEmail">用户名</label>
-              <input type="text" id="inputEmail" class="form-control" placeholder="请输入用户名"  ajaxurl="checkUserNameUnique.html" errormsg="请填写1-16位用户名" nullmsg="请填写用户名" datatype="*1-16" value="" name="username">
+            <label class="form-label " for="inputEmail">用户名</label>
+              <input type="text" id="inputEmail" class="form-control input-lg" placeholder="请输入用户名"  errormsg="请填写1-16位用户名" nullmsg="请填写用户名" datatype="*1-16" value="" name="username">
           </div>
           
           <div class="form-group">
-            <label class="form-label" for="inputPassword">密码</label>
-              <input type="password" id="inputPassword"  class="form-control" placeholder="请输入密码"  errormsg="密码为6-20位" nullmsg="请填写密码" datatype="*6-20" name="password">
+            <label class="form-label " for="inputPassword">密码</label>
+              <input type="password" id="inputPassword"  class="form-control input-lg" placeholder="请输入密码"  errormsg="密码为6-20位" nullmsg="请填写密码" datatype="*6-20" name="password">
           </div>
           <div class="form-group">
-            <label class="form-label" for="inputPassword">确认密码</label>
-              <input type="password" id="inputPassword" class="form-control" placeholder="请再次输入密码" recheck="password" errormsg="您两次输入的密码不一致" nullmsg="请填确认密码" datatype="*" name="repassword">
+            <label class="form-label " for="inputPassword">确认密码</label>
+              <input type="password" id="inputPassword" class="form-control input-lg" placeholder="请再次输入密码" recheck="password" errormsg="您两次输入的密码不一致" nullmsg="请填确认密码" datatype="*" name="repassword">
           </div>
           <div class="form-group">
-            <label class="form-label" for="inputEmail">邮箱</label>
-              <input type="text" id="inputEmail" class="form-control" placeholder="请输入电子邮件"  ajaxurl="checkUserEmailUnique.html" errormsg="请填写正确格式的邮箱" nullmsg="请填写邮箱" datatype="e" value="" name="email">
+            <label class="form-label " for="inputEmail">邮箱</label>
+              <input type="text" id="inputEmail" class="form-control input-lg" placeholder="请输入电子邮件"   errormsg="请填写正确格式的邮箱" nullmsg="请填写邮箱" datatype="e" value="" name="email">
           </div>
           <div class="form-group">
-            <label class="form-label" for="inputPassword">验证码</label>
-              <input type="text" id="inputPassword" class="form-control" placeholder="请输入验证码"  errormsg="请填写5位验证码" nullmsg="请填写验证码" datatype="*5-5" name="verify">
+            <label class="form-label " for="inputPassword">验证码</label>
+              <input type="text" id="inputPassword" class="form-control input-lg" placeholder="请输入验证码"  errormsg="请填写5位验证码" nullmsg="请填写验证码" datatype="*5-5" name="verify">
           </div>
+          
           <div class="form-group">
                 <img class="verifyimg reloadverify" alt="点击切换" src="{:U('verify')}" style="cursor:pointer;">
             
             </div>
             
           <div class="form-group">
-              <button type="submit" class="btn btn-success btn-lg col-md-3 col-xs-12">注 册</button>
+              <button type="submit" class="btn btn-primary btn-lg col-md-3 col-xs-12">注 册</button>
           </div>
         </form>
         </div>
-        
-        <div class="col-md-5 col-md-offset-1">
-              <!--第三方登陆-->
-              {:hook('SyncLogin')}
-        </div>
-        
+                
 	</div>
     
     
@@ -64,10 +60,10 @@
 	<script type="text/javascript">
     	$(document)
 	    	.ajaxStart(function(){
-	    		$("button:submit").addClass("log-in").attr("disabled", true);
+	    		$("button:submit").attr("disabled", true);
 	    	})
 	    	.ajaxStop(function(){
-	    		$("button:submit").removeClass("log-in").attr("disabled", false);
+	    		$("button:submit").attr("disabled", false);
 	    	});
 
 
@@ -79,7 +75,7 @@
     		function success(data){
     			if(data.status){
 					$.zui.messager.success('注册成功',{placement:'center'});
-    				window.location.href = data.url;
+    				setTimeout(function(){window.location.href = data.url;},1000);
     			} else {
     				$.zui.messager.warning(data.info,{placement:'center'});
     				//刷新验证码
