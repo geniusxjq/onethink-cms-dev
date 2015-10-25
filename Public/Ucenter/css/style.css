@@ -1,3 +1,4 @@
+
 /** 
  *主题
  * 描述：重置页面元素，设置布局样式及公共模块
@@ -14,12 +15,12 @@ html,body {
 
 body {
   position: relative;
-  padding-top: 0px;
-  font-family:"Microsoft YaHei",Arial, Helvetica, sans-serif;
+  padding-top: 40px;
   font-size: 14px;
   line-height: 20px;
-  color:333;
-  background-color:#fff;
+  background: #F5F5F5;
+  color: #707070;
+  font-family: Verdana, 'Helvetica Neue', 'Microsoft Yahei', 'Hiragino Sans GB', 'Microsoft Sans Serif', 'WenQuanYi Micro Hei', sans-serif;
 }
 
 /* 输入框 input/textarea
@@ -78,40 +79,35 @@ input[type='password']:focus,
 }
 /*页首
 ---------------------------------------------------------*/
-
-.top-box{
-	height:100px;
-	background-color:#145ccd;
-}
 /*导航*/
-.navbar-inverse{
+.navbar-default{
 	border:none;
 }
-.navbar-inverse .navbar-header .navbar-toggle{
+.navbar-default .navbar-header .navbar-toggle{
 	border:none;
 	top:5px;
 }
-.navbar-inverse .navbar-header .navbar-brand{
+.navbar-default .navbar-header .navbar-brand{
 	font-size:18px;
 }
-.navbar-inverse .navbar-header .navbar-brand,
-.navbar-inverse .navbar-nav > li{
+.navbar-default .navbar-header .navbar-brand,
+.navbar-default .navbar-nav > li{
 	line-height:28px;
 } 
 
-.navbar-inverse .navbar-nav > li > a{
+.navbar-default .navbar-nav > li > a{
 	line-height:inherit;
 	font-size:18px;
 	letter-spacing: 5px;
 }
-.navbar-inverse .navbar-right > li > a{
+.navbar-default .navbar-right > li > a{
 	letter-spacing:normal;
 }
 
 /*导航底部开头部分*/
 
 header .container{
-	background-color:tarnsparent;
+	
 	margin-bottom:15px;
 	margin-top:30px;
 }

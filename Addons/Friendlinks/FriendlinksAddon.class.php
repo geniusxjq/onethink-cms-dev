@@ -1,7 +1,6 @@
 <?php
 namespace Addons\Friendlinks;
 use Common\Controller\Addon;
-use Think\Db;
 
 /**
  * 合作单位插件

@@ -2,7 +2,6 @@
 
 namespace Addons\Advertising;
 use Common\Controller\Addon;
-use Think\Db;
 
 /**
  * 广告插件

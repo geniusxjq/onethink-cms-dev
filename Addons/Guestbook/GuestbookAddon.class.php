@@ -2,7 +2,7 @@
 
 namespace Addons\Guestbook;
 use Common\Controller\Addon;
-use Think\Model;
+
 /**
  * 留言板插件
  * @author 马剑威
