@@ -67,8 +67,6 @@ class MailController extends AddonsController
             $map['address'] = array('like', '%' . $address . '%');
         $mailList = D('MailList')->where($map)->select();
         $this->assign('mailList', $mailList);
-        $this->assign('current','list');
-
         $this->display(T('Addons://Mail@Mail/mailList'));
     }
 

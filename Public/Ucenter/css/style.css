@@ -56,7 +56,6 @@ input[type='password']:focus,
 }
 
 .form-horizontal .form-control{
-	border-width:2px;
 }
 
 /*按钮/警告

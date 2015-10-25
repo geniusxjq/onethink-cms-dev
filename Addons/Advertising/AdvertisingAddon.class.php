@@ -3,20 +3,22 @@
 namespace Addons\Advertising;
 use Common\Controller\Addon;
 use Think\Db;
+
 /**
  * 广告插件
  * @author quick
  */
 
-    class AdvertisingAddon extends Addon{
+class AdvertisingAddon extends Addon{
 
         public $info = array(
             'name'=>'Advertising',
-            'title'=>'广告位置',
-            'description'=>'广告位插件',
+            'title'=>'广告管理',
+            'description'=>'广告位插件，为网站增加广告管理功能。',
             'status'=>1,
-            'author'=>'onep2p',
-            'version'=>'0.1'
+            'author'=>'geniusxjq',
+			'url'=>'http://www.app880.com',
+            'version'=>'2.0'
         );
                 
         /**
@@ -37,6 +39,8 @@ use Think\Db;
         public $custom_adminlist = 'adminlist.html';
 		
 		public $addon_install_info = array(
+										   
+			'hooks'=>"Advertising:1:调用广告位广告的钩子",
 										   										   						
 			'install_sql'=>"DROP TABLE IF EXISTS `onethink_advertising`;
 			CREATE TABLE IF NOT EXISTS `onethink_advertising` (
@@ -47,9 +51,25 @@ use Think\Db;
 			`height` char(20) NOT NULL DEFAULT '' COMMENT '广告位置高度',
 			`status` tinyint(2) NOT NULL DEFAULT '1' COMMENT '状态（0：禁用，1：正常）',
 			PRIMARY KEY (`id`)
-			) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='广告位置表';",
+			) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='广告位置表';
+			DROP TABLE IF EXISTS `onethink_advertisement`;
+			CREATE TABLE IF NOT EXISTS `onethink_advertisement` (
+			`id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+			`title` char(80) NOT NULL DEFAULT '' COMMENT '广告名称',
+			`position` int(11) NOT NULL COMMENT '广告位置',
+			`advspic` int(11) NOT NULL COMMENT '图片地址(ID)',
+			`advstext` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT  '文字广告内容',
+			`advshtml` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT  '代码广告内容',
+			`link` char(140) NOT NULL DEFAULT '' COMMENT '链接地址',
+			`level` int(3) unsigned NOT NULL DEFAULT '0' COMMENT '优先级',
+			`status` tinyint(2) NOT NULL DEFAULT '1' COMMENT '状态（0：禁用，1：正常）',
+			`create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '开始时间',
+			`end_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '结束时间',
+			PRIMARY KEY (`id`)
+			) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='广告表';",
 			  
-			'uninstall_sql'=>"DROP TABLE IF EXISTS `onethink_advertising`;",
+			'uninstall_sql'=>"DROP TABLE IF EXISTS `onethink_advertising`;
+			DROP TABLE IF EXISTS `onethink_advertisement`;",
         );
 
         public function install(){
@@ -63,5 +83,14 @@ use Think\Db;
             return $this->uninstallAddon($this->addon_install_info);
 			
         }
+		
+		//实现的广告钩子
+        public function Advertising($param){
+        	$list = D('Addons://Advertising/Advertising')->getAdvertising($param);
+        	if(!$list)
+        		return ;
+			$this->assign('list',$list);
+			$this->display('widget');
+        }              
 
 }
