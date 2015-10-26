@@ -20,7 +20,7 @@ class QiniuController extends AdminController {
         $config = array(
         'accessKey'=>'bz-jMgX90rZg_3jC_nBneTK6iThvxsJzdhdnbHZa',
         'secrectKey'=>'lztQa6G-h7THHHZZGtwYZTmqQyH4mDqi6azxPGGY',
-        'bucket'=>'7xnsws',
+        'bucket'=>'app880',
         'domain'=>'7xnsws.com1.z0.glb.clouddn.com',
         );
         $this->qiniu = new QiniuStorage($config);
@@ -95,11 +95,12 @@ class QiniuController extends AdminController {
 
     public function detail($key){
         $result = $this->qiniu->info($key);
+		$src=preg_replace("/\+/","%20",$this->qiniu->downlink($key));
         if($result){
             if(in_array($result['mimeType'], array('image/jpeg','image/png'))){
-                $img = "<img src='{$this->qiniu->downlink($key)}?imageView/2/w/203/h/203'>";
+                $img = "<img src='{$src}?imageView/2/w/203/h/203'>";
             }else{
-                $img = '<img class="file-prev" src="https://dn-portal-static.qbox.me/v104/static/theme/default/image/resource/no-prev.png">';
+                $img = '该图片无法预览';
             }
             $time = date('Y-m-d H:i:s', bcmul(substr(strval($result['putTime']), 0, 11),"1000000000"));
             $filesize = format_bytes($result['fsize']);
@@ -113,7 +114,7 @@ class QiniuController extends AdminController {
                         {$img}
                     </div>
                     <p class="file-info-item">
-                        外链地址：<input class="file-share-link" type="text" readonly="readonly" value="{$this->qiniu->downlink($key)}">
+                        外链地址：<input class="file-share-link" type="text" readonly="readonly" value="{$src}">
                     </p>
                     <p class="file-info-item">
                         最后更新时间：<span>{$time}</span>

@@ -1,22 +1,42 @@
-<if condition="$list['type'] eq 2"><!-- type eq one is index advs -->
-<div class="header">
-    <div class="gg" id="gg">
-        	  <volist name="list.res" id="lo" key="k">
-                <a href="{$lo.link}" target="_blank" title="{$lo.title}" <if condition="$k eq 1">style="z-index: 3; opacity: 4;"</if> ><img src="__ROOT__{$lo.path}" alt="" /></a>
-              </volist>
-            </div>
-        </div>
-    </div>
-</div>
-<elseif condition="$list['type'] eq 3" />
-	<div style="width:{$list['width']};height:{$list['height']};background: #cecece;"><div style="margin:0px auto;width:150px;line-height: 30px;">{$list.advstext}</div></div>
-<elseif condition="$list['type'] eq 1" />
-	单图广告
-<elseif condition="$list['type'] eq 4" />
-	代码广告
-</if>
-<!-- add more -->
 
-<switch name="data.type">
-<case value="1"></case>
-</switch>
+<php>
+
+if($data){
+
+    if($data['list']){
+    
+</php>
+    
+    <switch name="data.type">
+    
+    <case value="1">
+    <volist name="data.list" id="lo" key="k">
+    <a target="_blank" href="{$lo.link|default='#'}"> {$lo.advstext|htmlspecialchars} </a>
+    </volist>
+    </case>
+    
+    <case value="2">
+    <volist name="data.list" id="lo" key="k">
+        <notempty name="lo.advspic">
+         <a target="_blank" href="{$lo.link|default='#'}"><img border="0" width="{$data.width}" height="{$data.height}" src="{$lo.advspic|get_cover='path'}" /> </a>
+        </notempty>
+    </volist>
+    </case>
+    
+    <case value="3">
+    <volist name="data.list" id="lo" key="k">
+         <a target="_blank" href="{$lo.link|default='#'}"> {$lo.advshtml} </a>
+    </volist>
+    </case>
+    
+    </switch>
+    
+    
+    <php>}else{</php>
+    
+        {$data.idle_content|default=''}   
+    
+<php>
+    }
+}
+</php>

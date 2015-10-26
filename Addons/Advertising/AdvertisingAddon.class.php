@@ -45,7 +45,9 @@ class AdvertisingAddon extends Addon{
 			CREATE TABLE IF NOT EXISTS `onethink_advertising` (
 			`id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
 			`title` char(80) NOT NULL DEFAULT '' COMMENT '广告位置名称',
-			`type` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '广告位置展示方式  0为默认展示一张',
+			`type` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '广告位置类型',
+			`same_limit` int(11) unsigned NOT NULL DEFAULT '1' COMMENT '广告位同时展示的广告数量限制  1为默认展示一张',
+			`idle_content` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT  '广告位闲置时默认显示的广告内容',
 			`width` char(20) NOT NULL DEFAULT '' COMMENT '广告位置宽度',
 			`height` char(20) NOT NULL DEFAULT '' COMMENT '广告位置高度',
 			`status` tinyint(2) NOT NULL DEFAULT '1' COMMENT '状态（0：禁用，1：正常）',
@@ -85,11 +87,13 @@ class AdvertisingAddon extends Addon{
 		
 		//实现的广告钩子
         public function Advertising($param){
-        	$data = D('Addons://Advertising/Advertising')->getAdvertising($param);
-        	if(!$data)
-        		return ;
+			
+			if(!$param)return ;
+        	$data=D('Addons://Advertising/Advertising')->getAdvertising($param);
+			if(!$data)return ;
 			$this->assign('data',$data);
 			$this->display('widget');
+			
         }              
 
 }

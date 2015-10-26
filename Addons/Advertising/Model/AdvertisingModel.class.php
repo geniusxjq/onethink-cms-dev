@@ -11,8 +11,13 @@ use Think\Model;
  * 分类模型
  */
 class AdvertisingModel extends Model{
+		/* 自动完成规则 */
+	protected $_auto = array(
+			array('same_limit', 'getSameLimit', self::MODEL_BOTH,'callback'),
+	);
+	
 	protected function _after_find(&$result,$options) {
-		$typetext = array(1=>'单图',2=>'多图',3=>'文字',4=>'代码');//有其他广告位置自行添加  2，0版本将添加后台广告分类功能
+		$typetext = array(1=>'文字',2=>'图片',3=>'代码');//有其他广告位置自行添加  2，0版本将添加后台广告分类功能
 		$result['typetext'] = $typetext[$result['type']];
 		$result['statustext'] =  $result['status'] == 0 ? '禁用' : '正常';
 	}	
@@ -74,6 +79,13 @@ class AdvertisingModel extends Model{
 		return $data;
 	}
 	
+	/*广告位显示限制返回值填充补全*/
+	
+	public function getSameLimit(){
+		$same_limit= I('post.same_limit');
+		return ($same_limit&&is_numeric($same_limit))?$same_limit:1;
+	}
+	
 	/*  获取广告位  */
 	public function getAdvertising($id){
 		
@@ -86,13 +98,15 @@ class AdvertisingModel extends Model{
 		$where = ' and position = '.$id;
 				
 		$data=array();
-		$list=D('Advertisement')->where('status = 1 and create_time < '.time().' and end_time > '.time().$where)->order('level asc,id asc')->find();
+		$list=D('Advertisement')->where('status = 1 and create_time < '.time().' and end_time > '.time().$where)
+		->order('level desc,id asc')->limit($ad_space['same_limit'])->select();
 		
-		if(!$list) return;
+		if(!$list&&!$ad_space['idle_content'])return;
 		
 		$data['type'] = $ad_space['type'];
 		$data['width'] = $ad_space['width'];
 		$data['height'] = $ad_space['height'];
+		$data['idle_content'] = $ad_space['idle_content'];
 		$data['list'] =$list;
 		
 		return $data;
