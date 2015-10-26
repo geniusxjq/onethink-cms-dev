@@ -63,7 +63,7 @@ class WaterAddon extends Addon
     public function dealPicture($path)
     {
 		
-		if(!$path) return $path;
+		if(!$path||strtolower(C('PICTURE_UPLOAD_DRIVER'))!='local') return $path;
 		
 		if(substr($path,0,1)=='/'){
 			

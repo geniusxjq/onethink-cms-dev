@@ -61,10 +61,10 @@ return array(
 	
 	/*七牛云存储实例*/
     'UPLOAD_QINIU_CONFIG'=>array(
-        'accessKey'=>'__ODsglZwwjRJNZHAu7vtcEf-zgIxdQAY-QqVrZD',
-        'secrectKey'=>'Z9-RahGtXhKeTUYy9WCnLbQ98ZuZ_paiaoBjByKv',
+        'accessKey'=>'bz-jMgX90rZg_3jC_nBneTK6iThvxsJzdhdnbHZa',
+        'secrectKey'=>'lztQa6G-h7THHHZZGtwYZTmqQyH4mDqi6azxPGGY',
         'bucket'=>'onethinktest',
-        'domain'=>'onethinktest.u.qiniudn.com',
+        'domain'=>'7xnsws.com1.z0.glb.clouddn.com',
         'timeout'=>3600,
     ),
 

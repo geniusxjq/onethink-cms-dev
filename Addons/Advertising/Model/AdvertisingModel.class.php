@@ -75,27 +75,26 @@ class AdvertisingModel extends Model{
 	}
 	
 	/*  获取广告位  */
-	public function getAdvertising($param){
-		if(isset($param)){
-			$sing = $this->find($param);//找到当前调用的广告位
-			$where = ' and position = '.$param;
-		}
-		if($sing['type'] == 2){
-			$advs =D('Advertisement')->where('status = 1 and create_time < '.time().' and end_time > '.time().$where)->order('level asc,id asc')->select();
-			foreach($advs as $key=>$val){		
-				$data['res'][$key] = $val;
-				$cover = M('picture')->find($val['advspic']);
-				$data['res'][$key]['path'] = $cover['path'];
-			}
-			$data['type'] = $sing['type'];
-			$data['width'] = $sing['width'];
-			$data['height'] = $sing['height'];
-		}else{
-			$data =D('Advertisement')->where('status = 1 and create_time < '.time().' and end_time > '.time().$where)->order('level asc,id asc')->find();
-			$data['type'] = $sing['type'];
-			$data['width'] = $sing['width'];
-			$data['height'] = $sing['height'];
-		}
+	public function getAdvertising($id){
+		
+		if(!isset($id)) return ;
+			
+		$ad_space = $this->find($id);//找到当前调用的广告位
+		
+		if(!$ad_space) return;
+		
+		$where = ' and position = '.$id;
+				
+		$data=array();
+		$list=D('Advertisement')->where('status = 1 and create_time < '.time().' and end_time > '.time().$where)->order('level asc,id asc')->find();
+		
+		if(!$list) return;
+		
+		$data['type'] = $ad_space['type'];
+		$data['width'] = $ad_space['width'];
+		$data['height'] = $ad_space['height'];
+		$data['list'] =$list;
+		
 		return $data;
 	}
 
