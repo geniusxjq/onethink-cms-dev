@@ -29,7 +29,7 @@ $(function () {
 		var patterns = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
 		var email_address = $('#email_address').val();
 		if (email_address == '' || !patterns.test(email_address)) {
-			$.zui.messager.warning('请输入正确的邮箱格式',{placement:'center'});
+			$.zui.messager.danger('请输入正确的邮箱格式',{placement:'center'});
 			return false;
 		}
 		var self = $(this);
@@ -37,11 +37,11 @@ $(function () {
 		return false;
 		function success(data){
 			if(data.status){
-				$.zui.messager.success(data.info,{placement:'center'});
+				$.zui.messager.info(data.info,{placement:'center'});
 				$('#email_address').val('');
 				$('#mail-subscribe-modal').modal('hide');
 			} else {
-				$.zui.messager.info(data.info,{placement:'center'});
+				$.zui.messager.special(data.info,{placement:'center'});
 			}
 		}
 		

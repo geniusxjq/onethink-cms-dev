@@ -77,7 +77,7 @@
 					$.zui.messager.success('注册成功',{placement:'center'});
     				setTimeout(function(){window.location.href = data.url;},1000);
     			} else {
-    				$.zui.messager.warning(data.info,{placement:'center'});
+    				$.zui.messager.danger(data.info,{placement:'center'});
     				//刷新验证码
     				$(".reloadverify").click();
     			}
