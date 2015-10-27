@@ -29,9 +29,11 @@
                             
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">{:get_username()} <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="{:U('Profile/password')}">修改密码</a></li>
+                                 <li><a href="{:U('Profile/index')}"><i class="icon-user "></i>&nbsp;个人中心</a></li>
+                                 <li><a href="{:U('Profile/index')}"><i class="icon-pencil"></i>&nbsp;账号设置</a></li>
+                                <li><a href="{:U('Profile/password')}"><i class="icon-asterisk"></i>&nbsp;修改密码</a></li>
                                 <li class="divider"></li>
-                                <li><a href="{:U('Passport/logout')}">退出</a></li>
+                                <li><a href="{:U('Passport/logout')}"><i class="icon-off"></i>&nbsp;退出登录</a></li>
                             </ul>
                         </li>
                     </ul>
