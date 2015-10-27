@@ -13,7 +13,7 @@
 		cursor:pointer;
     }
 
-    a.subscribe_btn:hover,a.subscribe_btn:focus,a.subscribe_btn:active{
+    .subscribe_btn:hover,.subscribe_btn:focus,.subscribe_btn:active{
         background-color: rgb(133, 133, 133);
         color: #fff
     }
