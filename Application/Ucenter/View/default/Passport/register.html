@@ -13,7 +13,7 @@
 	<div class="row col-md-6 center-block">
     
         <div class="col-md-12">
-        <form class="form-horizontal" action="__SELF__" method="post">
+        <form id="register-form" class="form-horizontal" action="__SELF__" method="post">
          
           <div class="form-group">
             <label class="form-label " for="inputEmail">用户名</label>
@@ -67,7 +67,7 @@
 	    	});
 
 
-    	$("form").submit(function(){
+    	$("#register-form").submit(function(){
     		var self = $(this);
     		$.post(self.attr("action"), self.serialize(), success, "json");
     		return false;

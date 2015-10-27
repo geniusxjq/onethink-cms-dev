@@ -9,32 +9,34 @@ if($data){
     
     <switch name="data.type">
     
-    <case value="1">
+    <case value="1">{/*文字广告*/}
     <volist name="data.list" id="lo" key="k">
-    <a target="_blank" href="{$lo.link|default='#'}"> {$lo.advstext|htmlspecialchars} </a>
+    <a target="_blank" href="{$lo.link|default='javascript:void(0);'}"> {$lo.advstext|htmlspecialchars}</a>
     </volist>
     </case>
     
-    <case value="2">
+    <case value="2"> {/*图片广告*/}
     <volist name="data.list" id="lo" key="k">
         <notempty name="lo.advspic">
-         <a target="_blank" href="{$lo.link|default='#'}"><img border="0" width="{$data.width}" height="{$data.height}" src="{$lo.advspic|get_cover='path'}" /> </a>
+         <a target="_blank" href="{$lo.link|default='javascript:void(0);'}"><img border="0" width="{$data.width}" height="{$data.height}" src="{$lo.advspic|get_cover='path'}" /> </a>
         </notempty>
     </volist>
     </case>
     
-    <case value="3">
+    <case value="3"> {/*代码广告*/}
     <volist name="data.list" id="lo" key="k">
-         <a target="_blank" href="{$lo.link|default='#'}"> {$lo.advshtml} </a>
+         <a target="_blank" href="{$lo.link|default='javascript:void(0);'}"> {$lo.advshtml} </a>
     </volist>
     </case>
     
     </switch>
     
     
-    <php>}else{</php>
+<php>}else{</php>
     
-        {$data.idle_content|default=''}   
+    {/*广告位闲置时显示的内容*/}
+
+    {$data.idle_content|default=''}
     
 <php>
     }

@@ -1,10 +1,10 @@
-    .subscribe_btn,.subscribe_btn_box{
+    .subscribe_box{
         z-index: 999;
         position: fixed;
-        width: 48px;
+        width: 52px;
         bottom: 90px;
-        height: 30px;
-        line-height: 30px;
+        height: 38px;
+        line-height: 38px;
         display: block;
         right: 50px;
         text-align: center;
@@ -17,6 +17,3 @@
         background-color: rgb(133, 133, 133);
         color: #fff
     }
-	.subscribe_box{
-		width:300px;
-	}

@@ -1,41 +1,53 @@
-<link type="text/css" rel="stylesheet" href="__ADDONROOT__/Public/subscribe.css?T=8">
-<div id="subscribe_btn_box" class="subscribe_btn_box">
-<a id="subscribe_btn" class="subscribe_btn" > 订阅 </a>
+<!-- 邮件订阅 -->
+<link type="text/css" rel="stylesheet" href="__ADDONROOT__/Public/subscribe.css?T=88978">
+<div class="subscribe_box">
+<a  class="subscribe_box" data-toggle="modal" data-target="#mail-subscribe-modal"> 订阅 </a>
+</div>
+<!-- 模态框HTML -->
+<div class="modal fade" id="mail-subscribe-modal">
+  <div class="modal-dialog"> 
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="container">
+            <button type="button" class="row btn close icon-lg" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="row modal-title" id="myModalLabel">邮件订阅</h4>
+            </div>
+        </div>
+        <div class="modal-body">
+        <div class="container col-md-12">
+            <form id="mail-subscribe" class="form-horizontal" action="{:addons_url('Mail://MailRss/subScribe','',C('DEFAULT_MODULE'))}" method="post">
+                <div class="col-md-10 col-xs-12 form-group">
+                <input id="email_address" name="email_address" type="text" class="form-control input-lg" placeholder="请填写你的邮箱地址">
+                </div>
+                <div class="col-md-2 col-xs-12 form-group">
+                <button type="submit" class="btn btn-lg btn-primary col-xs-12" style="margin-left:5px;">提交</button>
+                </div>
+            </form>
+        </div>
+    </div>
+  </div>
 </div>
 <script type="text/javascript">
 
 $(function () {
-			
-	$('#subscribe_btn').popover({
-		html:true,
-		container:'#subscribe_btn_box',
-		placement:'left',
-		content:'<div class="row subscribe_box"><div class="row col-md-10 col-xs-10"><input id="email_address" name="email_address" type="text" class="form-control"></div><div class="row col-md-3 col-xs-3"><button id="subscribe_submit_btn" type="button" class="btn btn-info col-md-10 pull-right">提交</button></div></div>',
-		
-		template:'<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
-		
-	
-	});
-			
-	$(document).on("click","#subscribe_submit_btn",function(){
+				
+	$("#mail-subscribe").submit(function(){
 		var patterns = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
 		var email_address = $('#email_address').val();
 		if (email_address == '' || !patterns.test(email_address)) {
-			$.zui.messager.warning('请输入正确的邮箱格式',{placement:'bottom-right'});
+			$.zui.messager.warning('请输入正确的邮箱格式',{placement:'center'});
 			return false;
 		}
-		
-		$.post("{:addons_url('Mail://MailRss/subScribe','',C('DEFAULT_MODULE'))}",{email_address:email_address}, success, "json");
-		
+		var self = $(this);
+		$.post(self.attr("action"), self.serialize(), success, "json");
 		return false;
-
 		function success(data){
 			if(data.status){
-				$.zui.messager.success(data.info,{placement:'bottom-right'});
+				$.zui.messager.success(data.info,{placement:'center'});
 				$('#email_address').val('');
-				$('#subscribe_btn').popover('hide');
+				$('#mail-subscribe-modal').modal('hide');
 			} else {
-				$.zui.messager.info(data.info,{placement:'bottom-right'});
+				$.zui.messager.info(data.info,{placement:'center'});
 			}
 		}
 		
@@ -44,3 +56,5 @@ $(function () {
 })
 
 </script>
+
+<!-- 邮件订阅 END -->
