@@ -2,9 +2,8 @@
 
 <block name="style">
 <link href="__ADDONROOT__/css/base.css" rel="stylesheet" type="text/css">
-<link href="__STATIC__/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css">
-<php> if(C('COLOR_STYLE')=='blue_color') echo '<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">';</php>
-<link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+<link href="__STATIC__/bootstrap/2.x/lib/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">
+<link href="__STATIC__/bootstrap/2.x/lib/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
 </block>
 
 <block name="body">
@@ -104,8 +103,8 @@
 	</div>
 </block>
 <block name="script">
-<script type="text/javascript" src="__STATIC__/daterangepicker/moment.js"></script>
-<script type="text/javascript" src="__STATIC__/daterangepicker/daterangepicker.js"></script>
+<script type="text/javascript" src="__STATIC__/bootstrap/2.x/lib/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="__STATIC__/bootstrap/2.x/lib/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
 <script type="text/javascript" src="__ADDONROOT__/js/mell/mell-1.0.js"></script>
 <script type="text/javascript" charset="utf-8">
 
@@ -135,19 +134,19 @@ Mell.Ready(function(){
 		
 	}
 	  
-	$('#start_datetime').daterangepicker({
-	  timePicker: true,
-	  timePickerIncrement: 5,
-	  format: 'YYYY-MM-DD HH:mm:ss',
-	  timePicker12Hour:false
-	});
+    $('#start_datetime').datetimepicker({
+        format: 'yyyy-mm-dd hh:ii:ss',
+        language:"zh-CN",
+        minView:2,
+        autoclose:true
+    });
 	
-	$('#end_datetime').daterangepicker({
-	  timePicker: true,
-	  timePickerIncrement: 5,
-	  format: 'YYYY-MM-DD HH:mm:ss',
-	  timePicker12Hour:false
-	});
+    $('#end_datetime').datetimepicker({
+        format: 'yyyy-mm-dd hh:ii:ss',
+        language:"zh-CN",
+        minView:2,
+        autoclose:true
+    });
 	
 	Mell.Event.on(document,"focus",
 		
