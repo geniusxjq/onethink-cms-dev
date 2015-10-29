@@ -1,4 +1,5 @@
 /* 扩展ThinkPHP对象 */
+
 (function($){
 	/**
 	 * 获取ThinkPHP基础配置
