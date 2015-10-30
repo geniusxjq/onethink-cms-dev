@@ -189,6 +189,7 @@ class ScheduleModel extends Model{
 		//保存到数据库
 		if( $this->isValidSchedule($schedule) ) {
 			$schedule['start_datetime'] = date('Y-m-d H:i:s', $this->setSecondToZero($schedule['start_datetime']));
+			($schedule['month'])&&($schedule['month']=count($schedule['month'])==12?'*':implode(',',$schedule['month']));
 			$res = $this->add($schedule);
 			$this->cleanCache();
 			return $res;

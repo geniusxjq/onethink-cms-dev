@@ -28,8 +28,8 @@ class ScheduleAddon extends Addon{
 			CREATE TABLE `onethink_schedule` (
 			  `id` int(11) NOT NULL AUTO_INCREMENT,
 			  `task_to_run` varchar(255) NOT NULL COMMENT '计划任务执行方法',
-			  `schedule_type` varchar(255) NOT NULL COMMENT '执行频率',
-			  `modifier` varchar(255) DEFAULT NULL COMMENT '执行频率,类型为MONTHLY时必须；ONCE时无效；其他时为可选，默认为1',
+			  `schedule_type` varchar(255) NOT NULL COMMENT '执行周期:只执行一次,按分钟执行,按小时执行,按天执行,按周执行,按月执行',
+			  `modifier` varchar(255) DEFAULT NULL COMMENT '执行频率,类型为“按月执行”时必须；只执行一次时无效；其他时为可选，默认为1',
 			  `dirlist` varchar(255) DEFAULT NULL COMMENT '指定周或月的一天或多天。只与WEEKLY和MONTHLY共同使用时有效，其他时忽略。',
 			  `month` varchar(255) DEFAULT NULL COMMENT '指定一年中的一个月或多个月.只在schedule_type=MONTHLY时有效，其他时忽略。当modifier=LASTDAY时必须，其他时可选。有效值：Jan - Dec，默认为*(每个月)',
 			  `start_datetime` datetime NOT NULL COMMENT '开始时间',

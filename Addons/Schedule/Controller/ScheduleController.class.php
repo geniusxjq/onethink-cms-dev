@@ -7,13 +7,14 @@ class ScheduleController extends AddonsController{
 	
 	//添加计划
 	public function add(){
+		
 		if(IS_POST){
 			$res = D('Addons://Schedule/Schedule')->addSchedule($_POST);
 			if($res) {
 				// TODO:记录日志
 				$this->success('新增成功',U('addons/adminlist',array('name'=>Schedule)));
 			} else {
-				$this->error(L('新增失败'));
+				$this->error('新增失败');
 			}		 
 		}else {
 			$this->meta_title = '添加计划';

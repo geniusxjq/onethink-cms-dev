@@ -1,42 +1,59 @@
 .date_month_box {
 	position:relative;
 	float:left;
-	width:350px;
+	height:auto;
+	margin-top:20px;
+}
+.date_month_box span {
+	position:relative;
+	float:left;
+	width:380px;
 	height:auto;
 	top:0px;
 	padding-top:10px;
 }
-.date_month_box_tab{
+.date_month_box label{
+	display:inline-block;
 	position:relative;
 	float:left;
 	width:50px;
 	height:50px;
 	background-color:#E8E8E8;
-	border:1px solid #E8E8E8;
+	border:none;
 	line-height:50px;
 	text-align:center;
 	margin:5px;
 	cursor:pointer;
+	padding:0px;
 }
-.date_month_box_tab:hover{
+.date_month_box label:hover{
 	background-color:#666;
 	color:#FFF;
 }
-.date_month_box_tab_selected{
+
+.date_month_box input[type='checkbox']{
+	display:none;
+	height:0px;
+	width:0px;
+}
+
+.date_month_box input[type='checkbox']:checked+font{
 	position:relative;
+	padding:0px;
 	float:left;
 	width:50px;
 	height:50px;
 	line-height:50px;
 	text-align:center;
-	margin:5px;
+	margin:0px;
 	cursor:pointer;
 	background-color:#01EF07;
-	border:1px solid #01EF07;
+	border:none;
 	color:#FFF;
 }
-.date_month_box_tab_selected:hover{
+
+.date_month_box input[type='checkbox']:checked+font:hover{
 	background-color:#02E685;
-	border:#02E685 solid 1px;
 	color:#FFF;
 }
+

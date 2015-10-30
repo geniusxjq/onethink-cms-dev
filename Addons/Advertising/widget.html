@@ -25,7 +25,7 @@ if($data){
     
     <case value="3"> {/*´úÂë¹ã¸æ*/}
     <volist name="data.list" id="lo" key="k">
-         <a target="_blank" href="{$lo.link|default='javascript:void(0);'}"> {$lo.advshtml} </a>
+         <a target="_blank" href="{$lo.link|default='javascript:void(0);'}"> {$lo.advshtml|htmlspecialchars_decode} </a>
     </volist>
     </case>
     
