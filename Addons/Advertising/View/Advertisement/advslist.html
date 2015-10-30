@@ -1,0 +1,92 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <div class="main-title">
+        <h2>{$main_title}</h2>
+    </div>
+    <div class="cf">
+     <!-- 高级搜索 -->
+        <div class="search-form fr cf">
+            <div class="sleft">
+                <input type="text" name="title" class="search-input" value="{:I('title')}" placeholder="请输入广告名称">
+                <a class="sch-btn" href="javascript:;" id="search" url="{:addons_url('Advertising://Advertisement/advsList',array(title=>I('title'),position=>I('position')))}"><i class="btn-search"></i></a>
+            </div>
+        </div>
+   </div>
+   <ul class="tab-nav nav">
+   
+        <li><a href="{:U('Admin/Addons/adminList',array('name'=>'Advertising'))}">广告位管理</a></li>
+        <li class="current"><a href="{:addons_url('Advertising://Advertisement/advsList')}">广告管理</a></li>
+
+    </ul>
+
+
+    <div class="tools" style="margin-bottom:10px;">
+        <a class="btn" href="{:addons_url('Advertising://Advertisement/add',array(position=>I('position')))}">新 增</a>
+        <button class="btn ajax-post" target-form="ids" url="{:addons_url('Advertising://Advertisement/savestatus',array('status'=>1))}">启 用</button>
+        <button class="btn ajax-post" target-form="ids" url="{:addons_url('Advertising://Advertisement/savestatus',array('status'=>0))}">禁用</button>
+    </div>
+     <div class="data-table table-striped">
+    <table style="text-align: center;">
+        <thead>
+            <tr>
+                <th width="20" class="row-selected row-selected"><input class="check-all" type="checkbox"></th>
+                <th width="48" style="text-align: center;">序号</th>
+                <volist name="listKey" id="vo">
+                    <th width="67" style="text-align: center;">{$vo}</th>
+                </volist>
+                <th width="160" style="text-align: center;">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <volist name="_list" id="lv" >
+            <tr>
+                <td><input class="ids" type="checkbox" name="id[]" value="{$lv.id}"></td>
+                <td>{$lv.id}</td>
+                <volist name="listKey" id="lk">
+                    <td>{$lv.$key}</td>
+                </volist>
+                <td>
+                    <a href="{:addons_url('Advertising://Advertisement/edit',array('id'=>$lv['id']))}">编辑</a>
+                    <if condition="$lv.status eq 1">
+                    <a class="ajax-get" href="{:addons_url('Advertising://Advertisement/forbidden',array('id'=>$lv['id']))}">禁用</a>
+                    <else/>
+                    <a class="ajax-get" href="{:addons_url('Advertising://Advertisement/off',array('id'=>$lv['id']))}">启用</a>
+                    </if>
+                    <a class="ajax-get" href="{:addons_url('Advertising://Advertisement/del',array('id'=>$lv['id']))}">删除</a>
+                </td>
+            </tr>
+            </volist>
+        </tbody>
+    </table>
+    </div>
+</block>
+<block name="script">
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            //搜索功能
+            $("#search").click(function(){
+                var url = $(this).attr('url');
+                var query  = $('.search-form').find('input').serialize();
+                query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+                query = query.replace(/^&/g,'');
+                if( url.indexOf('?')>0 ){
+                    url += '&' + query;
+                }else{
+                    url += '?' + query;
+                }
+                window.location.href = url;
+            });
+            //回车搜索
+            $(".search-input").keyup(function(e){
+                if(e.keyCode === 13){
+                    $("#search").click();
+                    return false;
+                }
+            });
+
+        });
+    </script>
+
+</block>
