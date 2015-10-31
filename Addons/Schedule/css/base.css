@@ -1,18 +1,18 @@
-.date_month_box {
+#task-form{
+	display:none;
+}
+.date_tab_box {
 	position:relative;
 	float:left;
 	height:auto;
-	margin-top:20px;
 }
-.date_month_box span {
+.date_tab_box span {
 	position:relative;
 	float:left;
 	width:380px;
 	height:auto;
-	top:0px;
-	padding-top:10px;
 }
-.date_month_box label{
+.date_tab_box label{
 	display:inline-block;
 	position:relative;
 	float:left;
@@ -26,18 +26,18 @@
 	cursor:pointer;
 	padding:0px;
 }
-.date_month_box label:hover{
+.date_tab_box label:hover{
 	background-color:#666;
 	color:#FFF;
 }
 
-.date_month_box input[type='checkbox']{
+.date_tab_box input[type='checkbox']{
 	display:none;
 	height:0px;
 	width:0px;
 }
 
-.date_month_box input[type='checkbox']:checked+font{
+.date_tab_box input[type='checkbox']:checked+font{
 	position:relative;
 	padding:0px;
 	float:left;
@@ -52,7 +52,7 @@
 	color:#FFF;
 }
 
-.date_month_box input[type='checkbox']:checked+font:hover{
+.date_tab_box input[type='checkbox']:checked+font:hover{
 	background-color:#02E685;
 	color:#FFF;
 }

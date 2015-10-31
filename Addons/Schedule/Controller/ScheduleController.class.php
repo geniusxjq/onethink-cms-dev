@@ -9,7 +9,7 @@ class ScheduleController extends AddonsController{
 	public function add(){
 		
 		if(IS_POST){
-			$res = D('Addons://Schedule/Schedule')->addSchedule($_POST);
+			$res = D('Addons://Schedule/Schedule')->addSchedule(I('post.'));
 			if($res) {
 				// TODO:记录日志
 				$this->success('新增成功',U('addons/adminlist',array('name'=>Schedule)));
