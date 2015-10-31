@@ -138,9 +138,9 @@
 			
 			/* 左边菜单高亮(针对Addons插件)*/
 			
-			if(/\/Addons\//.test(url)){
+			if("{:CONTROLLER_NAME}"=="Addons"){
 				
-				highlight_subnav("{:U('Addons/adminList/name/'.I('get._addons'))}");
+				highlight_subnav("{:U('Addons/adminList/name/'.(I('get._addons',$name)))}");
 			
 			}
 
