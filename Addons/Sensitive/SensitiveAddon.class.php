@@ -84,7 +84,7 @@ class SensitiveAddon extends Addon
 		
 		if(!$param||!$param["content"]) return "";
 		
-		if(!$this->isInstalled($this->info['name'])) //如果未安装则直接返回内容（不做处理）
+		if(!$this->isSetup($this->info['name'])) //如果未安装则直接返回内容（不做处理）
 		return $param["content"];
 		
 		$content=$param["content"];

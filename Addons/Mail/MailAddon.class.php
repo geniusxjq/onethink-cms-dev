@@ -3,7 +3,6 @@
 namespace Addons\Mail;
 
 use Common\Controller\Addon;
-use Think\Db;
 
 /**
  * 邮件订阅插件

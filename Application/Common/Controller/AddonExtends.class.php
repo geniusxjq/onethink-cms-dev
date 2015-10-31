@@ -267,7 +267,7 @@ abstract class AddonExtends{
 	
 	*/
 	
-	public function isInstalled($addon_name=''){
+	public function isSetup($addon_name=''){
 				
 		if(!$addon_name) return false;
 		

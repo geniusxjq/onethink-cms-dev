@@ -25,7 +25,7 @@ class GuestbookController extends AddonsController{
 		
 		}
 		
-		empty($data['content'])&&$this->ajaxReturn('请输入留言！');
+		empty($data['content'])&&$this->error('请输入留言！');
 
 		//数据库操作
 		$messageDB = M('Guestbook');
@@ -33,12 +33,9 @@ class GuestbookController extends AddonsController{
 		$result = $messageDB->add($data);
 		
 		if($result){
-			
-			//$this->success('留言已提交！');
-			$this->ajaxReturn('留言已提交！');
+			$this->success('留言成功！');
 		}else{
-			//$this->error('留言失败！');
-			$this->ajaxReturn('留言失败！');
+			$this->error('留言失败！');
 		}
 	}
 }
