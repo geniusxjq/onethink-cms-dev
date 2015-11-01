@@ -8,9 +8,9 @@ use Think\Model;
  */
  
 class ScheduleModel extends Model{
+	
 	private $MONTH_ARRAY 	= array('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec');
 	private $WEEK_ARRAY  	= array('Mon','Tue','Wed','Thu','Fri','Sat','Sun');
-	
 	private $model;
 	private $schedule		= array();
 	private $scheduleList 	= array();
@@ -190,10 +190,20 @@ class ScheduleModel extends Model{
 		
 		//保存到数据库
 		
-		if(empty($schedule['modifier'])){$schedule['modifier']=1;}
 		$schedule['start_datetime'] = date('Y-m-d H:i:s', $this->setSecondToZero($schedule['start_datetime']));
 		($schedule['month'])&&($schedule['month']=count($schedule['month'])==12?'*':implode(',',$schedule['month']));
-		is_array($schedule['dirlist'])&&($schedule['dirlist']=count($schedule['dirlist'])==7?'*':implode(',',$schedule['dirlist']));
+		
+		if(($schedule['schedule_type']=="WEEKLY")||(in_array($schedule['modifier'],array('FIRST','SECOND','THIRD','FOURTH','LAST')))){
+												 
+			(count($schedule['dirlist'])>=7)&&$schedule['dirlist']="*";
+			
+		}else{
+			
+			(count($schedule['dirlist'])>=28)&&$schedule['dirlist']="*";
+			
+		}
+		
+		is_array($schedule['dirlist'])&&($schedule['dirlist']=implode(',',$schedule['dirlist']));
 		
 		if( $this->isValidSchedule($schedule)) {
 			

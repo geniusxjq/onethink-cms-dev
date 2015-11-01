@@ -25,94 +25,90 @@ echo '<link href="__STATIC__/bootstrap/2.x/lib/datetimepicker/css/datetimepicker
 				<!-- 基础 -->
 				<div id="tab1" class="tab-pane in tab1">
 					<div class="form-item cf">
-						<label class="item-label">执行函数<span class="check-tips">（计划任务执行的函数，格式为：app/Model/method）</span></label>
+						<label class="item-label">执行方法/函数
+                        <span class="check-tips">（计划任务执行的函数，格式为：app/Model/method）</span>
+                        </label>
 						<div class="controls">
 							<input type="text" class="text input-large" name="task_to_run" value="">
 						</div>
 					</div>
                     	<div class="form-item cf">
-						<label class="item-label">开始时间 -- 结束时间<span class="check-tips">（任务启止时间。格式如：2015-02-09 21:50:00 ）</span></label>
+						<label class="item-label">开始时间 -- 结束时间
+                        <span class="check-tips">（任务启止时间，不指定结束时间则计划永久有效。格式如：2015-02-09 21:50）</span>
+                        </label>
 						<div class="controls">
 							<input type="text"  id="start_datetime" class="text input-mid" name="start_datetime" value=""> -- <input type="text"  id="end_datetime" class="text input-mid " name="end_datetime" value="">
 						</div>
 					</div>
 					<div class="form-item cf">
-						<label class="item-label">任务周期（类型）<span class="check-tips">（只执行一次，按分钟执行，按小时执行，按天执行，按周执行，按月执行。之一）</span></label>
+						<label class="item-label">任务周期（类型）
+                        <span class="check-tips">（执行任务的周期）</span>
+                        </label>
 						<div class="controls">	
                             <select name="schedule_type" id="schedule_type">
                             <option value="ONCE" selected="selected" data-text="once" data-type="type-1">只执行一次</option>
                             <option value="MINUTE" data-text="分钟(1-1439)" data-type="type-2">按分执行</option>
                             <option value="HOURLY" data-text="小时(1-23)" data-type="type-2">按时执行</option>
                             <option value="DAILY" data-text="天(1-365)" data-type="type-2">按天执行</option>
-                            <option value="WEEKLY" data-text="个周(1-52)" data-type="type-3">按周执行</option>
+                            <option value="WEEKLY" data-text="周(1-52)" data-type="type-3">按周执行</option>
                             <option value="MONTHLY" data-text="个月(1-12)" data-type="type-4">按月执行</option>
-                             <option value="MONTHLY" data-text="FIRST" data-type="type-5">按月的第一周执行</option>
-                              <option value="MONTHLY" data-text="SECOND" data-type="type-5">按月的第二周执行</option>
-                               <option value="MONTHLY" data-text="THIRD" data-type="type-5">按月的第三周执行</option>
-                                <option value="MONTHLY" data-text="FOURTH" data-type="type-5">按月的第四周执行</option>
+                            <option value="MONTHLY" data-text="FIRST" data-type="type-5">按月的第一周执行</option>
+                            <option value="MONTHLY" data-text="SECOND" data-type="type-5">按月的第二周执行</option>
+                            <option value="MONTHLY" data-text="THIRD" data-type="type-5">按月的第三周执行</option>
+                            <option value="MONTHLY" data-text="FOURTH" data-type="type-5">按月的第四周执行</option>
                             <option value="MONTHLY" data-text="LASTDAY" data-type="type-6">按月的最后一天执行</option>
                             </select>
 						</div>
 					</div>
 					<div class="form-item cf" id="modifier">
-						<label class="item-label">执行频率<span class="check-tips">（一个周期内执行任务的次数。类型为“按月执行“时必须，为“只执行一次“时无效；其他时为可选，默认为1次）</span></label>
+						<label class="item-label">执行频率（间隔）
+                        <span class="check-tips">（任务执行的时间间隔。默认为1个任务周期）</span>
+                        </label>
 						<div class="controls">
 							<input type="text" class="text input-mid" name="modifier" value="">&nbsp;<font id="task-unit"></font> 执行一次
 						</div>
 					</div>
 					<div class="form-item cf" id="dirlist">
-					
-                    <span id="dirlist-input">
-                      <label class="item-label" id="dirlist-title-2">指定月的一天或多天<span class="check-tips">（指定月的一天或多天。）</span></label>
-                     <div class="controls" >
-					  <input type="text" class="text input-large" name="dirlist"  value="">&nbsp;【有效值1-31】多个用英文逗号（,）隔开。
-					 </div>
                      
-                     </span>
-                     <span id="weekly-box" > 
-                     <label class="item-label" id="dirlist-title-1">指定周的一天或多天<span class="check-tips">（指定周的一天或多天。）</span></label>
+                     <span id="day-in-month-box" > 
+                         <label class="item-label">
+                         指定月的一天或多天
+                         <span class="check-tips">（指定月的一天或多天。如果当月只有28天，则大于28日的都会在28日执行。）</span>
+                         </label>
                          <div class="date_tab_box" >
-                                 <label><input class="checkbox-s-all" type="checkbox" value=""><font>每周</font></label> 
-                                 <label><input class="checkbox-s" type="checkbox" name="dirlist[]" value="Mon" ><font>周一</font></label>
-                                 <label><input class="checkbox-s" type="checkbox" name="dirlist[]" value="Tue" ><font>周二</font></label>
-                                  <label><input class="checkbox-s" type="checkbox" name="dirlist[]" value="Wed" ><font>周三</font></label>
-                                   <label><input class="checkbox-s" type="checkbox" name="dirlist[]" value="Thu" ><font>周四</font></label>
-                                  <label><input class="checkbox-s" type="checkbox" name="dirlist[]" value="Fri" ><font>周五</font></label>
-                                  <label><input class="checkbox-s" type="checkbox" name="dirlist[]" value="Sat" ><font>周六</font></label>
-                                  <label><input class="checkbox-s" type="checkbox" name="dirlist[]" value="Sun" ><font>周日</font></label>
+                                 <!--指定月的一天或多天-->
+                          </div> 
+                     </span>
+                     
+                     <span id="weekly-box" > 
+                         <label class="item-label">
+                         指定周的一天或多天<span class="check-tips">（指定周的一天或多天。）</span>
+                         </label>
+                         <div class="date_tab_box" >
+                               <!--指定周的一天或多天-->
                           </div> 
                        </span>
+                       
 					</div> 
                    
                     
 					<div class="form-item cf" id="month">
-                     <div class="controls">
-						<label class="item-label">
-                        指定一年中的一个月或多个月
-                        <span class="check-tips">
-                        (指定一年中的一个月或多个月.只在”按月执行“时有效，其他时忽略。当modifier=LASTDAY时必须，其他时可选。有效值：Jan-Dec，默认为每个月)
-                        </span>
-                        </label>
-						</div>
-                       <div class="date_tab_box">
-                           <span> 
-                             <label><input class="checkbox-s-all" type="checkbox"><font>每月</font></label>
-                             <label><input class="checkbox-s" type="checkbox" name="month[]" value="Jan" ><font>一月</font></label>
-                             <label><input class="checkbox-s" type="checkbox" name="month[]" value="Feb" ><font>二月</font></label>
-                              <label><input class="checkbox-s" type="checkbox" name="month[]" value="Mar" ><font>三月</font></label>
-                               <label><input class="checkbox-s" type="checkbox" name="month[]" value="Apr" ><font>四月</font></label>
-                              <label><input class="checkbox-s" type="checkbox" name="month[]" value="May" ><font>五月</font></label>
-                              <label><input class="checkbox-s" type="checkbox" name="month[]" value="Jun" ><font>六月</font></label>
-                               <label><input class="checkbox-s" type="checkbox" name="month[]" value="Jul" ><font>七月</font></label>
-                               <label><input class="checkbox-s" type="checkbox" name="month[]" value="Aug" ><font>八月</font></label>
-                                <label><input class="checkbox-s" type="checkbox" name="month[]" value="Sep" ><font>九月</font></label>
-                               <label><input class="checkbox-s" type="checkbox" name="month[]" value="Oct" ><font>十月</font></label>
-                                <label><input class="checkbox-s" type="checkbox" name="month[]" value="Nov" ><font>十一月</font></label>
-                                <label><input class="checkbox-s" type="checkbox" name="month[]" value="Dec" ><font>十二月</font></label>
-                              
-                           </span>
-                       </div>
-                        
+                    
+                         <span id="month-box">
+                             <div class="controls">
+                               
+                                <label class="item-label">
+                                    指定一年中的一个月或多个月
+                                    <span class="check-tips">
+                                    (指定一年中的一个月或多个月。不选则,默认为每个月。)
+                                    </span>
+                                </label>
+                              </div>   
+                             <div class="date_tab_box">
+                                     <!--指定一年中的一个月或多个月-->
+                             </div>
+                         </span>
+                       
                       </div>
    
 					<div class="form-item cf">
@@ -131,6 +127,7 @@ echo '<link href="__STATIC__/bootstrap/2.x/lib/datetimepicker/css/datetimepicker
 					<label class="item-label"></label>
 					<div class="controls edit_sort_btn">
 						<button class="btn submit-btn ajax-post no-refresh" type="submit" target-form="form-horizontal">确 定</button>
+                        <button class="btn btn-return" type="reset">重置</button>
 						<a class="btn btn-return" href="{:U('addons/adminlist',array('name'=>Schedule))}">返 回</a>
 					</div>
 				</div>
@@ -159,42 +156,118 @@ $(function(){
         autoclose:true,
     });
 	
+});	
+
+$(function(){	
+	
 	/*按选项隐藏表单项*/
 	
-	var weekly_box_html=$("#weekly-box").html();
+	var _hider=$("<div></div>");
 	
-	var dirlist_input_html=$("#dirlist-input").html();
+	var _dayer=$("#dirlist")
+	
+	var _monther=$("#month");
+	
+	var _month_box=$("#month-box");	
+	
+	var _weekly_box=$("#weekly-box");
+	
+	var _day_in_month_box=$("#day-in-month-box");
+		   
+	var data_list={
+		weekly:{
+			value:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+			name:['周一','周二','周三','周四','周五','周六','周日']
+			},
+		month:{
+			value:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+			name:['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月']
+			}
+	};
+	
+	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++日期选项构建+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	   
+	function checkbox_builder(type){
+		
+		switch(type){
+			
+			case "day":
+			
+			if(!_day_in_month_box.data("builded")){; 
+				
+				_day_in_month_box.find(".date_tab_box").append('<label><input class="checkbox-s-all" type="checkbox"><font>每天</font></label>');
+				
+				for(var i=1;i<=31;i++){
+					
+					_day_in_month_box.find(".date_tab_box")
+					.append('<label><input class="checkbox-s" type="checkbox" name="dirlist[]" value="'+i+'" ><font>'+i+'</font></label>')
+					
+				}
+				
+				_day_in_month_box.data("builded",true);
+				
+			}
+			
+			break;
+			
+			case "weekly":
+			
+			if(!_weekly_box.data("builded")){
+			
+				_weekly_box.find(".date_tab_box").append('<label><input class="checkbox-s-all" type="checkbox"><font>每周</font></label>');
+				
+				for(var i in data_list['weekly']['value']){
+					
+					_weekly_box.find(".date_tab_box").append('<label><input class="checkbox-s" type="checkbox" name="dirlist[]" value="'
+																+data_list['weekly']['value'][i]+'" ><font>'+data_list['weekly']['name'][i]+'</font></label>')
+					
+				}
+				
+				_weekly_box.data("builded",true);
+			
+			}
+			
+			break;
+			
+			case "month":
+			
+			if(!_monther.data("builded")){
+				
+				_monther.find(".date_tab_box").append('<label><input class="checkbox-s-all" type="checkbox"><font>每月</font></label>');
+				
+				for(var i in data_list['month']['value']){
+					
+					_monther.find(".date_tab_box").append('<label><input class="checkbox-s" type="checkbox" name="month[]" value="'
+															+data_list['month']['value'][i]+'" ><font>'+data_list['month']['name'][i]+'</font></label>')
+					
+				}
+				
+				_monther.data("builded",true);
+			
+			}
+			
+			break;
+			
+		}
+		
+	}	
 	
 	function switch_form(o){
-		
+				
 		var type=$(o).data("type");
 		
-		if(type=="type-5"||type=="type-6"){
-			
-			$("input[name='modifier']").val($(o).data("text"));
-			
-		}else{
-			
-			$("input[name='modifier']").val("1");
-			
-		}
-		
+		$("input[name='modifier']").val((type=="type-5"||type=="type-6")?$(o).data("text"):"");
+
 		if(type=="type-5"||type=="type-3"){
 			
-			$("#dirlist").show();
-			$("#dirlist-input").hide();
-			$("#weekly-box").show();
-			($("#weekly-box").html()=="")&&$("#weekly-box").html(weekly_box_html);
-			$("#dirlist-input").html("");
+			$("#dirlist,#weekly-box").show();$("#day-in-month-box").hide();
 			
 		}else{
 			
-			$("#dirlist").show();
-			$("#dirlist-input").show();
-			$("#weekly-box").hide();
+			$("#dirlist,#day-in-month-box").show();$("#weekly-box").hide();
 			
 		}
-		
+
 		switch(type){
 			
 			case "type-1":
@@ -205,43 +278,31 @@ $(function(){
 			
 			case "type-2":
 			
-			$("#modifier").show();
-			
-			$("#month,#dirlist").hide();
+			$("#modifier").show();$("#month,#dirlist").hide();
 			
 			break;
 			
 			case "type-3":
 			
-			$("#month").hide();
-			
-			$("#dirlist,#modifier").show();
+			$("#month").hide();$("#dirlist,#modifier").show();
 			
 			break;
 			
 			case "type-4":
 			
-			$("#month,#dirlist,#modifier").show();
-			$("#dirlist-input").show();
-			$("#weekly-box").hide();
-			$("#weekly-box").html("");
-			($("#dirlist-input").html()=="")&&$("#dirlist-input").html(dirlist_input_html);
+			$("#month,#dirlist,#modifier,#day-in-month-box").show();$("#weekly-box").hide();
 			
 			break;
 			
 			case "type-5":
 			
-			$("#modifier").hide();
-			
-			$("#month,#dirlist").show();
+			$("#modifier").hide();$("#month,#dirlist").show();
 			
 			break;
 			
 			case "type-6":
 			
-			$("#dirlist,#modifier").hide();
-			
-			$("#month").show();
+			$("#dirlist,#modifier").hide();$("#month").show();
 			
 			break;
 			
@@ -251,22 +312,63 @@ $(function(){
 		
 	}
 	
+	//*************************
+	
 	function _select_type(){
-				
-		$("#task-unit").text($("#schedule_type").find("option:selected").data("text"));
 		
-		switch_form($("#schedule_type").find("option:selected"));
+		var o=$("#schedule_type").find("option:selected");
+		
+		var type=o.data("type");
+		
+		if(type=="type-1"||type=="type-2"){
+			
+			_weekly_box.appendTo(_hider);
+			
+			_month_box.appendTo(_hider);
+			
+			_day_in_month_box.appendTo(_hider);
+		
+		}
+				
+		if(type=="type-5"||type=="type-3"){
+			_weekly_box.appendTo(_dayer);
+			checkbox_builder("weekly");
+		}else{
+			_weekly_box.appendTo(_hider);
+		}
+		
+		if(type=="type-4"||type=="type-5"||type=="type-6"){
+			_month_box.appendTo(_monther);
+			checkbox_builder("month");
+		}else{
+			_month_box.appendTo(_hider)
+		}
+		
+		if(type=="type-4"){
+			_day_in_month_box.appendTo(_dayer);
+			checkbox_builder("day");
+		}else{
+			_day_in_month_box.appendTo(_hider);
+		}
+		
+		$("#task-unit").text(o.data("text"));
+		
+		switch_form(o);
 		
 	}
 	
+	//初始化
+			
 	_select_type();
 	
 	$("#schedule_type").change(_select_type);
+
+	//***************************************************全选的实现
 	
-	//全选的实现
 	$(document).on("click",".checkbox-s-all",function(){
 		$(this).parent().parent().find("input[class='checkbox-s']").prop("checked", this.checked);
 	});
+	
 	$(document).on("click",".checkbox-s",function(){
 		var option =$(this).parent().parent().find("input[class='checkbox-s']");
 		option.each(function(i){
@@ -278,7 +380,7 @@ $(function(){
 			}
 		});
 	});
-
+	
 });
 
 </script>
