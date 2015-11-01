@@ -1,6 +1,8 @@
 
 <div class="tools">
 	<a onclick="return confirm('确定要删除选中的记录么？')" class="btn ajax-post" target-form="ids" href="{:addons_url('Schedule://Schedule/del')}">删除计划</a>
+    <button class="btn ajax-post" target-form="ids" url="{:addons_url('Schedule://Schedule/savestatus',array('status'=>1))}">启 用</button>
+    <button class="btn ajax-post" target-form="ids" url="{:addons_url('Schedule://Schedule/savestatus',array('status'=>0))}">禁用</button>
 	<a class="btn" target-form="ids" href="{:addons_url('Schedule://Schedule/add')}">新增计划</a>
 </div>
 <div class="data-table">

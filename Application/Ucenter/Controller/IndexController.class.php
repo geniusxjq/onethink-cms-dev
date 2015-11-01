@@ -20,6 +20,7 @@ class IndexController extends UcenterController {
 	}
 	
     public function index(){
+		
         $this->display();
     }
 }

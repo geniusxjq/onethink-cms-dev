@@ -26,10 +26,24 @@ echo '<link href="__STATIC__/bootstrap/2.x/lib/datetimepicker/css/datetimepicker
 				<div id="tab1" class="tab-pane in tab1">
 					<div class="form-item cf">
 						<label class="item-label">执行方法/函数
-                        <span class="check-tips">（计划任务执行的函数，格式为：app/Model/method）</span>
+                        <span class="check-tips">（计划任务执行的函数）</span>
                         </label>
 						<div class="controls">
-							<input type="text" class="text input-large" name="task_to_run" value="">
+                        <input type="hidden" name="task_to_run" value="">
+                        模型层：
+                        <select id="task-to-run-layer">
+                            <option value="Model">模型(Model)</option>
+                            <option value="Controller">控制器(Controller)</option>
+                            <option value="Api">接口(API)</option>
+                            <option value="Util">工具(Util)</option>
+                            <option value="Widget">部件(Widget)</option>
+                            <option value="Logic">逻辑(Logic)</option>
+                            <option value="Service">服务(Service)</option>
+                        </select>
+                        &nbsp;资源地址：
+                        <input type="text" class="text input-default" id="task-to-run-res" placeholder="[格式] 资源://模块/控制器/操作" value="">
+                        &nbsp;附带参数：
+                        <input type="text" class="text input-default" id="task-to-run-param" placeholder="[格式] a=1&b=2&c=3" value="">
 						</div>
 					</div>
                     	<div class="form-item cf">
@@ -68,7 +82,7 @@ echo '<link href="__STATIC__/bootstrap/2.x/lib/datetimepicker/css/datetimepicker
 							<input type="text" class="text input-mid" name="modifier" value="">&nbsp;<font id="task-unit"></font> 执行一次
 						</div>
 					</div>
-					<div class="form-item cf" id="dirlist">
+					<div class="form-item cf" id="daylist">
                      
                      <span id="day-in-month-box" > 
                          <label class="item-label">
@@ -126,7 +140,7 @@ echo '<link href="__STATIC__/bootstrap/2.x/lib/datetimepicker/css/datetimepicker
 				<div class="form-item cf">
 					<label class="item-label"></label>
 					<div class="controls edit_sort_btn">
-						<button class="btn submit-btn ajax-post no-refresh" type="submit" target-form="form-horizontal">确 定</button>
+						<button class="btn submit-btn no-refresh" type="submit">确 定</button>
                         <button class="btn btn-return" type="reset">重置</button>
 						<a class="btn btn-return" href="{:U('addons/adminlist',array('name'=>Schedule))}">返 回</a>
 					</div>
@@ -140,7 +154,68 @@ echo '<link href="__STATIC__/bootstrap/2.x/lib/datetimepicker/css/datetimepicker
 <script type="text/javascript" src="__STATIC__/bootstrap/2.x/lib/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
 <script type="text/javascript" charset="utf-8">
 
-$(function(){
++$(function(){
+		   
+	$(document)
+	.ajaxStart(function(){
+		$("button:submit").attr("disabled", true);
+	})
+	.ajaxStop(function(){
+		$("button:submit").attr("disabled", false);
+	});
+	
+	$("#task-form").submit(function(){
+									
+		var self = $(this);
+		
+		var data=$("input[name='task_to_run']").val($("#task-to-run-layer")
+					.val()+"::"+$("#task-to-run-res").val()+"::"+$("#task-to-run-param").val()).val().split("::");
+		
+		if(!data[1]){
+					
+			updateAlert("请填写完整的执行方法（资源地址）名!",'alert-error');
+			
+			return false;
+		
+		}
+		
+		var the_schedule_type=$("#schedule_type option:selected").data("type");
+		
+		//如果“按月的第N周执行”没有指定周的某一天则默认指定周一。
+		if(the_schedule_type=="type-5"){
+			
+			$("#weekly-box input[class='checkbox-s'][value='Mon']").prop("checked",true);
+			
+			return false;
+			
+		}
+		
+		//如果“按月的最后一天执行”没有指定月份，则默认指定每月。
+		if(the_schedule_type=="type-6"&&!$("#month-box input[class='checkbox-s']:checked").length){
+			
+			$("#month-box input[type='checkbox']").prop("checked",true);
+			
+			return false;
+			
+		}
+		
+		$.post(self.attr("action"), self.serialize(), success, "json");
+		
+		return false;
+	
+		function success(data){
+			if(data.status){
+				updateAlert(data.info,'alert-success');
+				setTimeout(function(){window.location.href = data.url;},1500);
+			} else {
+				updateAlert(data.info,'alert-error');
+			}
+		}
+	});
+
+});
+
++$(function(){
 							  
     $('#start_datetime').datetimepicker({
         format: 'yyyy-mm-dd hh:ii',
@@ -158,13 +233,13 @@ $(function(){
 	
 });	
 
-$(function(){	
++$(function(){
 	
 	/*按选项隐藏表单项*/
 	
 	var _hider=$("<div></div>");
 	
-	var _dayer=$("#dirlist")
+	var _dayer=$("#daylist")
 	
 	var _monther=$("#month");
 	
@@ -200,7 +275,7 @@ $(function(){
 				for(var i=1;i<=31;i++){
 					
 					_day_in_month_box.find(".date_tab_box")
-					.append('<label><input class="checkbox-s" type="checkbox" name="dirlist[]" value="'+i+'" ><font>'+i+'</font></label>')
+					.append('<label><input class="checkbox-s" type="checkbox" name="daylist[]" value="'+i+'" ><font>'+i+'</font></label>')
 					
 				}
 				
@@ -218,7 +293,7 @@ $(function(){
 				
 				for(var i in data_list['weekly']['value']){
 					
-					_weekly_box.find(".date_tab_box").append('<label><input class="checkbox-s" type="checkbox" name="dirlist[]" value="'
+					_weekly_box.find(".date_tab_box").append('<label><input class="checkbox-s" type="checkbox" name="daylist[]" value="'
 																+data_list['weekly']['value'][i]+'" ><font>'+data_list['weekly']['name'][i]+'</font></label>')
 					
 				}
@@ -260,11 +335,11 @@ $(function(){
 
 		if(type=="type-5"||type=="type-3"){
 			
-			$("#dirlist,#weekly-box").show();$("#day-in-month-box").hide();
+			$("#daylist,#weekly-box").show();$("#day-in-month-box").hide();
 			
 		}else{
 			
-			$("#dirlist,#day-in-month-box").show();$("#weekly-box").hide();
+			$("#daylist,#day-in-month-box").show();$("#weekly-box").hide();
 			
 		}
 
@@ -272,37 +347,37 @@ $(function(){
 			
 			case "type-1":
 			
-			$("#month,#dirlist,#modifier").hide();
+			$("#month,#daylist,#modifier").hide();
 			
 			break;
 			
 			case "type-2":
 			
-			$("#modifier").show();$("#month,#dirlist").hide();
+			$("#modifier").show();$("#month,#daylist").hide();
 			
 			break;
 			
 			case "type-3":
 			
-			$("#month").hide();$("#dirlist,#modifier").show();
+			$("#month").hide();$("#daylist,#modifier").show();
 			
 			break;
 			
 			case "type-4":
 			
-			$("#month,#dirlist,#modifier,#day-in-month-box").show();$("#weekly-box").hide();
+			$("#month,#daylist,#modifier,#day-in-month-box").show();$("#weekly-box").hide();
 			
 			break;
 			
 			case "type-5":
 			
-			$("#modifier").hide();$("#month,#dirlist").show();
+			$("#modifier").hide();$("#month,#daylist").show();
 			
 			break;
 			
 			case "type-6":
 			
-			$("#dirlist,#modifier").hide();$("#month").show();
+			$("#daylist,#modifier").hide();$("#month").show();
 			
 			break;
 			
@@ -316,7 +391,7 @@ $(function(){
 	
 	function _select_type(){
 		
-		var o=$("#schedule_type").find("option:selected");
+		var o=$("#schedule_type option:selected");
 		
 		var type=o.data("type");
 		
@@ -362,7 +437,7 @@ $(function(){
 	_select_type();
 	
 	$("#schedule_type").change(_select_type);
-
+	
 	//***************************************************全选的实现
 	
 	$(document).on("click",".checkbox-s-all",function(){

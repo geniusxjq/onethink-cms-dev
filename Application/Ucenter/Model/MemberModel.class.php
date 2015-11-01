@@ -66,7 +66,7 @@ class MemberModel extends Model{
         session('user_auth', null);
         session('user_auth_sign', null);
     }
-
+	
     /**
      * 自动登录用户
      * @param  integer $user 用户信息数组

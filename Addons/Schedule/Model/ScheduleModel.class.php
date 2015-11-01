@@ -15,6 +15,16 @@ class ScheduleModel extends Model{
 	private $schedule		= array();
 	private $scheduleList 	= array();
 	
+	protected function _after_find(&$result,$options) {
+		$result['statustext'] =  $result['status'] == 0 ? '禁用' : '正常';
+	}
+	
+	protected function _after_select(&$result,$options){
+		foreach($result as &$record){
+			$this->_after_find($record,$options);
+		}
+	}
+	
 	//判断一个schedule是否有效
 	public function isValidSchedule($schedule = '') {
 		
@@ -63,25 +73,23 @@ class ScheduleModel extends Model{
 		$checkScheduleList = $this->getScheduleList();
 		$checkScheduleList = $this->getSubByKey($checkScheduleList, 'task_to_run');
 		if (!in_array($schedule['task_to_run'], $checkScheduleList)) {
-			$str_log = "schedule_id = {$schedule['id']} 的任务不合法。";
+			$str_log = "ID为 {$schedule['id']} 的任务不合法。";
 			$this->_log($str_log);
 			return false;
 		}
 		//解析task类型, 并运行task
-		$task_to_run = explode('/',$schedule['task_to_run']);
+		$task_to_run=$this->fill_params($schedule);
 
-		if($task_to_run[0] == 'addons'){
-			//组装执行代码 - 执行addons下的model
-			$function = 'D("Addons://Schedule/'.$task_to_run[1].'")';
-			$str = "$function->{$task_to_run[2]}(" . $this->fill_params($task_to_run['params']) . ');';
-			eval($str);
-		}else
-		if($task_to_run['type'] == 'model'){
-			//组装执行代码
-			$str = "D({$task_to_run[1]}, {$task_to_run[0]})->{$task_to_run[2]}(" . $this->fill_params($task_to_run['params']) . ');';
-			eval($str);
-		}else if($task_to_run['type'] == 'url') {
-			//;
+		if(!$task_to_run) return false;
+		
+		if($task_to_run['layer'] !== 'url') {
+			
+			R($task_to_run['res'],$task_to_run['param'],$task_to_run['layer']);
+			
+		}else{
+			
+			//TODO:
+			
 		}
 		
 		if(strtoupper($schedule['schedule_type']) == 'ONCE') {
@@ -111,46 +119,36 @@ class ScheduleModel extends Model{
 			}
 		}
 		$this->saveSchedule($schedule);
-		$str_log = "schedule_id = {$schedule['id']} 的任务已运行。";
+		$str_log = "ID为{$schedule['id']}的任务已运行。";
 		if(C('APP_DEBUG')){
-			$str_log  .= "任务url为: {$schedule['task_to_run']} ，任务描述为: {$schedule['info']} 。";
+			$str_log  .= "任务为: {$schedule['task_to_run']} ，任务描述为: {$schedule['info']} 。";
 		}
 		$this->_log($str_log);
 	}
 	
 	//组装参数
     private function fill_params($params = '') {
-   		$result = '';
-    	if(is_array($params)) {
-    		$flag = true;
-	    	foreach ($params as $k => $v) {
-	    		if($flag == true) {
-	    			$result = $result . $this->format_params($v);
-	    			$flag = false;
-	    		}else {
-	    			$result = $result . ',' . $this->format_params($v);
-	    		}
-	    	}
-    	}else {
-    		$result = $params;
-    	}
+		
+   		$result =array();
+		
+    	list($result['layer'],$result['res'],$result['param'])=explode('::',$params['task_to_run']);
+		
+		if(empty($result['layer'])||empty($result['res'])){
+			
+			$this->forbidden($params['id']);
+			
+			$str_log = "ID为 {$params['id']} 的任务资源路径不正确。已被禁用";
+			
+			$this->_log($str_log);
+			
+			$result=false;
+			
+		}
+		
     	return $result;
+		
     }
-
-    //格式化参数
-    private function format_params($params) {
-    	if(is_array($params)) {
-	    	$result = 'Array(';
-	    	foreach ($params as $k => $v) {
-	    		$result = $result . "'$k'=>'$v',";
-	    	}
-	    	$result .= ')';
-	    	return $result;
-    	}else {
-    		return '\'' . $params . '\'';
-    	}
-    }
-    
+	
 	/**
 	 * 取一个二维数组中的每个数组的固定的键知道的值来形成一个新的一维数组
 	 * @param $pArray 一个二维数组
@@ -176,10 +174,33 @@ class ScheduleModel extends Model{
 
 	//删除计划任务
 	public function del($id) {
+		if(!$id) {
+			$this->error ="请选择记录";
+			return false;
+		}
+		$this->cleanCache();
 		return $this->delete($id);
 	}
 	
-
+	/* 禁用 */
+	public function forbidden($id){
+		if(!$id) {
+			$this->error ="请选择记录";
+			return false;
+		}
+		$this->cleanCache();
+		return $this->save(array('id'=>$id,'status'=>'0'));
+	}
+	
+	/* 启用 */
+	public function off($id){
+		if(!$id) {
+			$this->error ="请选择记录";
+			return false;
+		}
+		$this->cleanCache();
+		return $this->save(array('id'=>$id,'status'=>'1'));
+	}
 
 	//保存一条任务计划到数据库
 	//@return bool
@@ -195,15 +216,15 @@ class ScheduleModel extends Model{
 		
 		if(($schedule['schedule_type']=="WEEKLY")||(in_array($schedule['modifier'],array('FIRST','SECOND','THIRD','FOURTH','LAST')))){
 												 
-			(count($schedule['dirlist'])>=7)&&$schedule['dirlist']="*";
+			(count($schedule['daylist'])>=7)&&$schedule['daylist']="*";
 			
 		}else{
 			
-			(count($schedule['dirlist'])>=28)&&$schedule['dirlist']="*";
+			(count($schedule['daylist'])>=28)&&$schedule['daylist']="*";
 			
 		}
 		
-		is_array($schedule['dirlist'])&&($schedule['dirlist']=implode(',',$schedule['dirlist']));
+		is_array($schedule['daylist'])&&($schedule['daylist']=implode(',',$schedule['daylist']));
 		
 		if( $this->isValidSchedule($schedule)) {
 			
@@ -251,7 +272,7 @@ class ScheduleModel extends Model{
 	public function getScheduleList() {
 		$this->scheduleList = S ( 'getScheduleList' );
 		if ($this->scheduleList === false) {
-			$this->scheduleList = $this->order ( 'id' )->select ();
+			$this->scheduleList = $this->where('status=1')->order ( 'id' )->select();
 			S ( 'getScheduleList', $this->scheduleList ); // 缓存一周
 		}
 		return $this->scheduleList;
@@ -295,7 +316,7 @@ class ScheduleModel extends Model{
 			default:
 				return false;
 		}
-		return date('Y-m-d H:i:s', $datetime);
+		return date('Y-m-d H:i:s',$datetime);
 	}	
 
 	/*
@@ -333,8 +354,8 @@ class ScheduleModel extends Model{
 		$this->schedule['modifier'] = $modifier;
 	}
 
-	public function setDirlist($dirlist) {
-		$this->schedule['dirlist'] = $dirlist;
+	public function setDirlist($daylist) {
+		$this->schedule['daylist'] = $daylist;
 	}
 
 	public function setMonth($month) {
@@ -395,12 +416,12 @@ class ScheduleModel extends Model{
 			}
 			$flag = ($schedule['modifier'] >= 1) && ($schedule['modifier'] <= 52);
 		}
-		if( ($flag != false) && !empty($schedule['dirlist']) ) {
-			if($schedule['dirlist'] == '*') {
+		if( ($flag != false) && !empty($schedule['daylist']) ) {
+			if($schedule['daylist'] == '*') {
 				return true;
 			}else {
-				$dirlist = explode(',', str_replace(' ', '',$schedule['dirlist']));
-				foreach($dirlist as $v) {
+				$daylist = explode(',', str_replace(' ', '',$schedule['daylist']));
+				foreach($daylist as $v) {
 					$flag = $flag && in_array($v, $this->WEEK_ARRAY);
 					if($flag == false) {
 //						dump($v);
@@ -414,8 +435,8 @@ class ScheduleModel extends Model{
 	
 	protected function _checkMONTHLY($schedule) {
 		// modifier为LASTDAY时month必须，否则可选
-		// modifier为（FIRST,SECOND,THIRD,FOURTH,LAST）之一时：dirlist必须在MON～SUN、*中
-		// modifier为1～12时dirlist可选. 1～31和空为有效值（默认是1）
+		// modifier为（FIRST,SECOND,THIRD,FOURTH,LAST）之一时：daylist必须在MON～SUN、*中
+		// modifier为1～12时daylist可选. 1～31和空为有效值（默认是1）
 		if( !empty($schedule['modifier'])) {
 			//modifier为LASTDAY时month必须，否则可选
 			if( strtoupper($schedule['modifier']) == 'LASTDAY' ) {
@@ -423,11 +444,11 @@ class ScheduleModel extends Model{
 					return false;
 				}
 			}else if( in_array(strtoupper($schedule['modifier']),array('FIRST','SECOND','THIRD','FOURTH','LAST')) ) {				
-				//modifier为FIRST,SECOND,THIRD,FOURTH,LAST之一时，dirlist必须在MON～SUN、*中
-				if($schedule['dirlist'] !='*'){
+				//modifier为FIRST,SECOND,THIRD,FOURTH,LAST之一时，daylist必须在MON～SUN、*中
+				if($schedule['daylist'] !='*'){
 					$flag = true;
-					$dirlist = explode(',', str_replace(' ', '',$schedule['dirlist']));
-					foreach($dirlist as $v) {
+					$daylist = explode(',', str_replace(' ', '',$schedule['daylist']));
+					foreach($daylist as $v) {
 						$flag = $flag && in_array($v, $this->WEEK_ARRAY);
 						if($flag == false) {
 //							dump($v);
@@ -436,11 +457,11 @@ class ScheduleModel extends Model{
 					}//End foreach
 				}//End if...else
 			}elseif ( is_numeric($schedule['modifier']) && ($schedule['modifier'] >= 1) && ($schedule['modifier'] <= 12) ) {
-				//modifier为1～12时dirlist可选. 空、1～31为有效值（‘空’默认是1）
-				if( !empty($schedule['dirlist']) ) {
+				//modifier为1～12时daylist可选. 空、1～31为有效值（‘空’默认是1）
+				if( !empty($schedule['daylist']) ) {
 					$flag = true;
-					$dirlist = explode(',', str_replace(' ', '',$schedule['dirlist']));
-					foreach($dirlist as $v) {
+					$daylist = explode(',', str_replace(' ', '',$schedule['daylist']));
+					foreach($daylist as $v) {
 						$flag = $flag && (is_numeric($v) && ($v >= 1) && ($v <= 31));
 						if($flag == false) {
 //							dump($v);
@@ -542,18 +563,18 @@ class ScheduleModel extends Model{
 		//判断当前日期是否符合周数要求
 		//计算方法：((当前日期的周数 - 基准日期的周数) % modifier == 0)
 		if( (($this->_getWeekID() - $this->_getWeekID($date)) % $schedule['modifier']) == 0 ) {
-			//组装dirlist数组
-			if(empty($schedule['dirlist'])) {
-				//当dirlist为空时,默认为周一
-				$schedule['dirlist'] = array('Mon');
-			}elseif ($schedule['dirlist'] == '*') {
-				//当dirlist==*时，每天执行
-				$schedule['dirlist'] = $this->WEEK_ARRAY;
+			//组装daylist数组
+			if(empty($schedule['daylist'])) {
+				//当daylist为空时,默认为周一
+				$schedule['daylist'] = array('Mon');
+			}elseif ($schedule['daylist'] == '*') {
+				//当daylist==*时，每天执行
+				$schedule['daylist'] = $this->WEEK_ARRAY;
 			}else {
-				$schedule['dirlist'] = explode(',', str_replace(' ','',$schedule['dirlist']));
+				$schedule['daylist'] = explode(',', str_replace(' ','',$schedule['daylist']));
 			}
-			//判断今天是否在dirlist中。
-			if( in_array(date('D'), $schedule['dirlist']) ) {
+			//判断今天是否在daylist中。
+			if( in_array(date('D'), $schedule['daylist']) ) {
 				//判断今天是否已经执行过当前计划。如果否，根据基准时间计算执行时间（DATE为今天，TIME来自基准时间）
 				if( ($base_time_type == 'last_run_time') && ( date('Y-m-d',$date) == date('Y-m-d')) ) {
 					;
@@ -599,15 +620,15 @@ class ScheduleModel extends Model{
 		}elseif ( in_array(strtoupper($schedule['modifier']),array('FIRST','SECOND','THIRD','FOURTH','LAST')) ) {
 			//判断当前月份是否符合要求
 			if( in_array(date('M'), $schedule['month']) ) {
-				//设置dirlist数组(星期)
-				if ($schedule['dirlist'] == '*') {
-					$schedule['dirlist'] = $this->WEEK_ARRAY;
+				//设置daylist数组(星期)
+				if ($schedule['daylist'] == '*') {
+					$schedule['daylist'] = $this->WEEK_ARRAY;
 				}else {
-					$schedule['dirlist'] = explode(',', str_replace(' ','',$schedule['dirlist']));
+					$schedule['daylist'] = explode(',', str_replace(' ','',$schedule['daylist']));
 				}
 				
 				//判断星期是否符合要求
-				if( in_array(date('D'), $schedule['dirlist']) ) {
+				if( in_array(date('D'), $schedule['daylist']) ) {
 					//判断第x个是否符合要求
 					if($this->_isDayIDOfMonth($schedule['modifier'])) {
 						//判断今天是否已经执行过当前计划。如果否，根据基准时间计算执行时间（DATE为今天，TIME来自基准时间）
@@ -623,15 +644,15 @@ class ScheduleModel extends Model{
 		}elseif ( is_numeric($schedule['modifier']) ) {
 			//判断当前月份是否符合要求
 			if( ($this->_getMonthDif($date) % $schedule['modifier']) == 0 ) {
-				//组装dirlist数组
-				if(empty($schedule['dirlist'])) {
-					$schedule['dirlist'] = array('1');
+				//组装daylist数组
+				if(empty($schedule['daylist'])) {
+					$schedule['daylist'] = array('1');
 				} else{
-					$schedule['dirlist'] = explode(',', str_replace(' ','',$schedule['dirlist']));
+					$schedule['daylist'] = explode(',', str_replace(' ','',$schedule['daylist']));
 				}
 
 				//判断当期日期是否符合要求
-				if( in_array(date('d'),$schedule['dirlist']) || in_array(date('j'),$schedule['dirlist']) ) {
+				if( in_array(date('d'),$schedule['daylist']) || in_array(date('j'),$schedule['daylist']) ) {
 					//判断今天是否已经执行过当前计划。如果否，根据基准时间计算执行时间（DATE为今天，TIME来自基准时间）
 					if( ($base_time_type == 'last_run_time') && ( date('Y-m-d',$date) == date('Y-m-d')) ) {
 						;
@@ -754,5 +775,61 @@ class ScheduleModel extends Model{
 	public function cleanCache() {
 		S ( 'getScheduleList', null );
 	}	
-
+	
+	 /**
+	 * 发送HTTP请求方法
+	 * @param  string $url    请求URL
+	 * @param  array  $params 请求参数
+	 * @param  string $method 请求方法GET/POST
+	 * @return array  $data   响应数据
+	 */
+	 public function http($url, $params, $method = 'GET', $header = array(), $multi = false){
+		$opts = array(
+				CURLOPT_TIMEOUT        => 30,
+				CURLOPT_RETURNTRANSFER => 1,
+				CURLOPT_SSL_VERIFYPEER => false,
+				CURLOPT_SSL_VERIFYHOST => false,
+				CURLOPT_HTTPHEADER     => $header
+		);
+		/* 根据请求类型设置特定参数 */
+		switch(strtoupper($method)){
+			case 'GET':
+				$opts[CURLOPT_URL] = $url . '?' . http_build_query($params);
+				break;
+			case 'POST':
+				//判断是否传输文件
+				$params = $multi ? $params : http_build_query($params);
+				$opts[CURLOPT_URL] = $url;
+				$opts[CURLOPT_POST] = 1;
+				$opts[CURLOPT_POSTFIELDS] = $params;
+				break;
+			default:
+				if(C('APP_DEBUG'))
+					E('URL为"{$url}"的"HTTP 定时计划任务" 执行了不支持的请求方式！');
+				
+		}
+		/* 初始化并执行curl请求 */
+		$ch = curl_init();
+		curl_setopt_array($ch, $opts);
+		$data  = curl_exec($ch);
+		$error = curl_error($ch);
+		curl_close($ch);
+		if($error){
+			$data=false;
+			if(C('APP_DEBUG'))
+					E('URL为"{$url}"的"HTTP 定时计划任务" 请求发生错误！错误信息:/r/n'. $error);
+		}
+		
+		return  $data;
+		}
+		
+		/*检查URL的有效性*/
+		public function checkUrl($url){
+		
+			if (!preg_match_all('/(http|https){1}(:\/\/)?((([\da-z-\.]+)\.([a-z]{2,6}))|(localhost){1})([\/\w \.-?&%-=]*)*\/?/',$url))
+			{
+				return false;
+			}
+			 return true;
+		}
 }
