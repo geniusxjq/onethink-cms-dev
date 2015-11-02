@@ -14,16 +14,22 @@ echo '<link href="__STATIC__/bootstrap/2.x/lib/datetimepicker/css/datetimepicker
 
 <block name="body">
 	<div class="main-title cf">
-		<h2>新增计划</h2>
+		<h2>{$data?'编辑':'新增'}计划</h2>
 	</div>
 
 	<!-- 标签页导航 -->
 	<div class="tab-wrap">
 		<div class="tab-content">
 			<!-- 表单 -->
-			<form id="task-form" action="{:addons_url('Schedule://Schedule/add')}" method="post" class="form-horizontal doc-modal-form">
+			<form id="task-form" action="{:addons_url('Schedule://Schedule/edit')}" method="post" class="form-horizontal doc-modal-form">
 				<!-- 基础 -->
 				<div id="tab1" class="tab-pane in tab1">
+                    <notempty name="data">
+                    <div class="form-item cf">
+                            <label class="item-label">ID: {$data['id']}</label>
+                            <input type="hidden" name="id" value="{$data['id']}">
+					</div>
+                    </notempty>
 					<div class="form-item cf">
 						<label class="item-label">执行方法/函数
                         <span class="check-tips">（计划任务执行的函数）</span>
@@ -186,16 +192,12 @@ echo '<link href="__STATIC__/bootstrap/2.x/lib/datetimepicker/css/datetimepicker
 			
 			$("#weekly-box input[class='checkbox-s'][value='Mon']").prop("checked",true);
 			
-			return false;
-			
 		}
 		
 		//如果“按月的最后一天执行”没有指定月份，则默认指定每月。
 		if(the_schedule_type=="type-6"&&!$("#month-box input[class='checkbox-s']:checked").length){
 			
 			$("#month-box input[type='checkbox']").prop("checked",true);
-			
-			return false;
 			
 		}
 		

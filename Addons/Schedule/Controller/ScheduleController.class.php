@@ -13,29 +13,37 @@ class ScheduleController extends AddonsController{
 		
 	}
 	
-	//添加计划
-	public function add(){
+	//添加/编辑计划
+	public function edit(){
 		
+		$_name=(I('id')?'编辑':'添加');
+				
 		if(IS_POST){
-			$res = $this->_Model->addSchedule(I('post.'));
+			$res = $this->_Model->updateSchedule(I('post.'));
 			if($res) {
 				// TODO:记录日志
-				$this->success('新增成功',U('addons/adminlist',array('name'=>Schedule)));
+				$this->success($_name.'成功',U('Addons/adminList?name=Schedule'));
 			} else {
-				$this->error('新增失败');
+				$this->error($this->_Model->getError());
 			}		 
 		}else {
-			$this->meta_title = '添加计划';
-			$this->display(T('Addons://Schedule@Schedule/add'));			
+			
+			$this->meta_title = $_name.'计划';
+			
+			if(I('id')) $this->assign('data',$this->_Model->find(I('id')));
+			
+			$this->display(T('Addons://Schedule@Schedule/edit'));	
+			
 		}
+		
 	}
 	
 	//删除计划
 	public function del(){
-		if (!I('post.id')) {
+		if (!I('id')) {
 			$this->error('请选择至少一条数据！');
 		}
-		$id = implode(I('post.id'), ',');
+		$id =is_array(I('id'))?implode(I('id'), ','):I('id');
 		if ($this->_Model->del($id)){
 			$this->success('删除计划记录成功！');
 		}else {

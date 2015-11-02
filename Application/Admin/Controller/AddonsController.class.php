@@ -751,6 +751,7 @@ str;
 	
 	/**
      * 已安装插件后台菜单排序
+	 *author geniusxjq <app880.com>
      */
     public function sort(){
         if(IS_GET){

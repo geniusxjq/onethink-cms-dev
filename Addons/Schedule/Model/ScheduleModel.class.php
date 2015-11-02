@@ -16,8 +16,8 @@ class ScheduleModel extends Model{
 	
 	public $model=array(
         'title'=>'计划任务',
-        'template_add'=>'View/Schedule/add.html',
-        'template_edit'=>'',
+        'template_add'=>'View/Schedule/edit.html',
+        'template_edit'=>'View/Schedule/edit.html',
         'search_key'=>'',
         'extend'=>0,
     );
@@ -89,46 +89,38 @@ class ScheduleModel extends Model{
 		}
 		//解析task类型, 并运行task
 		$task_to_run=$this->fill_params($schedule);
-
 		if(!$task_to_run) return false;
-		
 		if($task_to_run['layer'] !== 'url') {
 			
 			R($task_to_run['res'],$task_to_run['param'],$task_to_run['layer']);
 			
 		}else{
-			
 			//TODO:
-			
 		}
 		
 		if(strtoupper($schedule['schedule_type']) == 'ONCE') {
 			
 			//ONCE类型的计划任务，将end_datetime设置为当前时间
-			
 			$schedule['end_datetime'] = date('Y-m-d H:i:s');
 						
 		}else {
 			
 			//非ONCE类型的计划任务， 防止由程序执行导致的启动时间的漂移
-			
 			if(in_array($schedule['schedule_type'], array('MINUTE', 'HOURLY'))) {
 				
 				//将last_run_time设置为当前时间（秒数设为0）
-				
 				$schedule['last_run_time'] = date('Y-m-d H:i:s',$this->setSecondToZero());
 				
 			}else {
 				
 				//将last_run_time设置为当前日期+预定时间
-				
 				$now_date = date('Y-m-d');
 				$fixed_time = date('H:i:s', strtotime($schedule['start_datetime']));
 				$schedule['last_run_time'] = $now_date . ' ' . $fixed_time;
 				
 			}
 		}
-		$this->saveSchedule($schedule);
+		$this->updateScheduleRunTime($schedule);
 		$str_log = "ID为{$schedule['id']}的任务已运行。";
 		if(C('APP_DEBUG')){
 			$str_log  .= "任务为: {$schedule['task_to_run']} ，任务描述为: {$schedule['info']} 。";
@@ -214,31 +206,24 @@ class ScheduleModel extends Model{
 
 	//保存一条任务计划到数据库
 	//@return bool
-	public function addSchedule($schedule = '') {
+	public function updateSchedule($schedule = '') {
 		if(empty($schedule)) {
 			$schedule = $this->schedule;
 		}
-		
 		//保存到数据库
-		
 		$schedule['start_datetime'] = date('Y-m-d H:i:s', $this->setSecondToZero($schedule['start_datetime']));
 		($schedule['month'])&&($schedule['month']=count($schedule['month'])==12?'*':implode(',',$schedule['month']));
-		
-		if(($schedule['schedule_type']=="WEEKLY")||(in_array($schedule['modifier'],array('FIRST','SECOND','THIRD','FOURTH','LAST')))){
-												 
-			(count($schedule['daylist'])>=7)&&$schedule['daylist']="*";
-			
-		}else{
-			
-			(count($schedule['daylist'])>=28)&&$schedule['daylist']="*";
-			
+		(!$schedule['modifier'])&&($schedule['modifier']=1);
+		if($schedule['daylist']){
+			if(($schedule['schedule_type']=="WEEKLY")||(in_array($schedule['modifier'],array('FIRST','SECOND','THIRD','FOURTH','LAST')))){
+				(count($schedule['daylist'])>=7)&&$schedule['daylist']="*";
+			}else{
+				(count($schedule['daylist'])>=28)&&$schedule['daylist']="*";
+			}
+			is_array($schedule['daylist'])&&($schedule['daylist']=implode(',',$schedule['daylist']));
 		}
-		
-		is_array($schedule['daylist'])&&($schedule['daylist']=implode(',',$schedule['daylist']));
-		
-		if( $this->isValidSchedule($schedule)) {
-			
-			$res = $this->add($schedule);
+		if( $this->isValidSchedule($schedule)){
+			$res =!$schedule['id']?$this->add($schedule):$this->save($schedule);
 			$this->cleanCache();
 			return $res;
 		}else {
@@ -247,7 +232,7 @@ class ScheduleModel extends Model{
 	}
 	
 	//更新一条任务计划
-	public function saveSchedule($schedule = '') {
+	public function updateScheduleRunTime($schedule = '') {
 		if(empty($schedule)) {
 			$schedule = $this->schedule;
 		}
@@ -443,14 +428,14 @@ class ScheduleModel extends Model{
 		return $flag;
 	}
 	
-	protected function _checkMONTHLY($schedule) {
+	protected function _checkMONTHLY($schedule){
 		// modifier为LASTDAY时month必须，否则可选
 		// modifier为（FIRST,SECOND,THIRD,FOURTH,LAST）之一时：daylist必须在MON～SUN、*中
 		// modifier为1～12时daylist可选. 1～31和空为有效值（默认是1）
-		if( !empty($schedule['modifier'])) {
+		if(!empty($schedule['modifier'])){
 			//modifier为LASTDAY时month必须，否则可选
 			if( strtoupper($schedule['modifier']) == 'LASTDAY' ) {
-				if(empty($schedule['month'])) {
+				if(empty($schedule['month'])){
 					return false;
 				}
 			}else if( in_array(strtoupper($schedule['modifier']),array('FIRST','SECOND','THIRD','FOURTH','LAST')) ) {				
