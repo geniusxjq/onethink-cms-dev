@@ -297,9 +297,12 @@ class Date {
      * @return string
      */
     public function timeDiff( $time ,$precision=false) {
+		
+		$datediff=$this->dateDiff($time,$precision);
         if(!is_numeric($precision) && !is_bool($precision)) {
             static $_diff = array('y'=>'年','M'=>'个月','d'=>'天','w'=>'周','s'=>'秒','h'=>'小时','m'=>'分钟');
-            return ceil($this->dateDiff($time,$precision)).$_diff[$precision].'前';
+			$time=ceil($datediff);
+            return ($time>0?$time:0).$_diff[$precision].($datediff<0?'前':'后');
         }
         $diff = abs($this->parse($time) - $this->date);
         static $chunks = array(array(31536000,'年'),array(2592000,'个月'),array(604800,'周'),array(86400,'天'),array(3600 ,'小时'),array(60,'分钟'),array(1,'秒'));
@@ -316,7 +319,7 @@ class Date {
                 }
             }
        }
-        return $since.'前';
+        return $since.($datediff<0?'前':'后');
     }
 
     /**

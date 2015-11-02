@@ -14,10 +14,9 @@
  
 function friendly_time($time,$precision=false) {
 	
-	$date=new \Org\Util\Date();
+	if(!$time||intval($time)<=0) return;
 	
-	//如果为时间戳那么就将其转换成日期格式
-	!preg_match("/[^\d]+/",$time)&&$time=time_format($time);
+	$date=new \Org\Util\Date();
 	
 	return $date->timeDiff($time,$precision);
 	

@@ -50,17 +50,17 @@ class ScheduleAddon extends Addon{
 		'fields'=>'*',			//要查的字段
 		'map'=>'',				//查询条件, 如果需要可以再插件类的构造方法里动态重置这个属性
 		'order'=>'id desc',		//排序,
-		'listKey'=>array( 		//这里定义的是除了id序号外的表格里字段显示的表头名
-			'id'=>'编号', 	
-			'schedule_type'=>'类型',
-			'modifier'=>'执行频率',
-			'daylist'=>'指定天',
-			'month'=>'指定月份',
-			'start_datetime'=>'开始时间',
-			'end_datetime'=>'失效时间',
-			'last_run_time'=>'上次执行',
-			'statustext'=>'状态',
-			'info'=>'简介',
+		'list_grid'=>array( 		//这里定义的是除了id序号外的表格里字段显示的表头名
+			'id:ID',
+			'schedule_type:类型',
+			'modifier:执行间隔',
+			'daylist:日',
+			'month:月',
+			'start_datetime:开始时间',
+			'end_datetime:失效时间',
+			'last_run_time:上次执行',
+			'statustext:状态',
+			'id:操作:[EDIT]|编辑,[DELETE]|删除'
 	
 		),
 	);		

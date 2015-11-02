@@ -10,8 +10,8 @@
 		<thead>
 			<tr>
 			<th class="row-selected row-selected"><input class="check-all" type="checkbox"></th>
-			<volist name="listKey" id="vo">
-				<th>{$vo}</th>
+			<volist name="list_grid" id="vo">
+				<th>{$vo.title}</th>
 			</volist>
 			</tr>
 		</thead>
@@ -19,8 +19,8 @@
 			<volist name="_list" id="lv" key="vo">
 			<tr>
 				<td><input class="ids" type="checkbox" name="id[]" value="{$lv.id}"></td>
-				<volist name="listKey" id="lk">
-					<td>{$lv.$key}</td>
+				<volist name="list_grid" id="lk">
+					<td>{:get_addonlist_field($lv, $lk, $name)}</td>
 				</volist>
 			</tr>
 			</volist>

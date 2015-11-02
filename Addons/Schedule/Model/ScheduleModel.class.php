@@ -11,9 +11,19 @@ class ScheduleModel extends Model{
 	
 	private $MONTH_ARRAY 	= array('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec');
 	private $WEEK_ARRAY  	= array('Mon','Tue','Wed','Thu','Fri','Sat','Sun');
-	private $model;
 	private $schedule		= array();
 	private $scheduleList 	= array();
+	
+	public $model=array(
+        'title'=>'计划任务',
+        'template_add'=>'View/Schedule/add.html',
+        'template_edit'=>'',
+        'search_key'=>'',
+        'extend'=>0,
+    );
+	
+	public $_fields = array(
+	);
 	
 	protected function _after_find(&$result,$options) {
 		$result['statustext'] =  $result['status'] == 0 ? '禁用' : '正常';
