@@ -9,7 +9,7 @@ use Common\Controller\Addon;
  * @author iszhang
 
 */
- 
+
 class ScheduleAddon extends Addon{
 
 	public $info = array(

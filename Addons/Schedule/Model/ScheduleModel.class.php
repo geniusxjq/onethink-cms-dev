@@ -57,6 +57,11 @@ class ScheduleModel extends Model{
 			case 'WEEKLY':
 				return $this->_checkWEEKLY($schedule);
 			case 'MONTHLY':
+			case 'MONTHLY-FIRST':
+			case 'MONTHLY-SECOND':
+			case 'MONTHLY-THIRD':
+			case 'MONTHLY-FOURTH':
+			case 'MONTHLY-LASTDAY':
 				return $this->_checkMONTHLY($schedule);
 			default:
 				return false;
@@ -218,12 +223,13 @@ class ScheduleModel extends Model{
 			if(($schedule['schedule_type']=="WEEKLY")||(in_array($schedule['modifier'],array('FIRST','SECOND','THIRD','FOURTH','LAST')))){
 				(count($schedule['daylist'])>=7)&&$schedule['daylist']="*";
 			}else{
-				(count($schedule['daylist'])>=28)&&$schedule['daylist']="*";
+				(count($schedule['daylist'])>=31)&&$schedule['daylist']="*";
 			}
 			is_array($schedule['daylist'])&&($schedule['daylist']=implode(',',$schedule['daylist']));
 		}
 		if( $this->isValidSchedule($schedule)){
 			$res =!$schedule['id']?$this->add($schedule):$this->save($schedule);
+			if($res==0)$this->error="数据没有变更无需保存";
 			$this->cleanCache();
 			return $res;
 		}else {
@@ -306,6 +312,11 @@ class ScheduleModel extends Model{
 				$datetime =  $this->_calculateWEEKLY($schedule);
 				break;
 			case 'MONTHLY':
+			case 'MONTHLY-FIRST':
+			case 'MONTHLY-SECOND':
+			case 'MONTHLY-THIRD':
+			case 'MONTHLY-FOURTH':
+			case 'MONTHLY-LASTDAY':
 				$datetime =  $this->_calculateMONTHLY($schedule);
 				break;
 			default:
@@ -453,13 +464,12 @@ class ScheduleModel extends Model{
 				}//End if...else
 			}elseif ( is_numeric($schedule['modifier']) && ($schedule['modifier'] >= 1) && ($schedule['modifier'] <= 12) ) {
 				//modifier为1～12时daylist可选. 空、1～31为有效值（‘空’默认是1）
-				if( !empty($schedule['daylist']) ) {
+				if(!empty($schedule['daylist'])&&$schedule['daylist']!='*') {
 					$flag = true;
 					$daylist = explode(',', str_replace(' ', '',$schedule['daylist']));
 					foreach($daylist as $v) {
 						$flag = $flag && (is_numeric($v) && ($v >= 1) && ($v <= 31));
 						if($flag == false) {
-//							dump($v);
 							return false;
 						}
 					}//End foreach

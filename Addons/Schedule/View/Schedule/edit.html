@@ -27,7 +27,7 @@ echo '<link href="__STATIC__/bootstrap/2.x/lib/datetimepicker/css/datetimepicker
                     <notempty name="data">
                     <div class="form-item cf">
                             <label class="item-label">ID: {$data['id']}</label>
-                            <input type="hidden" name="id" value="{$data['id']}">
+                            <input type="text" class="text input-mid" name="id" value="{$data['id']}">
 					</div>
                     </notempty>
 					<div class="form-item cf">
@@ -35,7 +35,7 @@ echo '<link href="__STATIC__/bootstrap/2.x/lib/datetimepicker/css/datetimepicker
                         <span class="check-tips">（计划任务执行的函数）</span>
                         </label>
 						<div class="controls">
-                        <input type="hidden" name="task_to_run" value="">
+                        <input type="text" class="text input-mid" name="task_to_run" value="">
                         模型层：
                         <select id="task-to-run-layer">
                             <option value="Model">模型(Model)</option>
@@ -65,30 +65,30 @@ echo '<link href="__STATIC__/bootstrap/2.x/lib/datetimepicker/css/datetimepicker
                         <span class="check-tips">（执行任务的周期）</span>
                         </label>
 						<div class="controls">	
-                            <select name="schedule_type" id="schedule_type">
+                            <select name="schedule_type" id="schedule_type" >
                             <option value="ONCE" selected="selected" data-text="once" data-type="type-1">只执行一次</option>
                             <option value="MINUTE" data-text="分钟(1-1439)" data-type="type-2">按分执行</option>
                             <option value="HOURLY" data-text="小时(1-23)" data-type="type-2">按时执行</option>
                             <option value="DAILY" data-text="天(1-365)" data-type="type-2">按天执行</option>
                             <option value="WEEKLY" data-text="周(1-52)" data-type="type-3">按周执行</option>
                             <option value="MONTHLY" data-text="个月(1-12)" data-type="type-4">按月执行</option>
-                            <option value="MONTHLY" data-text="FIRST" data-type="type-5">按月的第一周执行</option>
-                            <option value="MONTHLY" data-text="SECOND" data-type="type-5">按月的第二周执行</option>
-                            <option value="MONTHLY" data-text="THIRD" data-type="type-5">按月的第三周执行</option>
-                            <option value="MONTHLY" data-text="FOURTH" data-type="type-5">按月的第四周执行</option>
-                            <option value="MONTHLY" data-text="LASTDAY" data-type="type-6">按月的最后一天执行</option>
+                            <option value="MONTHLY-FIRST" data-text="FIRST" data-type="type-5">按月的第一周执行</option>
+                            <option value="MONTHLY-SECOND" data-text="SECOND" data-type="type-5">按月的第二周执行</option>
+                            <option value="MONTHLY-THIRD" data-text="THIRD" data-type="type-5">按月的第三周执行</option>
+                            <option value="MONTHLY-FOURTH" data-text="FOURTH" data-type="type-5">按月的第四周执行</option>
+                            <option value="MONTHLY-LASTDAY" data-text="LASTDAY" data-type="type-6">按月的最后一天执行</option>
                             </select>
 						</div>
 					</div>
-					<div class="form-item cf" id="modifier">
+					<div class="form-item cf" id="modifier-div">
 						<label class="item-label">执行频率（间隔）
                         <span class="check-tips">（任务执行的时间间隔。默认为1个任务周期）</span>
                         </label>
 						<div class="controls">
-							<input type="text" class="text input-mid" name="modifier" value="">&nbsp;<font id="task-unit"></font> 执行一次
+							<input type="text" class="text input-mid" name="modifier" data-value="" value="">&nbsp;<font id="task-unit"></font> 执行一次
 						</div>
 					</div>
-					<div class="form-item cf" id="daylist">
+					<div class="form-item cf" id="daylist-div">
                      
                      <span id="day-in-month-box" > 
                          <label class="item-label">
@@ -112,7 +112,7 @@ echo '<link href="__STATIC__/bootstrap/2.x/lib/datetimepicker/css/datetimepicker
 					</div> 
                    
                     
-					<div class="form-item cf" id="month">
+					<div class="form-item cf" id="month-div">
                     
                          <span id="month-box">
                              <div class="controls">
@@ -135,7 +135,7 @@ echo '<link href="__STATIC__/bootstrap/2.x/lib/datetimepicker/css/datetimepicker
 						<label class="item-label">简介<span class="check-tips">（对计划任务的简要描述）</span></label>
 						<div class="controls">
                         <label class="textarea">
-							<textarea rows="3" cols="54"name="info" value=""></textarea>
+							<textarea rows="3" cols="54" name="info" value=""></textarea>
                         </label>
 						</div>
 					</div>																														
@@ -159,6 +159,8 @@ echo '<link href="__STATIC__/bootstrap/2.x/lib/datetimepicker/css/datetimepicker
 <script type="text/javascript" src="__STATIC__/bootstrap/2.x/lib/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="__STATIC__/bootstrap/2.x/lib/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
 <script type="text/javascript" charset="utf-8">
+{/*编辑时返回的JSON数据*/}
+var EditData={$data?json_encode($data):'null'};
 
 +$(function(){
 		   
@@ -201,7 +203,14 @@ echo '<link href="__STATIC__/bootstrap/2.x/lib/datetimepicker/css/datetimepicker
 			
 		}
 		
-		$.post(self.attr("action"), self.serialize(), success, "json");
+		var form_data=self.serialize();
+		form_data['modifier']=66; 
+		if(the_schedule_type=="type-1") form_data['modifier']=null; form_data['daylist']=null; form_data['month']=null;
+		if(the_schedule_type=="type-2") form_data['daylist']=null; form_data['month']=null;
+		if(the_schedule_type=="type-3") form_data['month']=null;
+		if(the_schedule_type=="type-6") form_data['daylist']=null;
+		alert(form_data); 
+		$.post(self.attr("action"), form_data, success, "json");
 		
 		return false;
 	
@@ -241,9 +250,9 @@ echo '<link href="__STATIC__/bootstrap/2.x/lib/datetimepicker/css/datetimepicker
 	
 	var _hider=$("<div></div>");
 	
-	var _dayer=$("#daylist")
+	var _dayer=$("#daylist-div")
 	
-	var _monther=$("#month");
+	var _monther=$("#month-div");
 	
 	var _month_box=$("#month-box");	
 	
@@ -329,19 +338,71 @@ echo '<link href="__STATIC__/bootstrap/2.x/lib/datetimepicker/css/datetimepicker
 		
 	}	
 	
+	//编辑时将PHP返回的数据填充到表单
+	
+	function form_data_init(){
+		
+		if(!EditData) return ;
+		
+		$.each(EditData,function(n,v){
+			
+			if(n=='daylist'||n=='month') return;
+			
+			$("[name='"+n+"']").val(v);
+			
+		});
+		
+		_select_type(true);
+		
+		var task_to_run=EditData["task_to_run"].split("::");
+		
+		$("#task-to-run-layer").val(task_to_run[0]);
+		
+		$("#task-to-run-res").val(task_to_run[1]);
+		
+		$("#task-to-run-param").val(task_to_run[2]);
+		
+		function checkbox_deal(name){
+			
+			if(EditData[name]){
+				
+				if(EditData[name]!="*"){
+				
+				$.map(EditData[name].split(","),function(v){
+				
+				$("input[name='"+name+"[]'][value='"+v+"']").prop("checked",true);
+				
+				});
+				
+				}else{
+					
+					$("#"+name+"-div input[name='"+name+"[]'],#"+name+"-div input.checkbox-s-all").prop("checked",true);
+					
+				}
+				
+			}
+		
+		}
+		
+		checkbox_deal("month");
+		
+		checkbox_deal("daylist");
+		
+	}
+	
+	//根据任务计划类型隐藏表单项
+	
 	function switch_form(o){
 				
 		var type=$(o).data("type");
-		
-		$("input[name='modifier']").val((type=="type-5"||type=="type-6")?$(o).data("text"):"");
 
 		if(type=="type-5"||type=="type-3"){
 			
-			$("#daylist,#weekly-box").show();$("#day-in-month-box").hide();
+			$("#daylist-div,#weekly-box").show();$("#day-in-month-box").hide();
 			
 		}else{
 			
-			$("#daylist,#day-in-month-box").show();$("#weekly-box").hide();
+			$("#daylist-div,#day-in-month-box").show();$("#weekly-box").hide();
 			
 		}
 
@@ -349,49 +410,47 @@ echo '<link href="__STATIC__/bootstrap/2.x/lib/datetimepicker/css/datetimepicker
 			
 			case "type-1":
 			
-			$("#month,#daylist,#modifier").hide();
+			$("#month-div,#daylist-div,#modifier-div").hide();
 			
 			break;
 			
 			case "type-2":
 			
-			$("#modifier").show();$("#month,#daylist").hide();
+			$("#modifier-div").show();$("#month-div,#daylist-div").hide();
 			
 			break;
 			
 			case "type-3":
 			
-			$("#month").hide();$("#daylist,#modifier").show();
+			$("#month-div").hide();$("#daylist-div,#modifier-div").show();
 			
 			break;
 			
 			case "type-4":
 			
-			$("#month,#daylist,#modifier,#day-in-month-box").show();$("#weekly-box").hide();
+			$("#month-div,#daylist-div,#modifier-div,#day-in-month-box").show();$("#weekly-box").hide();
 			
 			break;
 			
 			case "type-5":
 			
-			$("#modifier").hide();$("#month,#daylist").show();
+			$("#modifier-div").hide();$("#month-div,#daylist-div").show();
 			
 			break;
 			
 			case "type-6":
 			
-			$("#daylist,#modifier").hide();$("#month").show();
+			$("#daylist-div,#modifier-div").hide();$("#month-div").show();
 			
 			break;
 			
 		}
-		
-		$("#task-form").show();
-		
+				
 	}
 	
 	//*************************
 	
-	function _select_type(){
+	function _select_type(is_init){
 		
 		var o=$("#schedule_type option:selected");
 		
@@ -430,17 +489,23 @@ echo '<link href="__STATIC__/bootstrap/2.x/lib/datetimepicker/css/datetimepicker
 		
 		$("#task-unit").text(o.data("text"));
 		
-		switch_form(o);
+		(is_init!=true)&&$("input[name='modifier']").val((type=="type-5"||type=="type-6")?$(o).data("text"):"");
 		
+		switch_form(o);
+				
 	}
 	
 	//初始化
 			
-	_select_type();
+	_select_type(true);
 	
 	$("#schedule_type").change(_select_type);
 	
-	//***************************************************全选的实现
+	form_data_init();
+	
+	$("#task-form").show();
+	
+	//***************************************************全选的实现（checkbox）
 	
 	$(document).on("click",".checkbox-s-all",function(){
 		$(this).parent().parent().find("input[class='checkbox-s']").prop("checked", this.checked);
