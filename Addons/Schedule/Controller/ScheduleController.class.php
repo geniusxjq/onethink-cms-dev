@@ -43,8 +43,7 @@ class ScheduleController extends AddonsController{
 		if (!I('id')) {
 			$this->error('请选择至少一条数据！');
 		}
-		$id =is_array(I('id'))?implode(I('id'), ','):I('id');
-		if ($this->_Model->del($id)){
+		if ($this->_Model->del(I('id'))){
 			$this->success('删除计划记录成功！');
 		}else {
 			$this->error('删除计划记录失败！');

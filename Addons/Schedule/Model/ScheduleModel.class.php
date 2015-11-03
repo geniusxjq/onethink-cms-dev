@@ -185,8 +185,8 @@ class ScheduleModel extends Model{
 			$this->error ="请选择记录";
 			return false;
 		}
-		
-		$res=$this->delete($id);
+		$map = array('id' => array('in',$id));
+		$res=$this->where($map)->delete();
 		if($res)$this->cleanCache();
 		return $res;
 	}
@@ -216,6 +216,7 @@ class ScheduleModel extends Model{
 	//根据任务类型过滤数据
 	public function paramFilter(&$schedule){
 		
+		(!$schedule['title'])&&$schedule['title']="计划-".($this->max('id')+1);
 		$schedule['start_datetime'] = date('Y-m-d H:i:s', $this->setSecondToZero($schedule['start_datetime']));
 		($schedule['month'])&&($schedule['month']=count($schedule['month'])>=12?'*':implode(',',$schedule['month']));
 		(!$schedule['modifier'])&&($schedule['modifier']=1);

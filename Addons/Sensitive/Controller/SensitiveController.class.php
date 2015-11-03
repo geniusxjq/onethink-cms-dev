@@ -31,7 +31,8 @@ class SensitiveController extends AddonsController
 
     public function delSensitive()
     {
-        $id = I('get.id', '');
+        $id = I('ids');
+		if(!$id) $this->error("请选择记录");
         if (D('Addons://Sensitive/Sensitive')->del($id)) {
             S('replace_sensitive_words',null);
             $this->success('删除成功', Cookie('__forward__'));
@@ -44,7 +45,8 @@ class SensitiveController extends AddonsController
     /* 禁用 */
     public function disable()
     {
-        $id = I('get.id', '');
+        $id = I('get.id');
+		if(!$id) $this->error("请选择记录");
         if (D('Addons://Sensitive/Sensitive')->off($id)) {
             S('replace_sensitive_words',null);
             $this->success('成功禁用该敏感词', Cookie('__forward__'));
@@ -56,7 +58,8 @@ class SensitiveController extends AddonsController
     /* 启用 */
     public function enable()
     {
-        $id = I('get.id', '');
+        $id = I('get.id');
+		if(!$id) $this->error("请选择记录");
         if (D('Addons://Sensitive/Sensitive')->on($id)) {
             S('replace_sensitive_words',null);
             $this->success('成功启用该敏感词', Cookie('__forward__'));
@@ -106,7 +109,7 @@ class SensitiveController extends AddonsController
     {
         $status = I('get.status');
         $ids = I('post.ids');
-
+		if(!$ids) $this->error("请选择记录");
         if ($status == 1) {
             foreach ($ids as $id) {
                 D('Addons://Sensitive/Sensitive')->on($id);

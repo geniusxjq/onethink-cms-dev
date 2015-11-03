@@ -5,7 +5,7 @@
             <button class="btn ajax-post" target-form="ids" url="{:addons_url('Sensitive://Sensitive/savestatus',array('status'=>1))}">启 用</button>
             <button class="btn ajax-post" target-form="ids" url="{:addons_url('Sensitive://Sensitive/savestatus',array('status'=>0))}">禁用</button>
 
-            <button class="btn ajax-post" url="{:addons_url('Sensitive://Sensitive/savestatus',array('status'=>-1))}" target-form="ids">删除</button>
+            <button class="btn ajax-post" url="{:addons_url('Sensitive://Sensitive/delSensitive')}" target-form="ids">删除</button>
             <a class="btn" href="{:addons_url('Sensitive://Sensitive/batch')}">批量增加</a>
             <!-- 高级搜索 -->
 
@@ -45,7 +45,7 @@
                                     <else/>
                                     <a class="ajax-get" href="{:addons_url('Sensitive://Sensitive/enable',array('id'=>$vo['id']))}">启用</a>
                                 </if>
-                                <a class="ajax-get" href="{:addons_url('Sensitive://Sensitive/delSensitive',array('id'=>$vo['id']))}">删除</a>
+                                <a class="ajax-get" href="{:addons_url('Sensitive://Sensitive/delSensitive',array('ids'=>$vo['id']))}">删除</a>
 
                             </td>
 

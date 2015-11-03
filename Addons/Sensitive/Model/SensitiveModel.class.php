@@ -59,7 +59,8 @@ class SensitiveModel extends Model{
 	
 	/* 删除 */
 	public function del($id){
-		return $this->delete($id);
+		$map = array('id' => array('in',$id));
+		return $this->where($map)->delete();
 	}	
 	
 	/* 获取编辑数据 */

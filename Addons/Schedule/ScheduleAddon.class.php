@@ -27,6 +27,7 @@ class ScheduleAddon extends Addon{
 		'install_sql'=>"DROP TABLE IF EXISTS `onethink_schedule`;
 			CREATE TABLE `onethink_schedule` (
 			  `id` int(11) NOT NULL AUTO_INCREMENT,
+			  `title` varchar(50) NOT NULL COMMENT '计划任务名称',
 			  `task_to_run` varchar(255) NOT NULL COMMENT '计划任务执行方法',
 			  `schedule_type` varchar(255) NOT NULL COMMENT '执行周期:只执行一次,按分钟执行,按小时执行,按天执行,按周执行,按月执行',
 			  `modifier` varchar(255) DEFAULT NULL COMMENT '执行频率,类型为“按月执行”时必须；只执行一次时无效；其他时为可选，默认为1',
@@ -52,6 +53,7 @@ class ScheduleAddon extends Addon{
 		'order'=>'id desc',		//排序,
 		'listKey'=>array( 		//这里定义的是除了id序号外的表格里字段显示的表头名
 			'id'=>'ID',
+			'title'=>'计划名称',
 			'schedule_type'=>'类型',
 			'modifier'=>'执行间隔',
 			'daylist'=>'日',
@@ -77,6 +79,11 @@ class ScheduleAddon extends Addon{
 
 	//实现的app_end钩子方法
 	public function app_end($param){//print_r(date('Y-h-d H:i:s','1390284571'));
+		
+		$config = $this->getConfig();
+		
+		if(!$config['is_open']) return;//插件已关闭
+		
 		$Schedule = D('Addons://Schedule/Schedule');
 		//锁定自动执行 修正一下
 		$lockfile = $Schedule->getLogPath() . '/schedule.lock';
