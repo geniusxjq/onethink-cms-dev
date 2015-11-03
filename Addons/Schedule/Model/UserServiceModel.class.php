@@ -13,7 +13,7 @@ class UserServiceModel{
 	 */
 	function send_mail($to = '', $subject = '', $body = '', $name = '', $attachment = null)
 	{
-		send_mail();
+		send_mail($to , $subject, $body , $name, $attachment );
 	}
 
 }

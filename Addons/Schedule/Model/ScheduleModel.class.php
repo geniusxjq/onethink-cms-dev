@@ -25,13 +25,20 @@ class ScheduleModel extends Model{
 	public $_fields = array(
 	);
 	
-	protected function _after_find(&$result,$options) {
+	protected function _afterFilter(&$result,$options) {
 		$result['statustext'] =  $result['status'] == 0 ? '禁用' : '正常';
+		$result['month'] = "<span title='{$result['month']}'>".msubstr($result['month'],0,15)."</span>";
+		$result['daylist'] = "<span title='{$result['daylist']}'>".msubstr($result['daylist'],0,15)."</span>";
+		
+	}
+	
+	protected function _after_find(&$result,$options) {
+		
 	}
 	
 	protected function _after_select(&$result,$options){
 		foreach($result as &$record){
-			$this->_after_find($record,$options);
+			$this->_afterFilter($record,$options);
 		}
 	}
 	
@@ -95,12 +102,38 @@ class ScheduleModel extends Model{
 		//解析task类型, 并运行task
 		$task_to_run=$this->fill_params($schedule);
 		if(!$task_to_run) return false;
-		if($task_to_run['layer'] !== 'url') {
+		
+		$RunStatus=false;//记录任务运行结果是否成功
+		
+		switch(strtoupper($task_to_run['layer'])){
 			
-			R($task_to_run['res'],$task_to_run['param'],$task_to_run['layer']);
+			case 'FUNCTION':
+			    //执行全局函数
+			    $vars=array();
+			    parse_str($task_to_run['param'],$vars);
+				$res=call_user_func_array($task_to_run['res'],$vars);
+				if($res!=false)$RunStatus=true;
 			
-		}else{
-			//TODO:
+			break;
+			
+			case 'CURL-POST':
+			     //curl 用post方法执行
+				 $res=$this->http($task_to_run['res'],$task_to_run['param'],'POST');
+				 if($res!=false)$RunStatus=true;
+			
+			break;
+
+			case 'CURL-GET':
+			     //curl 用get方法执行
+			     $res=$this->http($task_to_run['res'],$task_to_run['param'],'GET');
+				 if($res!=false)$RunStatus=true;
+			break;
+			
+			default:
+			    //默认R方法调用控制器模型
+				$res=R($task_to_run['res'],$task_to_run['param'],$task_to_run['layer']);
+				if($res!=false)$RunStatus=true;
+				
 		}
 		
 		if(strtoupper($schedule['schedule_type']) == 'ONCE') {
@@ -126,7 +159,7 @@ class ScheduleModel extends Model{
 			}
 		}
 		$this->updateScheduleRunTime($schedule);
-		$str_log = "ID为{$schedule['id']}的任务已运行。";
+		$str_log = "ID={$schedule['id']} 的任务已运行。 状态：".($RunStatus?"成功":"失败");
 		if(C('APP_DEBUG')){
 			$str_log  .= "任务为: {$schedule['task_to_run']} ，任务描述为: {$schedule['info']} 。";
 		}
@@ -216,7 +249,7 @@ class ScheduleModel extends Model{
 	//根据任务类型过滤数据
 	public function paramFilter(&$schedule){
 		
-		(!$schedule['title'])&&$schedule['title']="计划-".($this->max('id')+1);
+		(!$schedule['title'])&&($schedule['title']="计划-".($schedule['id']||$this->max('id')+1));
 		$schedule['start_datetime'] = date('Y-m-d H:i:s', $this->setSecondToZero($schedule['start_datetime']));
 		($schedule['month'])&&($schedule['month']=count($schedule['month'])>=12?'*':implode(',',$schedule['month']));
 		(!$schedule['modifier'])&&($schedule['modifier']=1);
@@ -772,6 +805,11 @@ class ScheduleModel extends Model{
 	
 	//日志文件
 	protected function _log($str) {
+		
+		$conf=get_addon_config('Schedule');
+		
+		if(!$conf['is_open_log']) return false;
+		
 		$filename = $this->getLogPath() . '/schedule_' . date('Y-m-d') . '.log';
 		
 		$str = '[' . date('Y-m-d H:i:s') . '] ' . $str;
@@ -807,11 +845,21 @@ class ScheduleModel extends Model{
 	 /**
 	 * 发送HTTP请求方法
 	 * @param  string $url    请求URL
-	 * @param  array  $params 请求参数
+	 * @param  array|string  $params 请求参数
 	 * @param  string $method 请求方法GET/POST
 	 * @return array  $data   响应数据
 	 */
-	 public function http($url, $params, $method = 'GET', $header = array(), $multi = false){
+	 public function http($url, $params=array(), $method = 'GET', $header = array(), $multi = false){
+		
+		if(!$this->checkUrl($url)) return false;
+		
+		$vars=array();
+		
+		if(is_string($params)){
+			parse_str($params,$vars);
+			$params=$vars;
+		}
+		
 		$opts = array(
 				CURLOPT_TIMEOUT        => 30,
 				CURLOPT_RETURNTRANSFER => 1,
@@ -849,15 +897,15 @@ class ScheduleModel extends Model{
 		}
 		
 		return  $data;
+	
+	}
+	
+	/*检查URL的有效性*/
+	public function checkUrl($url){
+		if (!preg_match_all('/(http|https){1}(:\/\/)?((([\da-z-\.]+)\.([a-z]{2,6}))|(localhost){1})([\/\w \.-?&%-=]*)*\/?/',$url))
+		{
+			return false;
 		}
-		
-		/*检查URL的有效性*/
-		public function checkUrl($url){
-		
-			if (!preg_match_all('/(http|https){1}(:\/\/)?((([\da-z-\.]+)\.([a-z]{2,6}))|(localhost){1})([\/\w \.-?&%-=]*)*\/?/',$url))
-			{
-				return false;
-			}
-			 return true;
-		}
+		 return true;
+	}
 }

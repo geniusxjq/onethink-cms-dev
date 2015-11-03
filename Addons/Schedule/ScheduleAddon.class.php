@@ -56,10 +56,10 @@ class ScheduleAddon extends Addon{
 			'title'=>'计划名称',
 			'schedule_type'=>'类型',
 			'modifier'=>'执行间隔',
-			'daylist'=>'日',
-			'month'=>'月',
+			'daylist'=>'指定日',
+			'month'=>'指定月',
 			'start_datetime'=>'开始时间',
-			'end_datetime'=>'失效时间',
+			'end_datetime'=>'结束时间',
 			'last_run_time'=>'上次执行',
 			'statustext'=>'状态',
 	

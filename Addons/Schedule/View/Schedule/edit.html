@@ -43,10 +43,13 @@ echo '<link href="__STATIC__/bootstrap/2.x/lib/datetimepicker/css/datetimepicker
                         </label>
 						<div class="controls">
                         <input type="hidden" class="text input-mid" name="task_to_run" value="">
-                        模型层：
+                        方法类型：
                         <select id="task-to-run-layer">
                             <option value="Model">模型(Model)</option>
                             <option value="Controller">控制器(Controller)</option>
+                            <option value="Function">函数(Function)</option>
+                            <option value="CUrl-Get">CURL 网址(GET)</option>
+                            <option value="CUrl-Post">CURL 网址(POST)</option>
                             <option value="Api">接口(API)</option>
                             <option value="Util">工具(Util)</option>
                             <option value="Widget">部件(Widget)</option>
@@ -54,7 +57,7 @@ echo '<link href="__STATIC__/bootstrap/2.x/lib/datetimepicker/css/datetimepicker
                             <option value="Service">服务(Service)</option>
                         </select>
                         &nbsp;资源地址：
-                        <input type="text" class="text input-default" id="task-to-run-res" placeholder="[格式] 资源://模块/控制器/操作" value="">
+                        <input type="text" class="text input-large" id="task-to-run-res" placeholder="[格式] 资源://模块/控制器/操作" value="">
                         &nbsp;附带参数：
                         <input type="text" class="text input-default" id="task-to-run-param" placeholder="[格式] a=1&b=2&c=3" value="">
 						</div>
