@@ -185,8 +185,10 @@ class ScheduleModel extends Model{
 			$this->error ="请选择记录";
 			return false;
 		}
-		$this->cleanCache();
-		return $this->delete($id);
+		
+		$res=$this->delete($id);
+		if($res)$this->cleanCache();
+		return $res;
 	}
 	
 	/* 禁用 */
@@ -195,8 +197,9 @@ class ScheduleModel extends Model{
 			$this->error ="请选择记录";
 			return false;
 		}
-		$this->cleanCache();
-		return $this->save(array('id'=>$id,'status'=>'0'));
+		$res=$this->save(array('id'=>$id,'status'=>'0'));
+		if($res)$this->cleanCache();
+		return $res;
 	}
 	
 	/* 启用 */
@@ -205,19 +208,16 @@ class ScheduleModel extends Model{
 			$this->error ="请选择记录";
 			return false;
 		}
-		$this->cleanCache();
-		return $this->save(array('id'=>$id,'status'=>'1'));
+		$res=$this->save(array('id'=>$id,'status'=>'1'));
+		if($res)$this->cleanCache();
+		return $res;
 	}
-
-	//保存一条任务计划到数据库
-	//@return bool
-	public function updateSchedule($schedule = '') {
-		if(empty($schedule)) {
-			$schedule = $this->schedule;
-		}
-		//保存到数据库
+	
+	//根据任务类型过滤数据
+	public function paramFilter(&$schedule){
+		
 		$schedule['start_datetime'] = date('Y-m-d H:i:s', $this->setSecondToZero($schedule['start_datetime']));
-		($schedule['month'])&&($schedule['month']=count($schedule['month'])==12?'*':implode(',',$schedule['month']));
+		($schedule['month'])&&($schedule['month']=count($schedule['month'])>=12?'*':implode(',',$schedule['month']));
 		(!$schedule['modifier'])&&($schedule['modifier']=1);
 		if($schedule['daylist']){
 			if(($schedule['schedule_type']=="WEEKLY")||(in_array($schedule['modifier'],array('FIRST','SECOND','THIRD','FOURTH','LAST')))){
@@ -227,12 +227,34 @@ class ScheduleModel extends Model{
 			}
 			is_array($schedule['daylist'])&&($schedule['daylist']=implode(',',$schedule['daylist']));
 		}
+		
+		if($schedule['schedule_type']=='WEEKLY') {$schedule['month']='';}
+		if($schedule['schedule_type']=='MONTHLY-LASTDAY') {$schedule['daylist']='';}
+		if(in_array($schedule['schedule_type'],array('MINUTE','HOURLY','DAILY'))) {$schedule['daylist']=''; $schedule['month']='';}
+		if($schedule['schedule_type']=='ONCE'){ $schedule['daylist']=''; $schedule['month']=''; $schedule['modifier']='';}
+		
+	}
+
+	//保存一条任务计划到数据库
+	//@return bool
+	public function updateSchedule($schedule = '') {
+		if(empty($schedule)) {
+			$schedule = $this->schedule;
+		}
+		
+		$this->paramFilter($schedule);
+		
+		//保存到数据库
 		if( $this->isValidSchedule($schedule)){
-			$res =!$schedule['id']?$this->add($schedule):$this->save($schedule);
-			if($res==0)$this->error="数据没有变更无需保存";
+			$res=!$schedule['id']?$this->add($schedule):$this->save($schedule);
+			if($res==0){
+				$this->error="数据没有变更无需保存";
+				return false;
+			}
 			$this->cleanCache();
 			return $res;
 		}else {
+			$this->error="计划任务参数不合法";
 			return false;
 		}
 	}
@@ -243,7 +265,7 @@ class ScheduleModel extends Model{
 			$schedule = $this->schedule;
 		}
 		//更新到数据库
-		if( $this->isValidSchedule($schedule) ) {
+		if( $this->isValidSchedule($schedule)) {
 			
 			if(strtoupper($schedule['schedule_type']) == 'ONCE') {
 				
@@ -261,7 +283,7 @@ class ScheduleModel extends Model{
 			
 			$map['id'] = $schedule['id'];
 			$res = $this->where($map)->save($data);
-			$this->cleanCache();
+			if($res)$this->cleanCache();
 			return $res;
 		}else {
 			return false;

@@ -18,7 +18,7 @@ function parse_content($content){
 		
 		$class=new $class();	
 		
-		$content=$class->parseSensitiveWords(array('content'=>$content));
+		$content=$class->parseSensitiveWords($content);
 		
 	}
 	/*敏感词过滤 END*/

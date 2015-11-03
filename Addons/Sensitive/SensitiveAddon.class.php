@@ -79,15 +79,13 @@ class SensitiveAddon extends Addon
 	
 	*/
 	
-	 public function parseSensitiveWords($param=array())
+	 public function parseSensitiveWords($content)
     {
 		
-		if(!$param||!$param["content"]) return "";
+		if(!$content) return "";
 		
-		if(!$this->isSetup($this->info['name'])) //如果未安装则直接返回内容（不做处理）
-		return $param["content"];
+		if(!$this->isSetup($this->info['name'])) return $content;//如果未安装则直接返回内容（不做处理）
 		
-		$content=$param["content"];
         $config = $this->getConfig();
         if ($config['is_open']) {
             $replace_words = S('replace_sensitive_words');
