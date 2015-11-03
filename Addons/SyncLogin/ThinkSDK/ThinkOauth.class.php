@@ -116,6 +116,7 @@ abstract class ThinkOauth{
      * @return mixed 返回Oauth
      */
     public static function getInstance($type, $token = null) {
+		if(!$type) throw new Exception('请传入接口类型参数"TYPE"');
         $name = ucfirst(strtolower($type)) . 'SDK';
         require_once "sdk/{$name}.class.php";
         if (class_exists($name)) {

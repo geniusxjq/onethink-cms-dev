@@ -23,10 +23,4 @@ class IndexController extends UcenterController {
 		
         $this->display();
     }
-	
-	public function send_mail()
-	{
-		
-		send_mail(I('post.to','') , I('post.subject',''), I('post.body','') , I('post.name',''), I('post.attachment',''));
-	}
 }
