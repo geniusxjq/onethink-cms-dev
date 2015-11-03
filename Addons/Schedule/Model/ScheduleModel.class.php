@@ -5,12 +5,12 @@ use Think\Model;
 
 /**
  * Schedule模型
- */
- 
+*/ 
 class ScheduleModel extends Model{
 	
 	private $MONTH_ARRAY 	= array('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec');
 	private $WEEK_ARRAY  	= array('Mon','Tue','Wed','Thu','Fri','Sat','Sun');
+	private $TAST_TYPE_TEXT=array('ONCE'=>'一次性','MINUTE'=>'分钟','HOURLY'=>'小时','DAILY'=>'日','WEEKLY'=>'周','MONTHLY'=>'月','MONTHLY-FIRST'=>'月的第一周','MONTHLY-SECOND'=>'月的第二周','MONTHLY-THIRD'=>'月的第三周','MONTHLY-FOURTH'=>'月的第四周','MONTHLY-LASTDAY'=>'月的最后一天');
 	private $schedule		= array();
 	private $scheduleList 	= array();
 	
@@ -26,9 +26,8 @@ class ScheduleModel extends Model{
 	);
 	
 	protected function _afterFilter(&$result,$options) {
-		$result['statustext'] =  $result['status'] == 0 ? '禁用' : '正常';
-		$result['month'] = "<span title='{$result['month']}'>".msubstr($result['month'],0,15)."</span>";
-		$result['daylist'] = "<span title='{$result['daylist']}'>".msubstr($result['daylist'],0,15)."</span>";
+		$result['status_text'] =  $result['status'] == 0 ? '禁用' : '正常';
+		$result['schedule_type_text']=$this->TAST_TYPE_TEXT[$result['schedule_type']];
 		
 	}
 	

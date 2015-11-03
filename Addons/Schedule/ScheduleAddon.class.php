@@ -54,14 +54,12 @@ class ScheduleAddon extends Addon{
 		'listKey'=>array( 		//这里定义的是除了id序号外的表格里字段显示的表头名
 			'id'=>'ID',
 			'title'=>'计划名称',
-			'schedule_type'=>'类型',
-			'modifier'=>'执行间隔',
-			'daylist'=>'指定日',
-			'month'=>'指定月',
+			'schedule_type_text'=>'类型/周期',
+			'info'=>'简介',
 			'start_datetime'=>'开始时间',
 			'end_datetime'=>'结束时间',
 			'last_run_time'=>'上次执行',
-			'statustext'=>'状态',
+			'status_text'=>'状态',
 	
 		),
 	);		
