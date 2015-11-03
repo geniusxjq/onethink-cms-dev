@@ -86,24 +86,24 @@ class ScheduleAddon extends Addon{
 		
 		$Schedule = D('Addons://Schedule/Schedule');
 		//锁定自动执行 修正一下
-		$lockfile = $Schedule->getLogPath() . '/schedule.lock';
+		$lock=S('Schedule-Lock');
 		//锁定未过期 - 返回
-		if( file_exists($lockfile) && ( (filemtime($lockfile))+60 > $_SERVER['REQUEST_TIME'] )){
+		if($lock&&(($lock+60) > $_SERVER['REQUEST_TIME'] )){
 			return ;
 		} else {
-			//重新生成锁文件
-			touch($lockfile);
+			//重新生成锁
+			S('Schedule-Lock',time());
 		}
 
 		//忽略中断\忽略过期
-		set_time_limit(0);
+		set_time_limit(1000);
 		ignore_user_abort(true);
 		
 		//执行计划任务
 		$Schedule->runScheduleList($Schedule->getScheduleList());
 		
 		//解除锁定
-		unlink($lockfile);
+		S('Schedule-Lock',null);
 		return ;
 	}
 	
