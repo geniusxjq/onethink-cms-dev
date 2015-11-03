@@ -36,8 +36,6 @@ class FriendlinksModel extends Model{
 				$data['picture'][$key]['path'] = $cover['path'];
 			}else{
 				$data['writing'][$key] = $val;
-				$cover = M('picture')->find($val['cover_id']);
-				$data['writing'][$key]['path'] = $cover['path'];
 			}
 		}
 		return $data;

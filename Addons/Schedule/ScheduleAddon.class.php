@@ -78,9 +78,9 @@ class ScheduleAddon extends Addon{
 	//实现的app_end钩子方法
 	public function app_end($param){//print_r(date('Y-h-d H:i:s','1390284571'));
 		
-		$config = $this->getConfig();
+		$conf = $this->getConfig();
 		
-		if(!$config['is_open']) return;//插件已关闭
+		if(!$conf['is_open']) return;//插件已关闭
 		
 		$Schedule = D('Addons://Schedule/Schedule');
 		//锁定自动执行 修正一下

@@ -69,6 +69,10 @@ use Common\Controller\Addon;
         //实现的pageFooter钩子方法
         public function Friendlinks($param){
         	
+			$conf=$this->getConfig();
+			
+			if(!$conf['is_open']) return;//插件已关闭
+			
 			$list = D('Addons://Friendlinks/Friendlinks')->linkList();
 			$this->assign('list',$list);
 			$this->assign('link',$param);
