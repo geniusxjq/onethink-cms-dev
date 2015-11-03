@@ -283,7 +283,7 @@ class MailController extends AddonsController
 		/**
 	 * 用常规方式发送邮件。
 	 */
-	function send_mail($to = '', $subject = '', $body = '', $name = '', $attachment = null)
+	private function send_mail($to = '', $subject = '', $body = '', $name = '', $attachment = null)
 	{
 		$from_email = C('MAIL_SMTP_USER');
 		$from_name =  C('WEB_SITE_NAME');

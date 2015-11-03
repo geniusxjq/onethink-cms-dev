@@ -86,12 +86,12 @@ class AdvertisingAddon extends Addon{
         }
 		
 		//实现的广告钩子
-        public function Advertising($param){
+        public function Advertising($ids){
 			
-			if(!$param)return ;
-        	$data=D('Addons://Advertising/Advertising')->getAdvertising($param);
-			if(!$data)return ;
-			$this->assign('data',$data);
+			if(!$ids)return ;
+        	$datas=D('Addons://Advertising/Advertising')->getAdvertising($ids);
+			if(!$datas)return ;
+			$this->assign('datas',$datas);
 			$this->display('widget');
 			
         }              
