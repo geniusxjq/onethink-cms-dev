@@ -104,7 +104,7 @@ class AdvertisingModel extends Model{
 			$where = ' and position = '.$id;
 					
 			$data=array();
-			$list=D('Advertisement')->where('status = 1 and create_time < '.time().' and end_time > '.time().$where)
+			$list=D('Advertisement')->where('status = 1 and ((create_time < '.time().' and end_time > '.time().') or is_never=1)'.$where)
 			->order('level desc,id asc')->limit($ad_space['same_limit'])->select();
 			
 			if(!$list&&!$ad_space['idle_content']) continue;

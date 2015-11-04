@@ -108,6 +108,13 @@
 					<input type="text" class="text input-large" name="link" value="{$info.link}">
 				</div>
 			</div>
+            <div class="form-item cf">
+				<label class="item-label">永久有效<span class="check-tips">（广告永久有效不做时间限制，忽略起止时间。）</span></label>
+				<div class="controls">
+					<label class="checkbox"><input type="radio" name="is_never" value="1" <if condition="$info.is_never eq 1">checked="checked"</if> ">是</label>
+					<label class="checkbox"><input type="radio" name="is_never" value="0" <if condition="$info.is_never eq 0">checked="checked"</if> ">否</label>
+				</div>
+			</div>
 			<div class="form-item cf">
 				<label class="item-label">开始时间</label>
 				<div class="controls">

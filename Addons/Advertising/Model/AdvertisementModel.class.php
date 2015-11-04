@@ -28,6 +28,7 @@ class AdvertisementModel extends Model{
 		$result['statustext'] =  $result['status'] == 0 ? '禁用' : '正常';
 		$result['create_time'] = date('Y-m-d H:i', $result['create_time']);
 		$result['end_time'] = date('Y-m-d H:i', $result['end_time']);
+		$result['is_nevertext']=$result['is_never']?'是':'否';
 	}
 	
 	protected function _after_select(&$result,$options){

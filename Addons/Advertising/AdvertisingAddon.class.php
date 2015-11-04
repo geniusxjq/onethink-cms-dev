@@ -64,6 +64,7 @@ class AdvertisingAddon extends Addon{
 			`link` char(140) NOT NULL DEFAULT '' COMMENT '链接地址',
 			`level` int(3) unsigned NOT NULL DEFAULT '0' COMMENT '优先级',
 			`status` tinyint(2) NOT NULL DEFAULT '1' COMMENT '状态（0：禁用，1：正常）',
+			`is_never` tinyint(2) NOT NULL DEFAULT '0' COMMENT '永久有效不受时间限制的广告（0：不是，1：是）',
 			`create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '开始时间',
 			`end_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '结束时间',
 			PRIMARY KEY (`id`)

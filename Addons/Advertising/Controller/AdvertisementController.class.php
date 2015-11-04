@@ -38,10 +38,11 @@ class AdvertisementController extends AddonsController{
 				'title'=>'广告名称',
 				'positiontext'=>'广告位置',
 				'link'=>'连接地址',
-				'statustext'=>'显示状态',
-				'level'=>'优先级',
 				'create_time'=>'开始时间',
 				'end_time'=>'结束时间',
+				'is_nevertext'=>'永久有效',
+				'statustext'=>'状态',
+				'level'=>'优先级',
 		);
 		
 		$this->assign('main_title',$main_title);

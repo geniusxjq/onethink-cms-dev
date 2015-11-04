@@ -170,7 +170,7 @@ class ScheduleModel extends Model{
 		
    		$result =array();
 		
-    	list($result['layer'],$result['res'],$result['param'])=explode('::',$params['task_to_run']);
+    	list($result['layer'],$result['res'],$result['param'])=explode('::',preg_replace('/\s+/','',$params['task_to_run']));
 		
 		if(empty($result['layer'])||empty($result['res'])){
 			
@@ -180,7 +180,7 @@ class ScheduleModel extends Model{
 			
 			$this->_log($str_log);
 			
-			$result=false;
+			return false;
 			
 		}
 		
@@ -278,7 +278,7 @@ class ScheduleModel extends Model{
 			$schedule = $this->schedule;
 		}
 		
-		if(trim(explode('::',$schedule['task_to_run'])[1])==''){
+		if(!$schedule['task_to_run']||!preg_match('/^(\w)+::(.)+::(.)*/',$schedule['task_to_run'])){
 			
 			$this->error="请填写完整的执行方法/资源地址";
 			

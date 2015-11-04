@@ -203,7 +203,7 @@ var EditData={$data?json_encode($data):'null'};
 		var self = $(this);
 		
 		var data=$("input[name='task_to_run']").val(($("#task-to-run-layer")
-					.val()||' ')+"::"+($("#task-to-run-res").val()||' ')+"::"+($("#task-to-run-param").val()||' ')).val().split("::");
+					.val())+"::"+($("#task-to-run-res").val())+"::"+($("#task-to-run-param").val())).val().split("::");
 		
 		if(!data[1]){
 					
