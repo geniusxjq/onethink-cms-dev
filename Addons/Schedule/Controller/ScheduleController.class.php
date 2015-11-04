@@ -19,7 +19,9 @@ class ScheduleController extends AddonsController{
 		$_name=(I('id')?'编辑':'添加');
 				
 		if(IS_POST){
+			
 			$res = $this->_Model->updateSchedule(I('post.'));
+			
 			if($res) {
 				// TODO:记录日志
 				$this->success($_name.'成功',U('Addons/adminList?name=Schedule'));

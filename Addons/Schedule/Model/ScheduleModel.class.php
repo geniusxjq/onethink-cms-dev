@@ -266,13 +266,24 @@ class ScheduleModel extends Model{
 		if(in_array($schedule['schedule_type'],array('MINUTE','HOURLY','DAILY'))) {$schedule['daylist']=''; $schedule['month']='';}
 		if($schedule['schedule_type']=='ONCE'){ $schedule['daylist']=''; $schedule['month']=''; $schedule['modifier']='';}
 		
+		return true;
+		
 	}
 
 	//保存一条任务计划到数据库
 	//@return bool
 	public function updateSchedule($schedule = '') {
+		
 		if(empty($schedule)) {
 			$schedule = $this->schedule;
+		}
+		
+		if(trim(explode('::',$schedule['task_to_run'])[1])==''){
+			
+			$this->error="请填写完整的执行方法/资源地址";
+			
+			return false;
+			
 		}
 		
 		$this->paramFilter($schedule);

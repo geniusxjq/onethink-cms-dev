@@ -90,17 +90,17 @@ echo '<link href="__STATIC__/bootstrap/2.x/lib/datetimepicker/css/datetimepicker
                             </select>
 						</div>
 					</div>
-					<div class="form-item cf" id="modifier-div">
+					<div class="form-item cf hidden" id="modifier-div">
 						<label class="item-label">执行频率（间隔）
                         <span class="check-tips">（任务执行的时间间隔。默认为1个任务周期）</span>
                         </label>
 						<div class="controls">
-							<input type="text" class="text input-mid" name="modifier" data-value="" value="">&nbsp;<font id="task-unit"></font> 执行一次
+							<input type="text" class="text input-mid" name="modifier" data-value="" value="">&nbsp;<font id="modifier-unit"></font> 执行一次
 						</div>
 					</div>
-					<div class="form-item cf" id="daylist-div">
+					<div class="form-item cf hidden" id="daylist-div">
                      
-                     <span id="day-in-month-box" > 
+                     <span id="month-day-box" > 
                          <label class="item-label">
                          指定月的一天或多天
                          <span class="check-tips">（指定月的一天或多天。如果当月只有28天，则大于28日的都会在28日执行。）</span>
@@ -122,7 +122,7 @@ echo '<link href="__STATIC__/bootstrap/2.x/lib/datetimepicker/css/datetimepicker
 					</div> 
                    
                     
-					<div class="form-item cf" id="month-div">
+					<div class="form-item cf hidden" id="month-div">
                     
                          <span id="month-box">
                              <div class="controls">
@@ -173,6 +173,22 @@ echo '<link href="__STATIC__/bootstrap/2.x/lib/datetimepicker/css/datetimepicker
 var EditData={$data?json_encode($data):'null'};
 
 +$(function(){
+			
+	var _timer=null;
+	
+	function _update_alert(_info,_class){
+		
+		if(_timer) clearTimeout(_timer);
+		
+		_timer=setTimeout(function(){
+								  
+			updateAlert('default');
+			
+		},5000);
+		
+		updateAlert(_info,_class);
+		
+	}
 		   
 	$(document)
 	.ajaxStart(function(){
@@ -186,12 +202,12 @@ var EditData={$data?json_encode($data):'null'};
 									
 		var self = $(this);
 		
-		var data=$("input[name='task_to_run']").val($("#task-to-run-layer")
-					.val()+"::"+$("#task-to-run-res").val()+"::"+$("#task-to-run-param").val()).val().split("::");
+		var data=$("input[name='task_to_run']").val(($("#task-to-run-layer")
+					.val()||' ')+"::"+($("#task-to-run-res").val()||' ')+"::"+($("#task-to-run-param").val()||' ')).val().split("::");
 		
 		if(!data[1]){
 					
-			updateAlert("请填写完整的执行方法（资源地址）!",'alert-error');
+			_update_alert("请填写完整的执行方法（资源地址）!",'alert-error');
 			
 			return false;
 		
@@ -219,10 +235,10 @@ var EditData={$data?json_encode($data):'null'};
 	
 		function success(data){
 			if(data.status){
-				updateAlert(data.info,'alert-success');
+				_update_alert(data.info,'alert-success');
 				setTimeout(function(){window.location.href = data.url;},1500);
 			} else {
-				updateAlert(data.info,'alert-error');
+				_update_alert(data.info,'alert-error');
 			}
 		}
 	});
@@ -261,7 +277,7 @@ var EditData={$data?json_encode($data):'null'};
 	
 	var _weekly_box=$("#weekly-box");
 	
-	var _day_in_month_box=$("#day-in-month-box");
+	var _month_day_box=$("#month-day-box");
 		   
 	var data_list={
 		weekly:{
@@ -282,18 +298,18 @@ var EditData={$data?json_encode($data):'null'};
 			
 			case "day":
 			
-			if(!_day_in_month_box.data("builded")){; 
+			if(!_month_day_box.data("builded")){; 
 				
-				_day_in_month_box.find(".date_tab_box").append('<label><input class="checkbox-s-all" type="checkbox"><font>每天</font></label>');
+				_month_day_box.find(".date_tab_box").append('<label><input class="checkbox-s-all" type="checkbox"><font>每天</font></label>');
 				
 				for(var i=1;i<=31;i++){
 					
-					_day_in_month_box.find(".date_tab_box")
+					_month_day_box.find(".date_tab_box")
 					.append('<label><input class="checkbox-s" type="checkbox" name="daylist[]" value="'+i+'" ><font>'+i+'</font></label>')
 					
 				}
 				
-				_day_in_month_box.data("builded",true);
+				_month_day_box.data("builded",true);
 				
 			}
 			
@@ -355,7 +371,7 @@ var EditData={$data?json_encode($data):'null'};
 			
 		});
 		
-		_select_type(true);
+		toggle_select_type(true);
 		
 		var task_to_run=EditData["task_to_run"].split("::");
 		
@@ -401,11 +417,11 @@ var EditData={$data?json_encode($data):'null'};
 
 		if(type=="type-5"||type=="type-3"){
 			
-			$("#daylist-div,#weekly-box").show();$("#day-in-month-box").hide();
+			$("#daylist-div,#weekly-box").show();$("#month-day-box").hide();
 			
 		}else{
 			
-			$("#daylist-div,#day-in-month-box").show();$("#weekly-box").hide();
+			$("#daylist-div,#month-day-box").show();$("#weekly-box").hide();
 			
 		}
 
@@ -431,7 +447,7 @@ var EditData={$data?json_encode($data):'null'};
 			
 			case "type-4":
 			
-			$("#month-div,#daylist-div,#modifier-div,#day-in-month-box").show();$("#weekly-box").hide();
+			$("#month-div,#daylist-div,#modifier-div,#month-day-box").show();$("#weekly-box").hide();
 			
 			break;
 			
@@ -453,7 +469,7 @@ var EditData={$data?json_encode($data):'null'};
 	
 	//*************************
 	
-	function _select_type(is_init){
+	function toggle_select_type(is_init){
 		
 		var o=$("#schedule_type option:selected");
 		
@@ -465,7 +481,7 @@ var EditData={$data?json_encode($data):'null'};
 			
 			_month_box.appendTo(_hider);
 			
-			_day_in_month_box.appendTo(_hider);
+			_month_day_box.appendTo(_hider);
 		
 		}
 				
@@ -484,13 +500,13 @@ var EditData={$data?json_encode($data):'null'};
 		}
 		
 		if(type=="type-4"){
-			_day_in_month_box.appendTo(_dayer);
+			_month_day_box.appendTo(_dayer);
 			checkbox_builder("day");
 		}else{
-			_day_in_month_box.appendTo(_hider);
+			_month_day_box.appendTo(_hider);
 		}
 		
-		$("#task-unit").text(o.data("text"));
+		$("#modifier-unit").text(o.data("text"));
 		
 		(is_init!=true)&&$("input[name='modifier']").val((type=="type-5"||type=="type-6")?$(o).data("text"):"");
 		
@@ -500,13 +516,11 @@ var EditData={$data?json_encode($data):'null'};
 	
 	//初始化
 			
-	_select_type(true);
-	
-	$("#schedule_type").change(_select_type);
-	
 	form_data_init();
 	
 	$("#task-form").show();
+	
+	$("#schedule_type").change(toggle_select_type);
 	
 	//***************************************************全选的实现（checkbox）
 	
