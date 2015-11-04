@@ -44,7 +44,7 @@ input[type='text'],
 input[type='password'],
 textarea{
   border-radius: 0px;
-  border-color:#e7e7e7;
+  border: solid 1px #e7e7e7;
   color:#707070;
   -webkit-box-shadow:none;
           box-shadow:none;
@@ -54,7 +54,7 @@ input[type='text']:focus,
 input[type='password']:focus,
 textarea:focus {
   outline:0;
-  border-color:#0F81FF;
+  border: solid 1px #0F81FF;
   -webkit-box-shadow: none;
           box-shadow: none;
 }

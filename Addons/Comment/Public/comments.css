@@ -11,9 +11,7 @@
 .document-comments .no-quote {font-size:12px;color:#ccc;}
 
 .addon-comment-form {margin-top:10px;}
-.addon-comment-form input.cancel-quote {display:none;}
-.addon-comment-form .verify-code {margin-bottom:10px;}
-.addon-comment-form .verify-code img {border:1px solid #dedede;}
+.addon-comment-form .cancel-quote {display:none;}
 
 .addon-comment-error {padding:20px 0;font-size:12px;color:red;}
 .addon-comment-form .need-login {font-size:12px;color:#999;}

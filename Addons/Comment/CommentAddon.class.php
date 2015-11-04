@@ -48,7 +48,7 @@ class CommentAddon extends Addon{
       'username:用户名',
       'content:内容',
       'did:评论文档',
-      'create_time|time_format:评论时间',
+      'create_time|time_form_hidden_fieldat:评论时间',
       'status:状态',
       'id:操作:[EDIT]|编辑,[DELETE]|删除'
     ),
@@ -71,46 +71,38 @@ class CommentAddon extends Addon{
   //实现的documentDetailAfter钩子方法
   public function documentDetailAfter($param){
 	  
-    $addon_comment_data = array('nickname' => '' ,'form' => array('did' => '', 'pid' => ''));
+    $_data = array('nickname'=>'','form_hidden_field'=>array('did' => '','pid' =>''));
+	
     $addon_config = $this->getConfig();
-    $this->assign('addon_comment_config', $addon_config);
 	
-    if (!is_login()) {
-      // 未登录
-      $addon_comment_data['nickname'] = '游客';
-      $addon_comment_data['form']['did'] = $param['id'];
-    }
-    else {
-      // 已登录
-      $addon_comment_data['nickname'] =get_nickname();
-      $addon_comment_data['form']['did'] = $param['id'];
-    }
-	
-    $addon_comment_data['form']['pid'] = 0;
-
     $Comment = D('Addons://Comment/Comment');
 	
-    if ($addon_config['comment_per_page'] > 0) {
-      $addon_comment_data['list'] = $Comment->getComments($param['id'], $addon_config['comment_per_page']);
-    }
-    else {
-      $addon_comment_data['list'] = array();
-    }
-    $this->assign('addon_comment_data', $addon_comment_data);
+    if (!$addon_config['comment_pagesize']>0) return ;
+      
+	$_data= $Comment->getComments($param['id'], $addon_config['comment_pagesize'],$addon_config['comment_show_examine_not']);
+	
+    $_data['nickname']=get_nickname();
+	
+	$_data['form_hidden_field']['did'] = $param['id'];
+	
+    $_data['form_hidden_field']['pid'] = 0;
+	
+    $this->assign('_data',$_data);
 
-    // 处理数据分页
-    $Page = new \Think\Page($Comment->getCommentsCount(), $addon_config['comment_per_page']);
-    $this->assign('addon_comment_page', $Page->show());
+    $this->assign('_config', $addon_config);
 
-    $this->assign('addon_comment_title', $addon_config['comment_title']);
-
-    // 获取模版名称
-    $template_name = $addon_config['comment_template'] == '' ? 'default' : $addon_config['comment_template'];
-    // 模版路径
-    $template_path = __DIR__ .'/View/'.$template_name.'/';
+    $this->assign('comment_title', $addon_config['comment_title']);
+    
+    $template_name = $addon_config['comment_template'] == '' ? 'default' : $addon_config['comment_template'];// 获取模版名称
+    
+    $template_path = __DIR__ .'/View/'.$template_name.'/';// 模版路径
+	
     if (!file_exists($template_path)) {
-      $this->assign('addon_comment_error', '模版不存在，使用默认模版');
-      $template_name = 'default';
+		
+		$this->assign('comment_error', '模版不存在，使用默认模版');
+		
+		$template_name = 'default';
+	  
     }
 	
     $this->display('View/'.$template_name.'/comment');

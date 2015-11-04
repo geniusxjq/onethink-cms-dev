@@ -1,31 +1,18 @@
 <extend name="Base/common"/>
 
 <block name="header">
-    <header>
-        <div class="container">
-            <h2>源自相同起点，演绎不同精彩 </h2>
-        </div>
-    </header>
+<header>
+<div class="container">
+    <h2>用户登录</h2>
+</div>
+</header>
 </block>
 
-<block name="side">
-<!-- 左侧 nav
-================================================== -->
-    <div class="span3 bs-docs-sidebar">
-        <ul class="nav nav-list bs-docs-sidenav">
-        </ul>
-    </div>
-</block>
 
 <block name="body"> 
+<div class="container center-block col-md-12">
 {:hook('Advertising','1,2,3')}
 {:hook('Friendlinks','1,2,3')}
-    <div class="span9">
-        <!-- Contents
-        ================================================== -->
-        <section id="contents">
-
-        </section>
-    </div>
-  
+{:hook('documentDetailAfter',array('id'=>2))}
+</div>
 </block>

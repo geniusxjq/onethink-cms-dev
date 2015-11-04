@@ -102,7 +102,7 @@ class ScheduleModel extends Model{
 		$task_to_run=$this->fill_params($schedule);
 		if(!$task_to_run) return false;
 		
-		$RunStatus=false;//记录任务运行结果是否成功
+		$run_result=false;//记录任务运行结果
 		
 		switch(strtoupper($task_to_run['layer'])){
 			
@@ -111,27 +111,27 @@ class ScheduleModel extends Model{
 			    $vars=array();
 			    parse_str($task_to_run['param'],$vars);
 				$res=call_user_func_array($task_to_run['res'],$vars);
-				if($res!=false)$RunStatus=true;
+				($res!=false)&&($run_result=true);
 			
 			break;
 			
 			case 'CURL-POST':
 			     //curl 用post方法执行
 				 $res=$this->http($task_to_run['res'],$task_to_run['param'],'POST');
-				 if($res!=false)$RunStatus=true;
+				 ($res!=false)&&($run_result=true);
 			
 			break;
 
 			case 'CURL-GET':
 			     //curl 用get方法执行
 			     $res=$this->http($task_to_run['res'],$task_to_run['param'],'GET');
-				 if($res!=false)$RunStatus=true;
+				 ($res!=false)&&($run_result=true);
 			break;
 			
 			default:
 			    //默认R方法调用控制器模型
 				$res=R($task_to_run['res'],$task_to_run['param'],$task_to_run['layer']);
-				if($res!=false)$RunStatus=true;
+				($res!=false)&&($run_result=true);
 				
 		}
 		
@@ -158,7 +158,7 @@ class ScheduleModel extends Model{
 			}
 		}
 		$this->updateScheduleRunTime($schedule);
-		$str_log = "ID={$schedule['id']} 的任务已运行。 状态：".($RunStatus?"成功":"失败");
+		$str_log = "ID={$schedule['id']} 的任务已运行。 状态：".($run_result?"成功":"失败");
 		if(C('APP_DEBUG')){
 			$str_log  .= "任务为: {$schedule['task_to_run']} ，任务描述为: {$schedule['info']} 。";
 		}

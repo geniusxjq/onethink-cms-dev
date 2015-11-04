@@ -158,60 +158,34 @@ class CommentModel extends Model{
   /**
    * 返回有效评论的数量
    */
-  public function getCommentsCount() {
-    $map = array('update_time'=> array('elt', NOW_TIME), 'status'=> 1);
-    return $this->_thisModel->where($map)->count();
-  }
-
+   
   /**
    * 获得评论列表，性能有待优化
    * @param int $id 文档id
-   * @param int $per_page 获取评论的最大条数
+   * @param int $pagesize 每页显示记录数
+   * @param boolean  $show_examine_not 显示未审核留言
+   * @param array  $where 附加条件
    * @return array 评论列表
    **/
-  public function getComments($id, $per_page = 100) {
-	 // 获得插件配置
-    $addon_config = get_addon_config('Comment');
+  public function getComments($id,$pagesize = 100,$show_examine_not=false,$where=array()) {
+	  
+	$p = I("p",1,"intval");
 	
-    $map = array('did'=> $id, 'update_time'=> array('elt', NOW_TIME));
-	
-	if($addon_config['comment_show_notcheck']==0){
-	
-	$map = array_merge(array('status'=> 1),$map);
-	
+	if (is_numeric($pagesize) && $pagesize > 0) {
+		
+		$pagesize = intval($pagesize);
+		
 	}
 	
-    $var_page = C('VAR_PAGE') ? C('VAR_PAGE') : 'p';
-    $comments = $this->_thisModel->where($map)->page((int)I('GET.'.$var_page, 1), $per_page)->order('create_time desc')->getField('id, pid, pids, username, content, create_time');
-    unset($map);
-
-    if (!$comments || count($comments) === 0) {
-      return array();
-    }
-
-    $parent_id_collection = array();
-    $comment_id_collection = array();
-    foreach ($comments as $comment) {
-      $comment_id_collection[] = $comment['id'];
-      if ((int)$comment['pids'] !== 0) {
-        $parent_ids = explode(',', $comment['pids']);
-        $parent_id_collection = array_merge($parent_id_collection, $parent_ids);
-      }
-      unset($comment);
-    }
-    $parent_id_collection = array_diff(array_unique($parent_id_collection), $comment_id_collection);
-    if (count($parent_id_collection) !== 0) {
-      $parent_comments = $this->_thisModel->where('id IN (%s) AND update_time<%d AND status=%d', implode(',', $parent_id_collection), NOW_TIME, 1)->order('create_time desc')->getField('id, pid, pids, username, content, create_time');
-    }
-
-    if ($parent_comments) {
-      $comments = array_merge($comments, $parent_comments);
-    }
-    unset($parent_comments);
-    unset($parent_id_collection);
-    unset($comment_id_collection);
-
-    return $comments;
+	$where['did']=$id;
+	!$show_examine_not&&$where['status']=1;
+	$result['count'] = $count =$this->where($where)->count('id');
+	$page = new \Think\Page($count,$pagesize);
+	$result['_page'] = $page->show();
+	$result['_list'] = $this->where($where)->page($p,$pagesize)->select();
+	
+	return $result;
+	
   }
 
   /**

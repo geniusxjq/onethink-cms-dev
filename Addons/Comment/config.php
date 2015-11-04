@@ -18,7 +18,7 @@ return array(
     'value' => '1',
     ),
   
-    'comment_show_notcheck' => array(
+  'comment_show_examine_not' => array(
     'title' => '显示未审核评论',
     'tip'   => '是否显示未审核的评论',
     'type'  => 'radio',
@@ -45,7 +45,7 @@ return array(
     'value'   => '150',
     'tip'     => '评论最大字数限制',
     ),
-  'comment_per_page' => array(
+  'comment_pagesize' => array(
     'title'   => '每页显示评论条数',
     'type'    => 'text',
     'value'   => '25',
