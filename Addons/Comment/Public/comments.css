@@ -15,10 +15,10 @@
     height: 64px;
 	line-height:64px;
 	margin:0px;
-	background-color:#f1f1f1;
+	background-color:#dfdfdf;
 	color:#fdfdfd;
 	text-align:center;
-	border-radius:50%;
+	border-radius:0px;
 }
 .comment-box .avatar + .content {
     padding-left: 0px;
@@ -28,11 +28,20 @@
     text-indent:10px;
 }
 .comment-box .comments .comment >.content .text-muted{
-	font-size:12px;
 }
-
+.comment-box .comments .comment >.content .quote{
+}
 .comment-form{
 	padding-top:20px;
+}
+.comment-form button[type='submit']{
+	
+}
+.comment-form .comment-verify-img{
+	border:solid 1px #eee;
+	width:230px;
+	height:70px;
+	cursor:pointer;
 }
 .comment-box .comment-form-header{
 	padding-bottom:20px;
@@ -49,5 +58,5 @@
 .comment-pagination li{}
 .comment-pagination li a:hover{text-decoration:none; background-color:#dedede;}
 .comment-pagination li a{ border:none; background:#eee;}
-.comment-pagination li.active a {}
+.comment-pagination li.active a { background-color:#39C;}
 .comment-pagination li.total a {background-color:#eee;}

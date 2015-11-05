@@ -93,7 +93,7 @@ textarea:focus {
 ---------------------------------------------------------*/
 /*导航*/
 .navbar,.navbar-default{
-	background:#fff;
+	background:#fdfdfd;
 	color:inherit;
 }
 .navbar-default{
@@ -259,4 +259,13 @@ header .container h2{
 }
 .footer li:first-child {
   padding-left: 0;
+}
+
+/*验证码图片
+----------------------------------*/
+.verify-img{
+	border:solid 1px #eee;
+	width:230px;
+	height:70px;
+	cursor:pointer;
 }

@@ -25,7 +25,7 @@
 
     function refreshVerify() {
         // 刷新验证码
-        var $verify_img = $('.addon-comment-verify-img');
+        var $verify_img = $('.comment-verify-img');
         var verify_img_url = $verify_img.attr('src');
         $verify_img.attr('src', '').attr('src', verify_img_url+'?'+Date.parse (new Date ()));
     }

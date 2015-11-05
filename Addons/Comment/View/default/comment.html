@@ -15,13 +15,17 @@
             <div class="comment">
               <a href="#" class="avatar"><i class="icon-user icon-2x"></i></a>
               <div class="content">          
-                 <div class="author"><a href="#">{$lo['username']==''?'游客':$lo['username']}</a>&nbsp;<span class="text-muted">{$lo['create_time']|time_format} </span></div>
+              
+              <div class="author">
+                 <a href="#">{$lo['username']==''?'游客':$lo['username']}</a>
+                 <span class="text-muted pull-right">{$lo['create_time']|time_format} </span>
+              </div>
                 
                 <div class="text">{$lo['content']}</div>
                 
                 <div class="actions pull-right">
                 
-                  <a href="#"> <div class="quote" data-pid="{$item['id']}"><a href="#quote">回复</a></div></a>
+                  <a href="#"> <div class="quote" data-pid="{$item['id']}"><a href="#quote"> <i class="icon icon-pencil text-danger"></i>&nbsp;回复</a></div></a>
                   
                 </div>
                 
@@ -81,7 +85,7 @@
                     </eq>
               
                     <div class="form-group">
-                    <button type="submit" class="btn btn-lg btn-primary ">提交</button>
+                    <button type="submit" class="btn btn-lg btn-info">提交</button>
                     <button type="button" class="btn btn-lg cancel-quote">取消</button>
                     </div>
                           

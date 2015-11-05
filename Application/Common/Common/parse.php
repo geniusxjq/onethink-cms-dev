@@ -36,7 +36,7 @@ function parse_content($content){
 function parse_page($count,$pagesize){
 	$result='';
 	$page = new \Think\Page($count,$pagesize);
-	$page->setConfig('header' ,'<li class="total"><a>%NOW_PAGE%/%TOTAL_ROW%</a></li>');
+	$page->setConfig('header' ,'<li class="total"><a>%NOW_PAGE%/%TOTAL_PAGE%</a></li>');
 	$page->setConfig('theme','<li>%FIRST%</li><li class="previous">%UP_PAGE%</li>%LINK_PAGE%<li class="next">%DOWN_PAGE%</li> %HEADER%');
 	$result= preg_replace('/^\<div\>|\<\/div\>$/i','',$page->show());
 	$result= preg_replace('/\<span class=\"current\"\>(\w*)\<\/span\>/i','<li class="active current"><a>$1</a></li>',$result);
