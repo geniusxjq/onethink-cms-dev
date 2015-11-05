@@ -180,8 +180,9 @@ class CommentModel extends Model{
 	$where['did']=$id;
 	!$show_examine_not&&$where['status']=1;
 	$result['count'] = $count =$this->where($where)->count('id');
-	$page = new \Think\Page($count,$pagesize);
-	$result['_page'] = $page->show();
+
+	$result['_page'] =parse_page($result['count'],$pagesize);
+	
 	$result['_list'] = $this->where($where)->page($p,$pagesize)->select();
 	
 	return $result;

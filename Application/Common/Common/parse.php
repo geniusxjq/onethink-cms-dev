@@ -27,6 +27,23 @@ function parse_content($content){
 
 }
 
+/*
+*返回页码（bootstrap风格"<li><a></a></li>"）
+*@param int $conut 总记录数
+*@param int $pagesize 每页显示记录数
+*/
+
+function parse_page($count,$pagesize){
+	$result='';
+	$page = new \Think\Page($count,$pagesize);
+	$page->setConfig('header' ,'<li class="total"><a>%NOW_PAGE%/%TOTAL_ROW%</a></li>');
+	$page->setConfig('theme','<li>%FIRST%</li><li class="previous">%UP_PAGE%</li>%LINK_PAGE%<li class="next">%DOWN_PAGE%</li> %HEADER%');
+	$result= preg_replace('/^\<div\>|\<\/div\>$/i','',$page->show());
+	$result= preg_replace('/\<span class=\"current\"\>(\w*)\<\/span\>/i','<li class="active current"><a>$1</a></li>',$result);
+	$result = preg_replace('/\<a class=\"num\"(\w*[^\<\>]*)\>(\w*[^\<\>]*)\<\/a\>/i','<li class="num"><a $1 >$2</a></li>',$result);
+	return $result;
+}
+
 /**
  * 取一个二维数组中的每个数组的固定的键知道的值来形成一个新的一维数组
  * @param $array 一个二维数组
@@ -84,5 +101,4 @@ function get_first_letter($s0) {
     if($asc>=-11847 and $asc<=-11056) return "Y";
     if($asc>=-11055 and $asc<=-10247) return "Z";
     return '#';
-	
 }

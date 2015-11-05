@@ -1,22 +1,6 @@
 (function($){
-    var $comments_wrapper = $('.document-comments');
-    var $comments = $('.document-comments .comment-wrapper');
-    var $comment_form = $('.addon-comment-form');
-    
-	$comments.find('.quote').on('click', function(){
-        $comment_form.appendTo($(this).parents('.comment-wrapper').eq(0).children('.comment-content'));
-        $('.addon-comment-form .cancel-quote').show();
-        setPID($(this).attr('data-pid'));
-        return false;
-    });
-
-    $('.addon-comment-form input.cancel-quote').on('click', function(){
-        $comments_wrapper.after($comment_form);
-        $(this).hide();
-        setPID(0);
-    });
-    $('.addon-comment-form form').on('submit', function(){
-        var $form = $('.addon-comment-form form');
+    $('.comment-box form').on('submit', function(){
+        var $form = $('.comment-box form');
         var url = $form.attr('action');
         var data = {};
         data.did = $form.find('input[name="did"]').val();
@@ -35,7 +19,7 @@
 		return false;
     });
 
-    $('.addon-comment-verify-img').on('click', function(){
+    $('.comment-verify-img').on('click', function(){
         refreshVerify();
     });
 

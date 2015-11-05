@@ -1,94 +1,95 @@
-<notempty name="comment_error">
-    <div class="addon-comment-error">{$comment_error}</div>
-</notempty>
-
-<div class="comments">
-    <header>
-      <h3><i class="icon-comments icon-border-circle"></i> {$_data['count']} 条评论</h3>
-      <div class="alert alert-info text-center">
-        <a href="#comment-reply-form">发表评论</a>
+<div class="row comment-box">
+        <notempty name="comment_error">
+            <div class="alert alert-danger text-center">{$comment_error}</div>
+        </notempty>
+        
+      <div class="comments row col-md-12">
+    
+          <header> 
+            <h3 class="row">
+            <i class="icon icon-quote-left icon-lg text-info"></i>&nbsp;&nbsp;评论 ( {$_data['count']} )  
+             </h3>     
+          </header> 
+          <section class="comments-list">
+          <foreach name="_data._list" item="lo" key="id" >
+            <div class="comment">
+              <a href="#" class="avatar"><i class="icon-user icon-2x"></i></a>
+              <div class="content">          
+                 <div class="author"><a href="#">{$lo['username']==''?'游客':$lo['username']}</a>&nbsp;<span class="text-muted">{$lo['create_time']|time_format} </span></div>
+                
+                <div class="text">{$lo['content']}</div>
+                
+                <div class="actions pull-right">
+                
+                  <a href="#"> <div class="quote" data-pid="{$item['id']}"><a href="#quote">回复</a></div></a>
+                  
+                </div>
+                
+              </div>
+            </div> 
+            </foreach>
+          </section>
+        <ul class=" row pager pager-loose comment-pagination">{$_data['_page']}</ul>
       </div>
-    </header>
-    <section class="comments-list">
-    <foreach name="_data._list" item="lo" key="id" >
-      <div class="comment">
-        <a href="###" class="avatar"><i class="icon-user icon-border icon-2x icon-muted"></i></a>
-        <div class="content">
-          <div class="pull-right"><span class="text-muted">{$lo['create_time']|time_format} </span></div>
-          <a href="#" class="author"><strong>{$lo['username']==''?'游客':$lo['username']}</strong></a>
-          <div class="text">{$lo['content']}</div>
-          <div class="actions">
-            <a href="##"><div class="quote" data-pid="{$item['id']}"><a href="#quote">回复</a></div></a>
-          </div>
-        </div>
-      </div> 
-      </foreach>
-    </section>
-    
-</div>
-
-<div class="addon-comment-pagination">
-    {$_data['_page']}
-</div>
-<div class="addon-comment-form" id="comment-reply-form">
-
-    <php> if ($_config['comment_enable'] == 0) { </php>
-    
-        <div class="disable">评论已经被关闭</div>
         
-    <php>  } elseif ($_config['comment_need_login'] == 1 && is_login() === 0) {</php>
-        
-        <div class="need-login">登录后才可以评论</div>
-        
-    <php> } else { </php>
-    
-    <div class="row col-md-12  with-padding">
-        <div class="media">
-          <div class="media-left pull-left">
-            <a href="#">
-              <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PCEtLQpTb3VyY2UgVVJMOiBob2xkZXIuanMvNjR4NjQKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNTBkMmQ0MTBmYyB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1MGQyZDQxMGZjIj48cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSIxNCIgeT0iMzYuOCI+NjR4NjQ8L3RleHQ+PC9nPjwvZz48L3N2Zz4=">
-            </a>
-          </div>
-          <div class="media-body pull-left" style="padding-left:8px;">
-            <h4 class="media-heading">{$_data['nickname']|default='游客'} </h4>你好，说点什么吧：
-          </div>
-        </div>
-    </div>
-    
-
-    <form action="{:addons_url('Comment://Comment/submit','',C('DEFAULT_MODULE'))}">
-       
-       <foreach name="_data.form_hidden_field" item="lo" key="k">
-        
-        <input type="hidden" name="{$k}" value="{$lo}" />
-        
-        </foreach>
-        
-        <div class="form-group">
-            <textarea name="content" id="content" style="width:100%;" rows="10"></textarea>
-        </div>
-        
-        <eq name="_config.comment_verify" value="1" >
-        
-        <div class="form-group">
-          <label for="verifyCode">验证码</label>
-          <div>
-            <input type="text" class="input input-lg" name="verify_code" id="verify_code" />
-          </div>
-        </div>
-        <div class="form-group ">
-               <img  class="addon-comment-verify-img" src="{:addons_url('Comment://Comment/verifyCode','',C('DEFAULT_MODULE'))}" />
-        </div>
-        
-        </eq>
-  
-        <div class="form-group">
-        <button type="submit" class="btn btn-lg btn-info ">提交</button>
-        <button type="button" class="btn btn-lg cancel-quote">取消</button>
-        </div>
+      <div class="comment-form" id="comment-reply-form">
+      
+            <php> if ($_config['comment_enable'] == 0) { </php>
+            
+                <div class="alert alert-warning text-center">评论已经被关闭</div>
+                
+            <php>  } elseif ($_config['comment_need_login'] == 1 && is_login() === 0) {</php>
+                
+                <div class="alert alert-info text-center">登录后才可以评论</div>
+                
+            <php> } else { </php>
+            
+            <header class="comment-form-header">
+            
+            <a href="#" class="avatar"><i class="icon-user icon-2x"></i></a>
+             <span>
+                <h4>{$_data['nickname']|default='游客'} </h4>你好，说点什么吧：
+            </span>
+            
+            </header>
+            
+            <footer>
+                <form class="comment-form" action="{:addons_url('Comment://Comment/submit','',C('DEFAULT_MODULE'))}">
+                   
+                   <foreach name="_data.form_hidden_field" item="lo" key="k">
+                    
+                    <input type="hidden" name="{$k}" value="{$lo}" />
+                    
+                    </foreach>
+                    
+                    <div class="form-group">
+                        <textarea name="content" id="content" style="width:100%;" rows="5"></textarea>
+                    </div>
+                    
+                    <eq name="_config.comment_verify" value="1" >
+                    
+                    <div class="form-group">
+                      <label for="verifyCode">验证码</label>
+                      <div>
+                        <input type="text" class="input input-lg" name="verify_code" id="verify_code" />
+                      </div>
+                    </div>
+                    <div class="form-group ">
+                           <img  class="comment-verify-img" src="{:addons_url('Comment://Comment/verifyCode','',C('DEFAULT_MODULE'))}" />
+                    </div>
+                    
+                    </eq>
               
-    </form>
-    
-    <php>}</php>
+                    <div class="form-group">
+                    <button type="submit" class="btn btn-lg btn-primary ">提交</button>
+                    <button type="button" class="btn btn-lg cancel-quote">取消</button>
+                    </div>
+                          
+                </form>
+             </footer>
+             
+            <php>}</php>
+            
+        </div>
     
 </div>
