@@ -15,7 +15,7 @@
     height: 64px;
 	line-height:64px;
 	margin:0px;
-	background-color:#dfdfdf;
+	background-color:#eaeaea;
 	color:#fdfdfd;
 	text-align:center;
 	border-radius:0px;
@@ -31,13 +31,13 @@
 }
 .comment-box .comments .comment >.content .quote{
 }
-.comment-form{
+.comment-box .comment-form{
 	padding-top:20px;
 }
-.comment-form button[type='submit']{
+.comment-box .comment-form button[type='submit']{
 	
 }
-.comment-form .comment-verify-img{
+.comment-box .comment-form .comment-verify-img{
 	border:solid 1px #eee;
 	width:230px;
 	height:70px;
@@ -53,10 +53,21 @@
 	display:block;
 	float:left;
 }
-
-.comment-pagination {}
-.comment-pagination li{}
-.comment-pagination li a:hover{text-decoration:none; background-color:#dedede;}
-.comment-pagination li a{ border:none; background:#eee;}
-.comment-pagination li.active a { background-color:#39C;}
-.comment-pagination li.total a {background-color:#eee;}
+.comment-box .comment-form-header span h4{
+}
+.comment-box .comment-pagination {}
+.comment-box .comment-pagination li{}
+.comment-box .comment-pagination li a:hover{
+	color:#666;
+	text-decoration:none; 
+	background-color:#dedede;
+}
+.comment-box .comment-pagination li a{ 
+border:none; background:#eee; 
+}
+.comment-box .comment-pagination li.active a,
+.comment-box .comment-pagination li.active a:hover {
+	background-color:#bbb;
+	color:#fff;
+}
+.comment-box .comment-pagination li.total a {background-color:#eee; cursor:default;}

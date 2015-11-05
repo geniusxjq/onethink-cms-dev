@@ -7,7 +7,7 @@
     
           <header> 
             <h3 class="row">
-            <i class="icon icon-quote-left icon-lg text-info"></i>&nbsp;&nbsp;评论 ( {$_data['count']} )  
+            <i class="icon icon-quote-left icon-lg text-info"></i>&nbsp;&nbsp;评论 ( {$_data['count']} )&nbsp;&nbsp;  
              </h3>     
           </header> 
           <section class="comments-list">
@@ -25,7 +25,7 @@
                 
                 <div class="actions pull-right">
                 
-                  <a href="#"> <div class="quote" data-pid="{$item['id']}"><a href="#quote"> <i class="icon icon-pencil text-danger"></i>&nbsp;回复</a></div></a>
+                  <a href="#"> <div class="quote" data-pid="{$item['id']}"><a href="#quote"> <i class="icon icon-pencil text-muted"></i>&nbsp;回复</a></div></a>
                   
                 </div>
                 
@@ -33,7 +33,9 @@
             </div> 
             </foreach>
           </section>
-        <ul class=" row pager pager-loose comment-pagination">{$_data['_page']}</ul>
+          <footer>
+              <ul class=" row pager pager-loose comment-pagination">{$_data['_page']}</ul>
+          </footer>
       </div>
         
       <div class="comment-form" id="comment-reply-form">
@@ -86,7 +88,6 @@
               
                     <div class="form-group">
                     <button type="submit" class="btn btn-lg btn-info">提交</button>
-                    <button type="button" class="btn btn-lg cancel-quote">取消</button>
                     </div>
                           
                 </form>
