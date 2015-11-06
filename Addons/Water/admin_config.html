@@ -1,3 +1,5 @@
+<script type="text/javascript" src="__ADDONROOT__/js/jquery.js"></script>
+<script type="text/javascript" src="__ADDONROOT__/js/jquery.colorpicker.js"></script>
 <foreach name="data['config']" item="form" key="o_key">
 <div class="form-item cf">
 <label class="item-label">
@@ -8,7 +10,7 @@
 </label>
 <switch name="form.type">
 
-    <case value="radio">
+<case value="radio">
     <div class="controls">
         <foreach name="form.options" item="opt" key="opt_k">
             <label class="radio">
@@ -18,7 +20,29 @@
     </div>
 </case>
 
-
+<case value="text">
+<div class="controls">
+  <input type="text" name="config[{$o_key}]" class="text input-large" value="{$form.value}">
+</div>
+</case>
+<case value="color">
+<div class="controls">
+  <input type="text" id="color-input-{$o_key}" name="config[{$o_key}]" class="text input-mid" value="{$form.value}"><input type="button" style="background-color:#000;" class="btn" id="color-btn-{$o_key}">
+</div>
+<script type="text/javascript">
+var jQuery = $.noConflict(true);
+jQuery("#color-btn-{$o_key}").css("background-color","{$form.value}");
+jQuery(function(){
+	jQuery("#color-btn-{$o_key},#color-input-{$o_key}").colorpicker({
+		fillcolor:true,
+		success:function(o,color){
+			jQuery("#color-btn-{$o_key}").css("background-color",color);
+		},
+		target:jQuery("#color-input-{$o_key}")
+	});
+});
+</script>
+</case>
 <case value="water">
     <php>empty($form['value']) && $form['value']='./Addons/Water/water.png';</php>
     <div class="controls">

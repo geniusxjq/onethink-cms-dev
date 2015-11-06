@@ -38,32 +38,13 @@ class WaterAddon extends Addon
 	
 	/*
 	图片处理钩子
-	@param $param 传入参数
-	
-	格式:
-	
-	array(
-		  
-		'Path'=>'path',//文件路径
-		
-		'Water-Off'=>true,//是否关闭水印.'true'关闭/不设置或'false'不关闭 (在某些情况下想关闭(不使用)水印功能时可以单独设置)
-		
-	);
-	
-	关闭方式: 
-	
-	在实例化上传类的配置中加入'Water-Off=>true'即可,如下:
-		
-	$config = array('Water-Off'=>true);
-	
-    $upload = new \Think\Upload($config);// 实例化上传类
-	
+	@param $path string 文件路径	
 	*/
 	
     public function dealPicture($path)
     {
 		
-		if(!$path||strtolower(C('PICTURE_UPLOAD_DRIVER'))!='local') return $path;
+		if(!$path||strtolower(C('PICTURE_UPLOAD_DRIVER'))!='local') return false;
 		
 		if(substr($path,0,1)=='/'){
 			
@@ -71,30 +52,94 @@ class WaterAddon extends Addon
 			
 		}
 		
+		//如果文件不存在或不是文件
+
+		if(!is_file($path)||!file_exists($path)) return false;
+		
 		try{
 			
 			$config = $this->getConfig();
+			
 			if($config['switch']){
-				if($config['water']){
-					$water = $config['water'];
+								
+				$result=false;
+				
+				$watermark=new \Think\Image;
+				 
+				$watermark->open($path);
+				
+				if($config['type']==0){
+					
+					$fontsize=is_numeric($config['fontsize'])?$config['fontsize']:32;//默认32号字体
+					$font=is_numeric($config['font'])?$config['font']:'simhei';//默认黑体字
+					$textcolor=!empty($config['textcolor'])?$config['textcolor']:'#000';//默认黑色
+					$water_text=!empty($config['text'])?$config['text']:'请设置水印文字';
+					$offset=is_numeric($config['offset'])?$config['offset']:20;//偏移量默认20
+					
+					//根据水印位置调整边距值
+					switch($config['position']){
+						
+						case 1:
+						 $offset=array($offset,$offset);
+						break;
+						
+						case 2:
+						  $offset=array(0,$offset);
+						break;
+						
+						case 3:
+						 $offset=array(($offset*(-1)),$offset);
+						break;
+						
+						case 4:
+						   $offset=array($offset,0);
+						break;
+						
+						case 5:
+						$offset=0;
+						break;
+						
+						case 6:
+						    $offset=array(($offset*(-1)),0);
+						break;
+						
+						case 7:
+						$offset=array($offset,($offset*(-1)));
+						break;
+						
+						case 8:
+						$offset=array(0,($offset*(-1)));
+						break;
+						
+						case 8:
+						$offset=$offset*(-1);
+						break;	
+						
+					}
+					
+					$result=$watermark->text($water_text,$this->addon_path.'fonts/'.$font.'.ttf',$fontsize,$textcolor,$config['position'],$offset);
+					
+				}else{
+					
+					if($config['water']){
+						$water = $config['water'];
+					}else{
+						$water =$this->addon_path.'water.png';
+					}
+					$water_open=file_exists($water);
+					$alpha=is_numeric($config['alpha'])?$config['alpha']:80;
+					if($water_open){
+						$result=$watermark->water($water,$config['position'],$alpha);
+					}
 				}
-				else{
-					$water =$this->addon_path.'water.png';
-				}
-				$water_open=file_exists($water);
-				$picture_open=file_exists($path);
-				require_once($this->addon_path."WaterMark.class.php");
-				if($water_open&&$picture_open)
-				{
-					$watermark=new \WaterMark($path,$config['position']);
-					$watermark->setWaterImage($water);
-					$watermark->imageWaterMark();
-				}
+				
+				if($result)$watermark->save($path);
+				
 			}
 			
 		}catch(Exception $e){}
 		
-        return $param;
+        return true;
      }
 
     public function AdminIndex($param)
