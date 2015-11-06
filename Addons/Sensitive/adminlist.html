@@ -18,38 +18,30 @@
                     <th class="row-selected">
                         <input class="checkbox check-all" type="checkbox">
                     </th>
-                    <th>ID</th>
-                    <volist name="listKey" id="vo">
-                        <th >{$vo}</th>
+                    <volist name="list_grid" id="vo">
+                        <th >{$vo.title}</th>
                     </volist>
                     <th>操作</th>
                 </tr>
                 </thead>
                 <tbody>
                 <notempty name="_list">
-                    <volist name="_list" id="vo">
+                
+                    <volist name="_list" id="lv" key="vo">
                         <tr>
-                            <td><input class="ids row-selected" type="checkbox" name="ids[]" value="{$vo.id}"></td>
-                            <td>{$vo.id}</td>
-
-                            <td>{$vo.title}</td>
-
-                            <td><php>echo $vo['status']==0? '禁用': '启用';</php></td>
-
-                            <td>{$vo.create_time|time_format}</td>
-
-
-                            <td width="200"><a href="{:addons_url('Sensitive://Sensitive/editSensitive',array('id'=>$vo['id']))}">编辑</a>
-                                <if condition="$vo.status eq 1">
-                                    <a class="ajax-get" href="{:addons_url('Sensitive://Sensitive/disable',array('id'=>$vo['id']))}">禁用</a>
+                            <td><input class="ids row-selected" type="checkbox" name="ids[]" value="{$lv.id}"></td>
+                           <volist name="list_grid" id="lk">
+                                <td>{:get_addonlist_field($lv, $lk, $name)}</td>
+                            </volist>      
+                            <td width="200"><a href="{:addons_url('Sensitive://Sensitive/editSensitive',array('id'=>$lv['id']))}">编辑</a>
+                                <if condition="$lv.status eq 1">
+                                    <a class="ajax-get" href="{:addons_url('Sensitive://Sensitive/disable',array('id'=>$lv['id']))}">禁用</a>
                                     <else/>
-                                    <a class="ajax-get" href="{:addons_url('Sensitive://Sensitive/enable',array('id'=>$vo['id']))}">启用</a>
+                                    <a class="ajax-get" href="{:addons_url('Sensitive://Sensitive/enable',array('id'=>$lv['id']))}">启用</a>
                                 </if>
-                                <a class="ajax-get" href="{:addons_url('Sensitive://Sensitive/delSensitive',array('ids'=>$vo['id']))}">删除</a>
+                                <a class="ajax-get" href="{:addons_url('Sensitive://Sensitive/delSensitive',array('ids'=>$lv['id']))}">删除</a>
 
                             </td>
-
-
 
                         </tr>
                     </volist>

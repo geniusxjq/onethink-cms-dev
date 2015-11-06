@@ -48,7 +48,7 @@ class CommentAddon extends Addon{
       'username:用户名',
       'content:内容',
       'did:评论文档',
-      'create_time|time_form_hidden_fieldat:评论时间',
+      'create_time|time_format:评论时间',
       'status:状态',
       'id:操作:[EDIT]|编辑,[DELETE]|删除'
     ),
@@ -93,19 +93,13 @@ class CommentAddon extends Addon{
 
     $this->assign('comment_title', $addon_config['comment_title']);
     
-    $template_name = $addon_config['comment_template'] == '' ? 'default' : $addon_config['comment_template'];// 获取模版名称
+    $theme_name=$addon_config['comment_template']||'default';// 获取模版名称
     
-    $template_path = __DIR__ .'/View/'.$template_name.'/';// 模版路径
+    $template_path =$this->addon_path.'/View/'.$theme_name.'/';// 模版路径
 	
-    if (!file_exists($template_path)) {
-		
-		$this->assign('comment_error', '模版不存在，使用默认模版');
-		
-		$template_name = 'default';
+	if (!file_exists($template_path)) $theme_name = 'default';
 	  
-    }
-	
-    $this->display('View/'.$template_name.'/comment');
+    $this->display('View/'.$theme_name.'/comment');
 
   }
 

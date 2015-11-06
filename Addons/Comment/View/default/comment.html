@@ -1,27 +1,23 @@
 <div class="row comment-box">
-        <notempty name="comment_error">
-            <div class="alert alert-danger text-center">{$comment_error}</div>
-        </notempty>
         
       <div class="comments row col-md-12">
-    
           <header> 
             <h3 class="row">
             <i class="icon icon-quote-left icon-lg text-info"></i>&nbsp;&nbsp;评论 ( {$_data['count']} )&nbsp;&nbsp;  
              </h3>     
           </header> 
           <section class="comments-list">
-          <foreach name="_data._list" item="lo" key="id" >
+          <foreach name="_data._list" item="item" key="k" >
             <div class="comment">
               <a href="#" class="avatar"><i class="icon-user icon-2x"></i></a>
               <div class="content">          
               
               <div class="author">
-                 <a href="#">{$lo['username']==''?'游客':$lo['username']}</a>
-                 <span class="text-muted pull-right">{$lo['create_time']|time_format} </span>
+                 <a href="#">{$item['username']==''?'游客':$item['username']}</a>
+                 <span class="text-muted pull-right">{$item['create_time']|time_format} </span>
               </div>
                 
-                <div class="text">{$lo['content']}</div>
+                <div class="text">{$item['content']}</div>
                 
                 <div class="actions pull-right">
                 
@@ -36,8 +32,9 @@
           <footer>
               <ul class=" row pager pager-loose comment-pagination">{$_data['_page']}</ul>
           </footer>
+
       </div>
-        
+            
       <div class="comment-form" id="comment-reply-form">
       
             <php> if ($_config['comment_enable'] == 0) { </php>
@@ -62,9 +59,9 @@
             <footer>
                 <form class="comment-form" action="{:addons_url('Comment://Comment/submit','',C('DEFAULT_MODULE'))}">
                    
-                   <foreach name="_data.form_hidden_field" item="lo" key="k">
+                   <foreach name="_data.form_hidden_field" item="item" key="k">
                     
-                    <input type="hidden" name="{$k}" value="{$lo}" />
+                    <input type="hidden" name="{$k}" value="{$item}" />
                     
                     </foreach>
                     

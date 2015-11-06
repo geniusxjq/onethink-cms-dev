@@ -17,6 +17,20 @@ class SensitiveModel extends Model{
         array('status', 1, self::MODEL_BOTH),
     );
 	
+	protected function _afterFilter(&$result,$options) {
+		$result['status_text'] =  $result['status'] == 0 ? '禁用' : '正常';
+	}
+	
+	protected function _after_find(&$result,$options) {
+		
+	}
+	
+	protected function _after_select(&$result,$options){
+		foreach($result as &$record){
+			$this->_afterFilter($record,$options);
+		}
+	}
+
 	/**
 	 * 新增或更新
 	 * @return boolean fasle 失败 ， int  成功 返回完整的数据

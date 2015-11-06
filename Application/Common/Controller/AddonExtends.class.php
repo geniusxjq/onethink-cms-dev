@@ -21,7 +21,7 @@ abstract class AddonExtends{
 	  
 	  */
 	  
-	  public function readSqlFile($file){
+	  final protected function readSqlFile($file){
 		  
 		  return Storage::read($file);
 		  
@@ -37,7 +37,7 @@ abstract class AddonExtends{
 	   * @return array
 	   */
 	   
-	  public function executeSql($sql,$sql_db_prefix='onethink_',$stop = true,$db_charset = 'utf-8') {
+	  final protected function executeSql($sql,$sql_db_prefix='onethink_',$stop = true,$db_charset = 'utf-8') {
 		  
 		  if(!$sql) return true;
 
@@ -122,7 +122,7 @@ abstract class AddonExtends{
 	 
    */
    
-	public function toArrayList($data,$array_temp='',$list_delimiter=",",$value_delimiter=":"){
+	final protected function toArrayList($data,$array_temp='',$list_delimiter=",",$value_delimiter=":"){
 		
 		$result=array();
 		
@@ -206,7 +206,7 @@ abstract class AddonExtends{
 	 * @param int $hook_type  钩子类型（默认为1）
 	 * @param string $addons_name 插件名称
      */
-    public function addHook($hook_name='',$hook_description='',$hook_type=1,$addon_name=''){
+    final protected function addHook($hook_name='',$hook_description='',$hook_type=1,$addon_name=''){
 		
 		if(!$hook_name) return;
 		
@@ -242,7 +242,7 @@ abstract class AddonExtends{
      * 删除钩子（只在钩子为唯一（独立）钩子时才删除）
      * @param string $hook_name  钩子名称
      */
-    public function deleteHook($hook_name){
+    final protected function deleteHook($hook_name){
 		
 		if(!$hook_name) return;
 		
@@ -267,7 +267,7 @@ abstract class AddonExtends{
 	
 	*/
 	
-	public function isSetup($addon_name=''){
+	final protected function isSetup($addon_name=''){
 				
 		if(!$addon_name) return false;
 		
@@ -300,7 +300,7 @@ abstract class AddonExtends{
 	3.array(array('name'=>'name','type'=>typeId,'description'=>'description'));
 	
 	*/
-	public function installAddon($install_info=array()){
+	final protected function installAddon($install_info=array()){
 		
 		/* 先判断插件需要的钩子是否存在 */
 		if($install_info['hooks']){
@@ -349,7 +349,7 @@ abstract class AddonExtends{
 	3.array(array('name'=>'name','type'=>typeId,'description'=>'description'));
 	
 	*/ 
-	public function uninstallAddon($install_info=array()){
+	final protected function uninstallAddon($install_info=array()){
 			
 		//删除钩子
 		if($install_info['hooks']){

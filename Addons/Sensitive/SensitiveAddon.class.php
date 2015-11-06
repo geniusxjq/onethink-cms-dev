@@ -42,11 +42,11 @@ class SensitiveAddon extends Addon
      * @var unknown_type
      */
     public $admin_list = array(
-        'listKey' => array(
-            'title' => '名称',
-            'status' => '状态',
-            'create_time' => '创建时间',
-
+        'list_grid' => array(
+				'id:ID',
+				'title:名称',
+				'status_text:状态:',
+				'create_time|time_format:创建时间',
         ),
         'model' => 'Sensitive',
         'order' => 'id asc'

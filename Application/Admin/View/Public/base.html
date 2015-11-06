@@ -136,14 +136,15 @@
             url = url.replace(/(\/(p)\/\d+)|(&p=\d+)|(\/(id)\/\d+)|(&id=\d+)|(\/(group)\/\d+)|(&group=\d+)/, "");
             $subnav.find("a[href='" + url + "']").parent().addClass("current");
 			
-			/* 左边菜单高亮(针对Addons插件)*/
+			<eq name="CONTROLLER_NAME" value="Addons">
+				/* 左边菜单高亮(针对Addons插件)*/
+				<php>
+				$the_addon_name=I('get._addons','');
+				!$the_addon_name&&isset($name)?$name:'';
+				</php>
+				highlight_subnav("{:U('Addons/adminList/name/'.$the_addon_name)}");
+			</eq>
 			
-			if("{:CONTROLLER_NAME}"=="Addons"){
-				
-				highlight_subnav("{:U('Addons/adminList/name/'.(I('get._addons',$name)))}");
-			
-			}
-
             /* 左边菜单显示收起 */
             $("#subnav").on("click", "h3", function(){
                 var $this = $(this);

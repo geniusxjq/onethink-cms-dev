@@ -40,12 +40,12 @@ use Common\Controller\Addon;
         );
 				
         public $admin_list = array(
-            'listKey' => array(
-        				'title'=>'站点名称',
-        				'typetext'=>'类型',
-        				'statustext'=>'显示状态',
-        				'level'=>'优先级',
-        				'create_time'=>'开始时间',
+            'list_grid' => array(
+        				'title:站点名称',
+        				'typetext:类型',
+        				'statustext:显示状态',
+        				'level:优先级',
+        				'create_time:开始时间',
         		),
         		'model'=>'Friendlinks',
         		'order'=>'level desc,id asc',
