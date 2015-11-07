@@ -41,7 +41,7 @@ class BaseUtil{
 				
 				$res['name']=json_decode($res['name']);
 				
-				$res['name']=is_object($res['name']->name)?$res['name']->name:$res['fontname'];
+				is_object($res['name'])&&$res['name']=$res['name']->name?$res['name']->name:$res['fontname'];
 				
 			}else{
 				
