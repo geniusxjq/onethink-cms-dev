@@ -24,33 +24,27 @@ class BaseUtil{
 		$font_dirs = glob($font_dirs_path.'*', GLOB_ONLYDIR);
 		
 		foreach($font_dirs as $dirsname){
-		    
-			$res=array('fontname'=>basename($dirsname),'name'=>'');
+		    			
+			$file_name=basename($dirsname);
 			
 			$config_file=$dirsname.'/config.txt';
 		
-			$res['name']=file_get_contents($config_file);
+			$file_res=file_get_contents($config_file);
 			
-			if($res['name']){
+			if($file_res){
 				
-				if(!(new \Org\Util\String)->isUtf8($res['name'])){
+				if(!(new \Org\Util\String)->isUtf8($file_res)){
 					
-					$res['name']=mb_convert_encoding($res['name'], 'UTF-8', 'GBK'); 
+					$file_res=mb_convert_encoding($file_res, 'UTF-8', 'GBK'); 
 					
 				}
 				
-				$res['name']=json_decode($res['name']);
+				$file_res=json_decode($file_res);
 				
-				is_object($res['name'])&&$res['name']=$res['name']->name?$res['name']->name:$res['fontname'];
-				
-			}else{
-				
-				$res['name']=$res['fontname'];
+				is_object($file_res)&&$font_list[$file_name]=$file_res->name?$file_res->name:$file_name;
 				
 			}
 			
-			$font_list[]=$res;
-		
 		}
 		
 		return $font_list;

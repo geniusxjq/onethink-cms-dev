@@ -125,7 +125,7 @@ class WaterAddon extends Addon
 						
 					}
 					
-					//判断是否包含中文，如果包含且当前字体是赢文字体，则自动切换到中文默认字体。
+					//判断是否包含中文如果包含，且当前字体是英文字体，则自动切换到中文默认字体。
 					if (preg_match("/[\x7f-\xff]/",$water_text)){
 						
 						$the_font_config=A('Addons://Water/Base','Util')->get_font_config($this->addon_path.'fonts/'.$font.'/config.txt');

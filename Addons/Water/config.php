@@ -1,8 +1,12 @@
 <?php
 
+//获取字体数据
+$font_list=R('Addons://Water/Base/get_font_list','','Util');
+
 return array(
    
 	'switch' => array( //配置在表单中的键名 ,这个会是config[title]
+											  
         'title' => '是否开启添加水印：', //表单的文字
         'type' => 'radio', //表单的类型：text、textarea、checkbox、radio、select等
         'options' => array(
@@ -53,14 +57,22 @@ return array(
         'value' => '21',
 		'tip' => '文字水印的字体大小，默认32号'
     ),	
-	'font' => array(
-        'title' => '水印字体',
-        'type'=>'font',		 //表单的类型：text、textarea、checkbox、radio、select等
-        'options'=>array(		 //select 和radion、checkbox的子选项
-            'simfang'=>'仿宋体',		 //值=>文字
-        ),
+	'font' =>array(
+       
+	   'title' => '水印字体',
+       
+	   'type'=>'select',		 //表单的类型：text、textarea、checkbox、radio、select等
+        
+		'options'=>array_merge(array(		 //select 和radion、checkbox的子选项
+           
+		   'simfang'=>'仿宋体',		 //值=>文字
+			
+        ),$font_list),
+		
         'value'=>'simfang',
-        'tip' => '文字水印的字体，默认黑体'
+        
+		'tip' => '文字水印的字体，默认黑体'
+		
     ),	
 	'offset' => array(
         'title' => '水印文字相对边距',

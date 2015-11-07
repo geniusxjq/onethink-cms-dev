@@ -1,7 +1,3 @@
-<php>
-//获取字体数据
-$font_list=R('Addons://Water/Base/get_font_list','','Util');
-</php>
 <script type="text/javascript" src="__STATIC__/jquery-migrate-1.2.1.min.js"></script>
 <script type="text/javascript" src="__ADDONROOT__/js/jquery.colorpicker.js"></script>
 <foreach name="data['config']" item="form" key="o_key">
@@ -109,15 +105,6 @@ $(function(){
             <select name="config[{$o_key}]">
                 <foreach name="form.options" item="opt" key="opt_k">
                     <option value="{$opt_k}" <eq name="form.value" value="$opt_k"> selected</eq>>{$opt}</option>
-                </foreach>
-            </select>
-        </div>
-    </case>
-    <case value="font">
-        <div class="controls">
-            <select name="config[{$o_key}]">
-                <foreach name="font_list" item="opt" key="opt_k">
-                    <option value="{$opt['fontname']}" <eq name="form.value" value="$opt['fontname']"> selected</eq>>{$opt['name']}</option>
                 </foreach>
             </select>
         </div>
