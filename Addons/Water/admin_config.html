@@ -1,4 +1,8 @@
-<script type="text/javascript" src="__ADDONROOT__/js/jquery.js"></script>
+<php>
+//获取字体数据
+$font_list=R('Addons://Water/Base/get_font_list','','Util');
+</php>
+<script type="text/javascript" src="__STATIC__/jquery-migrate-1.2.1.min.js"></script>
 <script type="text/javascript" src="__ADDONROOT__/js/jquery.colorpicker.js"></script>
 <foreach name="data['config']" item="form" key="o_key">
 <div class="form-item cf">
@@ -30,15 +34,14 @@
   <input type="text" id="color-input-{$o_key}" name="config[{$o_key}]" class="text input-mid" value="{$form.value}"><input type="button" style="background-color:#000;" class="btn" id="color-btn-{$o_key}">
 </div>
 <script type="text/javascript">
-var jQuery = $.noConflict(true);
-jQuery("#color-btn-{$o_key}").css("background-color","{$form.value}");
-jQuery(function(){
-	jQuery("#color-btn-{$o_key},#color-input-{$o_key}").colorpicker({
+$("#color-btn-{$o_key}").css("background-color","{$form.value}");
+$(function(){
+	$("#color-btn-{$o_key},#color-input-{$o_key}").colorpicker({
 		fillcolor:true,
 		success:function(o,color){
-			jQuery("#color-btn-{$o_key}").css("background-color",color);
+			$("#color-btn-{$o_key}").css("background-color",color);
 		},
-		target:jQuery("#color-input-{$o_key}")
+		target:$("#color-input-{$o_key}")
 	});
 });
 </script>
@@ -110,7 +113,15 @@ jQuery(function(){
             </select>
         </div>
     </case>
-
+    <case value="font">
+        <div class="controls">
+            <select name="config[{$o_key}]">
+                <foreach name="font_list" item="opt" key="opt_k">
+                    <option value="{$opt['fontname']}" <eq name="form.value" value="$opt['fontname']"> selected</eq>>{$opt['name']}</option>
+                </foreach>
+            </select>
+        </div>
+    </case>
 </switch>
 
 </div>

@@ -35,6 +35,7 @@ return array(
             '7'=>'左下',
             '8'=>'中下',
             '9'=>'右下',
+			'10'=>'随机',
 
         ),
         'value'=>'9',
@@ -54,12 +55,11 @@ return array(
     ),	
 	'font' => array(
         'title' => '水印字体',
-        'type'=>'select',		 //表单的类型：text、textarea、checkbox、radio、select等
+        'type'=>'font',		 //表单的类型：text、textarea、checkbox、radio、select等
         'options'=>array(		 //select 和radion、checkbox的子选项
-            'simhei'=>'黑体',		 //值=>文字
-            'NightClub'=>'NightClub（英文）',
+            'simfang'=>'仿宋体',		 //值=>文字
         ),
-        'value'=>'1',
+        'value'=>'simfang',
         'tip' => '文字水印的字体，默认黑体'
     ),	
 	'offset' => array(
@@ -68,7 +68,12 @@ return array(
         'value'=>'20',
         'tip' => '文字水印的文字相对图片边缘的边距，默认0px，水印位置是中间时忽略。'
     ),	
-	
+	'angle' => array(
+        'title' => '水印文字角度',
+        'type'=>'text',		 //表单的类型：text、textarea、checkbox、radio、select等
+        'value'=>'0',
+        'tip' => '水印文字的旋转角度，默认0度'
+    ),	
 	'alpha' => array(
         'title' => '水印图片透明度',
         'type' => 'text',

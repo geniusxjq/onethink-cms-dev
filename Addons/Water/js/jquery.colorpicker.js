@@ -42,6 +42,8 @@
                     opts.success(obj,color);
                 });
 				
+				 opts.hiddenAuto&&$("#colorpanel").mouseleave(function(){$(this).hide();});
+				
             });
         });
     
@@ -83,6 +85,7 @@
         }
     };
     jQuery.fn.colorpicker.defaults = {
+		hiddenAuto:true,//是否自动隐藏
         ishex : true, //是否使用16进制颜色值
         fillcolor:false,  //是否将颜色值填充至对象的val中
         target: null, //目标对象
