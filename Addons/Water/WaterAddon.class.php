@@ -58,9 +58,11 @@ class WaterAddon extends Addon
 		
 		try{
 			
-			$config_temp_arr = include $this->config_file;
+			$_Model=A('Addons://Water/Water','Model');
 			
-			$config = $this->getConfig();
+			$config_temp=include $this->config_file;
+			
+			$config=$this->getConfig();
 			
 			if($config['switch']){
 								
@@ -70,91 +72,32 @@ class WaterAddon extends Addon
 				 
 				$watermark->open($path);
 				
-				//如果位置为随机
-				if($config['position']==10){
-					$config['position']=rand(1,9);
-				}
-				
 				if($config['type']==0){
 					
-					$fontsize=is_numeric($config['fontsize'])?$config['fontsize']:$config_temp_arr['fontsize'][value];//默认32号字体
-					$font=!empty($config['font'])?$config['font']:$config_temp_arr['font'][value];//默认体字
-					$textcolor=!empty($config['textcolor'])?$config['textcolor']:$config_temp_arr['textcolor'][value];//默认黑色
-					$water_text=!empty($config['text'])?$config['text']:$config_temp_arr['text'][value];
-					$offset=is_numeric($config['offset'])?$config['offset']:$config_temp_arr['offset'][value];//偏移量默认20
-					$angle=is_numeric($config['angle'])?$config['angle']:$config_temp_arr['angle'][value];//文字角度
+					$_Model->param_deal($config,$config_temp,'text');//参数调整
 					
-					//根据水印位置调整边距值
-					switch($config['position']){
-						
-						case 1:
-						   $offset=array($offset,$offset);
-						break;
-						
-						case 2:
-							$offset=array(0,$offset);
-						break;
-						
-						case 3:
-						   $offset=array(($offset*(-1)),$offset);
-						break;
-						
-						case 4:
-						   $offset=array($offset,0);
-						break;
-						
-						case 5:
-							$offset=0;
-						break;
-						
-						case 6:
-						    $offset=array(($offset*(-1)),0);
-						break;
-						
-						case 7:
-							$offset=array($offset,($offset*(-1)));
-						break;
-						
-						case 8:
-							$offset=array(0,($offset*(-1)));
-						break;
-						
-						case 9:
-							$offset=$offset*(-1);
-						break;	
-						
-					}
+					$_Model->font_switch($config,$config_temp);//字体自动判断切换
 					
-					//判断是否包含中文如果包含，且当前字体是英文字体，则自动切换到中文默认字体。
-					if (preg_match("/[\x7f-\xff]/",$water_text)){
-						
-						$the_font_config=A('Addons://Water/Base','Util')->get_font_config($this->addon_path.'fonts/'.$font.'/config.txt');
-						
-						if($the_font_config&&strtolower($the_font_config->lang)!='cn'){
-							
-							$font=$config_temp_arr['font'][value];
-							
-						}
-						
-					}
+					$_Model->position_deal($config);//偏移位置调整
 					
-					$result=$watermark->text($water_text,$this->addon_path.'fonts/'.$font.'/'.$font.'.ttf',$fontsize,$textcolor,$config['position'],$offset,$angle);
+					$font_path=$this->addon_path.'fonts/'.$config['font'].'/'.$config['font'].'.ttf';
+					
+					$result=$watermark->text($config['text'],$font_path,$config['fontsize'],$config['textcolor'],$config['position'],$config['offset'],$config['angle']);
 					
 				}else{
 					
-					if($config['water']){
-						$water = $config['water'];
-					}else{
-						$water =$this->addon_path.'water.png';
-					}
+					$_Model->param_deal($config,$config_temp,'image');//参数调整
+					
+					$water=$config['water'];
 					
 					$water_open=file_exists($water);
 					
-					$alpha=is_numeric($config['alpha'])?$config['alpha']:$config_temp_arr['alpha'][value];
-					
 					if($water_open){
-						$result=$watermark->water($water,$config['position'],$alpha);
+						
+						$result=$watermark->water($water,$config['position'],$config['alpha']);
+						
 					}
+					
 				}
 				
 				if($result)$watermark->save($path);
