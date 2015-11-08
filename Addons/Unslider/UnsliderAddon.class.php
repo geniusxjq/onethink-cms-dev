@@ -44,7 +44,7 @@ use Common\Controller\Addon;
         public function Unslider(){
             $config = $this->getConfig();
             $Document = D('Document');
-            $list = $Document->where('cover_id >0')->select();
+            $list = $Document->where('cover_id >0')->limit(5)->select();
             $Picture = M('Picture');
             foreach ($list as $k=>$v)
             {
@@ -61,7 +61,7 @@ use Common\Controller\Addon;
 		public function pageHeader(){
             $config = $this->getConfig();
             if($config['display'])
-                $this->display('herder');
+                $this->display('header');
         }
         /**
 		 * 加载js

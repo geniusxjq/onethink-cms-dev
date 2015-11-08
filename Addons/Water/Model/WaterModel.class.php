@@ -40,13 +40,17 @@ class WaterModel{
 		    			
 			$file_name=basename($dirsname);
 			
+			$font_list[$file_name]=$file_name;
+			
 			$config_file=$dirsname.'/config.txt';
 		
 			$file_res=file_get_contents($config_file);
 			
 			if($file_res){
-							
-				$file_res=(new \Org\Util\String)->autoCharset($file_res);
+				
+				$_ST=new \Org\Util\String;
+				
+				!$_ST->isUtf8($file_res)&&$file_res=$_ST->autoCharset($file_res);
 			
 				$file_res=json_decode($file_res);
 				
@@ -70,7 +74,9 @@ class WaterModel{
 		
 		if($res){
 			
-			$res=(new \Org\Util\String)->autoCharset($res);
+			$_ST=new \Org\Util\String;
+				
+			!$_ST->isUtf8($res)&&$res=$_ST->autoCharset($res);
 			
 			$res=json_decode($res);
 			

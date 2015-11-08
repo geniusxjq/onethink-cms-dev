@@ -1,0 +1,79 @@
+﻿@charset "utf-8";
+
+.fixed-bar{ padding:0px;position:fixed;right:20px;bottom:50px;z-index:50;_position:absolute;_bottom:auto;_top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||0)-(parseInt(this.currentStyle.marginBottom,10)||0))-30);}
+
+.fixed-bar li{ margin:0; padding:0; list-style:none; height:32px;line-height:32px;}
+.fixed-bar img{ border:0;}
+
+.fixed-bar .consult-box{border:0px solid #e6e6e6; display:none;}
+
+.fixed-bar .consult-box .consult-header{padding:0px;position:relative;height:36px;margin:0px;background:none;}
+
+.fixed-bar .consult-box .consult-title{ margin:0px; padding:0px;color:#666;font:normal 16px/36px "Microsoft YaHei","\5FAE\8F6F\96C5\9ED1";text-align:center;}
+
+.fixed-bar .consult-list{margin:0 2px -1px;padding:9px 0;border-bottom:1px dashed #eaeaea; overflow:hidden}
+
+.fixed-bar .consult-list li{padding:6px 0 6px 23px;color:#666;font:normal 13px/24px "Microsoft YaHei","\5FAE\8F6F\96C5\9ED1";}
+
+.fixed-bar .consult-list span,.fixed-bar .consult-list a{float:left;line-height:24px;}
+.fixed-bar .consult-list span{padding-right:10px;}
+
+.fixed-bar .consult-list img{vertical-align:middle;}
+
+.fixed-bar .wide-bar{width:134px;background:#fff;}
+
+.fixed-bar .gotop i,.fixed-bar-im i{
+	height:64px;
+	line-height:64px;
+}
+
+.fixed-bar .gotop,.fixed-bar-im{
+	position:relative;
+	float:left;
+	z-index:1;
+	display:block;
+	width:68px;
+	height:64px;
+	line-height:64px;
+	overflow:hidden;
+	margin:-1px 0 0;
+	padding:0px;
+	border:none;
+	color:#fff;
+	font:normal 14px/36px "Microsoft YaHei","";
+	text-align:center;
+	cursor:pointer;
+}
+
+.fixed-bar .gotop{
+	background-color:#999;
+}
+
+.fixed-bar .gotop:hover{
+	z-index:10;
+	background-color:#777;
+	text-decoration:none;
+}
+
+.fixed-bar .gotop .icon{
+	display:block;
+	position:absolute;
+	top:50%;
+	left:50%;
+	width:23px;
+	height:12px;
+	overflow:hidden;
+	margin:-18px 0 0 -12px;
+	background-position:right -251px; 
+	text-indent:-999em;
+}
+
+.fixed-bar-im{
+	float:right;
+	background-color:#999;
+}
+.fixed-bar-im:hover{
+	color:#FFF;
+	text-decoration:none;
+	background-color:#777;
+}

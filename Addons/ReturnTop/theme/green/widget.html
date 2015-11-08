@@ -1,0 +1,74 @@
+
+<!-- ReturnTop 代码部分begin -->
+
+<link type="text/css" rel="stylesheet" href="__ADDONROOT__/theme/{$addons_config['theme']}/css/style.css">
+<div class="fixed-bar">
+	<div class="wide-bar">
+		<div class="consult-box">
+			<div class="consult-header">
+			<h3 class="consult-title">{$addons_config['support_title']|default='客服咨询'}</h3>
+			</div>
+			<ul class="consult-list">
+				<li>
+					<a target="_blank" href="###"><i class="icon-lg icon-qq "></i></a><span>{$addons_config['qq']}</span>
+				</li>
+				</li>
+				<li ><i class="icon-lg icon-phone"></i><span>{$addons_config['tel']}</span></li> 
+			</ul>
+		</div>
+		
+	</div>
+    <a class="gotop" title="回到顶部"><i class="icon-2x icon-angle-up"></i></a>
+    <a class="fixed-bar-im" title="联系方式"><i class="icon-2x icon-comments"></i></a>
+</div>
+<script>    
+$(function(){
+	
+	var lock_box=0,lock_s=0;
+	
+	function _set(){ 
+		
+		var  scrollTop=$(document).scrollTop(),bodyHeight =$(window).height(); 
+		
+		if(scrollTop>bodyHeight&&lock_s!=1){
+			
+			lock_s=1;
+			
+			$(".fixed-bar .gotop").fadeIn(500);
+			
+		}
+		
+		if(scrollTop<bodyHeight&&lock_s!=2){
+			
+			lock_s=2;
+			
+			$(".fixed-bar .gotop").fadeOut(500);
+			
+		}
+		
+		if(lock_box) return false;
+		
+		lock_box=1;
+		
+		$('.fixed-bar .consult-box').slideUp(200,function(){lock_box=0;});
+		
+	}
+	
+	_set();
+	
+	$(document).scroll(_set);
+	
+	$(".fixed-bar .gotop").click(function(){ $('html,body').animate({'scrollTop':0},"slow");});
+	
+	$(".fixed-bar-im").click(function(){
+									   		
+		$('.fixed-bar .consult-box').slideToggle(200);
+		
+		return false;
+		
+	});
+
+});
+
+</script>
+<!-- ReturnTop 代码部分end -->
