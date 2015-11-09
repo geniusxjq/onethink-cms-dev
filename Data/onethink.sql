@@ -1,298 +1,483 @@
-# SQL-Front 5.1  (Build 4.16)
+-- phpMyAdmin SQL Dump
+-- version 3.5.2.2
+-- http://www.phpmyadmin.net
+--
+-- ä¸»æœº: 127.0.0.1
+-- ç”Ÿæˆæ—¥æœŸ: 2015 å¹´ 11 æœˆ 09 æ—¥ 15:05
+-- æœåŠ¡å™¨ç‰ˆæœ¬: 5.5.27
+-- PHP ç‰ˆæœ¬: 5.4.7
 
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE */;
-/*!40101 SET SQL_MODE='' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES */;
-/*!40103 SET SQL_NOTES='ON' */;
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
 
-# Host: localhost    Database: onethink
-# ------------------------------------------------------
-# Server version 5.5.27
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
 
-#
-# Source for table onethink_action
-#
+--
+-- æ•°æ®åº“: `onethink`
+--
 
-DROP TABLE IF EXISTS `onethink_action`;
-CREATE TABLE `onethink_action` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Ö÷¼ü',
-  `name` char(30) NOT NULL DEFAULT '' COMMENT 'ĞĞÎªÎ¨Ò»±êÊ¶',
-  `title` char(80) NOT NULL DEFAULT '' COMMENT 'ĞĞÎªËµÃ÷',
-  `remark` char(140) NOT NULL DEFAULT '' COMMENT 'ĞĞÎªÃèÊö',
-  `rule` text COMMENT 'ĞĞÎª¹æÔò',
-  `log` text COMMENT 'ÈÕÖ¾¹æÔò',
-  `type` tinyint(2) unsigned NOT NULL DEFAULT '1' COMMENT 'ÀàĞÍ',
-  `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '×´Ì¬',
-  `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT 'ĞŞ¸ÄÊ±¼ä',
+-- --------------------------------------------------------
+
+--
+-- è¡¨çš„ç»“æ„ `onethink_action`
+--
+
+CREATE TABLE IF NOT EXISTS `onethink_action` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ä¸»é”®',
+  `name` char(30) NOT NULL DEFAULT '' COMMENT 'è¡Œä¸ºå”¯ä¸€æ ‡è¯†',
+  `title` char(80) NOT NULL DEFAULT '' COMMENT 'è¡Œä¸ºè¯´æ˜',
+  `remark` char(140) NOT NULL DEFAULT '' COMMENT 'è¡Œä¸ºæè¿°',
+  `rule` text COMMENT 'è¡Œä¸ºè§„åˆ™',
+  `log` text COMMENT 'æ—¥å¿—è§„åˆ™',
+  `type` tinyint(2) unsigned NOT NULL DEFAULT '1' COMMENT 'ç±»å‹',
+  `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT 'çŠ¶æ€',
+  `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT 'ä¿®æ”¹æ—¶é—´',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='ÏµÍ³ĞĞÎª±í';
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='ç³»ç»Ÿè¡Œä¸ºè¡¨' AUTO_INCREMENT=12 ;
 
-#
-# Dumping data for table onethink_action
-#
+--
+-- è½¬å­˜è¡¨ä¸­çš„æ•°æ® `onethink_action`
+--
 
-INSERT INTO `onethink_action` VALUES (1,'user_login','ÓÃ»§µÇÂ¼','»ı·Ö+10£¬Ã¿ÌìÒ»´Î','table:member|field:score|condition:uid={$self} AND status>-1|rule:score+10|cycle:24|max:1;','[user|get_nickname]ÔÚ[time|time_format]µÇÂ¼ÁËºóÌ¨',1,1,1387181220);
-INSERT INTO `onethink_action` VALUES (2,'add_article','·¢²¼ÎÄÕÂ','»ı·Ö+5£¬Ã¿ÌìÉÏÏŞ5´Î','table:member|field:score|condition:uid={$self}|rule:score+5|cycle:24|max:5','',2,0,1380173180);
-INSERT INTO `onethink_action` VALUES (3,'review','ÆÀÂÛ','ÆÀÂÛ»ı·Ö+1£¬ÎŞÏŞÖÆ','table:member|field:score|condition:uid={$self}|rule:score+1','',2,1,1383285646);
-INSERT INTO `onethink_action` VALUES (4,'add_document','·¢±íÎÄµµ','»ı·Ö+10£¬Ã¿ÌìÉÏÏŞ5´Î','table:member|field:score|condition:uid={$self}|rule:score+10|cycle:24|max:5','[user|get_nickname]ÔÚ[time|time_format]·¢±íÁËÒ»ÆªÎÄÕÂ¡£\r\n±í[model]£¬¼ÇÂ¼±àºÅ[record]¡£',2,0,1386139726);
-INSERT INTO `onethink_action` VALUES (5,'add_document_topic','·¢±íÌÖÂÛ','»ı·Ö+5£¬Ã¿ÌìÉÏÏŞ10´Î','table:member|field:score|condition:uid={$self}|rule:score+5|cycle:24|max:10','',2,0,1383285551);
-INSERT INTO `onethink_action` VALUES (6,'update_config','¸üĞÂÅäÖÃ','ĞÂÔö»òĞŞ¸Ä»òÉ¾³ıÅäÖÃ','','',1,1,1383294988);
-INSERT INTO `onethink_action` VALUES (7,'update_model','¸üĞÂÄ£ĞÍ','ĞÂÔö»òĞŞ¸ÄÄ£ĞÍ','','',1,1,1383295057);
-INSERT INTO `onethink_action` VALUES (8,'update_attribute','¸üĞÂÊôĞÔ','ĞÂÔö»ò¸üĞÂ»òÉ¾³ıÊôĞÔ','','',1,1,1383295963);
-INSERT INTO `onethink_action` VALUES (9,'update_channel','¸üĞÂµ¼º½','ĞÂÔö»òĞŞ¸Ä»òÉ¾³ıµ¼º½','','',1,1,1383296301);
-INSERT INTO `onethink_action` VALUES (10,'update_menu','¸üĞÂ²Ëµ¥','ĞÂÔö»òĞŞ¸Ä»òÉ¾³ı²Ëµ¥','','',1,1,1383296392);
-INSERT INTO `onethink_action` VALUES (11,'update_category','¸üĞÂ·ÖÀà','ĞÂÔö»òĞŞ¸Ä»òÉ¾³ı·ÖÀà','','',1,1,1383296765);
+INSERT INTO `onethink_action` (`id`, `name`, `title`, `remark`, `rule`, `log`, `type`, `status`, `update_time`) VALUES
+(1, 'user_login', 'ç”¨æˆ·ç™»å½•', 'ç§¯åˆ†+10ï¼Œæ¯å¤©ä¸€æ¬¡', 'table:member|field:score|condition:uid={$self} AND status>-1|rule:score+10|cycle:24|max:1;', '[user|get_nickname]åœ¨[time|time_format]ç™»å½•äº†åå°', 1, 1, 1387181220),
+(2, 'add_article', 'å‘å¸ƒæ–‡ç« ', 'ç§¯åˆ†+5ï¼Œæ¯å¤©ä¸Šé™5æ¬¡', 'table:member|field:score|condition:uid={$self}|rule:score+5|cycle:24|max:5', '', 2, 0, 1380173180),
+(3, 'review', 'è¯„è®º', 'è¯„è®ºç§¯åˆ†+1ï¼Œæ— é™åˆ¶', 'table:member|field:score|condition:uid={$self}|rule:score+1', '', 2, 1, 1383285646),
+(4, 'add_document', 'å‘è¡¨æ–‡æ¡£', 'ç§¯åˆ†+10ï¼Œæ¯å¤©ä¸Šé™5æ¬¡', 'table:member|field:score|condition:uid={$self}|rule:score+10|cycle:24|max:5', '[user|get_nickname]åœ¨[time|time_format]å‘è¡¨äº†ä¸€ç¯‡æ–‡ç« ã€‚\r\nè¡¨[model]ï¼Œè®°å½•ç¼–å·[record]ã€‚', 2, 0, 1386139726),
+(5, 'add_document_topic', 'å‘è¡¨è®¨è®º', 'ç§¯åˆ†+5ï¼Œæ¯å¤©ä¸Šé™10æ¬¡', 'table:member|field:score|condition:uid={$self}|rule:score+5|cycle:24|max:10', '', 2, 0, 1383285551),
+(6, 'update_config', 'æ›´æ–°é…ç½®', 'æ–°å¢æˆ–ä¿®æ”¹æˆ–åˆ é™¤é…ç½®', '', '', 1, 1, 1383294988),
+(7, 'update_model', 'æ›´æ–°æ¨¡å‹', 'æ–°å¢æˆ–ä¿®æ”¹æ¨¡å‹', '', '', 1, 1, 1383295057),
+(8, 'update_attribute', 'æ›´æ–°å±æ€§', 'æ–°å¢æˆ–æ›´æ–°æˆ–åˆ é™¤å±æ€§', '', '', 1, 1, 1383295963),
+(9, 'update_channel', 'æ›´æ–°å¯¼èˆª', 'æ–°å¢æˆ–ä¿®æ”¹æˆ–åˆ é™¤å¯¼èˆª', '', '', 1, 1, 1383296301),
+(10, 'update_menu', 'æ›´æ–°èœå•', 'æ–°å¢æˆ–ä¿®æ”¹æˆ–åˆ é™¤èœå•', '', '', 1, 1, 1383296392),
+(11, 'update_category', 'æ›´æ–°åˆ†ç±»', 'æ–°å¢æˆ–ä¿®æ”¹æˆ–åˆ é™¤åˆ†ç±»', '', '', 1, 1, 1383296765);
 
-#
-# Source for table onethink_action_log
-#
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `onethink_action_log`;
-CREATE TABLE `onethink_action_log` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Ö÷¼ü',
-  `action_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'ĞĞÎªid',
-  `user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Ö´ĞĞÓÃ»§id',
-  `action_ip` bigint(20) NOT NULL COMMENT 'Ö´ĞĞĞĞÎªÕßip',
-  `model` varchar(50) NOT NULL DEFAULT '' COMMENT '´¥·¢ĞĞÎªµÄ±í',
-  `record_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '´¥·¢ĞĞÎªµÄÊı¾İid',
-  `remark` varchar(255) NOT NULL DEFAULT '' COMMENT 'ÈÕÖ¾±¸×¢',
-  `status` tinyint(2) NOT NULL DEFAULT '1' COMMENT '×´Ì¬',
-  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Ö´ĞĞĞĞÎªµÄÊ±¼ä',
+--
+-- è¡¨çš„ç»“æ„ `onethink_action_log`
+--
+
+CREATE TABLE IF NOT EXISTS `onethink_action_log` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ä¸»é”®',
+  `action_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'è¡Œä¸ºid',
+  `user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'æ‰§è¡Œç”¨æˆ·id',
+  `action_ip` bigint(20) NOT NULL COMMENT 'æ‰§è¡Œè¡Œä¸ºè€…ip',
+  `model` varchar(50) NOT NULL DEFAULT '' COMMENT 'è§¦å‘è¡Œä¸ºçš„è¡¨',
+  `record_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'è§¦å‘è¡Œä¸ºçš„æ•°æ®id',
+  `remark` varchar(255) NOT NULL DEFAULT '' COMMENT 'æ—¥å¿—å¤‡æ³¨',
+  `status` tinyint(2) NOT NULL DEFAULT '1' COMMENT 'çŠ¶æ€',
+  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'æ‰§è¡Œè¡Œä¸ºçš„æ—¶é—´',
   PRIMARY KEY (`id`),
   KEY `action_ip_ix` (`action_ip`),
   KEY `action_id_ix` (`action_id`),
   KEY `user_id_ix` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=197 DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED COMMENT='ĞĞÎªÈÕÖ¾±í';
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED COMMENT='è¡Œä¸ºæ—¥å¿—è¡¨' AUTO_INCREMENT=359 ;
 
-#
-# Dumping data for table onethink_action_log
-#
+--
+-- è½¬å­˜è¡¨ä¸­çš„æ•°æ® `onethink_action_log`
+--
 
-INSERT INTO `onethink_action_log` VALUES (120,1,1,2130706433,'member',1,'adminÔÚ2015-02-17 15:19µÇÂ¼ÁËºóÌ¨',1,1424157551);
-INSERT INTO `onethink_action_log` VALUES (121,1,1,2130706433,'member',1,'adminÔÚ2015-02-17 15:33µÇÂ¼ÁËºóÌ¨',1,1424158422);
-INSERT INTO `onethink_action_log` VALUES (122,1,1,2130706433,'member',1,'adminÔÚ2015-02-17 17:17µÇÂ¼ÁËºóÌ¨',1,1424164625);
-INSERT INTO `onethink_action_log` VALUES (123,1,1,2130706433,'member',1,'adminÔÚ2015-02-17 19:45µÇÂ¼ÁËºóÌ¨',1,1424173532);
-INSERT INTO `onethink_action_log` VALUES (124,1,1,2130706433,'member',1,'adminÔÚ2015-02-17 21:53µÇÂ¼ÁËºóÌ¨',1,1424181197);
-INSERT INTO `onethink_action_log` VALUES (125,10,1,2130706433,'Menu',27,'²Ù×÷url£º/admin.php?s=/Menu/edit.html',1,1424185127);
-INSERT INTO `onethink_action_log` VALUES (126,10,1,2130706433,'Menu',27,'²Ù×÷url£º/admin.php?s=/Menu/edit.html',1,1424186044);
-INSERT INTO `onethink_action_log` VALUES (127,10,1,2130706433,'Menu',27,'²Ù×÷url£º/admin.php?s=/Menu/edit.html',1,1424186456);
-INSERT INTO `onethink_action_log` VALUES (128,1,1,2130706433,'member',1,'adminÔÚ2015-02-17 23:27µÇÂ¼ÁËºóÌ¨',1,1424186851);
-INSERT INTO `onethink_action_log` VALUES (129,1,1,2130706433,'member',1,'adminÔÚ2015-02-18 08:41µÇÂ¼ÁËºóÌ¨',1,1424220092);
-INSERT INTO `onethink_action_log` VALUES (130,7,1,2130706433,'model',4,'²Ù×÷url£º/admin.php?s=/Model/update.html',1,1424221521);
-INSERT INTO `onethink_action_log` VALUES (131,8,1,2130706433,'attribute',33,'²Ù×÷url£º/admin.php?s=/Attribute/update.html',1,1424222398);
-INSERT INTO `onethink_action_log` VALUES (132,7,1,2130706433,'model',4,'²Ù×÷url£º/admin.php?s=/Model/update.html',1,1424222476);
-INSERT INTO `onethink_action_log` VALUES (133,8,1,2130706433,'attribute',34,'²Ù×÷url£º/admin.php?s=/Model/generate.html',1,1424222572);
-INSERT INTO `onethink_action_log` VALUES (134,7,1,2130706433,'model',6,'²Ù×÷url£º/admin.php?s=/Model/update.html',1,1424222843);
-INSERT INTO `onethink_action_log` VALUES (135,8,1,2130706433,'attribute',35,'²Ù×÷url£º/admin.php?s=/Attribute/update.html',1,1424222997);
-INSERT INTO `onethink_action_log` VALUES (136,8,1,2130706433,'attribute',36,'²Ù×÷url£º/admin.php?s=/Attribute/update.html',1,1424223175);
-INSERT INTO `onethink_action_log` VALUES (137,7,1,2130706433,'model',6,'²Ù×÷url£º/admin.php?s=/Model/update.html',1,1424223274);
-INSERT INTO `onethink_action_log` VALUES (138,7,1,2130706433,'model',6,'²Ù×÷url£º/admin.php?s=/Model/update.html',1,1424223513);
-INSERT INTO `onethink_action_log` VALUES (139,8,1,2130706433,'attribute',37,'²Ù×÷url£º/admin.php?s=/Attribute/update.html',1,1424223701);
-INSERT INTO `onethink_action_log` VALUES (140,8,1,2130706433,'attribute',36,'²Ù×÷url£º/admin.php?s=/Attribute/update.html',1,1424223846);
-INSERT INTO `onethink_action_log` VALUES (141,7,1,2130706433,'model',6,'²Ù×÷url£º/admin.php?s=/Model/update.html',1,1424224095);
-INSERT INTO `onethink_action_log` VALUES (142,7,1,2130706433,'model',6,'²Ù×÷url£º/admin.php?s=/Model/update.html',1,1424224134);
-INSERT INTO `onethink_action_log` VALUES (143,8,1,2130706433,'attribute',38,'²Ù×÷url£º/admin.php?s=/Attribute/update.html',1,1424224320);
-INSERT INTO `onethink_action_log` VALUES (144,7,1,2130706433,'model',6,'²Ù×÷url£º/admin.php?s=/Model/update.html',1,1424224343);
-INSERT INTO `onethink_action_log` VALUES (145,7,1,2130706433,'model',6,'²Ù×÷url£º/admin.php?s=/Model/update.html',1,1424224367);
-INSERT INTO `onethink_action_log` VALUES (146,8,1,2130706433,'attribute',39,'²Ù×÷url£º/admin.php?s=/Attribute/update.html',1,1424224536);
-INSERT INTO `onethink_action_log` VALUES (147,8,1,2130706433,'attribute',39,'²Ù×÷url£º/admin.php?s=/Attribute/update.html',1,1424224624);
-INSERT INTO `onethink_action_log` VALUES (148,8,1,2130706433,'attribute',39,'²Ù×÷url£º/admin.php?s=/Attribute/update.html',1,1424224674);
-INSERT INTO `onethink_action_log` VALUES (149,7,1,2130706433,'model',6,'²Ù×÷url£º/admin.php?s=/Model/update.html',1,1424224738);
-INSERT INTO `onethink_action_log` VALUES (150,8,1,2130706433,'attribute',40,'²Ù×÷url£º/admin.php?s=/Model/generate.html',1,1424224858);
-INSERT INTO `onethink_action_log` VALUES (151,8,1,2130706433,'attribute',41,'²Ù×÷url£º/admin.php?s=/Model/generate.html',1,1424224858);
-INSERT INTO `onethink_action_log` VALUES (152,8,1,2130706433,'attribute',42,'²Ù×÷url£º/admin.php?s=/Model/generate.html',1,1424224858);
-INSERT INTO `onethink_action_log` VALUES (153,8,1,2130706433,'attribute',43,'²Ù×÷url£º/admin.php?s=/Model/generate.html',1,1424224858);
-INSERT INTO `onethink_action_log` VALUES (154,8,1,2130706433,'attribute',44,'²Ù×÷url£º/admin.php?s=/Model/generate.html',1,1424224858);
-INSERT INTO `onethink_action_log` VALUES (155,11,1,2130706433,'category',2,'²Ù×÷url£º/admin.php?s=/Category/edit.html',1,1424239790);
-INSERT INTO `onethink_action_log` VALUES (156,8,1,2130706433,'attribute',39,'²Ù×÷url£º/admin.php?s=/Attribute/update.html',1,1424239574);
-INSERT INTO `onethink_action_log` VALUES (157,7,1,2130706433,'model',6,'²Ù×÷url£º/admin.php?s=/Model/update.html',1,1424239791);
-INSERT INTO `onethink_action_log` VALUES (158,8,1,2130706433,'attribute',45,'²Ù×÷url£º/admin.php?s=/Attribute/update.html',1,1424240217);
-INSERT INTO `onethink_action_log` VALUES (159,7,1,2130706433,'model',6,'²Ù×÷url£º/admin.php?s=/Model/update.html',1,1424240250);
-INSERT INTO `onethink_action_log` VALUES (160,7,1,2130706433,'model',6,'²Ù×÷url£º/admin.php?s=/Model/update.html',1,1424240326);
-INSERT INTO `onethink_action_log` VALUES (161,8,1,2130706433,'attribute',36,'²Ù×÷url£º/admin.php?s=/Attribute/update.html',1,1424240493);
-INSERT INTO `onethink_action_log` VALUES (162,8,1,2130706433,'attribute',36,'²Ù×÷url£º/admin.php?s=/Attribute/update.html',1,1424240611);
-INSERT INTO `onethink_action_log` VALUES (163,8,1,2130706433,'attribute',36,'²Ù×÷url£º/admin.php?s=/Attribute/update.html',1,1424240689);
-INSERT INTO `onethink_action_log` VALUES (164,8,1,2130706433,'attribute',37,'²Ù×÷url£º/admin.php?s=/Attribute/update.html',1,1424240749);
-INSERT INTO `onethink_action_log` VALUES (165,8,1,2130706433,'attribute',45,'²Ù×÷url£º/admin.php?s=/Attribute/update.html',1,1424240767);
-INSERT INTO `onethink_action_log` VALUES (166,8,1,2130706433,'attribute',35,'²Ù×÷url£º/admin.php?s=/Attribute/update.html',1,1424240910);
-INSERT INTO `onethink_action_log` VALUES (167,8,1,2130706433,'attribute',35,'²Ù×÷url£º/admin.php?s=/Attribute/update.html',1,1424240953);
-INSERT INTO `onethink_action_log` VALUES (168,8,1,2130706433,'attribute',37,'²Ù×÷url£º/admin.php?s=/Attribute/update.html',1,1424240968);
-INSERT INTO `onethink_action_log` VALUES (169,8,1,2130706433,'attribute',46,'²Ù×÷url£º/admin.php?s=/Attribute/update.html',1,1424241068);
-INSERT INTO `onethink_action_log` VALUES (170,7,1,2130706433,'model',6,'²Ù×÷url£º/admin.php?s=/Model/update.html',1,1424241099);
-INSERT INTO `onethink_action_log` VALUES (171,7,1,2130706433,'model',6,'²Ù×÷url£º/admin.php?s=/Model/update.html',1,1424241154);
-INSERT INTO `onethink_action_log` VALUES (172,7,1,2130706433,'model',6,'²Ù×÷url£º/admin.php?s=/Model/update.html',1,1424241310);
-INSERT INTO `onethink_action_log` VALUES (173,7,1,2130706433,'model',6,'²Ù×÷url£º/admin.php?s=/Model/update.html',1,1424241364);
-INSERT INTO `onethink_action_log` VALUES (174,7,1,2130706433,'model',6,'²Ù×÷url£º/admin.php?s=/Model/update.html',1,1424241803);
-INSERT INTO `onethink_action_log` VALUES (175,7,1,2130706433,'model',6,'²Ù×÷url£º/admin.php?s=/Model/update.html',1,1424241897);
-INSERT INTO `onethink_action_log` VALUES (176,8,1,2130706433,'attribute',47,'²Ù×÷url£º/admin.php?s=/Attribute/update.html',1,1424242022);
-INSERT INTO `onethink_action_log` VALUES (177,7,1,2130706433,'model',6,'²Ù×÷url£º/admin.php?s=/Model/update.html',1,1424242066);
-INSERT INTO `onethink_action_log` VALUES (178,7,1,2130706433,'model',6,'²Ù×÷url£º/admin.php?s=/Model/update.html',1,1424242138);
-INSERT INTO `onethink_action_log` VALUES (179,7,1,2130706433,'model',6,'²Ù×÷url£º/admin.php?s=/Model/update.html',1,1424242546);
-INSERT INTO `onethink_action_log` VALUES (180,7,1,2130706433,'model',6,'²Ù×÷url£º/admin.php?s=/Model/update.html',1,1424242595);
-INSERT INTO `onethink_action_log` VALUES (181,7,1,2130706433,'model',6,'²Ù×÷url£º/admin.php?s=/Model/update.html',1,1424242667);
-INSERT INTO `onethink_action_log` VALUES (182,7,1,2130706433,'model',6,'²Ù×÷url£º/admin.php?s=/Model/update.html',1,1424242907);
-INSERT INTO `onethink_action_log` VALUES (183,7,1,2130706433,'model',6,'²Ù×÷url£º/admin.php?s=/Model/update.html',1,1424242967);
-INSERT INTO `onethink_action_log` VALUES (184,1,1,2130706433,'member',1,'adminÔÚ2015-02-19 14:48µÇÂ¼ÁËºóÌ¨',1,1424328523);
-INSERT INTO `onethink_action_log` VALUES (185,1,3,2130706433,'member',3,'geniusxjqÔÚ2015-02-19 20:28µÇÂ¼ÁËºóÌ¨',1,1424348892);
-INSERT INTO `onethink_action_log` VALUES (186,1,1,2130706433,'member',1,'adminÔÚ2015-02-19 23:27µÇÂ¼ÁËºóÌ¨',1,1424359653);
-INSERT INTO `onethink_action_log` VALUES (187,1,3,2130706433,'member',3,'geniusxjqÔÚ2015-02-20 10:12µÇÂ¼ÁËºóÌ¨',1,1424398363);
-INSERT INTO `onethink_action_log` VALUES (188,1,4,2130706433,'member',4,'xjq123ÔÚ2015-02-20 10:20µÇÂ¼ÁËºóÌ¨',1,1424398807);
-INSERT INTO `onethink_action_log` VALUES (189,1,3,2130706433,'member',3,'geniusxjqÔÚ2015-02-20 10:28µÇÂ¼ÁËºóÌ¨',1,1424399281);
-INSERT INTO `onethink_action_log` VALUES (190,1,1,2130706433,'member',1,'adminÔÚ2015-02-20 11:51µÇÂ¼ÁËºóÌ¨',1,1424404301);
-INSERT INTO `onethink_action_log` VALUES (191,9,1,2130706433,'channel',1,'²Ù×÷url£º/admin.php?s=/Channel/edit.html',1,1424404763);
-INSERT INTO `onethink_action_log` VALUES (192,9,1,2130706433,'channel',2,'²Ù×÷url£º/admin.php?s=/Channel/edit.html',1,1424404779);
-INSERT INTO `onethink_action_log` VALUES (193,9,1,2130706433,'channel',1,'²Ù×÷url£º/admin.php?s=/Channel/edit.html',1,1424406781);
-INSERT INTO `onethink_action_log` VALUES (194,9,1,2130706433,'channel',0,'²Ù×÷url£º/admin.php?s=/Channel/del/id/3.html',1,1424406795);
-INSERT INTO `onethink_action_log` VALUES (195,1,1,2130706433,'member',1,'adminÔÚ2015-02-20 18:59µÇÂ¼ÁËºóÌ¨',1,1424429960);
-INSERT INTO `onethink_action_log` VALUES (196,1,1,2130706433,'member',1,'adminÔÚ2015-02-23 18:45µÇÂ¼ÁËºóÌ¨',1,1424688334);
+INSERT INTO `onethink_action_log` (`id`, `action_id`, `user_id`, `action_ip`, `model`, `record_id`, `remark`, `status`, `create_time`) VALUES
+(120, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-02-17 15:19ç™»å½•äº†åå°', 1, 1424157551),
+(121, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-02-17 15:33ç™»å½•äº†åå°', 1, 1424158422),
+(122, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-02-17 17:17ç™»å½•äº†åå°', 1, 1424164625),
+(123, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-02-17 19:45ç™»å½•äº†åå°', 1, 1424173532),
+(124, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-02-17 21:53ç™»å½•äº†åå°', 1, 1424181197),
+(125, 10, 1, 2130706433, 'Menu', 27, 'æ“ä½œurlï¼š/admin.php?s=/Menu/edit.html', 1, 1424185127),
+(126, 10, 1, 2130706433, 'Menu', 27, 'æ“ä½œurlï¼š/admin.php?s=/Menu/edit.html', 1, 1424186044),
+(127, 10, 1, 2130706433, 'Menu', 27, 'æ“ä½œurlï¼š/admin.php?s=/Menu/edit.html', 1, 1424186456),
+(128, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-02-17 23:27ç™»å½•äº†åå°', 1, 1424186851),
+(129, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-02-18 08:41ç™»å½•äº†åå°', 1, 1424220092),
+(130, 7, 1, 2130706433, 'model', 4, 'æ“ä½œurlï¼š/admin.php?s=/Model/update.html', 1, 1424221521),
+(131, 8, 1, 2130706433, 'attribute', 33, 'æ“ä½œurlï¼š/admin.php?s=/Attribute/update.html', 1, 1424222398),
+(132, 7, 1, 2130706433, 'model', 4, 'æ“ä½œurlï¼š/admin.php?s=/Model/update.html', 1, 1424222476),
+(133, 8, 1, 2130706433, 'attribute', 34, 'æ“ä½œurlï¼š/admin.php?s=/Model/generate.html', 1, 1424222572),
+(134, 7, 1, 2130706433, 'model', 6, 'æ“ä½œurlï¼š/admin.php?s=/Model/update.html', 1, 1424222843),
+(135, 8, 1, 2130706433, 'attribute', 35, 'æ“ä½œurlï¼š/admin.php?s=/Attribute/update.html', 1, 1424222997),
+(136, 8, 1, 2130706433, 'attribute', 36, 'æ“ä½œurlï¼š/admin.php?s=/Attribute/update.html', 1, 1424223175),
+(137, 7, 1, 2130706433, 'model', 6, 'æ“ä½œurlï¼š/admin.php?s=/Model/update.html', 1, 1424223274),
+(138, 7, 1, 2130706433, 'model', 6, 'æ“ä½œurlï¼š/admin.php?s=/Model/update.html', 1, 1424223513),
+(139, 8, 1, 2130706433, 'attribute', 37, 'æ“ä½œurlï¼š/admin.php?s=/Attribute/update.html', 1, 1424223701),
+(140, 8, 1, 2130706433, 'attribute', 36, 'æ“ä½œurlï¼š/admin.php?s=/Attribute/update.html', 1, 1424223846),
+(141, 7, 1, 2130706433, 'model', 6, 'æ“ä½œurlï¼š/admin.php?s=/Model/update.html', 1, 1424224095),
+(142, 7, 1, 2130706433, 'model', 6, 'æ“ä½œurlï¼š/admin.php?s=/Model/update.html', 1, 1424224134),
+(143, 8, 1, 2130706433, 'attribute', 38, 'æ“ä½œurlï¼š/admin.php?s=/Attribute/update.html', 1, 1424224320),
+(144, 7, 1, 2130706433, 'model', 6, 'æ“ä½œurlï¼š/admin.php?s=/Model/update.html', 1, 1424224343),
+(145, 7, 1, 2130706433, 'model', 6, 'æ“ä½œurlï¼š/admin.php?s=/Model/update.html', 1, 1424224367),
+(146, 8, 1, 2130706433, 'attribute', 39, 'æ“ä½œurlï¼š/admin.php?s=/Attribute/update.html', 1, 1424224536),
+(147, 8, 1, 2130706433, 'attribute', 39, 'æ“ä½œurlï¼š/admin.php?s=/Attribute/update.html', 1, 1424224624),
+(148, 8, 1, 2130706433, 'attribute', 39, 'æ“ä½œurlï¼š/admin.php?s=/Attribute/update.html', 1, 1424224674),
+(149, 7, 1, 2130706433, 'model', 6, 'æ“ä½œurlï¼š/admin.php?s=/Model/update.html', 1, 1424224738),
+(150, 8, 1, 2130706433, 'attribute', 40, 'æ“ä½œurlï¼š/admin.php?s=/Model/generate.html', 1, 1424224858),
+(151, 8, 1, 2130706433, 'attribute', 41, 'æ“ä½œurlï¼š/admin.php?s=/Model/generate.html', 1, 1424224858),
+(152, 8, 1, 2130706433, 'attribute', 42, 'æ“ä½œurlï¼š/admin.php?s=/Model/generate.html', 1, 1424224858),
+(153, 8, 1, 2130706433, 'attribute', 43, 'æ“ä½œurlï¼š/admin.php?s=/Model/generate.html', 1, 1424224858),
+(154, 8, 1, 2130706433, 'attribute', 44, 'æ“ä½œurlï¼š/admin.php?s=/Model/generate.html', 1, 1424224858),
+(155, 11, 1, 2130706433, 'category', 2, 'æ“ä½œurlï¼š/admin.php?s=/Category/edit.html', 1, 1424239790),
+(156, 8, 1, 2130706433, 'attribute', 39, 'æ“ä½œurlï¼š/admin.php?s=/Attribute/update.html', 1, 1424239574),
+(157, 7, 1, 2130706433, 'model', 6, 'æ“ä½œurlï¼š/admin.php?s=/Model/update.html', 1, 1424239791),
+(158, 8, 1, 2130706433, 'attribute', 45, 'æ“ä½œurlï¼š/admin.php?s=/Attribute/update.html', 1, 1424240217),
+(159, 7, 1, 2130706433, 'model', 6, 'æ“ä½œurlï¼š/admin.php?s=/Model/update.html', 1, 1424240250),
+(160, 7, 1, 2130706433, 'model', 6, 'æ“ä½œurlï¼š/admin.php?s=/Model/update.html', 1, 1424240326),
+(161, 8, 1, 2130706433, 'attribute', 36, 'æ“ä½œurlï¼š/admin.php?s=/Attribute/update.html', 1, 1424240493),
+(162, 8, 1, 2130706433, 'attribute', 36, 'æ“ä½œurlï¼š/admin.php?s=/Attribute/update.html', 1, 1424240611),
+(163, 8, 1, 2130706433, 'attribute', 36, 'æ“ä½œurlï¼š/admin.php?s=/Attribute/update.html', 1, 1424240689),
+(164, 8, 1, 2130706433, 'attribute', 37, 'æ“ä½œurlï¼š/admin.php?s=/Attribute/update.html', 1, 1424240749),
+(165, 8, 1, 2130706433, 'attribute', 45, 'æ“ä½œurlï¼š/admin.php?s=/Attribute/update.html', 1, 1424240767),
+(166, 8, 1, 2130706433, 'attribute', 35, 'æ“ä½œurlï¼š/admin.php?s=/Attribute/update.html', 1, 1424240910),
+(167, 8, 1, 2130706433, 'attribute', 35, 'æ“ä½œurlï¼š/admin.php?s=/Attribute/update.html', 1, 1424240953),
+(168, 8, 1, 2130706433, 'attribute', 37, 'æ“ä½œurlï¼š/admin.php?s=/Attribute/update.html', 1, 1424240968),
+(169, 8, 1, 2130706433, 'attribute', 46, 'æ“ä½œurlï¼š/admin.php?s=/Attribute/update.html', 1, 1424241068),
+(170, 7, 1, 2130706433, 'model', 6, 'æ“ä½œurlï¼š/admin.php?s=/Model/update.html', 1, 1424241099),
+(171, 7, 1, 2130706433, 'model', 6, 'æ“ä½œurlï¼š/admin.php?s=/Model/update.html', 1, 1424241154),
+(172, 7, 1, 2130706433, 'model', 6, 'æ“ä½œurlï¼š/admin.php?s=/Model/update.html', 1, 1424241310),
+(173, 7, 1, 2130706433, 'model', 6, 'æ“ä½œurlï¼š/admin.php?s=/Model/update.html', 1, 1424241364),
+(174, 7, 1, 2130706433, 'model', 6, 'æ“ä½œurlï¼š/admin.php?s=/Model/update.html', 1, 1424241803),
+(175, 7, 1, 2130706433, 'model', 6, 'æ“ä½œurlï¼š/admin.php?s=/Model/update.html', 1, 1424241897),
+(176, 8, 1, 2130706433, 'attribute', 47, 'æ“ä½œurlï¼š/admin.php?s=/Attribute/update.html', 1, 1424242022),
+(177, 7, 1, 2130706433, 'model', 6, 'æ“ä½œurlï¼š/admin.php?s=/Model/update.html', 1, 1424242066),
+(178, 7, 1, 2130706433, 'model', 6, 'æ“ä½œurlï¼š/admin.php?s=/Model/update.html', 1, 1424242138),
+(179, 7, 1, 2130706433, 'model', 6, 'æ“ä½œurlï¼š/admin.php?s=/Model/update.html', 1, 1424242546),
+(180, 7, 1, 2130706433, 'model', 6, 'æ“ä½œurlï¼š/admin.php?s=/Model/update.html', 1, 1424242595),
+(181, 7, 1, 2130706433, 'model', 6, 'æ“ä½œurlï¼š/admin.php?s=/Model/update.html', 1, 1424242667),
+(182, 7, 1, 2130706433, 'model', 6, 'æ“ä½œurlï¼š/admin.php?s=/Model/update.html', 1, 1424242907),
+(183, 7, 1, 2130706433, 'model', 6, 'æ“ä½œurlï¼š/admin.php?s=/Model/update.html', 1, 1424242967),
+(184, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-02-19 14:48ç™»å½•äº†åå°', 1, 1424328523),
+(185, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-02-19 20:28ç™»å½•äº†åå°', 1, 1424348892),
+(186, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-02-19 23:27ç™»å½•äº†åå°', 1, 1424359653),
+(187, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-02-20 10:12ç™»å½•äº†åå°', 1, 1424398363),
+(188, 1, 4, 2130706433, 'member', 4, 'xjq123åœ¨2015-02-20 10:20ç™»å½•äº†åå°', 1, 1424398807),
+(189, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-02-20 10:28ç™»å½•äº†åå°', 1, 1424399281),
+(190, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-02-20 11:51ç™»å½•äº†åå°', 1, 1424404301),
+(191, 9, 1, 2130706433, 'channel', 1, 'æ“ä½œurlï¼š/admin.php?s=/Channel/edit.html', 1, 1424404763),
+(192, 9, 1, 2130706433, 'channel', 2, 'æ“ä½œurlï¼š/admin.php?s=/Channel/edit.html', 1, 1424404779),
+(193, 9, 1, 2130706433, 'channel', 1, 'æ“ä½œurlï¼š/admin.php?s=/Channel/edit.html', 1, 1424406781),
+(194, 9, 1, 2130706433, 'channel', 0, 'æ“ä½œurlï¼š/admin.php?s=/Channel/del/id/3.html', 1, 1424406795),
+(195, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-02-20 18:59ç™»å½•äº†åå°', 1, 1424429960),
+(196, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-02-23 18:45ç™»å½•äº†åå°', 1, 1424688334),
+(197, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-02-26 17:47ç™»å½•äº†åå°', 1, 1424944057),
+(198, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-02-28 22:08ç™»å½•äº†åå°', 1, 1425132497),
+(199, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-02-28 22:13ç™»å½•äº†åå°', 1, 1425132790),
+(200, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-06-24 22:47ç™»å½•äº†åå°', 1, 1435157248),
+(201, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-06-27 18:25ç™»å½•äº†åå°', 1, 1435400750),
+(202, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-07-16 12:49ç™»å½•äº†åå°', 1, 1437022180),
+(203, 7, 1, 2130706433, 'model', 8, 'æ“ä½œurlï¼š/admin.php?s=/Model/update.html', 1, 1437024360),
+(204, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-09-21 15:10ç™»å½•äº†åå°', 1, 1442819406),
+(205, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-09-21 15:20ç™»å½•äº†åå°', 1, 1442820010),
+(206, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-10-06 17:34ç™»å½•äº†åå°', 1, 1444124047),
+(207, 11, 1, 2130706433, 'category', 1, 'æ“ä½œurlï¼š/admin.php?s=/Category/edit.html', 1, 1444128128),
+(208, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-06 18:43ç™»å½•äº†åå°', 1, 1444128216),
+(209, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-10-06 21:51ç™»å½•äº†åå°', 1, 1444139478),
+(210, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-10-07 10:19ç™»å½•äº†åå°', 1, 1444184354),
+(211, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-10-07 15:24ç™»å½•äº†åå°', 1, 1444202673),
+(212, 8, 1, 2130706433, 'attribute', 48, 'æ“ä½œurlï¼š/admin.php?s=/Attribute/update.html', 1, 1444206487),
+(213, 7, 1, 2130706433, 'model', 2, 'æ“ä½œurlï¼š/admin.php?s=/Model/update.html', 1, 1444206541),
+(214, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-10-07 18:22ç™»å½•äº†åå°', 1, 1444213340),
+(215, 11, 1, 2130706433, 'category', 39, 'æ“ä½œurlï¼š/admin.php?s=/Category/add.html', 1, 1444221410),
+(216, 11, 1, 2130706433, 'category', 2, 'æ“ä½œurlï¼š/admin.php?s=/Category/edit.html', 1, 1444221558),
+(217, 11, 1, 2130706433, 'category', 39, 'æ“ä½œurlï¼š/admin.php?s=/Category/edit.html', 1, 1444221561),
+(218, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-07 21:39ç™»å½•äº†åå°', 1, 1444225190),
+(219, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-10-08 12:29ç™»å½•äº†åå°', 1, 1444278590),
+(220, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-08 13:41ç™»å½•äº†åå°', 1, 1444282872),
+(221, 1, 3, -1062731517, 'member', 3, 'geniusxjqåœ¨2015-10-08 14:03ç™»å½•äº†åå°', 1, 1444284193),
+(222, 1, 3, -1062731517, 'member', 3, 'geniusxjqåœ¨2015-10-08 14:04ç™»å½•äº†åå°', 1, 1444284281),
+(223, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-08 15:19ç™»å½•äº†åå°', 1, 1444288799),
+(224, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-08 15:19ç™»å½•äº†åå°', 1, 1444288796),
+(225, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-08 17:51ç™»å½•äº†åå°', 1, 1444297885),
+(226, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-10-08 23:40ç™»å½•äº†åå°', 1, 1444318813),
+(227, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-10-09 12:24ç™»å½•äº†åå°', 1, 1444364651),
+(228, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-09 15:21ç™»å½•äº†åå°', 1, 1444375314),
+(229, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-09 17:32ç™»å½•äº†åå°', 1, 1444383150),
+(230, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-10-09 18:10ç™»å½•äº†åå°', 1, 1444385409),
+(231, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-10-09 21:57ç™»å½•äº†åå°', 1, 1444399024),
+(232, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-10-10 11:26ç™»å½•äº†åå°', 1, 1444447598),
+(233, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-10-11 00:47ç™»å½•äº†åå°', 1, 1444495635),
+(234, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-10-12 14:10ç™»å½•äº†åå°', 1, 1444630202),
+(235, 7, 1, 2130706433, 'model', 2, 'æ“ä½œurlï¼š/admin.php?s=/Model/update.html', 1, 1444638898),
+(236, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-10-13 20:37ç™»å½•äº†åå°', 1, 1444739836),
+(237, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-13 21:44ç™»å½•äº†åå°', 1, 1444743846),
+(238, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-13 21:46ç™»å½•äº†åå°', 1, 1444743975),
+(239, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-13 22:11ç™»å½•äº†åå°', 1, 1444745504),
+(240, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-14 00:02ç™»å½•äº†åå°', 1, 1444752120),
+(241, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-14 00:08ç™»å½•äº†åå°', 1, 1444752484),
+(242, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-14 00:10ç™»å½•äº†åå°', 1, 1444752629),
+(243, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-14 12:05ç™»å½•äº†åå°', 1, 1444795519),
+(244, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-10-14 12:06ç™»å½•äº†åå°', 1, 1444795567),
+(245, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-10-14 13:10ç™»å½•äº†åå°', 1, 1444799430),
+(246, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-14 17:14ç™»å½•äº†åå°', 1, 1444814094),
+(247, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-15 12:05ç™»å½•äº†åå°', 1, 1444881949),
+(248, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-10-15 12:07ç™»å½•äº†åå°', 1, 1444882060),
+(249, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-15 13:23ç™»å½•äº†åå°', 1, 1444886615),
+(250, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-15 20:02ç™»å½•äº†åå°', 1, 1444910537),
+(251, 1, 3, -1062731515, 'member', 3, 'geniusxjqåœ¨2015-10-15 23:26ç™»å½•äº†åå°', 1, 1444922795),
+(252, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-15 23:29ç™»å½•äº†åå°', 1, 1444922954),
+(253, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-16 11:55ç™»å½•äº†åå°', 1, 1444967752),
+(254, 1, 3, -1062731515, 'member', 3, 'geniusxjqåœ¨2015-10-16 12:04ç™»å½•äº†åå°', 1, 1444968265),
+(255, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-10-16 14:05ç™»å½•äº†åå°', 1, 1444975540),
+(256, 7, 1, 2130706433, 'model', 2, 'æ“ä½œurlï¼š/admin.php?s=/Model/update.html', 1, 1444976420),
+(257, 1, 1, -1062731515, 'member', 1, 'adminåœ¨2015-10-16 14:32ç™»å½•äº†åå°', 1, 1444977123),
+(258, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-16 17:06ç™»å½•äº†åå°', 1, 1444986383),
+(259, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-16 18:50ç™»å½•äº†åå°', 1, 1444992651),
+(260, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-17 13:12ç™»å½•äº†åå°', 1, 1445058759),
+(261, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-17 15:30ç™»å½•äº†åå°', 1, 1445067048),
+(262, 1, 3, -1062731515, 'member', 3, 'geniusxjqåœ¨2015-10-17 16:06ç™»å½•äº†åå°', 1, 1445069216),
+(263, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-17 16:58ç™»å½•äº†åå°', 1, 1445072303),
+(264, 1, 3, -1062731515, 'member', 3, 'geniusxjqåœ¨2015-10-17 17:56ç™»å½•äº†åå°', 1, 1445075780),
+(265, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-17 18:54ç™»å½•äº†åå°', 1, 1445079282),
+(266, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-17 23:00ç™»å½•äº†åå°', 1, 1445094056),
+(267, 1, 3, -1062731515, 'member', 3, 'geniusxjqåœ¨2015-10-17 23:43ç™»å½•äº†åå°', 1, 1445096636),
+(268, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-18 09:31ç™»å½•äº†åå°', 1, 1445131867),
+(269, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-19 10:35ç™»å½•äº†åå°', 1, 1445222142),
+(270, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-19 15:05ç™»å½•äº†åå°', 1, 1445238351),
+(271, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-19 17:47ç™»å½•äº†åå°', 1, 1445248079),
+(272, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-20 17:36ç™»å½•äº†åå°', 1, 1445333819),
+(273, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-20 17:50ç™»å½•äº†åå°', 1, 1445334620),
+(274, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-10-20 22:32ç™»å½•äº†åå°', 1, 1445351552),
+(275, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-20 23:03ç™»å½•äº†åå°', 1, 1445353436),
+(276, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-10-21 13:05ç™»å½•äº†åå°', 1, 1445403901),
+(277, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-21 17:44ç™»å½•äº†åå°', 1, 1445420694),
+(278, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-21 18:06ç™»å½•äº†åå°', 1, 1445421996),
+(279, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-21 19:38ç™»å½•äº†åå°', 1, 1445427521),
+(280, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-21 20:47ç™»å½•äº†åå°', 1, 1445431657),
+(281, 1, 3, -1062731515, 'member', 3, 'geniusxjqåœ¨2015-10-21 20:48ç™»å½•äº†åå°', 1, 1445431722),
+(282, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-22 13:48ç™»å½•äº†åå°', 1, 1445492912),
+(283, 1, 3, -1062731515, 'member', 3, 'geniusxjqåœ¨2015-10-22 13:49ç™»å½•äº†åå°', 1, 1445492977),
+(284, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-22 16:15ç™»å½•äº†åå°', 1, 1445501749),
+(285, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-22 17:48ç™»å½•äº†åå°', 1, 1445507311),
+(286, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-22 18:05ç™»å½•äº†åå°', 1, 1445508324),
+(287, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-22 22:05ç™»å½•äº†åå°', 1, 1445522745),
+(288, 1, 3, -1062731515, 'member', 3, 'geniusxjqåœ¨2015-10-22 22:06ç™»å½•äº†åå°', 1, 1445522793),
+(289, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-23 00:11ç™»å½•äº†åå°', 1, 1445530301),
+(290, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-23 09:54ç™»å½•äº†åå°', 1, 1445565288),
+(291, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-10-23 10:39ç™»å½•äº†åå°', 1, 1445567966),
+(292, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-23 11:36ç™»å½•äº†åå°', 1, 1445571419),
+(293, 1, 3, -1062731515, 'member', 3, 'geniusxjqåœ¨2015-10-23 11:42ç™»å½•äº†åå°', 1, 1445571753),
+(294, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-23 11:43ç™»å½•äº†åå°', 1, 1445571799),
+(295, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-23 12:04ç™»å½•äº†åå°', 1, 1445573075),
+(296, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-24 14:14ç™»å½•äº†åå°', 1, 1445667243),
+(297, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-24 14:15ç™»å½•äº†åå°', 1, 1445667335),
+(298, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-24 14:20ç™»å½•äº†åå°', 1, 1445667639),
+(299, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-24 14:31ç™»å½•äº†åå°', 1, 1445668271),
+(300, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-24 14:32ç™»å½•äº†åå°', 1, 1445668366),
+(301, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-24 14:35ç™»å½•äº†åå°', 1, 1445668552),
+(302, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-24 14:39ç™»å½•äº†åå°', 1, 1445668784),
+(303, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-24 15:05ç™»å½•äº†åå°', 1, 1445670331),
+(304, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-24 15:07ç™»å½•äº†åå°', 1, 1445670423),
+(305, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-24 18:16ç™»å½•äº†åå°', 1, 1445681803),
+(306, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-10-25 11:59ç™»å½•äº†åå°', 1, 1445745580),
+(307, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-10-25 22:42ç™»å½•äº†åå°', 1, 1445784156),
+(308, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-25 23:11ç™»å½•äº†åå°', 1, 1445785878),
+(309, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-10-26 16:12ç™»å½•äº†åå°', 1, 1445847150),
+(310, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-27 09:19ç™»å½•äº†åå°', 1, 1445908799),
+(311, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-10-27 09:22ç™»å½•äº†åå°', 1, 1445908970),
+(312, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-27 13:15ç™»å½•äº†åå°', 1, 1445922945),
+(313, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-27 14:02ç™»å½•äº†åå°', 1, 1445925769),
+(314, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-27 14:55ç™»å½•äº†åå°', 1, 1445928941),
+(315, 1, 3, -1062731515, 'member', 3, 'geniusxjqåœ¨2015-10-27 15:40ç™»å½•äº†åå°', 1, 1445931601),
+(316, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-27 16:07ç™»å½•äº†åå°', 1, 1445933227),
+(317, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-27 16:11ç™»å½•äº†åå°', 1, 1445933493),
+(318, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-27 18:29ç™»å½•äº†åå°', 1, 1445941757),
+(319, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-27 19:04ç™»å½•äº†åå°', 1, 1445943852),
+(320, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-27 20:21ç™»å½•äº†åå°', 1, 1445948477),
+(321, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-27 20:24ç™»å½•äº†åå°', 1, 1445948659),
+(322, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-27 20:34ç™»å½•äº†åå°', 1, 1445949287),
+(323, 1, 3, -1062731515, 'member', 3, 'geniusxjqåœ¨2015-10-27 20:38ç™»å½•äº†åå°', 1, 1445949517),
+(324, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-28 00:00ç™»å½•äº†åå°', 1, 1445961613),
+(325, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-28 00:29ç™»å½•äº†åå°', 1, 1445963354),
+(326, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-28 11:26ç™»å½•äº†åå°', 1, 1446002799),
+(327, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-28 13:49ç™»å½•äº†åå°', 1, 1446011382),
+(328, 1, 3, -1062731515, 'member', 3, 'geniusxjqåœ¨2015-10-28 13:58ç™»å½•äº†åå°', 1, 1446011906),
+(329, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-28 17:27ç™»å½•äº†åå°', 1, 1446024436),
+(330, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-10-28 19:00ç™»å½•äº†åå°', 1, 1446030058),
+(331, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-10-29 11:34ç™»å½•äº†åå°', 1, 1446089671),
+(332, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-10-30 11:58ç™»å½•äº†åå°', 1, 1446177503),
+(333, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-10-30 15:09ç™»å½•äº†åå°', 1, 1446188979),
+(334, 1, 3, -1062731517, 'member', 3, 'geniusxjqåœ¨2015-10-30 18:57ç™»å½•äº†åå°', 1, 1446202628),
+(335, 1, 3, -1062731517, 'member', 3, 'geniusxjqåœ¨2015-10-30 19:08ç™»å½•äº†åå°', 1, 1446203297),
+(336, 1, 1, -1062731517, 'member', 1, 'adminåœ¨2015-10-30 19:09ç™»å½•äº†åå°', 1, 1446203346),
+(337, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-10-31 12:04ç™»å½•äº†åå°', 1, 1446264284),
+(338, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-11-01 11:43ç™»å½•äº†åå°', 1, 1446349436),
+(339, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2002-01-01 01:37ç™»å½•äº†åå°', 1, 1009820252),
+(340, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-11-03 23:00ç™»å½•äº†åå°', 1, 1446562853),
+(341, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-11-04 00:56ç™»å½•äº†åå°', 1, 1446569767),
+(342, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-11-04 10:23ç™»å½•äº†åå°', 1, 1446603802),
+(343, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-11-04 13:39ç™»å½•äº†åå°', 1, 1446615580),
+(344, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-11-04 22:50ç™»å½•äº†åå°', 1, 1446648628),
+(345, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-11-05 15:01ç™»å½•äº†åå°', 1, 1446706878),
+(346, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-11-05 17:26ç™»å½•äº†åå°', 1, 1446715560),
+(347, 1, 3, 2130706433, 'member', 3, 'geniusxjqåœ¨2015-11-06 00:21ç™»å½•äº†åå°', 1, 1446740517),
+(348, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-11-06 10:12ç™»å½•äº†åå°', 1, 1446775950),
+(349, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-11-06 14:43ç™»å½•äº†åå°', 1, 1446792183),
+(350, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-11-07 07:47ç™»å½•äº†åå°', 1, 1446853629),
+(351, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-11-07 15:12ç™»å½•äº†åå°', 1, 1446880359),
+(352, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-11-07 19:15ç™»å½•äº†åå°', 1, 1446894906),
+(353, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-11-07 21:37ç™»å½•äº†åå°', 1, 1446903448),
+(354, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-11-08 09:27ç™»å½•äº†åå°', 1, 1446946024),
+(355, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-11-08 09:46ç™»å½•äº†åå°', 1, 1446947207),
+(356, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-11-08 12:17ç™»å½•äº†åå°', 1, 1446956234),
+(357, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-11-09 10:43ç™»å½•äº†åå°', 1, 1447036999),
+(358, 1, 1, 2130706433, 'member', 1, 'adminåœ¨2015-11-09 12:24ç™»å½•äº†åå°', 1, 1447043052);
 
-#
-# Source for table onethink_addons
-#
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `onethink_addons`;
-CREATE TABLE `onethink_addons` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Ö÷¼ü',
-  `name` varchar(40) NOT NULL COMMENT '²å¼şÃû»ò±êÊ¶',
-  `title` varchar(20) NOT NULL DEFAULT '' COMMENT 'ÖĞÎÄÃû',
-  `description` text COMMENT '²å¼şÃèÊö',
-  `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '×´Ì¬',
-  `config` text COMMENT 'ÅäÖÃ',
-  `author` varchar(40) DEFAULT '' COMMENT '×÷Õß',
-  `url` varchar(255) DEFAULT '' COMMENT '²å¼ş×÷ÕßÊ×Ò³Á´½Ó',
-  `version` varchar(20) DEFAULT '' COMMENT '°æ±¾ºÅ',
-  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '°²×°Ê±¼ä',
-  `has_adminlist` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT 'ÊÇ·ñÓĞºóÌ¨ÁĞ±í',
-  `is_locked` tinyint(1) DEFAULT '0' COMMENT '²å¼şÊÇ·ñÒÑ±»Ëø¶¨',
-  `sort` int(10) DEFAULT '0' COMMENT 'ÒÑ°²×°²å¼ş²Ëµ¥ÅÅĞò',
+--
+-- è¡¨çš„ç»“æ„ `onethink_addons`
+--
+
+CREATE TABLE IF NOT EXISTS `onethink_addons` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ä¸»é”®',
+  `name` varchar(40) NOT NULL COMMENT 'æ’ä»¶åæˆ–æ ‡è¯†',
+  `title` varchar(20) NOT NULL DEFAULT '' COMMENT 'ä¸­æ–‡å',
+  `description` text COMMENT 'æ’ä»¶æè¿°',
+  `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'çŠ¶æ€',
+  `config` text COMMENT 'é…ç½®',
+  `author` varchar(40) DEFAULT '' COMMENT 'ä½œè€…',
+  `url` varchar(255) DEFAULT '' COMMENT 'æ’ä»¶ä½œè€…é¦–é¡µé“¾æ¥',
+  `version` varchar(20) DEFAULT '' COMMENT 'ç‰ˆæœ¬å·',
+  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'å®‰è£…æ—¶é—´',
+  `has_adminlist` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT 'æ˜¯å¦æœ‰åå°åˆ—è¡¨',
+  `is_locked` tinyint(1) DEFAULT '0' COMMENT 'æ’ä»¶æ˜¯å¦å·²è¢«é”å®š',
+  `sort` int(10) DEFAULT '0' COMMENT 'å·²å®‰è£…æ’ä»¶èœå•æ’åº',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=167 DEFAULT CHARSET=utf8 COMMENT='²å¼ş±í';
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='æ’ä»¶è¡¨' AUTO_INCREMENT=200 ;
 
-#
-# Dumping data for table onethink_addons
-#
+--
+-- è½¬å­˜è¡¨ä¸­çš„æ•°æ® `onethink_addons`
+--
 
-INSERT INTO `onethink_addons` VALUES (2,'SiteStat','Õ¾µãÍ³¼ÆĞÅÏ¢','Í³¼ÆÕ¾µãµÄ»ù´¡ĞÅÏ¢',1,'{\"title\":\"\\u7cfb\\u7edf\\u4fe1\\u606f\",\"width\":\"1\",\"display\":\"1\",\"status\":\"0\"}','thinkphp','','0.1',1379512015,0,1,0);
-INSERT INTO `onethink_addons` VALUES (3,'DevTeam','¿ª·¢ÍÅ¶ÓĞÅÏ¢','¿ª·¢ÍÅ¶Ó³ÉÔ±ĞÅÏ¢',1,'{\"title\":\"OneThink\\u5f00\\u53d1\\u56e2\\u961f\",\"width\":\"2\",\"display\":\"1\"}','thinkphp','','0.1',1379512022,0,1,0);
-INSERT INTO `onethink_addons` VALUES (4,'SystemInfo','ÏµÍ³»·¾³ĞÅÏ¢','ÓÃÓÚÏÔÊ¾Ò»Ğ©·şÎñÆ÷µÄĞÅÏ¢',1,'{\"title\":\"\\u7cfb\\u7edf\\u4fe1\\u606f\",\"width\":\"2\",\"display\":\"1\"}','thinkphp','','0.1',1379512036,0,1,0);
-INSERT INTO `onethink_addons` VALUES (5,'Editor','Ç°Ì¨±à¼­Æ÷','ÓÃÓÚÔöÇ¿ÕûÕ¾³¤ÎÄ±¾µÄÊäÈëºÍÏÔÊ¾',1,'{\"editor_type\":\"2\",\"editor_wysiwyg\":\"1\",\"editor_height\":\"300px\",\"editor_resize_type\":\"1\"}','thinkphp','','0.1',1379830910,0,1,0);
-INSERT INTO `onethink_addons` VALUES (6,'Attachment','¸½¼ş','ÓÃÓÚÎÄµµÄ£ĞÍÉÏ´«¸½¼ş',1,'null','thinkphp','','0.1',1379842319,1,1,12);
-INSERT INTO `onethink_addons` VALUES (9,'SocialComment','Í¨ÓÃÉç½»»¯ÆÀÂÛ','¼¯³ÉÁË¸÷ÖÖÉç½»»¯ÆÀÂÛ²å¼ş£¬ÇáËÉ¼¯³Éµ½ÏµÍ³ÖĞ¡£',0,'{\"comment_type\":\"1\",\"comment_uid_youyan\":\"\",\"comment_short_name_duoshuo\":\"\",\"comment_data_list_duoshuo\":\"\"}','thinkphp','','0.1',1380273962,0,1,0);
-INSERT INTO `onethink_addons` VALUES (15,'EditorForAdmin','ºóÌ¨±à¼­Æ÷','ÓÃÓÚÔöÇ¿ÕûÕ¾³¤ÎÄ±¾µÄÊäÈëºÍÏÔÊ¾',1,'{\"editor_type\":\"2\",\"editor_wysiwyg\":\"1\",\"editor_height\":\"500px\",\"editor_resize_type\":\"1\"}','thinkphp','','0.1',1383126253,0,1,0);
-INSERT INTO `onethink_addons` VALUES (108,'Water','Í¼Æ¬Ë®Ó¡','ÓÃÓÚÎªÉÏ´«µÄÍ¼Æ¬Ìí¼ÓË®Ó¡',1,'{\"switch\":\"1\",\"water\":\"\",\"position\":\"9\"}','xjw129xjt','','0.1',1423563901,0,1,0);
-INSERT INTO `onethink_addons` VALUES (114,'Sensitive','Ãô¸Ğ´Ê','Ãô¸Ğ´Ê¹ıÂË²å¼ş',1,'{\"is_open\":\"1\"}','geniusxjq(app880.com)','http://app880.com','0.1',1423640787,1,1,7);
-INSERT INTO `onethink_addons` VALUES (118,'Mail','ÓÊ¼ş¶©ÔÄ','ÓÊ¼ş¶©ÔÄ²å¼ş',1,'null','geniusxjq(app880.com)','http://app880.com','0.1',1423650031,1,1,11);
-INSERT INTO `onethink_addons` VALUES (123,'Schedule','¼Æ»®ÈÎÎñ','Ö´ĞĞ¼Æ»®ÈÎÎñ²å¼ş',1,'{\"random\":\"1\"}','geniusxjq(app880.com)','http://app880.com','0.1',1423675029,1,1,10);
-INSERT INTO `onethink_addons` VALUES (135,'Friendlinks','ÓÑÇéÁ´½Ó','ÓÑÇéÁ´½Ó',1,'{\"random\":\"1\"}','geniusxjq(app880.com)','http://app880.com','0.1',1423825560,1,1,4);
-INSERT INTO `onethink_addons` VALUES (136,'Advs','¹ã¸æ¹ÜÀí','¹ã¸æ²å¼ş',1,'null','onep2p','','0.1',1423825694,1,1,5);
-INSERT INTO `onethink_addons` VALUES (137,'Advertising','¹ã¸æÎ»ÖÃ','¹ã¸æÎ»²å¼ş',1,'null','onep2p','','0.1',1423825700,1,1,6);
-INSERT INTO `onethink_addons` VALUES (140,'SyncLogin','µÚÈı·½ÕËºÅÍ¬²½µÇÂ½','µÚÈı·½ÕËºÅÍ¬²½µÇÂ½',1,'{\"type\":[\"Qq\"],\"meta\":\"\",\"QqKEY\":\"\",\"QqSecret\":\"\",\"SinaKEY\":\"\",\"SinaSecret\":\"\"}','yidian','','0.1',1423825967,0,0,0);
-INSERT INTO `onethink_addons` VALUES (143,'ReturnTop','·µ»Ø¶¥²¿','»Øµ½¶¥²¿ÃÀ»¯£¬Ëæ»ú»òÖ¸¶¨ÏÔÊ¾£¬100¿îÑùÊ½£¬Ã¿ÌìÒ»ÖÖ»»£¬ÌìÌì¶¼ÓÃĞÂÑùÊ½',1,'{\"random\":\"0\",\"current\":\"68\"}','thinkphp','','0.1',1423826511,0,0,0);
-INSERT INTO `onethink_addons` VALUES (147,'BaiduShare','°Ù¶È·ÖÏí','ÓÃ»§½«ÍøÕ¾ÄÚÈİ·ÖÏíµ½µÚÈı·½ÍøÕ¾£¬µÚÈı·½ÍøÕ¾µÄÓÃ»§µã»÷×¨ÓĞµÄ·ÖÏíÁ´½Ó£¬´ÓµÚÈı·½ÍøÕ¾´øÀ´Éç»á»¯Á÷Á¿¡£',1,'{\"openbutton\":\"0\",\"buttonlist\":[\"mshare\",\"qzone\",\"tsina\",\"renren\",\"tqq\",\"tieba\"],\"button_size\":\"1\",\"openimg\":\"0\",\"imglist\":[\"mshare\",\"qzone\",\"tsina\",\"renren\",\"tqq\",\"tieba\"],\"img_size\":\"1\",\"openselect\":\"0\",\"selectlist\":[\"mshare\",\"qzone\",\"tsina\",\"renren\",\"tqq\",\"tieba\"]}','jesuspan','','0.1',1423837279,0,0,0);
-INSERT INTO `onethink_addons` VALUES (151,'Wechat','Î¢ĞÅ','Î¢ĞÅ²å¼ş',1,'{\"url\":\"http:\\/\\/localhost\\/admin.php?s=\\/Home\\/Addons\\/execute\\/_addons\\/Wechat\\/_controller\\/Wechat\\/_action\\/index\\/ukey\\/VNSrn2MJcatu9vs.html\",\"ukey\":\"VNSrn2MJcatu9vs\",\"token\":\"4fkgsny7jYp06d5G9cbahoIltFJOVA\",\"appid\":\"\",\"appsecret\":\"\",\"codelogin\":\"0\",\"codeloginlocation\":null,\"default\":null,\"subscribe\":null,\"button\":null}','huay1','','1.0',1423925643,1,0,1);
-INSERT INTO `onethink_addons` VALUES (153,'Guestbook','ÁôÑÔ°å','ÕâÊÇÒ»¸ö¼òµ¥µÄÁôÑÔ°å',1,'{\"display\":\"1\",\"messages_check\":\"1\"}','geniusxjq(app880.com)','http://app880.com','0.2',1423925886,1,0,2);
-INSERT INTO `onethink_addons` VALUES (154,'Fancybox','Í¼Æ¬µ¯³ö²¥·Å','ÈÃÎÄÕÂÄÚÈİÒ³µÄÍ¼Æ¬ÓĞµ¯³öÍ¼Æ¬²¥·ÅµÄĞ§¹û',1,'{\"group\":\"1\",\"transitionIn\":\"fade\",\"transitionOut\":\"fade\",\"padding\":\"10\",\"hideOnContentClick\":\"true\",\"easingIn\":\"easeOutCubic\"}','che1988','','0.1',1423975760,0,0,0);
-INSERT INTO `onethink_addons` VALUES (157,'Unslider','½¹µãÍ¼','½¹µãÍ¼',0,'{\"title\":\"Uslider\",\"display\":\"1\"}','cepljxiongjun','','0.1',1423988274,0,0,0);
-INSERT INTO `onethink_addons` VALUES (158,'Vote','Î¢Í¶Æ±','Ö§³Öµ¥Ñ¡¡¢¶àÑ¡µÄĞ¡Í¶Æ±²å¼ş¡£¿ÉÒÔÓÃÀ´ÊÕ¼¯ÓÃ»§¶ÔÄ³¼¸¸öÑ¡ÏîµÄÒâ¼û¡£',1,'{\"defaultid\":\"0\",\"display\":\"1\"}','Microrain','','1.0',1423990253,1,0,3);
-INSERT INTO `onethink_addons` VALUES (159,'Support','QQ¿Í·ş','ÍøÕ¾QQ¿Í·ş²å¼ş',1,'{\"random\":\"1\",\"QqKEY\":\"\",\"AnliKEY\":\"\",\"sinaKEY\":\"\"}','¸ßÁú','','0.1',1424068041,0,0,0);
-INSERT INTO `onethink_addons` VALUES (163,'ImportData','Êı¾İµ¼Èë','ÕâÊÇÒ»¸öÓÃÓÚ´ÓÆäËû²©¿Íµ¼Èëµ½OneThinkµÄºóÌ¨²å¼ş£¬Ä¿Ç°Ö§³ÖWordPress,Ö÷Òªµ¼Èë·ÖÀàºÍÎÄÕÂ£¡',1,'null','ITÍ¯ÀÏ','','0.1',1424068706,1,0,8);
-INSERT INTO `onethink_addons` VALUES (166,'Comment','ÆÀÂÛ¹¦ÄÜ','ÓÃÓÚ¸÷ÖÖÀàĞÍÎÄµµÆÀÂÛ',1,'null','Wolixli','','0.1',1424688364,1,0,0);
+INSERT INTO `onethink_addons` (`id`, `name`, `title`, `description`, `status`, `config`, `author`, `url`, `version`, `create_time`, `has_adminlist`, `is_locked`, `sort`) VALUES
+(2, 'SiteStat', 'ç«™ç‚¹ç»Ÿè®¡ä¿¡æ¯', 'ç»Ÿè®¡ç«™ç‚¹çš„åŸºç¡€ä¿¡æ¯', 1, '{"title":"\\u7cfb\\u7edf\\u4fe1\\u606f","width":"1","display":"1","status":"0"}', 'thinkphp', '', '0.1', 1379512015, 0, 1, 0),
+(3, 'DevTeam', 'å¼€å‘å›¢é˜Ÿä¿¡æ¯', 'å¼€å‘å›¢é˜Ÿæˆå‘˜ä¿¡æ¯', 1, '{"title":"OneThink\\u5f00\\u53d1\\u56e2\\u961f","width":"2","display":"1"}', 'thinkphp', '', '0.1', 1379512022, 0, 1, 0),
+(4, 'SystemInfo', 'ç³»ç»Ÿç¯å¢ƒä¿¡æ¯', 'ç”¨äºæ˜¾ç¤ºä¸€äº›æœåŠ¡å™¨çš„ä¿¡æ¯', 1, '{"title":"\\u7cfb\\u7edf\\u4fe1\\u606f","width":"2","display":"1"}', 'thinkphp', '', '0.1', 1379512036, 0, 1, 0),
+(5, 'Editor', 'å‰å°ç¼–è¾‘å™¨', 'ç”¨äºå¢å¼ºæ•´ç«™é•¿æ–‡æœ¬çš„è¾“å…¥å’Œæ˜¾ç¤º', 1, '{"editor_type":"2","editor_wysiwyg":"1","editor_height":"300px","editor_resize_type":"1"}', 'thinkphp', '', '0.1', 1379830910, 0, 1, 0),
+(6, 'Attachment', 'é™„ä»¶', 'ç”¨äºæ–‡æ¡£æ¨¡å‹ä¸Šä¼ é™„ä»¶', 1, 'null', 'thinkphp', '', '0.1', 1379842319, 1, 1, 11),
+(9, 'SocialComment', 'é€šç”¨ç¤¾äº¤åŒ–è¯„è®º', 'é›†æˆäº†å„ç§ç¤¾äº¤åŒ–è¯„è®ºæ’ä»¶ï¼Œè½»æ¾é›†æˆåˆ°ç³»ç»Ÿä¸­ã€‚', 0, '{"comment_type":"1","comment_uid_youyan":"","comment_short_name_duoshuo":"","comment_data_list_duoshuo":""}', 'thinkphp', '', '0.1', 1380273962, 0, 1, 0),
+(15, 'EditorForAdmin', 'åå°ç¼–è¾‘å™¨', 'ç”¨äºå¢å¼ºæ•´ç«™é•¿æ–‡æœ¬çš„è¾“å…¥å’Œæ˜¾ç¤º', 1, '{"editor_type":"2","editor_wysiwyg":"2","editor_markdownpreview":"0","editor_height":"500px","editor_resize_type":"1"}', 'thinkphp', '', '0.1', 1383126253, 0, 1, 0),
+(135, 'Friendlinks', 'å‹æƒ…é“¾æ¥', 'å‹æƒ…é“¾æ¥', 1, '{"is_open":"1"}', 'geniusxjq(app880.com)', 'http://app880.com', '0.1', 1423825560, 1, 1, 7),
+(194, 'Advertising', 'å¹¿å‘Šç®¡ç†', 'å¹¿å‘Šä½æ’ä»¶ï¼Œä¸ºç½‘ç«™å¢åŠ å¹¿å‘Šç®¡ç†åŠŸèƒ½ã€‚', 1, 'null', 'geniusxjq', 'http://www.app880.com', '2.0', 1446626227, 1, 0, 0),
+(196, 'Water', 'å›¾ç‰‡æ°´å°', 'ç”¨äºä¸ºä¸Šä¼ çš„å›¾ç‰‡æ·»åŠ æ°´å°', 1, '{"switch":"1","type":"0","position":"9","textcolor":"#FFFFFF","fontsize":"21","font":"cour","offset":"20","angle":"0","alpha":"80","text":" APP880.com -- \\u5618\\u5618","water":".\\/Uploads\\/Water\\/Water.png"}', 'geniusxjq(app880.com)', 'http://app880.com', '0.1', 1446792309, 0, 0, 0),
+(118, 'Mail', 'é‚®ä»¶è®¢é˜…', 'é‚®ä»¶è®¢é˜…æ’ä»¶', 1, 'null', 'geniusxjq(app880.com)', 'http://app880.com', '0.1', 1423650031, 1, 1, 8),
+(198, 'ReturnTop', 'è¿”å›é¡¶éƒ¨', 'è¿”å›é¡¶éƒ¨', 1, '{"status":"1","theme":"rocket","support_title":"","customer":"","case":"","tel":"","qq":"","weibo":""}', 'CoreThink', '', '1.0', 1446957408, 0, 0, 0),
+(153, 'Guestbook', 'ç•™è¨€æ¿', 'è¿™æ˜¯ä¸€ä¸ªç®€å•çš„ç•™è¨€æ¿', 1, '{"display":"1","messages_check":"1"}', 'geniusxjq(app880.com)', 'http://app880.com', '0.2', 1423925886, 1, 0, 5),
+(147, 'BaiduShare', 'ç™¾åº¦åˆ†äº«', 'ç”¨æˆ·å°†ç½‘ç«™å†…å®¹åˆ†äº«åˆ°ç¬¬ä¸‰æ–¹ç½‘ç«™ï¼Œç¬¬ä¸‰æ–¹ç½‘ç«™çš„ç”¨æˆ·ç‚¹å‡»ä¸“æœ‰çš„åˆ†äº«é“¾æ¥ï¼Œä»ç¬¬ä¸‰æ–¹ç½‘ç«™å¸¦æ¥ç¤¾ä¼šåŒ–æµé‡ã€‚', 0, '{"openbutton":"0","buttonlist":["mshare","qzone","tsina","renren","tqq","tieba"],"openimg":"0","imglist":["mshare","qzone","tsina","renren","tqq","tieba"],"openselect":"1","selectlist":["mshare","qzone","tsina","renren","tqq","tieba"]}', 'jesuspan', '', '0.1', 1423837279, 0, 0, 0),
+(195, 'ImageManager', 'å›¾ç‰‡ç®¡ç†', 'å›¾ç‰‡ç®¡ç†ï¼Œå¿«é€Ÿé€‰æ‹©å·²ä¸Šä¼ å›¾ç‰‡åˆ°å°é¢', 1, '{"page_size":"20","delete_switch":"1","delete_mode":"0"}', 'å‡¡äºº', '', '0.1', 1446781853, 0, 0, 0),
+(157, 'Unslider', 'ç„¦ç‚¹å›¾', 'ç„¦ç‚¹å›¾', 0, '{"title":"Uslider","display":"1"}', 'cepljxiongjun', '', '0.1', 1423988274, 0, 0, 0),
+(199, 'Schedule', 'è®¡åˆ’ä»»åŠ¡', 'æ‰§è¡Œè®¡åˆ’ä»»åŠ¡æ’ä»¶', 1, '{"is_open":"1","is_open_log":"1"}', 'geniusxjq(app880.com)', 'http://app880.com', '0.1', 1447045165, 1, 0, 0),
+(193, 'Sensitive', 'æ•æ„Ÿè¯', 'æ•æ„Ÿè¯è¿‡æ»¤æ’ä»¶', 1, '{"is_open":"1"}', 'geniusxjq(app880.com)', 'http://app880.com', '0.1', 1446544884, 1, 1, 0),
+(140, 'SyncLogin', 'ç¬¬ä¸‰æ–¹è´¦å·åŒæ­¥ç™»é™†', 'ç¬¬ä¸‰æ–¹è´¦å·åŒæ­¥ç™»é™†', 1, '{"type":["qq","sina"],"meta":"","QqKEY":"","QqSecret":"","SinaKEY":"","SinaSecret":""}', 'yidian', '', '0.1', 1423825967, 0, 0, 0),
+(151, 'Wechat', 'å¾®ä¿¡', 'å¾®ä¿¡æ’ä»¶', 1, '{"url":"http:\\/\\/localhost\\/admin.php?s=\\/Home\\/Addons\\/execute\\/_addons\\/Wechat\\/_controller\\/Wechat\\/_action\\/index\\/ukey\\/VNSrn2MJcatu9vs.html","ukey":"VNSrn2MJcatu9vs","token":"4fkgsny7jYp06d5G9cbahoIltFJOVA","appid":"","appsecret":"","codelogin":"0","codeloginlocation":null,"default":null,"subscribe":null,"button":null}', 'huay1', '', '1.0', 1423925643, 1, 0, 2),
+(170, 'Fancybox', 'å›¾ç‰‡å¼¹å‡ºæ’­æ”¾', 'è®©æ–‡ç« å†…å®¹é¡µçš„å›¾ç‰‡æœ‰å¼¹å‡ºå›¾ç‰‡æ’­æ”¾çš„æ•ˆæœ', 1, '{"group":"1","transitionIn":"none","transitionOut":"none","padding":"10","hideOnContentClick":"false","easingIn":"easeInOutCirc"}', 'che1988', '', '0.1', 1444126824, 0, 0, 0),
+(158, 'Vote', 'å¾®æŠ•ç¥¨', 'æ”¯æŒå•é€‰ã€å¤šé€‰çš„å°æŠ•ç¥¨æ’ä»¶ã€‚å¯ä»¥ç”¨æ¥æ”¶é›†ç”¨æˆ·å¯¹æŸå‡ ä¸ªé€‰é¡¹çš„æ„è§ã€‚', 1, '{"defaultid":"0","display":"1"}', 'Microrain', '', '1.0', 1423990253, 1, 0, 3),
+(168, 'Avatar', 'å¤´åƒä¸Šä¼ æ’ä»¶', 'ç”¨æˆ·å¤´åƒä¸Šä¼ ', 1, '{"random":"1"}', 'genisuxjq', '', '0.1', 1425134549, 0, 1, 0),
+(163, 'ImportData', 'æ•°æ®å¯¼å…¥', 'è¿™æ˜¯ä¸€ä¸ªç”¨äºä»å…¶ä»–åšå®¢å¯¼å…¥åˆ°OneThinkçš„åå°æ’ä»¶ï¼Œç›®å‰æ”¯æŒWordPress,ä¸»è¦å¯¼å…¥åˆ†ç±»å’Œæ–‡ç« ï¼', 1, 'null', 'ITç«¥è€', '', '0.1', 1424068706, 1, 0, 1),
+(173, 'UploadImages', 'å¤šå›¾ä¸Šä¼ ', 'å¤šå›¾ä¸Šä¼ ', 1, 'null', 'æœ¨æ¢å¤§å›§', '', '1.2', 1444205270, 0, 1, 0),
+(180, 'Comment', 'è¯„è®º', 'æœ¬åœ°ç‹¬ç«‹è¯„è®ºæ’ä»¶', 1, '{"comment_title":"\\u8bc4\\u8bba\\u5217\\u8868","comment_enable":"1","comment_show_examine_not":"1","comment_verify":"1","comment_max_length":"150","comment_pagesize":"5","comment_need_login":"0","comment_template":"default"}', 'leoding86@msn.com', '', '0.8.0630Beta', 1444372674, 1, 0, 6);
 
-#
-# Source for table onethink_advertising
-#
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `onethink_advertising`;
-CREATE TABLE `onethink_advertising` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Ö÷¼ü',
-  `title` char(80) NOT NULL DEFAULT '' COMMENT '¹ã¸æÎ»ÖÃÃû³Æ',
-  `type` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '¹ã¸æÎ»ÖÃÕ¹Ê¾·½Ê½  0ÎªÄ¬ÈÏÕ¹Ê¾Ò»ÕÅ',
-  `width` char(20) NOT NULL DEFAULT '' COMMENT '¹ã¸æÎ»ÖÃ¿í¶È',
-  `height` char(20) NOT NULL DEFAULT '' COMMENT '¹ã¸æÎ»ÖÃ¸ß¶È',
-  `status` tinyint(2) NOT NULL DEFAULT '1' COMMENT '×´Ì¬£¨0£º½ûÓÃ£¬1£ºÕı³££©',
+--
+-- è¡¨çš„ç»“æ„ `onethink_advertisement`
+--
+
+CREATE TABLE IF NOT EXISTS `onethink_advertisement` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ä¸»é”®',
+  `title` char(80) NOT NULL DEFAULT '' COMMENT 'å¹¿å‘Šåç§°',
+  `position` int(11) NOT NULL COMMENT 'å¹¿å‘Šä½ç½®',
+  `advspic` int(11) NOT NULL COMMENT 'å›¾ç‰‡åœ°å€(ID)',
+  `advstext` text NOT NULL COMMENT 'æ–‡å­—å¹¿å‘Šå†…å®¹',
+  `advshtml` text NOT NULL COMMENT 'ä»£ç å¹¿å‘Šå†…å®¹',
+  `link` char(140) NOT NULL DEFAULT '' COMMENT 'é“¾æ¥åœ°å€',
+  `level` int(3) unsigned NOT NULL DEFAULT '0' COMMENT 'ä¼˜å…ˆçº§',
+  `status` tinyint(2) NOT NULL DEFAULT '1' COMMENT 'çŠ¶æ€ï¼ˆ0ï¼šç¦ç”¨ï¼Œ1ï¼šæ­£å¸¸ï¼‰',
+  `is_never` tinyint(2) NOT NULL DEFAULT '0' COMMENT 'æ°¸ä¹…æœ‰æ•ˆä¸å—æ—¶é—´é™åˆ¶çš„å¹¿å‘Šï¼ˆ0ï¼šä¸æ˜¯ï¼Œ1ï¼šæ˜¯ï¼‰',
+  `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT 'å¼€å§‹æ—¶é—´',
+  `end_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT 'ç»“æŸæ—¶é—´',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
-#
-# Dumping data for table onethink_advertising
-#
+--
+-- è½¬å­˜è¡¨ä¸­çš„æ•°æ® `onethink_advertisement`
+--
 
-INSERT INTO `onethink_advertising` VALUES (1,'01',1,'01','01',1);
+INSERT INTO `onethink_advertisement` (`id`, `title`, `position`, `advspic`, `advstext`, `advshtml`, `link`, `level`, `status`, `is_never`, `create_time`, `end_time`) VALUES
+(1, '011', 1, 0, 'test', '', '', 0, 1, 1, 1446626280, 1446626280);
 
-#
-# Source for table onethink_advs
-#
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `onethink_advs`;
-CREATE TABLE `onethink_advs` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Ö÷¼ü',
-  `title` char(80) NOT NULL DEFAULT '' COMMENT '¹ã¸æÃû³Æ',
-  `position` int(11) NOT NULL COMMENT '¹ã¸æÎ»ÖÃ',
-  `advspic` int(11) NOT NULL COMMENT 'Í¼Æ¬µØÖ·',
-  `advstext` text NOT NULL COMMENT 'ÎÄ×Ö¹ã¸æÄÚÈİ',
-  `advshtml` text NOT NULL COMMENT '´úÂë¹ã¸æÄÚÈİ',
-  `link` char(140) NOT NULL DEFAULT '' COMMENT 'Á´½ÓµØÖ·',
-  `level` int(3) unsigned NOT NULL DEFAULT '0' COMMENT 'ÓÅÏÈ¼¶',
-  `status` tinyint(2) NOT NULL DEFAULT '1' COMMENT '×´Ì¬£¨0£º½ûÓÃ£¬1£ºÕı³££©',
-  `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '¿ªÊ¼Ê±¼ä',
-  `end_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '½áÊøÊ±¼ä',
+--
+-- è¡¨çš„ç»“æ„ `onethink_advertising`
+--
+
+CREATE TABLE IF NOT EXISTS `onethink_advertising` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ä¸»é”®',
+  `title` char(80) NOT NULL DEFAULT '' COMMENT 'å¹¿å‘Šä½ç½®åç§°',
+  `type` int(11) unsigned NOT NULL DEFAULT '1' COMMENT 'å¹¿å‘Šä½ç½®ç±»å‹ 1æ–‡å­— 2å›¾ç‰‡ 3ä»£ç ',
+  `same_limit` int(11) unsigned NOT NULL DEFAULT '1' COMMENT 'å¹¿å‘Šä½åŒæ—¶å±•ç¤ºçš„å¹¿å‘Šæ•°é‡é™åˆ¶  1ä¸ºé»˜è®¤å±•ç¤ºä¸€å¼ ',
+  `idle_content` text NOT NULL COMMENT 'å¹¿å‘Šä½é—²ç½®æ—¶é»˜è®¤æ˜¾ç¤ºçš„å¹¿å‘Šå†…å®¹',
+  `width` char(20) NOT NULL DEFAULT '' COMMENT 'å¹¿å‘Šä½ç½®å®½åº¦',
+  `height` char(20) NOT NULL DEFAULT '' COMMENT 'å¹¿å‘Šä½ç½®é«˜åº¦',
+  `status` tinyint(2) NOT NULL DEFAULT '1' COMMENT 'çŠ¶æ€ï¼ˆ0ï¼šç¦ç”¨ï¼Œ1ï¼šæ­£å¸¸ï¼‰',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
-#
-# Dumping data for table onethink_advs
-#
+--
+-- è½¬å­˜è¡¨ä¸­çš„æ•°æ® `onethink_advertising`
+--
 
+INSERT INTO `onethink_advertising` (`id`, `title`, `type`, `same_limit`, `idle_content`, `width`, `height`, `status`) VALUES
+(1, '01', 1, 1, '<p style="text-align: left;"><img src="http://img.baidu.com/hi/jx2/j_0001.gif"/></p>', '', '', 1),
+(2, '02', 3, 1, '<p><img src="http://img.baidu.com/hi/jx2/j_0003.gif"/></p>', '100', '100', 1);
 
-#
-# Source for table onethink_attachment
-#
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `onethink_attachment`;
-CREATE TABLE `onethink_attachment` (
+--
+-- è¡¨çš„ç»“æ„ `onethink_attachment`
+--
+
+CREATE TABLE IF NOT EXISTS `onethink_attachment` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'ÓÃ»§ID',
-  `title` char(30) NOT NULL DEFAULT '' COMMENT '¸½¼şÏÔÊ¾Ãû',
-  `type` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '¸½¼şÀàĞÍ',
-  `source` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '×ÊÔ´ID',
-  `record_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '¹ØÁª¼ÇÂ¼ID',
-  `download` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'ÏÂÔØ´ÎÊı',
-  `size` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '¸½¼ş´óĞ¡',
-  `dir` int(12) unsigned NOT NULL DEFAULT '0' COMMENT 'ÉÏ¼¶Ä¿Â¼ID',
-  `sort` int(8) unsigned NOT NULL DEFAULT '0' COMMENT 'ÅÅĞò',
-  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '´´½¨Ê±¼ä',
-  `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '¸üĞÂÊ±¼ä',
-  `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '×´Ì¬',
+  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'ç”¨æˆ·ID',
+  `title` char(30) NOT NULL DEFAULT '' COMMENT 'é™„ä»¶æ˜¾ç¤ºå',
+  `type` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'é™„ä»¶ç±»å‹',
+  `source` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'èµ„æºID',
+  `record_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'å…³è”è®°å½•ID',
+  `download` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'ä¸‹è½½æ¬¡æ•°',
+  `size` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT 'é™„ä»¶å¤§å°',
+  `dir` int(12) unsigned NOT NULL DEFAULT '0' COMMENT 'ä¸Šçº§ç›®å½•ID',
+  `sort` int(8) unsigned NOT NULL DEFAULT '0' COMMENT 'æ’åº',
+  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'åˆ›å»ºæ—¶é—´',
+  `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT 'æ›´æ–°æ—¶é—´',
+  `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'çŠ¶æ€',
   PRIMARY KEY (`id`),
   KEY `idx_record_status` (`record_id`,`status`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='¸½¼ş±í';
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='é™„ä»¶è¡¨' AUTO_INCREMENT=1 ;
 
-#
-# Dumping data for table onethink_attachment
-#
+-- --------------------------------------------------------
 
+--
+-- è¡¨çš„ç»“æ„ `onethink_attribute`
+--
 
-#
-# Source for table onethink_attribute
-#
-
-DROP TABLE IF EXISTS `onethink_attribute`;
-CREATE TABLE `onethink_attribute` (
+CREATE TABLE IF NOT EXISTS `onethink_attribute` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(30) NOT NULL DEFAULT '' COMMENT '×Ö¶ÎÃû',
-  `title` varchar(100) NOT NULL DEFAULT '' COMMENT '×Ö¶Î×¢ÊÍ',
-  `field` varchar(100) NOT NULL DEFAULT '' COMMENT '×Ö¶Î¶¨Òå',
-  `type` varchar(20) NOT NULL DEFAULT '' COMMENT 'Êı¾İÀàĞÍ',
-  `value` varchar(100) NOT NULL DEFAULT '' COMMENT '×Ö¶ÎÄ¬ÈÏÖµ',
-  `remark` varchar(100) NOT NULL DEFAULT '' COMMENT '±¸×¢',
-  `is_show` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT 'ÊÇ·ñÏÔÊ¾',
-  `extra` varchar(255) NOT NULL DEFAULT '' COMMENT '²ÎÊı',
-  `model_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Ä£ĞÍid',
-  `is_must` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT 'ÊÇ·ñ±ØÌî',
-  `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '×´Ì¬',
-  `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '¸üĞÂÊ±¼ä',
-  `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '´´½¨Ê±¼ä',
+  `name` varchar(30) NOT NULL DEFAULT '' COMMENT 'å­—æ®µå',
+  `title` varchar(100) NOT NULL DEFAULT '' COMMENT 'å­—æ®µæ³¨é‡Š',
+  `field` varchar(100) NOT NULL DEFAULT '' COMMENT 'å­—æ®µå®šä¹‰',
+  `type` varchar(20) NOT NULL DEFAULT '' COMMENT 'æ•°æ®ç±»å‹',
+  `value` varchar(100) NOT NULL DEFAULT '' COMMENT 'å­—æ®µé»˜è®¤å€¼',
+  `remark` varchar(100) NOT NULL DEFAULT '' COMMENT 'å¤‡æ³¨',
+  `is_show` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT 'æ˜¯å¦æ˜¾ç¤º',
+  `extra` varchar(255) NOT NULL DEFAULT '' COMMENT 'å‚æ•°',
+  `model_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'æ¨¡å‹id',
+  `is_must` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT 'æ˜¯å¦å¿…å¡«',
+  `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT 'çŠ¶æ€',
+  `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT 'æ›´æ–°æ—¶é—´',
+  `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT 'åˆ›å»ºæ—¶é—´',
   `validate_rule` varchar(255) NOT NULL DEFAULT '',
   `validate_time` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `error_info` varchar(100) NOT NULL DEFAULT '',
@@ -302,724 +487,747 @@ CREATE TABLE `onethink_attribute` (
   `auto_type` varchar(25) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `model_id` (`model_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=48 DEFAULT CHARSET=utf8 COMMENT='Ä£ĞÍÊôĞÔ±í';
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='æ¨¡å‹å±æ€§è¡¨' AUTO_INCREMENT=49 ;
 
-#
-# Dumping data for table onethink_attribute
-#
+--
+-- è½¬å­˜è¡¨ä¸­çš„æ•°æ® `onethink_attribute`
+--
 
-INSERT INTO `onethink_attribute` VALUES (1,'uid','ÓÃ»§ID','int(10) unsigned NOT NULL ','num','0','',0,'',1,0,1,1384508362,1383891233,'',0,'','','',0,'');
-INSERT INTO `onethink_attribute` VALUES (2,'name','±êÊ¶','char(40) NOT NULL ','string','','Í¬Ò»¸ù½ÚµãÏÂ±êÊ¶²»ÖØ¸´',1,'',1,0,1,1383894743,1383891233,'',0,'','','',0,'');
-INSERT INTO `onethink_attribute` VALUES (3,'title','±êÌâ','char(80) NOT NULL ','string','','ÎÄµµ±êÌâ',1,'',1,0,1,1383894778,1383891233,'',0,'','','',0,'');
-INSERT INTO `onethink_attribute` VALUES (4,'category_id','ËùÊô·ÖÀà','int(10) unsigned NOT NULL ','string','','',0,'',1,0,1,1384508336,1383891233,'',0,'','','',0,'');
-INSERT INTO `onethink_attribute` VALUES (5,'description','ÃèÊö','char(140) NOT NULL ','textarea','','',1,'',1,0,1,1383894927,1383891233,'',0,'','','',0,'');
-INSERT INTO `onethink_attribute` VALUES (6,'root','¸ù½Úµã','int(10) unsigned NOT NULL ','num','0','¸ÃÎÄµµµÄ¶¥¼¶ÎÄµµ±àºÅ',0,'',1,0,1,1384508323,1383891233,'',0,'','','',0,'');
-INSERT INTO `onethink_attribute` VALUES (7,'pid','ËùÊôID','int(10) unsigned NOT NULL ','num','0','¸¸ÎÄµµ±àºÅ',0,'',1,0,1,1384508543,1383891233,'',0,'','','',0,'');
-INSERT INTO `onethink_attribute` VALUES (8,'model_id','ÄÚÈİÄ£ĞÍID','tinyint(3) unsigned NOT NULL ','num','0','¸ÃÎÄµµËù¶ÔÓ¦µÄÄ£ĞÍ',0,'',1,0,1,1384508350,1383891233,'',0,'','','',0,'');
-INSERT INTO `onethink_attribute` VALUES (9,'type','ÄÚÈİÀàĞÍ','tinyint(3) unsigned NOT NULL ','select','2','',1,'1:Ä¿Â¼\r\n2:Ö÷Ìâ\r\n3:¶ÎÂä',1,0,1,1384511157,1383891233,'',0,'','','',0,'');
-INSERT INTO `onethink_attribute` VALUES (10,'position','ÍÆ¼öÎ»','smallint(5) unsigned NOT NULL ','checkbox','0','¶à¸öÍÆ¼öÔò½«ÆäÍÆ¼öÖµÏà¼Ó',1,'[DOCUMENT_POSITION]',1,0,1,1383895640,1383891233,'',0,'','','',0,'');
-INSERT INTO `onethink_attribute` VALUES (11,'link_id','ÍâÁ´','int(10) unsigned NOT NULL ','num','0','0-·ÇÍâÁ´£¬´óÓÚ0-ÍâÁ´ID,ĞèÒªº¯Êı½øĞĞÁ´½ÓÓë±àºÅµÄ×ª»»',1,'',1,0,1,1383895757,1383891233,'',0,'','','',0,'');
-INSERT INTO `onethink_attribute` VALUES (12,'cover_id','·âÃæ','int(10) unsigned NOT NULL ','picture','0','0-ÎŞ·âÃæ£¬´óÓÚ0-·âÃæÍ¼Æ¬ID£¬ĞèÒªº¯Êı´¦Àí',1,'',1,0,1,1384147827,1383891233,'',0,'','','',0,'');
-INSERT INTO `onethink_attribute` VALUES (13,'display','¿É¼ûĞÔ','tinyint(3) unsigned NOT NULL ','radio','1','',1,'0:²»¿É¼û\r\n1:ËùÓĞÈË¿É¼û',1,0,1,1386662271,1383891233,'',0,'','regex','',0,'function');
-INSERT INTO `onethink_attribute` VALUES (14,'deadline','½ØÖÁÊ±¼ä','int(10) unsigned NOT NULL ','datetime','0','0-ÓÀ¾ÃÓĞĞ§',1,'',1,0,1,1387163248,1383891233,'',0,'','regex','',0,'function');
-INSERT INTO `onethink_attribute` VALUES (15,'attach','¸½¼şÊıÁ¿','tinyint(3) unsigned NOT NULL ','num','0','',0,'',1,0,1,1387260355,1383891233,'',0,'','regex','',0,'function');
-INSERT INTO `onethink_attribute` VALUES (16,'view','ä¯ÀÀÁ¿','int(10) unsigned NOT NULL ','num','0','',1,'',1,0,1,1383895835,1383891233,'',0,'','','',0,'');
-INSERT INTO `onethink_attribute` VALUES (17,'comment','ÆÀÂÛÊı','int(10) unsigned NOT NULL ','num','0','',1,'',1,0,1,1383895846,1383891233,'',0,'','','',0,'');
-INSERT INTO `onethink_attribute` VALUES (18,'extend','À©Õ¹Í³¼Æ×Ö¶Î','int(10) unsigned NOT NULL ','num','0','¸ù¾İĞèÇó×ÔĞĞÊ¹ÓÃ',0,'',1,0,1,1384508264,1383891233,'',0,'','','',0,'');
-INSERT INTO `onethink_attribute` VALUES (19,'level','ÓÅÏÈ¼¶','int(10) unsigned NOT NULL ','num','0','Ô½¸ßÅÅĞòÔ½¿¿Ç°',1,'',1,0,1,1383895894,1383891233,'',0,'','','',0,'');
-INSERT INTO `onethink_attribute` VALUES (20,'create_time','´´½¨Ê±¼ä','int(10) unsigned NOT NULL ','datetime','0','',1,'',1,0,1,1383895903,1383891233,'',0,'','','',0,'');
-INSERT INTO `onethink_attribute` VALUES (21,'update_time','¸üĞÂÊ±¼ä','int(10) unsigned NOT NULL ','datetime','0','',0,'',1,0,1,1384508277,1383891233,'',0,'','','',0,'');
-INSERT INTO `onethink_attribute` VALUES (22,'status','Êı¾İ×´Ì¬','tinyint(4) NOT NULL ','radio','0','',0,'-1:É¾³ı\r\n0:½ûÓÃ\r\n1:Õı³£\r\n2:´ıÉóºË\r\n3:²İ¸å',1,0,1,1384508496,1383891233,'',0,'','','',0,'');
-INSERT INTO `onethink_attribute` VALUES (23,'parse','ÄÚÈİ½âÎöÀàĞÍ','tinyint(3) unsigned NOT NULL ','select','0','',0,'0:html\r\n1:ubb\r\n2:markdown',2,0,1,1384511049,1383891243,'',0,'','','',0,'');
-INSERT INTO `onethink_attribute` VALUES (24,'content','ÎÄÕÂÄÚÈİ','text NOT NULL ','editor','','',1,'',2,0,1,1383896225,1383891243,'',0,'','','',0,'');
-INSERT INTO `onethink_attribute` VALUES (25,'template','ÏêÇéÒ³ÏÔÊ¾Ä£°å','varchar(100) NOT NULL ','string','','²ÎÕÕdisplay·½·¨²ÎÊıµÄ¶¨Òå',1,'',2,0,1,1383896190,1383891243,'',0,'','','',0,'');
-INSERT INTO `onethink_attribute` VALUES (26,'bookmark','ÊÕ²ØÊı','int(10) unsigned NOT NULL ','num','0','',1,'',2,0,1,1383896103,1383891243,'',0,'','','',0,'');
-INSERT INTO `onethink_attribute` VALUES (27,'parse','ÄÚÈİ½âÎöÀàĞÍ','tinyint(3) unsigned NOT NULL ','select','0','',0,'0:html\r\n1:ubb\r\n2:markdown',3,0,1,1387260461,1383891252,'',0,'','regex','',0,'function');
-INSERT INTO `onethink_attribute` VALUES (28,'content','ÏÂÔØÏêÏ¸ÃèÊö','text NOT NULL ','editor','','',1,'',3,0,1,1383896438,1383891252,'',0,'','','',0,'');
-INSERT INTO `onethink_attribute` VALUES (29,'template','ÏêÇéÒ³ÏÔÊ¾Ä£°å','varchar(100) NOT NULL ','string','','',1,'',3,0,1,1383896429,1383891252,'',0,'','','',0,'');
-INSERT INTO `onethink_attribute` VALUES (30,'file_id','ÎÄ¼şID','int(10) unsigned NOT NULL ','file','0','ĞèÒªº¯Êı´¦Àí',1,'',3,0,1,1383896415,1383891252,'',0,'','','',0,'');
-INSERT INTO `onethink_attribute` VALUES (31,'download','ÏÂÔØ´ÎÊı','int(10) unsigned NOT NULL ','num','0','',1,'',3,0,1,1383896380,1383891252,'',0,'','','',0,'');
-INSERT INTO `onethink_attribute` VALUES (32,'size','ÎÄ¼ş´óĞ¡','bigint(20) unsigned NOT NULL ','num','0','µ¥Î»bit',1,'',3,0,1,1383896371,1383891252,'',0,'','','',0,'');
+INSERT INTO `onethink_attribute` (`id`, `name`, `title`, `field`, `type`, `value`, `remark`, `is_show`, `extra`, `model_id`, `is_must`, `status`, `update_time`, `create_time`, `validate_rule`, `validate_time`, `error_info`, `validate_type`, `auto_rule`, `auto_time`, `auto_type`) VALUES
+(1, 'uid', 'ç”¨æˆ·ID', 'int(10) unsigned NOT NULL ', 'num', '0', '', 0, '', 1, 0, 1, 1384508362, 1383891233, '', 0, '', '', '', 0, ''),
+(2, 'name', 'æ ‡è¯†', 'char(40) NOT NULL ', 'string', '', 'åŒä¸€æ ¹èŠ‚ç‚¹ä¸‹æ ‡è¯†ä¸é‡å¤', 1, '', 1, 0, 1, 1383894743, 1383891233, '', 0, '', '', '', 0, ''),
+(3, 'title', 'æ ‡é¢˜', 'char(80) NOT NULL ', 'string', '', 'æ–‡æ¡£æ ‡é¢˜', 1, '', 1, 0, 1, 1383894778, 1383891233, '', 0, '', '', '', 0, ''),
+(4, 'category_id', 'æ‰€å±åˆ†ç±»', 'int(10) unsigned NOT NULL ', 'string', '', '', 0, '', 1, 0, 1, 1384508336, 1383891233, '', 0, '', '', '', 0, ''),
+(5, 'description', 'æè¿°', 'char(140) NOT NULL ', 'textarea', '', '', 1, '', 1, 0, 1, 1383894927, 1383891233, '', 0, '', '', '', 0, ''),
+(6, 'root', 'æ ¹èŠ‚ç‚¹', 'int(10) unsigned NOT NULL ', 'num', '0', 'è¯¥æ–‡æ¡£çš„é¡¶çº§æ–‡æ¡£ç¼–å·', 0, '', 1, 0, 1, 1384508323, 1383891233, '', 0, '', '', '', 0, ''),
+(7, 'pid', 'æ‰€å±ID', 'int(10) unsigned NOT NULL ', 'num', '0', 'çˆ¶æ–‡æ¡£ç¼–å·', 0, '', 1, 0, 1, 1384508543, 1383891233, '', 0, '', '', '', 0, ''),
+(8, 'model_id', 'å†…å®¹æ¨¡å‹ID', 'tinyint(3) unsigned NOT NULL ', 'num', '0', 'è¯¥æ–‡æ¡£æ‰€å¯¹åº”çš„æ¨¡å‹', 0, '', 1, 0, 1, 1384508350, 1383891233, '', 0, '', '', '', 0, ''),
+(9, 'type', 'å†…å®¹ç±»å‹', 'tinyint(3) unsigned NOT NULL ', 'select', '2', '', 1, '1:ç›®å½•\r\n2:ä¸»é¢˜\r\n3:æ®µè½', 1, 0, 1, 1384511157, 1383891233, '', 0, '', '', '', 0, ''),
+(10, 'position', 'æ¨èä½', 'smallint(5) unsigned NOT NULL ', 'checkbox', '0', 'å¤šä¸ªæ¨èåˆ™å°†å…¶æ¨èå€¼ç›¸åŠ ', 1, '[DOCUMENT_POSITION]', 1, 0, 1, 1383895640, 1383891233, '', 0, '', '', '', 0, ''),
+(11, 'link_id', 'å¤–é“¾', 'int(10) unsigned NOT NULL ', 'num', '0', '0-éå¤–é“¾ï¼Œå¤§äº0-å¤–é“¾ID,éœ€è¦å‡½æ•°è¿›è¡Œé“¾æ¥ä¸ç¼–å·çš„è½¬æ¢', 1, '', 1, 0, 1, 1383895757, 1383891233, '', 0, '', '', '', 0, ''),
+(12, 'cover_id', 'å°é¢', 'int(10) unsigned NOT NULL ', 'picture', '0', '0-æ— å°é¢ï¼Œå¤§äº0-å°é¢å›¾ç‰‡IDï¼Œéœ€è¦å‡½æ•°å¤„ç†', 1, '', 1, 0, 1, 1384147827, 1383891233, '', 0, '', '', '', 0, ''),
+(13, 'display', 'å¯è§æ€§', 'tinyint(3) unsigned NOT NULL ', 'radio', '1', '', 1, '0:ä¸å¯è§\r\n1:æ‰€æœ‰äººå¯è§', 1, 0, 1, 1386662271, 1383891233, '', 0, '', 'regex', '', 0, 'function'),
+(14, 'deadline', 'æˆªè‡³æ—¶é—´', 'int(10) unsigned NOT NULL ', 'datetime', '0', '0-æ°¸ä¹…æœ‰æ•ˆ', 1, '', 1, 0, 1, 1387163248, 1383891233, '', 0, '', 'regex', '', 0, 'function'),
+(15, 'attach', 'é™„ä»¶æ•°é‡', 'tinyint(3) unsigned NOT NULL ', 'num', '0', '', 0, '', 1, 0, 1, 1387260355, 1383891233, '', 0, '', 'regex', '', 0, 'function'),
+(16, 'view', 'æµè§ˆé‡', 'int(10) unsigned NOT NULL ', 'num', '0', '', 1, '', 1, 0, 1, 1383895835, 1383891233, '', 0, '', '', '', 0, ''),
+(17, 'comment', 'è¯„è®ºæ•°', 'int(10) unsigned NOT NULL ', 'num', '0', '', 1, '', 1, 0, 1, 1383895846, 1383891233, '', 0, '', '', '', 0, ''),
+(18, 'extend', 'æ‰©å±•ç»Ÿè®¡å­—æ®µ', 'int(10) unsigned NOT NULL ', 'num', '0', 'æ ¹æ®éœ€æ±‚è‡ªè¡Œä½¿ç”¨', 0, '', 1, 0, 1, 1384508264, 1383891233, '', 0, '', '', '', 0, ''),
+(19, 'level', 'ä¼˜å…ˆçº§', 'int(10) unsigned NOT NULL ', 'num', '0', 'è¶Šé«˜æ’åºè¶Šé å‰', 1, '', 1, 0, 1, 1383895894, 1383891233, '', 0, '', '', '', 0, ''),
+(20, 'create_time', 'åˆ›å»ºæ—¶é—´', 'int(10) unsigned NOT NULL ', 'datetime', '0', '', 1, '', 1, 0, 1, 1383895903, 1383891233, '', 0, '', '', '', 0, ''),
+(21, 'update_time', 'æ›´æ–°æ—¶é—´', 'int(10) unsigned NOT NULL ', 'datetime', '0', '', 0, '', 1, 0, 1, 1384508277, 1383891233, '', 0, '', '', '', 0, ''),
+(22, 'status', 'æ•°æ®çŠ¶æ€', 'tinyint(4) NOT NULL ', 'radio', '0', '', 0, '-1:åˆ é™¤\r\n0:ç¦ç”¨\r\n1:æ­£å¸¸\r\n2:å¾…å®¡æ ¸\r\n3:è‰ç¨¿', 1, 0, 1, 1384508496, 1383891233, '', 0, '', '', '', 0, ''),
+(23, 'parse', 'å†…å®¹è§£æç±»å‹', 'tinyint(3) unsigned NOT NULL ', 'select', '0', '', 0, '0:html\r\n1:ubb\r\n2:markdown', 2, 0, 1, 1384511049, 1383891243, '', 0, '', '', '', 0, ''),
+(24, 'content', 'æ–‡ç« å†…å®¹', 'text NOT NULL ', 'editor', '', '', 1, '', 2, 0, 1, 1383896225, 1383891243, '', 0, '', '', '', 0, ''),
+(25, 'template', 'è¯¦æƒ…é¡µæ˜¾ç¤ºæ¨¡æ¿', 'varchar(100) NOT NULL ', 'string', '', 'å‚ç…§displayæ–¹æ³•å‚æ•°çš„å®šä¹‰', 1, '', 2, 0, 1, 1383896190, 1383891243, '', 0, '', '', '', 0, ''),
+(26, 'bookmark', 'æ”¶è—æ•°', 'int(10) unsigned NOT NULL ', 'num', '0', '', 1, '', 2, 0, 1, 1383896103, 1383891243, '', 0, '', '', '', 0, ''),
+(27, 'parse', 'å†…å®¹è§£æç±»å‹', 'tinyint(3) unsigned NOT NULL ', 'select', '0', '', 0, '0:html\r\n1:ubb\r\n2:markdown', 3, 0, 1, 1387260461, 1383891252, '', 0, '', 'regex', '', 0, 'function'),
+(28, 'content', 'ä¸‹è½½è¯¦ç»†æè¿°', 'text NOT NULL ', 'editor', '', '', 1, '', 3, 0, 1, 1383896438, 1383891252, '', 0, '', '', '', 0, ''),
+(29, 'template', 'è¯¦æƒ…é¡µæ˜¾ç¤ºæ¨¡æ¿', 'varchar(100) NOT NULL ', 'string', '', '', 1, '', 3, 0, 1, 1383896429, 1383891252, '', 0, '', '', '', 0, ''),
+(30, 'file_id', 'æ–‡ä»¶ID', 'int(10) unsigned NOT NULL ', 'file', '0', 'éœ€è¦å‡½æ•°å¤„ç†', 1, '', 3, 0, 1, 1383896415, 1383891252, '', 0, '', '', '', 0, ''),
+(31, 'download', 'ä¸‹è½½æ¬¡æ•°', 'int(10) unsigned NOT NULL ', 'num', '0', '', 1, '', 3, 0, 1, 1383896380, 1383891252, '', 0, '', '', '', 0, ''),
+(32, 'size', 'æ–‡ä»¶å¤§å°', 'bigint(20) unsigned NOT NULL ', 'num', '0', 'å•ä½bit', 1, '', 3, 0, 1, 1383896371, 1383891252, '', 0, '', '', '', 0, ''),
+(48, 'atlas', 'å›¾é›†', 'varchar(255) NOT NULL', 'pictures', '', '', 1, '', 2, 0, 1, 1444206487, 1444206487, '', 3, '', 'regex', '', 3, 'function');
 
-#
-# Source for table onethink_auth_extend
-#
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `onethink_auth_extend`;
-CREATE TABLE `onethink_auth_extend` (
-  `group_id` mediumint(10) unsigned NOT NULL COMMENT 'ÓÃ»§id',
-  `extend_id` mediumint(8) unsigned NOT NULL COMMENT 'À©Õ¹±íÖĞÊı¾İµÄid',
-  `type` tinyint(1) unsigned NOT NULL COMMENT 'À©Õ¹ÀàĞÍ±êÊ¶ 1:À¸Ä¿·ÖÀàÈ¨ÏŞ;2:Ä£ĞÍÈ¨ÏŞ',
+--
+-- è¡¨çš„ç»“æ„ `onethink_auth_extend`
+--
+
+CREATE TABLE IF NOT EXISTS `onethink_auth_extend` (
+  `group_id` mediumint(10) unsigned NOT NULL COMMENT 'ç”¨æˆ·id',
+  `extend_id` mediumint(8) unsigned NOT NULL COMMENT 'æ‰©å±•è¡¨ä¸­æ•°æ®çš„id',
+  `type` tinyint(1) unsigned NOT NULL COMMENT 'æ‰©å±•ç±»å‹æ ‡è¯† 1:æ ç›®åˆ†ç±»æƒé™;2:æ¨¡å‹æƒé™',
   UNIQUE KEY `group_extend_type` (`group_id`,`extend_id`,`type`),
   KEY `uid` (`group_id`),
   KEY `group_id` (`extend_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='ÓÃ»§×éÓë·ÖÀàµÄ¶ÔÓ¦¹ØÏµ±í';
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='ç”¨æˆ·ç»„ä¸åˆ†ç±»çš„å¯¹åº”å…³ç³»è¡¨';
 
-#
-# Dumping data for table onethink_auth_extend
-#
+--
+-- è½¬å­˜è¡¨ä¸­çš„æ•°æ® `onethink_auth_extend`
+--
 
-INSERT INTO `onethink_auth_extend` VALUES (1,1,1);
-INSERT INTO `onethink_auth_extend` VALUES (1,1,2);
-INSERT INTO `onethink_auth_extend` VALUES (1,2,1);
-INSERT INTO `onethink_auth_extend` VALUES (1,2,2);
-INSERT INTO `onethink_auth_extend` VALUES (1,3,2);
+INSERT INTO `onethink_auth_extend` (`group_id`, `extend_id`, `type`) VALUES
+(1, 1, 1),
+(1, 1, 2),
+(1, 2, 1),
+(1, 2, 2),
+(1, 3, 2);
 
-#
-# Source for table onethink_auth_group
-#
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `onethink_auth_group`;
-CREATE TABLE `onethink_auth_group` (
-  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ÓÃ»§×éid,×ÔÔöÖ÷¼ü',
-  `module` varchar(20) NOT NULL DEFAULT '' COMMENT 'ÓÃ»§×éËùÊôÄ£¿é',
-  `type` tinyint(4) NOT NULL DEFAULT '0' COMMENT '×éÀàĞÍ',
-  `title` char(20) NOT NULL DEFAULT '' COMMENT 'ÓÃ»§×éÖĞÎÄÃû³Æ',
-  `description` varchar(80) NOT NULL DEFAULT '' COMMENT 'ÃèÊöĞÅÏ¢',
-  `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'ÓÃ»§×é×´Ì¬£ºÎª1Õı³££¬Îª0½ûÓÃ,-1ÎªÉ¾³ı',
-  `rules` varchar(500) NOT NULL DEFAULT '' COMMENT 'ÓÃ»§×éÓµÓĞµÄ¹æÔòid£¬¶à¸ö¹æÔò , ¸ô¿ª',
+--
+-- è¡¨çš„ç»“æ„ `onethink_auth_group`
+--
+
+CREATE TABLE IF NOT EXISTS `onethink_auth_group` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ç”¨æˆ·ç»„id,è‡ªå¢ä¸»é”®',
+  `module` varchar(20) NOT NULL DEFAULT '' COMMENT 'ç”¨æˆ·ç»„æ‰€å±æ¨¡å—',
+  `type` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'ç»„ç±»å‹',
+  `title` char(20) NOT NULL DEFAULT '' COMMENT 'ç”¨æˆ·ç»„ä¸­æ–‡åç§°',
+  `description` varchar(80) NOT NULL DEFAULT '' COMMENT 'æè¿°ä¿¡æ¯',
+  `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'ç”¨æˆ·ç»„çŠ¶æ€ï¼šä¸º1æ­£å¸¸ï¼Œä¸º0ç¦ç”¨,-1ä¸ºåˆ é™¤',
+  `rules` varchar(500) NOT NULL DEFAULT '' COMMENT 'ç”¨æˆ·ç»„æ‹¥æœ‰çš„è§„åˆ™idï¼Œå¤šä¸ªè§„åˆ™ , éš”å¼€',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
-#
-# Dumping data for table onethink_auth_group
-#
+--
+-- è½¬å­˜è¡¨ä¸­çš„æ•°æ® `onethink_auth_group`
+--
 
-INSERT INTO `onethink_auth_group` VALUES (1,'admin',1,'Ä¬ÈÏÓÃ»§×é','',1,'2,7,8,9,10,11,12,13,14,15,16,17,18,79,211,217');
-INSERT INTO `onethink_auth_group` VALUES (2,'admin',1,'²âÊÔÓÃ»§','²âÊÔÓÃ»§',1,'232,2,7,8,9,10,11,12,13,14,15,16,17,18,79,211,217');
+INSERT INTO `onethink_auth_group` (`id`, `module`, `type`, `title`, `description`, `status`, `rules`) VALUES
+(1, 'admin', 1, 'é»˜è®¤ç”¨æˆ·ç»„', '', 1, '2,7,8,9,10,11,12,13,14,15,16,17,18,79,211,217'),
+(2, 'admin', 1, 'æµ‹è¯•ç”¨æˆ·', 'æµ‹è¯•ç”¨æˆ·', 1, '232,2,7,8,9,10,11,12,13,14,15,16,17,18,79,211,217');
 
-#
-# Source for table onethink_auth_group_access
-#
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `onethink_auth_group_access`;
-CREATE TABLE `onethink_auth_group_access` (
-  `uid` int(10) unsigned NOT NULL COMMENT 'ÓÃ»§id',
-  `group_id` mediumint(8) unsigned NOT NULL COMMENT 'ÓÃ»§×éid',
+--
+-- è¡¨çš„ç»“æ„ `onethink_auth_group_access`
+--
+
+CREATE TABLE IF NOT EXISTS `onethink_auth_group_access` (
+  `uid` int(10) unsigned NOT NULL COMMENT 'ç”¨æˆ·id',
+  `group_id` mediumint(8) unsigned NOT NULL COMMENT 'ç”¨æˆ·ç»„id',
   UNIQUE KEY `uid_group_id` (`uid`,`group_id`),
   KEY `uid` (`uid`),
   KEY `group_id` (`group_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-#
-# Dumping data for table onethink_auth_group_access
-#
+--
+-- è½¬å­˜è¡¨ä¸­çš„æ•°æ® `onethink_auth_group_access`
+--
 
-INSERT INTO `onethink_auth_group_access` VALUES (3,1);
+INSERT INTO `onethink_auth_group_access` (`uid`, `group_id`) VALUES
+(3, 1);
 
-#
-# Source for table onethink_auth_rule
-#
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `onethink_auth_rule`;
-CREATE TABLE `onethink_auth_rule` (
-  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '¹æÔòid,×ÔÔöÖ÷¼ü',
-  `module` varchar(20) NOT NULL COMMENT '¹æÔòËùÊômodule',
-  `type` tinyint(2) NOT NULL DEFAULT '1' COMMENT '1-url;2-Ö÷²Ëµ¥',
-  `name` char(80) NOT NULL DEFAULT '' COMMENT '¹æÔòÎ¨Ò»Ó¢ÎÄ±êÊ¶',
-  `title` char(20) NOT NULL DEFAULT '' COMMENT '¹æÔòÖĞÎÄÃèÊö',
-  `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'ÊÇ·ñÓĞĞ§(0:ÎŞĞ§,1:ÓĞĞ§)',
-  `condition` varchar(300) NOT NULL DEFAULT '' COMMENT '¹æÔò¸½¼ÓÌõ¼ş',
+--
+-- è¡¨çš„ç»“æ„ `onethink_auth_rule`
+--
+
+CREATE TABLE IF NOT EXISTS `onethink_auth_rule` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT 'è§„åˆ™id,è‡ªå¢ä¸»é”®',
+  `module` varchar(20) NOT NULL COMMENT 'è§„åˆ™æ‰€å±module',
+  `type` tinyint(2) NOT NULL DEFAULT '1' COMMENT '1-url;2-ä¸»èœå•',
+  `name` char(80) NOT NULL DEFAULT '' COMMENT 'è§„åˆ™å”¯ä¸€è‹±æ–‡æ ‡è¯†',
+  `title` char(20) NOT NULL DEFAULT '' COMMENT 'è§„åˆ™ä¸­æ–‡æè¿°',
+  `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'æ˜¯å¦æœ‰æ•ˆ(0:æ— æ•ˆ,1:æœ‰æ•ˆ)',
+  `condition` varchar(300) NOT NULL DEFAULT '' COMMENT 'è§„åˆ™é™„åŠ æ¡ä»¶',
   PRIMARY KEY (`id`),
   KEY `module` (`module`,`status`,`type`)
-) ENGINE=MyISAM AUTO_INCREMENT=233 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=235 ;
 
-#
-# Dumping data for table onethink_auth_rule
-#
+--
+-- è½¬å­˜è¡¨ä¸­çš„æ•°æ® `onethink_auth_rule`
+--
 
-INSERT INTO `onethink_auth_rule` VALUES (1,'admin',2,'Admin/Index/index','Ê×Ò³',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (2,'admin',2,'Admin/Article/index','ÄÚÈİ',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (3,'admin',2,'Admin/User/index','ÓÃ»§',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (4,'admin',2,'Admin/Addons/index','À©Õ¹',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (5,'admin',2,'Admin/Config/group','ÏµÍ³',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (7,'admin',1,'Admin/article/add','ĞÂÔö',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (8,'admin',1,'Admin/article/edit','±à¼­',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (9,'admin',1,'Admin/article/setStatus','¸Ä±ä×´Ì¬',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (10,'admin',1,'Admin/article/update','±£´æ',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (11,'admin',1,'Admin/article/autoSave','±£´æ²İ¸å',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (12,'admin',1,'Admin/article/move','ÒÆ¶¯',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (13,'admin',1,'Admin/article/copy','¸´ÖÆ',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (14,'admin',1,'Admin/article/paste','Õ³Ìù',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (15,'admin',1,'Admin/article/permit','»¹Ô­',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (16,'admin',1,'Admin/article/clear','Çå¿Õ',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (17,'admin',1,'Admin/Article/examine','ÉóºËÁĞ±í',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (18,'admin',1,'Admin/article/recycle','»ØÊÕÕ¾',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (19,'admin',1,'Admin/User/addaction','ĞÂÔöÓÃ»§ĞĞÎª',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (20,'admin',1,'Admin/User/editaction','±à¼­ÓÃ»§ĞĞÎª',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (21,'admin',1,'Admin/User/saveAction','±£´æÓÃ»§ĞĞÎª',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (22,'admin',1,'Admin/User/setStatus','±ä¸üĞĞÎª×´Ì¬',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (23,'admin',1,'Admin/User/changeStatus?method=forbidUser','½ûÓÃ»áÔ±',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (24,'admin',1,'Admin/User/changeStatus?method=resumeUser','ÆôÓÃ»áÔ±',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (25,'admin',1,'Admin/User/changeStatus?method=deleteUser','É¾³ı»áÔ±',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (26,'admin',1,'Admin/User/index','ÓÃ»§ĞÅÏ¢',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (27,'admin',1,'Admin/User/action','ÓÃ»§ĞĞÎª',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (28,'admin',1,'Admin/AuthManager/changeStatus?method=deleteGroup','É¾³ı',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (29,'admin',1,'Admin/AuthManager/changeStatus?method=forbidGroup','½ûÓÃ',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (30,'admin',1,'Admin/AuthManager/changeStatus?method=resumeGroup','»Ö¸´',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (31,'admin',1,'Admin/AuthManager/createGroup','ĞÂÔö',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (32,'admin',1,'Admin/AuthManager/editGroup','±à¼­',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (33,'admin',1,'Admin/AuthManager/writeGroup','±£´æÓÃ»§×é',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (34,'admin',1,'Admin/AuthManager/group','ÊÚÈ¨',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (35,'admin',1,'Admin/AuthManager/access','·ÃÎÊÊÚÈ¨',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (36,'admin',1,'Admin/AuthManager/user','³ÉÔ±ÊÚÈ¨',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (37,'admin',1,'Admin/AuthManager/removeFromGroup','½â³ıÊÚÈ¨',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (38,'admin',1,'Admin/AuthManager/addToGroup','±£´æ³ÉÔ±ÊÚÈ¨',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (39,'admin',1,'Admin/AuthManager/category','·ÖÀàÊÚÈ¨',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (40,'admin',1,'Admin/AuthManager/addToCategory','±£´æ·ÖÀàÊÚÈ¨',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (41,'admin',1,'Admin/AuthManager/index','È¨ÏŞ¹ÜÀí',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (42,'admin',1,'Admin/Addons/create','´´½¨',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (43,'admin',1,'Admin/Addons/checkForm','¼ì²â´´½¨',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (44,'admin',1,'Admin/Addons/preview','Ô¤ÀÀ',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (45,'admin',1,'Admin/Addons/build','¿ìËÙÉú³É²å¼ş',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (46,'admin',1,'Admin/Addons/config','ÉèÖÃ',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (47,'admin',1,'Admin/Addons/disable','½ûÓÃ',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (48,'admin',1,'Admin/Addons/enable','ÆôÓÃ',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (49,'admin',1,'Admin/Addons/install','°²×°',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (50,'admin',1,'Admin/Addons/uninstall','Ğ¶ÔØ',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (51,'admin',1,'Admin/Addons/saveconfig','¸üĞÂÅäÖÃ',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (52,'admin',1,'Admin/Addons/adminList','²å¼şºóÌ¨ÁĞ±í',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (53,'admin',1,'Admin/Addons/execute','URL·½Ê½·ÃÎÊ²å¼ş',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (54,'admin',1,'Admin/Addons/index','²å¼ş¹ÜÀí',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (55,'admin',1,'Admin/Addons/hooks','¹³×Ó¹ÜÀí',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (56,'admin',1,'Admin/model/add','ĞÂÔö',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (57,'admin',1,'Admin/model/edit','±à¼­',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (58,'admin',1,'Admin/model/setStatus','¸Ä±ä×´Ì¬',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (59,'admin',1,'Admin/model/update','±£´æÊı¾İ',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (60,'admin',1,'Admin/Model/index','Ä£ĞÍ¹ÜÀí',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (61,'admin',1,'Admin/Config/edit','±à¼­',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (62,'admin',1,'Admin/Config/del','É¾³ı',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (63,'admin',1,'Admin/Config/add','ĞÂÔö',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (64,'admin',1,'Admin/Config/save','±£´æ',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (65,'admin',1,'Admin/Config/group','ÍøÕ¾ÉèÖÃ',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (66,'admin',1,'Admin/Config/index','ÅäÖÃ¹ÜÀí',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (67,'admin',1,'Admin/Channel/add','ĞÂÔö',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (68,'admin',1,'Admin/Channel/edit','±à¼­',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (69,'admin',1,'Admin/Channel/del','É¾³ı',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (70,'admin',1,'Admin/Channel/index','µ¼º½¹ÜÀí',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (71,'admin',1,'Admin/Category/edit','±à¼­',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (72,'admin',1,'Admin/Category/add','ĞÂÔö',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (73,'admin',1,'Admin/Category/remove','É¾³ı',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (74,'admin',1,'Admin/Category/index','·ÖÀà¹ÜÀí',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (75,'admin',1,'Admin/file/upload','ÉÏ´«¿Ø¼ş',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (76,'admin',1,'Admin/file/uploadPicture','ÉÏ´«Í¼Æ¬',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (77,'admin',1,'Admin/file/download','ÏÂÔØ',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (79,'admin',1,'Admin/article/batchOperate','µ¼Èë',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (80,'admin',1,'Admin/Database/index?type=export','±¸·İÊı¾İ¿â',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (81,'admin',1,'Admin/Database/index?type=import','»¹Ô­Êı¾İ¿â',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (82,'admin',1,'Admin/Database/export','±¸·İ',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (83,'admin',1,'Admin/Database/optimize','ÓÅ»¯±í',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (84,'admin',1,'Admin/Database/repair','ĞŞ¸´±í',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (86,'admin',1,'Admin/Database/import','»Ö¸´',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (87,'admin',1,'Admin/Database/del','É¾³ı',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (88,'admin',1,'Admin/User/add','ĞÂÔöÓÃ»§',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (89,'admin',1,'Admin/Attribute/index','ÊôĞÔ¹ÜÀí',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (90,'admin',1,'Admin/Attribute/add','ĞÂÔö',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (91,'admin',1,'Admin/Attribute/edit','±à¼­',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (92,'admin',1,'Admin/Attribute/setStatus','¸Ä±ä×´Ì¬',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (93,'admin',1,'Admin/Attribute/update','±£´æÊı¾İ',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (94,'admin',1,'Admin/AuthManager/modelauth','Ä£ĞÍÊÚÈ¨',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (95,'admin',1,'Admin/AuthManager/addToModel','±£´æÄ£ĞÍÊÚÈ¨',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (96,'admin',1,'Admin/Category/move','ÒÆ¶¯',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (97,'admin',1,'Admin/Category/merge','ºÏ²¢',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (98,'admin',1,'Admin/Config/menu','ºóÌ¨²Ëµ¥¹ÜÀí',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (99,'admin',1,'Admin/Article/mydocument','ÄÚÈİ',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (100,'admin',1,'Admin/Menu/index','²Ëµ¥¹ÜÀí',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (101,'admin',1,'Admin/other','ÆäËû',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (102,'admin',1,'Admin/Menu/add','ĞÂÔö',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (103,'admin',1,'Admin/Menu/edit','±à¼­',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (104,'admin',1,'Admin/Think/lists?model=article','ÎÄÕÂ¹ÜÀí',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (105,'admin',1,'Admin/Think/lists?model=download','ÏÂÔØ¹ÜÀí',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (106,'admin',1,'Admin/Think/lists?model=config','ÅäÖÃ¹ÜÀí',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (107,'admin',1,'Admin/Action/actionlog','ĞĞÎªÈÕÖ¾',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (108,'admin',1,'Admin/User/updatePassword','ĞŞ¸ÄÃÜÂë',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (109,'admin',1,'Admin/User/updateNickname','ĞŞ¸ÄêÇ³Æ',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (110,'admin',1,'Admin/action/edit','²é¿´ĞĞÎªÈÕÖ¾',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (111,'admin',2,'Admin/article/index','ÎÄµµÁĞ±í',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (112,'admin',2,'Admin/article/add','ĞÂÔö',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (113,'admin',2,'Admin/article/edit','±à¼­',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (114,'admin',2,'Admin/article/setStatus','¸Ä±ä×´Ì¬',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (115,'admin',2,'Admin/article/update','±£´æ',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (116,'admin',2,'Admin/article/autoSave','±£´æ²İ¸å',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (117,'admin',2,'Admin/article/move','ÒÆ¶¯',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (118,'admin',2,'Admin/article/copy','¸´ÖÆ',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (119,'admin',2,'Admin/article/paste','Õ³Ìù',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (120,'admin',2,'Admin/article/batchOperate','µ¼Èë',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (121,'admin',2,'Admin/article/recycle','»ØÊÕÕ¾',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (122,'admin',2,'Admin/article/permit','»¹Ô­',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (123,'admin',2,'Admin/article/clear','Çå¿Õ',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (124,'admin',2,'Admin/User/add','ĞÂÔöÓÃ»§',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (125,'admin',2,'Admin/User/action','ÓÃ»§ĞĞÎª',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (126,'admin',2,'Admin/User/addAction','ĞÂÔöÓÃ»§ĞĞÎª',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (127,'admin',2,'Admin/User/editAction','±à¼­ÓÃ»§ĞĞÎª',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (128,'admin',2,'Admin/User/saveAction','±£´æÓÃ»§ĞĞÎª',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (129,'admin',2,'Admin/User/setStatus','±ä¸üĞĞÎª×´Ì¬',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (130,'admin',2,'Admin/User/changeStatus?method=forbidUser','½ûÓÃ»áÔ±',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (131,'admin',2,'Admin/User/changeStatus?method=resumeUser','ÆôÓÃ»áÔ±',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (132,'admin',2,'Admin/User/changeStatus?method=deleteUser','É¾³ı»áÔ±',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (133,'admin',2,'Admin/AuthManager/index','È¨ÏŞ¹ÜÀí',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (134,'admin',2,'Admin/AuthManager/changeStatus?method=deleteGroup','É¾³ı',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (135,'admin',2,'Admin/AuthManager/changeStatus?method=forbidGroup','½ûÓÃ',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (136,'admin',2,'Admin/AuthManager/changeStatus?method=resumeGroup','»Ö¸´',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (137,'admin',2,'Admin/AuthManager/createGroup','ĞÂÔö',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (138,'admin',2,'Admin/AuthManager/editGroup','±à¼­',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (139,'admin',2,'Admin/AuthManager/writeGroup','±£´æÓÃ»§×é',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (140,'admin',2,'Admin/AuthManager/group','ÊÚÈ¨',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (141,'admin',2,'Admin/AuthManager/access','·ÃÎÊÊÚÈ¨',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (142,'admin',2,'Admin/AuthManager/user','³ÉÔ±ÊÚÈ¨',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (143,'admin',2,'Admin/AuthManager/removeFromGroup','½â³ıÊÚÈ¨',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (144,'admin',2,'Admin/AuthManager/addToGroup','±£´æ³ÉÔ±ÊÚÈ¨',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (145,'admin',2,'Admin/AuthManager/category','·ÖÀàÊÚÈ¨',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (146,'admin',2,'Admin/AuthManager/addToCategory','±£´æ·ÖÀàÊÚÈ¨',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (147,'admin',2,'Admin/AuthManager/modelauth','Ä£ĞÍÊÚÈ¨',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (148,'admin',2,'Admin/AuthManager/addToModel','±£´æÄ£ĞÍÊÚÈ¨',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (149,'admin',2,'Admin/Addons/create','´´½¨',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (150,'admin',2,'Admin/Addons/checkForm','¼ì²â´´½¨',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (151,'admin',2,'Admin/Addons/preview','Ô¤ÀÀ',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (152,'admin',2,'Admin/Addons/build','¿ìËÙÉú³É²å¼ş',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (153,'admin',2,'Admin/Addons/config','ÉèÖÃ',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (154,'admin',2,'Admin/Addons/disable','½ûÓÃ',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (155,'admin',2,'Admin/Addons/enable','ÆôÓÃ',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (156,'admin',2,'Admin/Addons/install','°²×°',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (157,'admin',2,'Admin/Addons/uninstall','Ğ¶ÔØ',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (158,'admin',2,'Admin/Addons/saveconfig','¸üĞÂÅäÖÃ',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (159,'admin',2,'Admin/Addons/adminList','²å¼şºóÌ¨ÁĞ±í',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (160,'admin',2,'Admin/Addons/execute','URL·½Ê½·ÃÎÊ²å¼ş',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (161,'admin',2,'Admin/Addons/hooks','¹³×Ó¹ÜÀí',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (162,'admin',2,'Admin/Model/index','Ä£ĞÍ¹ÜÀí',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (163,'admin',2,'Admin/model/add','ĞÂÔö',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (164,'admin',2,'Admin/model/edit','±à¼­',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (165,'admin',2,'Admin/model/setStatus','¸Ä±ä×´Ì¬',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (166,'admin',2,'Admin/model/update','±£´æÊı¾İ',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (167,'admin',2,'Admin/Attribute/index','ÊôĞÔ¹ÜÀí',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (168,'admin',2,'Admin/Attribute/add','ĞÂÔö',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (169,'admin',2,'Admin/Attribute/edit','±à¼­',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (170,'admin',2,'Admin/Attribute/setStatus','¸Ä±ä×´Ì¬',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (171,'admin',2,'Admin/Attribute/update','±£´æÊı¾İ',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (172,'admin',2,'Admin/Config/index','ÅäÖÃ¹ÜÀí',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (173,'admin',2,'Admin/Config/edit','±à¼­',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (174,'admin',2,'Admin/Config/del','É¾³ı',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (175,'admin',2,'Admin/Config/add','ĞÂÔö',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (176,'admin',2,'Admin/Config/save','±£´æ',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (177,'admin',2,'Admin/Menu/index','²Ëµ¥¹ÜÀí',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (178,'admin',2,'Admin/Channel/index','µ¼º½¹ÜÀí',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (179,'admin',2,'Admin/Channel/add','ĞÂÔö',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (180,'admin',2,'Admin/Channel/edit','±à¼­',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (181,'admin',2,'Admin/Channel/del','É¾³ı',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (182,'admin',2,'Admin/Category/index','·ÖÀà¹ÜÀí',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (183,'admin',2,'Admin/Category/edit','±à¼­',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (184,'admin',2,'Admin/Category/add','ĞÂÔö',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (185,'admin',2,'Admin/Category/remove','É¾³ı',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (186,'admin',2,'Admin/Category/move','ÒÆ¶¯',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (187,'admin',2,'Admin/Category/merge','ºÏ²¢',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (188,'admin',2,'Admin/Database/index?type=export','±¸·İÊı¾İ¿â',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (189,'admin',2,'Admin/Database/export','±¸·İ',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (190,'admin',2,'Admin/Database/optimize','ÓÅ»¯±í',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (191,'admin',2,'Admin/Database/repair','ĞŞ¸´±í',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (192,'admin',2,'Admin/Database/index?type=import','»¹Ô­Êı¾İ¿â',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (193,'admin',2,'Admin/Database/import','»Ö¸´',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (194,'admin',2,'Admin/Database/del','É¾³ı',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (195,'admin',2,'Admin/other','ÆäËû',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (196,'admin',2,'Admin/Menu/add','ĞÂÔö',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (197,'admin',2,'Admin/Menu/edit','±à¼­',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (198,'admin',2,'Admin/Think/lists?model=article','Ó¦ÓÃ',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (199,'admin',2,'Admin/Think/lists?model=download','ÏÂÔØ¹ÜÀí',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (200,'admin',2,'Admin/Think/lists?model=config','Ó¦ÓÃ',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (201,'admin',2,'Admin/Action/actionlog','ĞĞÎªÈÕÖ¾',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (202,'admin',2,'Admin/User/updatePassword','ĞŞ¸ÄÃÜÂë',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (203,'admin',2,'Admin/User/updateNickname','ĞŞ¸ÄêÇ³Æ',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (204,'admin',2,'Admin/action/edit','²é¿´ĞĞÎªÈÕÖ¾',-1,'');
-INSERT INTO `onethink_auth_rule` VALUES (205,'admin',1,'Admin/think/add','ĞÂÔöÊı¾İ',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (206,'admin',1,'Admin/think/edit','±à¼­Êı¾İ',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (207,'admin',1,'Admin/Menu/import','µ¼Èë',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (208,'admin',1,'Admin/Model/generate','Éú³É',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (209,'admin',1,'Admin/Addons/addHook','ĞÂÔö¹³×Ó',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (210,'admin',1,'Admin/Addons/edithook','±à¼­¹³×Ó',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (211,'admin',1,'Admin/Article/sort','ÎÄµµÅÅĞò',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (212,'admin',1,'Admin/Config/sort','ÅÅĞò',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (213,'admin',1,'Admin/Menu/sort','ÅÅĞò',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (214,'admin',1,'Admin/Channel/sort','ÅÅĞò',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (215,'admin',1,'Admin/Category/operate/type/move','ÒÆ¶¯',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (216,'admin',1,'Admin/Category/operate/type/merge','ºÏ²¢',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (217,'admin',1,'Admin/article/index','ÎÄµµÁĞ±í',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (218,'admin',1,'Admin/think/lists','Êı¾İÁĞ±í',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (219,'admin',1,'Admin/Addons/sort','ÒÑ°²×°²å¼ş²Ëµ¥ÅÅĞò',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (220,'admin',1,'Admin/AuthManager/accessUser','Ç°Ì¨È¨ÏŞ¹ÜÀí',1,'');
-INSERT INTO `onethink_auth_rule` VALUES (221,'admin',1,'Admin/AuthManager/addNode','ĞÂÔöÇ°Ì¨È¨ÏŞ½Úµã',1,'');
+INSERT INTO `onethink_auth_rule` (`id`, `module`, `type`, `name`, `title`, `status`, `condition`) VALUES
+(1, 'admin', 2, 'Admin/Index/index', 'é¦–é¡µ', 1, ''),
+(2, 'admin', 2, 'Admin/Article/index', 'å†…å®¹', 1, ''),
+(3, 'admin', 2, 'Admin/User/index', 'ç”¨æˆ·', 1, ''),
+(4, 'admin', 2, 'Admin/Addons/index', 'æ‰©å±•', 1, ''),
+(5, 'admin', 2, 'Admin/Config/group', 'ç³»ç»Ÿ', 1, ''),
+(7, 'admin', 1, 'Admin/article/add', 'æ–°å¢', 1, ''),
+(8, 'admin', 1, 'Admin/article/edit', 'ç¼–è¾‘', 1, ''),
+(9, 'admin', 1, 'Admin/article/setStatus', 'æ”¹å˜çŠ¶æ€', 1, ''),
+(10, 'admin', 1, 'Admin/article/update', 'ä¿å­˜', 1, ''),
+(11, 'admin', 1, 'Admin/article/autoSave', 'ä¿å­˜è‰ç¨¿', 1, ''),
+(12, 'admin', 1, 'Admin/article/move', 'ç§»åŠ¨', 1, ''),
+(13, 'admin', 1, 'Admin/article/copy', 'å¤åˆ¶', 1, ''),
+(14, 'admin', 1, 'Admin/article/paste', 'ç²˜è´´', 1, ''),
+(15, 'admin', 1, 'Admin/article/permit', 'è¿˜åŸ', 1, ''),
+(16, 'admin', 1, 'Admin/article/clear', 'æ¸…ç©º', 1, ''),
+(17, 'admin', 1, 'Admin/Article/examine', 'å®¡æ ¸åˆ—è¡¨', 1, ''),
+(18, 'admin', 1, 'Admin/article/recycle', 'å›æ”¶ç«™', 1, ''),
+(19, 'admin', 1, 'Admin/User/addaction', 'æ–°å¢ç”¨æˆ·è¡Œä¸º', 1, ''),
+(20, 'admin', 1, 'Admin/User/editaction', 'ç¼–è¾‘ç”¨æˆ·è¡Œä¸º', 1, ''),
+(21, 'admin', 1, 'Admin/User/saveAction', 'ä¿å­˜ç”¨æˆ·è¡Œä¸º', 1, ''),
+(22, 'admin', 1, 'Admin/User/setStatus', 'å˜æ›´è¡Œä¸ºçŠ¶æ€', 1, ''),
+(23, 'admin', 1, 'Admin/User/changeStatus?method=forbidUser', 'ç¦ç”¨ä¼šå‘˜', 1, ''),
+(24, 'admin', 1, 'Admin/User/changeStatus?method=resumeUser', 'å¯ç”¨ä¼šå‘˜', 1, ''),
+(25, 'admin', 1, 'Admin/User/changeStatus?method=deleteUser', 'åˆ é™¤ä¼šå‘˜', 1, ''),
+(26, 'admin', 1, 'Admin/User/index', 'ç”¨æˆ·ä¿¡æ¯', 1, ''),
+(27, 'admin', 1, 'Admin/User/action', 'ç”¨æˆ·è¡Œä¸º', 1, ''),
+(28, 'admin', 1, 'Admin/AuthManager/changeStatus?method=deleteGroup', 'åˆ é™¤', 1, ''),
+(29, 'admin', 1, 'Admin/AuthManager/changeStatus?method=forbidGroup', 'ç¦ç”¨', 1, ''),
+(30, 'admin', 1, 'Admin/AuthManager/changeStatus?method=resumeGroup', 'æ¢å¤', 1, ''),
+(31, 'admin', 1, 'Admin/AuthManager/createGroup', 'æ–°å¢', 1, ''),
+(32, 'admin', 1, 'Admin/AuthManager/editGroup', 'ç¼–è¾‘', 1, ''),
+(33, 'admin', 1, 'Admin/AuthManager/writeGroup', 'ä¿å­˜ç”¨æˆ·ç»„', 1, ''),
+(34, 'admin', 1, 'Admin/AuthManager/group', 'æˆæƒ', 1, ''),
+(35, 'admin', 1, 'Admin/AuthManager/access', 'è®¿é—®æˆæƒ', 1, ''),
+(36, 'admin', 1, 'Admin/AuthManager/user', 'æˆå‘˜æˆæƒ', 1, ''),
+(37, 'admin', 1, 'Admin/AuthManager/removeFromGroup', 'è§£é™¤æˆæƒ', 1, ''),
+(38, 'admin', 1, 'Admin/AuthManager/addToGroup', 'ä¿å­˜æˆå‘˜æˆæƒ', 1, ''),
+(39, 'admin', 1, 'Admin/AuthManager/category', 'åˆ†ç±»æˆæƒ', 1, ''),
+(40, 'admin', 1, 'Admin/AuthManager/addToCategory', 'ä¿å­˜åˆ†ç±»æˆæƒ', 1, ''),
+(41, 'admin', 1, 'Admin/AuthManager/index', 'æƒé™ç®¡ç†', 1, ''),
+(42, 'admin', 1, 'Admin/Addons/create', 'åˆ›å»º', 1, ''),
+(43, 'admin', 1, 'Admin/Addons/checkForm', 'æ£€æµ‹åˆ›å»º', 1, ''),
+(44, 'admin', 1, 'Admin/Addons/preview', 'é¢„è§ˆ', 1, ''),
+(45, 'admin', 1, 'Admin/Addons/build', 'å¿«é€Ÿç”Ÿæˆæ’ä»¶', 1, ''),
+(46, 'admin', 1, 'Admin/Addons/config', 'è®¾ç½®', 1, ''),
+(47, 'admin', 1, 'Admin/Addons/disable', 'ç¦ç”¨', 1, ''),
+(48, 'admin', 1, 'Admin/Addons/enable', 'å¯ç”¨', 1, ''),
+(49, 'admin', 1, 'Admin/Addons/install', 'å®‰è£…', 1, ''),
+(50, 'admin', 1, 'Admin/Addons/uninstall', 'å¸è½½', 1, ''),
+(51, 'admin', 1, 'Admin/Addons/saveconfig', 'æ›´æ–°é…ç½®', 1, ''),
+(52, 'admin', 1, 'Admin/Addons/adminList', 'æ’ä»¶åå°åˆ—è¡¨', 1, ''),
+(53, 'admin', 1, 'Admin/Addons/execute', 'URLæ–¹å¼è®¿é—®æ’ä»¶', 1, ''),
+(54, 'admin', 1, 'Admin/Addons/index', 'æ’ä»¶ç®¡ç†', 1, ''),
+(55, 'admin', 1, 'Admin/Addons/hooks', 'é’©å­ç®¡ç†', 1, ''),
+(56, 'admin', 1, 'Admin/model/add', 'æ–°å¢', 1, ''),
+(57, 'admin', 1, 'Admin/model/edit', 'ç¼–è¾‘', 1, ''),
+(58, 'admin', 1, 'Admin/model/setStatus', 'æ”¹å˜çŠ¶æ€', 1, ''),
+(59, 'admin', 1, 'Admin/model/update', 'ä¿å­˜æ•°æ®', 1, ''),
+(60, 'admin', 1, 'Admin/Model/index', 'æ¨¡å‹ç®¡ç†', 1, ''),
+(61, 'admin', 1, 'Admin/Config/edit', 'ç¼–è¾‘', 1, ''),
+(62, 'admin', 1, 'Admin/Config/del', 'åˆ é™¤', 1, ''),
+(63, 'admin', 1, 'Admin/Config/add', 'æ–°å¢', 1, ''),
+(64, 'admin', 1, 'Admin/Config/save', 'ä¿å­˜', 1, ''),
+(65, 'admin', 1, 'Admin/Config/group', 'ç½‘ç«™è®¾ç½®', 1, ''),
+(66, 'admin', 1, 'Admin/Config/index', 'é…ç½®ç®¡ç†', 1, ''),
+(67, 'admin', 1, 'Admin/Channel/add', 'æ–°å¢', 1, ''),
+(68, 'admin', 1, 'Admin/Channel/edit', 'ç¼–è¾‘', 1, ''),
+(69, 'admin', 1, 'Admin/Channel/del', 'åˆ é™¤', 1, ''),
+(70, 'admin', 1, 'Admin/Channel/index', 'å¯¼èˆªç®¡ç†', 1, ''),
+(71, 'admin', 1, 'Admin/Category/edit', 'ç¼–è¾‘', 1, ''),
+(72, 'admin', 1, 'Admin/Category/add', 'æ–°å¢', 1, ''),
+(73, 'admin', 1, 'Admin/Category/remove', 'åˆ é™¤', 1, ''),
+(74, 'admin', 1, 'Admin/Category/index', 'åˆ†ç±»ç®¡ç†', 1, ''),
+(75, 'admin', 1, 'Admin/file/upload', 'ä¸Šä¼ æ§ä»¶', -1, ''),
+(76, 'admin', 1, 'Admin/file/uploadPicture', 'ä¸Šä¼ å›¾ç‰‡', -1, ''),
+(77, 'admin', 1, 'Admin/file/download', 'ä¸‹è½½', -1, ''),
+(79, 'admin', 1, 'Admin/article/batchOperate', 'å¯¼å…¥', 1, ''),
+(80, 'admin', 1, 'Admin/Database/index?type=export', 'å¤‡ä»½æ•°æ®åº“', 1, ''),
+(81, 'admin', 1, 'Admin/Database/index?type=import', 'è¿˜åŸæ•°æ®åº“', 1, ''),
+(82, 'admin', 1, 'Admin/Database/export', 'å¤‡ä»½', 1, ''),
+(83, 'admin', 1, 'Admin/Database/optimize', 'ä¼˜åŒ–è¡¨', 1, ''),
+(84, 'admin', 1, 'Admin/Database/repair', 'ä¿®å¤è¡¨', 1, ''),
+(86, 'admin', 1, 'Admin/Database/import', 'æ¢å¤', 1, ''),
+(87, 'admin', 1, 'Admin/Database/del', 'åˆ é™¤', 1, ''),
+(88, 'admin', 1, 'Admin/User/add', 'æ–°å¢ç”¨æˆ·', 1, ''),
+(89, 'admin', 1, 'Admin/Attribute/index', 'å±æ€§ç®¡ç†', 1, ''),
+(90, 'admin', 1, 'Admin/Attribute/add', 'æ–°å¢', 1, ''),
+(91, 'admin', 1, 'Admin/Attribute/edit', 'ç¼–è¾‘', 1, ''),
+(92, 'admin', 1, 'Admin/Attribute/setStatus', 'æ”¹å˜çŠ¶æ€', 1, ''),
+(93, 'admin', 1, 'Admin/Attribute/update', 'ä¿å­˜æ•°æ®', 1, ''),
+(94, 'admin', 1, 'Admin/AuthManager/modelauth', 'æ¨¡å‹æˆæƒ', 1, ''),
+(95, 'admin', 1, 'Admin/AuthManager/addToModel', 'ä¿å­˜æ¨¡å‹æˆæƒ', 1, ''),
+(96, 'admin', 1, 'Admin/Category/move', 'ç§»åŠ¨', -1, ''),
+(97, 'admin', 1, 'Admin/Category/merge', 'åˆå¹¶', -1, ''),
+(98, 'admin', 1, 'Admin/Config/menu', 'åå°èœå•ç®¡ç†', -1, ''),
+(99, 'admin', 1, 'Admin/Article/mydocument', 'å†…å®¹', -1, ''),
+(100, 'admin', 1, 'Admin/Menu/index', 'èœå•ç®¡ç†', 1, ''),
+(101, 'admin', 1, 'Admin/other', 'å…¶ä»–', -1, ''),
+(102, 'admin', 1, 'Admin/Menu/add', 'æ–°å¢', 1, ''),
+(103, 'admin', 1, 'Admin/Menu/edit', 'ç¼–è¾‘', 1, ''),
+(104, 'admin', 1, 'Admin/Think/lists?model=article', 'æ–‡ç« ç®¡ç†', -1, ''),
+(105, 'admin', 1, 'Admin/Think/lists?model=download', 'ä¸‹è½½ç®¡ç†', -1, ''),
+(106, 'admin', 1, 'Admin/Think/lists?model=config', 'é…ç½®ç®¡ç†', -1, ''),
+(107, 'admin', 1, 'Admin/Action/actionlog', 'è¡Œä¸ºæ—¥å¿—', 1, ''),
+(108, 'admin', 1, 'Admin/User/updatePassword', 'ä¿®æ”¹å¯†ç ', 1, ''),
+(109, 'admin', 1, 'Admin/User/updateNickname', 'ä¿®æ”¹æ˜µç§°', 1, ''),
+(110, 'admin', 1, 'Admin/action/edit', 'æŸ¥çœ‹è¡Œä¸ºæ—¥å¿—', 1, ''),
+(111, 'admin', 2, 'Admin/article/index', 'æ–‡æ¡£åˆ—è¡¨', -1, ''),
+(112, 'admin', 2, 'Admin/article/add', 'æ–°å¢', -1, ''),
+(113, 'admin', 2, 'Admin/article/edit', 'ç¼–è¾‘', -1, ''),
+(114, 'admin', 2, 'Admin/article/setStatus', 'æ”¹å˜çŠ¶æ€', -1, ''),
+(115, 'admin', 2, 'Admin/article/update', 'ä¿å­˜', -1, ''),
+(116, 'admin', 2, 'Admin/article/autoSave', 'ä¿å­˜è‰ç¨¿', -1, ''),
+(117, 'admin', 2, 'Admin/article/move', 'ç§»åŠ¨', -1, ''),
+(118, 'admin', 2, 'Admin/article/copy', 'å¤åˆ¶', -1, ''),
+(119, 'admin', 2, 'Admin/article/paste', 'ç²˜è´´', -1, ''),
+(120, 'admin', 2, 'Admin/article/batchOperate', 'å¯¼å…¥', -1, ''),
+(121, 'admin', 2, 'Admin/article/recycle', 'å›æ”¶ç«™', -1, ''),
+(122, 'admin', 2, 'Admin/article/permit', 'è¿˜åŸ', -1, ''),
+(123, 'admin', 2, 'Admin/article/clear', 'æ¸…ç©º', -1, ''),
+(124, 'admin', 2, 'Admin/User/add', 'æ–°å¢ç”¨æˆ·', -1, ''),
+(125, 'admin', 2, 'Admin/User/action', 'ç”¨æˆ·è¡Œä¸º', -1, ''),
+(126, 'admin', 2, 'Admin/User/addAction', 'æ–°å¢ç”¨æˆ·è¡Œä¸º', -1, ''),
+(127, 'admin', 2, 'Admin/User/editAction', 'ç¼–è¾‘ç”¨æˆ·è¡Œä¸º', -1, ''),
+(128, 'admin', 2, 'Admin/User/saveAction', 'ä¿å­˜ç”¨æˆ·è¡Œä¸º', -1, ''),
+(129, 'admin', 2, 'Admin/User/setStatus', 'å˜æ›´è¡Œä¸ºçŠ¶æ€', -1, ''),
+(130, 'admin', 2, 'Admin/User/changeStatus?method=forbidUser', 'ç¦ç”¨ä¼šå‘˜', -1, ''),
+(131, 'admin', 2, 'Admin/User/changeStatus?method=resumeUser', 'å¯ç”¨ä¼šå‘˜', -1, ''),
+(132, 'admin', 2, 'Admin/User/changeStatus?method=deleteUser', 'åˆ é™¤ä¼šå‘˜', -1, ''),
+(133, 'admin', 2, 'Admin/AuthManager/index', 'æƒé™ç®¡ç†', -1, ''),
+(134, 'admin', 2, 'Admin/AuthManager/changeStatus?method=deleteGroup', 'åˆ é™¤', -1, ''),
+(135, 'admin', 2, 'Admin/AuthManager/changeStatus?method=forbidGroup', 'ç¦ç”¨', -1, ''),
+(136, 'admin', 2, 'Admin/AuthManager/changeStatus?method=resumeGroup', 'æ¢å¤', -1, ''),
+(137, 'admin', 2, 'Admin/AuthManager/createGroup', 'æ–°å¢', -1, ''),
+(138, 'admin', 2, 'Admin/AuthManager/editGroup', 'ç¼–è¾‘', -1, ''),
+(139, 'admin', 2, 'Admin/AuthManager/writeGroup', 'ä¿å­˜ç”¨æˆ·ç»„', -1, ''),
+(140, 'admin', 2, 'Admin/AuthManager/group', 'æˆæƒ', -1, ''),
+(141, 'admin', 2, 'Admin/AuthManager/access', 'è®¿é—®æˆæƒ', -1, ''),
+(142, 'admin', 2, 'Admin/AuthManager/user', 'æˆå‘˜æˆæƒ', -1, ''),
+(143, 'admin', 2, 'Admin/AuthManager/removeFromGroup', 'è§£é™¤æˆæƒ', -1, ''),
+(144, 'admin', 2, 'Admin/AuthManager/addToGroup', 'ä¿å­˜æˆå‘˜æˆæƒ', -1, ''),
+(145, 'admin', 2, 'Admin/AuthManager/category', 'åˆ†ç±»æˆæƒ', -1, ''),
+(146, 'admin', 2, 'Admin/AuthManager/addToCategory', 'ä¿å­˜åˆ†ç±»æˆæƒ', -1, ''),
+(147, 'admin', 2, 'Admin/AuthManager/modelauth', 'æ¨¡å‹æˆæƒ', -1, ''),
+(148, 'admin', 2, 'Admin/AuthManager/addToModel', 'ä¿å­˜æ¨¡å‹æˆæƒ', -1, ''),
+(149, 'admin', 2, 'Admin/Addons/create', 'åˆ›å»º', -1, ''),
+(150, 'admin', 2, 'Admin/Addons/checkForm', 'æ£€æµ‹åˆ›å»º', -1, ''),
+(151, 'admin', 2, 'Admin/Addons/preview', 'é¢„è§ˆ', -1, ''),
+(152, 'admin', 2, 'Admin/Addons/build', 'å¿«é€Ÿç”Ÿæˆæ’ä»¶', -1, ''),
+(153, 'admin', 2, 'Admin/Addons/config', 'è®¾ç½®', -1, ''),
+(154, 'admin', 2, 'Admin/Addons/disable', 'ç¦ç”¨', -1, ''),
+(155, 'admin', 2, 'Admin/Addons/enable', 'å¯ç”¨', -1, ''),
+(156, 'admin', 2, 'Admin/Addons/install', 'å®‰è£…', -1, ''),
+(157, 'admin', 2, 'Admin/Addons/uninstall', 'å¸è½½', -1, ''),
+(158, 'admin', 2, 'Admin/Addons/saveconfig', 'æ›´æ–°é…ç½®', -1, ''),
+(159, 'admin', 2, 'Admin/Addons/adminList', 'æ’ä»¶åå°åˆ—è¡¨', -1, ''),
+(160, 'admin', 2, 'Admin/Addons/execute', 'URLæ–¹å¼è®¿é—®æ’ä»¶', -1, ''),
+(161, 'admin', 2, 'Admin/Addons/hooks', 'é’©å­ç®¡ç†', -1, ''),
+(162, 'admin', 2, 'Admin/Model/index', 'æ¨¡å‹ç®¡ç†', -1, ''),
+(163, 'admin', 2, 'Admin/model/add', 'æ–°å¢', -1, ''),
+(164, 'admin', 2, 'Admin/model/edit', 'ç¼–è¾‘', -1, ''),
+(165, 'admin', 2, 'Admin/model/setStatus', 'æ”¹å˜çŠ¶æ€', -1, ''),
+(166, 'admin', 2, 'Admin/model/update', 'ä¿å­˜æ•°æ®', -1, ''),
+(167, 'admin', 2, 'Admin/Attribute/index', 'å±æ€§ç®¡ç†', -1, ''),
+(168, 'admin', 2, 'Admin/Attribute/add', 'æ–°å¢', -1, ''),
+(169, 'admin', 2, 'Admin/Attribute/edit', 'ç¼–è¾‘', -1, ''),
+(170, 'admin', 2, 'Admin/Attribute/setStatus', 'æ”¹å˜çŠ¶æ€', -1, ''),
+(171, 'admin', 2, 'Admin/Attribute/update', 'ä¿å­˜æ•°æ®', -1, ''),
+(172, 'admin', 2, 'Admin/Config/index', 'é…ç½®ç®¡ç†', -1, ''),
+(173, 'admin', 2, 'Admin/Config/edit', 'ç¼–è¾‘', -1, ''),
+(174, 'admin', 2, 'Admin/Config/del', 'åˆ é™¤', -1, ''),
+(175, 'admin', 2, 'Admin/Config/add', 'æ–°å¢', -1, ''),
+(176, 'admin', 2, 'Admin/Config/save', 'ä¿å­˜', -1, ''),
+(177, 'admin', 2, 'Admin/Menu/index', 'èœå•ç®¡ç†', -1, ''),
+(178, 'admin', 2, 'Admin/Channel/index', 'å¯¼èˆªç®¡ç†', -1, ''),
+(179, 'admin', 2, 'Admin/Channel/add', 'æ–°å¢', -1, ''),
+(180, 'admin', 2, 'Admin/Channel/edit', 'ç¼–è¾‘', -1, ''),
+(181, 'admin', 2, 'Admin/Channel/del', 'åˆ é™¤', -1, ''),
+(182, 'admin', 2, 'Admin/Category/index', 'åˆ†ç±»ç®¡ç†', -1, ''),
+(183, 'admin', 2, 'Admin/Category/edit', 'ç¼–è¾‘', -1, ''),
+(184, 'admin', 2, 'Admin/Category/add', 'æ–°å¢', -1, ''),
+(185, 'admin', 2, 'Admin/Category/remove', 'åˆ é™¤', -1, ''),
+(186, 'admin', 2, 'Admin/Category/move', 'ç§»åŠ¨', -1, ''),
+(187, 'admin', 2, 'Admin/Category/merge', 'åˆå¹¶', -1, ''),
+(188, 'admin', 2, 'Admin/Database/index?type=export', 'å¤‡ä»½æ•°æ®åº“', -1, ''),
+(189, 'admin', 2, 'Admin/Database/export', 'å¤‡ä»½', -1, ''),
+(190, 'admin', 2, 'Admin/Database/optimize', 'ä¼˜åŒ–è¡¨', -1, ''),
+(191, 'admin', 2, 'Admin/Database/repair', 'ä¿®å¤è¡¨', -1, ''),
+(192, 'admin', 2, 'Admin/Database/index?type=import', 'è¿˜åŸæ•°æ®åº“', -1, ''),
+(193, 'admin', 2, 'Admin/Database/import', 'æ¢å¤', -1, ''),
+(194, 'admin', 2, 'Admin/Database/del', 'åˆ é™¤', -1, ''),
+(195, 'admin', 2, 'Admin/other', 'å…¶ä»–', 1, ''),
+(196, 'admin', 2, 'Admin/Menu/add', 'æ–°å¢', -1, ''),
+(197, 'admin', 2, 'Admin/Menu/edit', 'ç¼–è¾‘', -1, ''),
+(198, 'admin', 2, 'Admin/Think/lists?model=article', 'åº”ç”¨', -1, ''),
+(199, 'admin', 2, 'Admin/Think/lists?model=download', 'ä¸‹è½½ç®¡ç†', -1, ''),
+(200, 'admin', 2, 'Admin/Think/lists?model=config', 'åº”ç”¨', -1, ''),
+(201, 'admin', 2, 'Admin/Action/actionlog', 'è¡Œä¸ºæ—¥å¿—', -1, ''),
+(202, 'admin', 2, 'Admin/User/updatePassword', 'ä¿®æ”¹å¯†ç ', -1, ''),
+(203, 'admin', 2, 'Admin/User/updateNickname', 'ä¿®æ”¹æ˜µç§°', -1, ''),
+(204, 'admin', 2, 'Admin/action/edit', 'æŸ¥çœ‹è¡Œä¸ºæ—¥å¿—', -1, ''),
+(205, 'admin', 1, 'Admin/think/add', 'æ–°å¢æ•°æ®', 1, ''),
+(206, 'admin', 1, 'Admin/think/edit', 'ç¼–è¾‘æ•°æ®', 1, ''),
+(207, 'admin', 1, 'Admin/Menu/import', 'å¯¼å…¥', 1, ''),
+(208, 'admin', 1, 'Admin/Model/generate', 'ç”Ÿæˆ', 1, ''),
+(209, 'admin', 1, 'Admin/Addons/addHook', 'æ–°å¢é’©å­', 1, ''),
+(210, 'admin', 1, 'Admin/Addons/edithook', 'ç¼–è¾‘é’©å­', 1, ''),
+(211, 'admin', 1, 'Admin/Article/sort', 'æ–‡æ¡£æ’åº', 1, ''),
+(212, 'admin', 1, 'Admin/Config/sort', 'æ’åº', 1, ''),
+(213, 'admin', 1, 'Admin/Menu/sort', 'æ’åº', 1, ''),
+(214, 'admin', 1, 'Admin/Channel/sort', 'æ’åº', 1, ''),
+(215, 'admin', 1, 'Admin/Category/operate/type/move', 'ç§»åŠ¨', 1, ''),
+(216, 'admin', 1, 'Admin/Category/operate/type/merge', 'åˆå¹¶', 1, ''),
+(217, 'admin', 1, 'Admin/article/index', 'æ–‡æ¡£åˆ—è¡¨', 1, ''),
+(218, 'admin', 1, 'Admin/think/lists', 'æ•°æ®åˆ—è¡¨', 1, ''),
+(219, 'admin', 1, 'Admin/Addons/sort', 'å·²å®‰è£…æ’ä»¶èœå•æ’åº', 1, ''),
+(220, 'admin', 1, 'Admin/AuthManager/accessUser', 'å‰å°æƒé™ç®¡ç†', 1, ''),
+(221, 'admin', 1, 'Admin/AuthManager/addNode', 'æ–°å¢å‰å°æƒé™èŠ‚ç‚¹', 1, '');
 
-#
-# Source for table onethink_category
-#
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `onethink_category`;
-CREATE TABLE `onethink_category` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '·ÖÀàID',
-  `name` varchar(30) NOT NULL COMMENT '±êÖ¾',
-  `title` varchar(50) NOT NULL COMMENT '±êÌâ',
-  `pid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'ÉÏ¼¶·ÖÀàID',
-  `sort` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'ÅÅĞò£¨Í¬¼¶ÓĞĞ§£©',
-  `list_row` tinyint(3) unsigned NOT NULL DEFAULT '10' COMMENT 'ÁĞ±íÃ¿Ò³ĞĞÊı',
-  `meta_title` varchar(50) NOT NULL DEFAULT '' COMMENT 'SEOµÄÍøÒ³±êÌâ',
-  `keywords` varchar(255) NOT NULL DEFAULT '' COMMENT '¹Ø¼ü×Ö',
-  `description` varchar(255) NOT NULL DEFAULT '' COMMENT 'ÃèÊö',
-  `template_index` varchar(100) NOT NULL DEFAULT '' COMMENT 'ÆµµÀÒ³Ä£°å',
-  `template_lists` varchar(100) NOT NULL DEFAULT '' COMMENT 'ÁĞ±íÒ³Ä£°å',
-  `template_detail` varchar(100) NOT NULL DEFAULT '' COMMENT 'ÏêÇéÒ³Ä£°å',
-  `template_edit` varchar(100) NOT NULL DEFAULT '' COMMENT '±à¼­Ò³Ä£°å',
-  `model` varchar(100) NOT NULL DEFAULT '' COMMENT 'ÁĞ±í°ó¶¨Ä£ĞÍ',
-  `model_sub` varchar(100) NOT NULL DEFAULT '' COMMENT '×ÓÎÄµµ°ó¶¨Ä£ĞÍ',
-  `type` varchar(100) NOT NULL DEFAULT '' COMMENT 'ÔÊĞí·¢²¼µÄÄÚÈİÀàĞÍ',
-  `link_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'ÍâÁ´',
-  `allow_publish` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'ÊÇ·ñÔÊĞí·¢²¼ÄÚÈİ',
-  `display` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '¿É¼ûĞÔ',
-  `reply` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'ÊÇ·ñÔÊĞí»Ø¸´',
-  `check` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '·¢²¼µÄÎÄÕÂÊÇ·ñĞèÒªÉóºË',
+--
+-- è¡¨çš„ç»“æ„ `onethink_avatar`
+--
+
+CREATE TABLE IF NOT EXISTS `onethink_avatar` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) NOT NULL COMMENT 'ç”¨æˆ·ID',
+  `path` varchar(200) NOT NULL COMMENT 'å¤´åƒè·¯å¾„',
+  `create_time` int(11) NOT NULL COMMENT 'åˆ›å»ºæ—¶é—´',
+  `status` int(11) NOT NULL DEFAULT '0' COMMENT 'å¤´åƒçŠ¶æ€ï¼Œå¯ç”¨æˆ–ç¦ç”¨',
+  `is_temp` int(11) NOT NULL DEFAULT '1' COMMENT 'å¤´åƒå›¾ç‰‡æ–‡ä»¶æ˜¯å¦æ˜¯ä¸´æ—¶å›¾ç‰‡ï¼ˆåªæœ‰ç”¨æˆ·æäº¤ç¡®è®¤åæ‰ä½œä¸ºå¤´åƒä½¿ç”¨ï¼‰[0=ä¸æ˜¯ 1=æ˜¯]',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- è¡¨çš„ç»“æ„ `onethink_category`
+--
+
+CREATE TABLE IF NOT EXISTS `onethink_category` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'åˆ†ç±»ID',
+  `name` varchar(30) NOT NULL COMMENT 'æ ‡å¿—',
+  `title` varchar(50) NOT NULL COMMENT 'æ ‡é¢˜',
+  `pid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'ä¸Šçº§åˆ†ç±»ID',
+  `sort` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'æ’åºï¼ˆåŒçº§æœ‰æ•ˆï¼‰',
+  `list_row` tinyint(3) unsigned NOT NULL DEFAULT '10' COMMENT 'åˆ—è¡¨æ¯é¡µè¡Œæ•°',
+  `meta_title` varchar(50) NOT NULL DEFAULT '' COMMENT 'SEOçš„ç½‘é¡µæ ‡é¢˜',
+  `keywords` varchar(255) NOT NULL DEFAULT '' COMMENT 'å…³é”®å­—',
+  `description` varchar(255) NOT NULL DEFAULT '' COMMENT 'æè¿°',
+  `template_index` varchar(100) NOT NULL DEFAULT '' COMMENT 'é¢‘é“é¡µæ¨¡æ¿',
+  `template_lists` varchar(100) NOT NULL DEFAULT '' COMMENT 'åˆ—è¡¨é¡µæ¨¡æ¿',
+  `template_detail` varchar(100) NOT NULL DEFAULT '' COMMENT 'è¯¦æƒ…é¡µæ¨¡æ¿',
+  `template_edit` varchar(100) NOT NULL DEFAULT '' COMMENT 'ç¼–è¾‘é¡µæ¨¡æ¿',
+  `model` varchar(100) NOT NULL DEFAULT '' COMMENT 'åˆ—è¡¨ç»‘å®šæ¨¡å‹',
+  `model_sub` varchar(100) NOT NULL DEFAULT '' COMMENT 'å­æ–‡æ¡£ç»‘å®šæ¨¡å‹',
+  `type` varchar(100) NOT NULL DEFAULT '' COMMENT 'å…è®¸å‘å¸ƒçš„å†…å®¹ç±»å‹',
+  `link_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'å¤–é“¾',
+  `allow_publish` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'æ˜¯å¦å…è®¸å‘å¸ƒå†…å®¹',
+  `display` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'å¯è§æ€§',
+  `reply` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'æ˜¯å¦å…è®¸å›å¤',
+  `check` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'å‘å¸ƒçš„æ–‡ç« æ˜¯å¦éœ€è¦å®¡æ ¸',
   `reply_model` varchar(100) NOT NULL DEFAULT '',
-  `extend` text COMMENT 'À©Õ¹ÉèÖÃ',
-  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '´´½¨Ê±¼ä',
-  `update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '¸üĞÂÊ±¼ä',
-  `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'Êı¾İ×´Ì¬',
-  `icon` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '·ÖÀàÍ¼±ê',
-  `groups` varchar(255) NOT NULL DEFAULT '' COMMENT '·Ö×é¶¨Òå',
+  `extend` text COMMENT 'æ‰©å±•è®¾ç½®',
+  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'åˆ›å»ºæ—¶é—´',
+  `update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'æ›´æ–°æ—¶é—´',
+  `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'æ•°æ®çŠ¶æ€',
+  `icon` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'åˆ†ç±»å›¾æ ‡',
+  `groups` varchar(255) NOT NULL DEFAULT '' COMMENT 'åˆ†ç»„å®šä¹‰',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_name` (`name`),
   KEY `pid` (`pid`)
-) ENGINE=MyISAM AUTO_INCREMENT=39 DEFAULT CHARSET=utf8 COMMENT='·ÖÀà±í';
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='åˆ†ç±»è¡¨' AUTO_INCREMENT=40 ;
 
-#
-# Dumping data for table onethink_category
-#
+--
+-- è½¬å­˜è¡¨ä¸­çš„æ•°æ® `onethink_category`
+--
 
-INSERT INTO `onethink_category` VALUES (1,'blog','²©¿Í',0,0,10,'','','','','','','','2,3','2','2,1',0,0,1,0,0,'1','',1379474947,1382701539,1,0,'');
-INSERT INTO `onethink_category` VALUES (2,'default_blog','Ä¬ÈÏ·ÖÀà',1,1,10,'','','','','','','','2,3','2','2,1,3',0,2,1,0,1,'1','',1379475028,1424239790,1,0,'');
+INSERT INTO `onethink_category` (`id`, `name`, `title`, `pid`, `sort`, `list_row`, `meta_title`, `keywords`, `description`, `template_index`, `template_lists`, `template_detail`, `template_edit`, `model`, `model_sub`, `type`, `link_id`, `allow_publish`, `display`, `reply`, `check`, `reply_model`, `extend`, `create_time`, `update_time`, `status`, `icon`, `groups`) VALUES
+(1, 'blog', 'åšå®¢', 0, 0, 10, '', '', '', '', '', '', '', '2,3', '2', '2,1', 0, 2, 1, 0, 0, '1', '', 1379474947, 1444128128, 1, 0, ''),
+(2, 'default_blog', 'é»˜è®¤åˆ†ç±»', 1, 0, 10, '', '', '', '', '', '', '', '2,3', '2', '2,1,3', 0, 2, 1, 0, 1, '1', '', 1379475028, 1444221558, 1, 0, ''),
+(39, 'feeling', 'å¿ƒå¾—', 1, 1, 10, '', '', '', '', '', '', '', '2', '2', '2,1,3', 0, 1, 1, 0, 0, '', NULL, 1444221410, 1444221561, 1, 0, '');
 
-#
-# Source for table onethink_channel
-#
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `onethink_channel`;
-CREATE TABLE `onethink_channel` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ÆµµÀID',
-  `pid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'ÉÏ¼¶ÆµµÀID',
-  `title` char(30) NOT NULL COMMENT 'ÆµµÀ±êÌâ',
-  `url` char(100) NOT NULL COMMENT 'ÆµµÀÁ¬½Ó',
-  `sort` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'µ¼º½ÅÅĞò',
-  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '´´½¨Ê±¼ä',
-  `update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '¸üĞÂÊ±¼ä',
-  `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '×´Ì¬',
-  `target` tinyint(2) unsigned NOT NULL DEFAULT '0' COMMENT 'ĞÂ´°¿Ú´ò¿ª',
+--
+-- è¡¨çš„ç»“æ„ `onethink_channel`
+--
+
+CREATE TABLE IF NOT EXISTS `onethink_channel` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'é¢‘é“ID',
+  `pid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'ä¸Šçº§é¢‘é“ID',
+  `title` char(30) NOT NULL COMMENT 'é¢‘é“æ ‡é¢˜',
+  `url` char(100) NOT NULL COMMENT 'é¢‘é“è¿æ¥',
+  `sort` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'å¯¼èˆªæ’åº',
+  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'åˆ›å»ºæ—¶é—´',
+  `update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'æ›´æ–°æ—¶é—´',
+  `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'çŠ¶æ€',
+  `target` tinyint(2) unsigned NOT NULL DEFAULT '0' COMMENT 'æ–°çª—å£æ‰“å¼€',
   PRIMARY KEY (`id`),
   KEY `pid` (`pid`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
-#
-# Dumping data for table onethink_channel
-#
+--
+-- è½¬å­˜è¡¨ä¸­çš„æ•°æ® `onethink_channel`
+--
 
-INSERT INTO `onethink_channel` VALUES (1,0,'Ê×Ò³','Home/Index/index',1,1379475111,1424406781,1,0);
-INSERT INTO `onethink_channel` VALUES (2,0,'²©¿Í','Home/Article/index?category=blog',2,1379475131,1424404779,1,0);
+INSERT INTO `onethink_channel` (`id`, `pid`, `title`, `url`, `sort`, `create_time`, `update_time`, `status`, `target`) VALUES
+(1, 0, 'é¦–é¡µ', 'Home/Index/index', 1, 1379475111, 1424406781, 1, 0),
+(2, 0, 'åšå®¢', 'Home/Article/index?category=blog', 2, 1379475131, 1424404779, 1, 0);
 
-#
-# Source for table onethink_comment
-#
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `onethink_comment`;
-CREATE TABLE `onethink_comment` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `pid` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '±»»Ø¸´ÆÀÂÛµÄID',
-  `model_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT 'ÊÇÄÄ¸öÎÄµµÄ£ĞÍµÄ',
-  `cid` int(11) unsigned NOT NULL DEFAULT '0' COMMENT 'ÄÚÈİid,nameºÍcidÀ´¶¨Î»ÊÇÄÄ¸öÄÚÈİµÄ',
-  `comment` text COMMENT 'ÆÀÂÛÄÚÈİ',
-  `digg` int(11) unsigned NOT NULL DEFAULT '0' COMMENT 'ÔŞÊı£¨¶¥£©',
-  `com_ip` bigint(20) NOT NULL DEFAULT '0' COMMENT 'ÆÀÂÛIP',
-  `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT 'Ìí¼ÓÊ±¼ä',
-  `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'ÊÇ·ñ±»É¾³ı',
-  `uid` int(10) unsigned DEFAULT NULL COMMENT 'ÊÇÄÄÎ»»Ø¸´µÄ,0Îª·ÇÍøÕ¾ÓÃ»§',
-  `uname` varchar(200) DEFAULT NULL COMMENT '·ÇÍøÕ¾ÓÃ»§Ê¹ÓÃµÄÃû³Æ',
-  `uemail` varchar(200) DEFAULT NULL COMMENT '·ÇÍøÕ¾ÓÃ»§Ê¹ÓÃµÄÓÊÏä',
-  `uurl` varchar(200) DEFAULT NULL COMMENT '·ÇÍøÕ¾ÓÃ»§Ê¹ÓÃÍøÕ¾µØÖ·',
-  PRIMARY KEY (`id`),
-  KEY `uid` (`uid`),
-  KEY `model_id` (`model_id`),
-  KEY `cid` (`cid`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+--
+-- è¡¨çš„ç»“æ„ `onethink_comment`
+--
 
-#
-# Dumping data for table onethink_comment
-#
+CREATE TABLE IF NOT EXISTS `onethink_comment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `pid` int(11) NOT NULL DEFAULT '0',
+  `pids` text NOT NULL,
+  `did` int(11) NOT NULL DEFAULT '0',
+  `uid` int(11) NOT NULL DEFAULT '0',
+  `username` varchar(100) NOT NULL DEFAULT '',
+  `content` text NOT NULL,
+  `status` int(11) NOT NULL DEFAULT '0',
+  `create_time` int(10) NOT NULL DEFAULT '0',
+  `update_time` int(10) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
 
-INSERT INTO `onethink_comment` VALUES (1,0,2,2,'sfsdf',1,2130706433,1424688430,1,NULL,'sdfsdf','836692464@qq.com','');
+--
+-- è½¬å­˜è¡¨ä¸­çš„æ•°æ® `onethink_comment`
+--
 
-#
-# Source for table onethink_config
-#
+INSERT INTO `onethink_comment` (`id`, `pid`, `pids`, `did`, `uid`, `username`, `content`, `status`, `create_time`, `update_time`) VALUES
+(9, 0, '0', 2, 0, 'æ¸¸å®¢', 'sdfsfs', 0, 1446633965, 1446633965),
+(8, 0, '0', 2, 0, 'æ¸¸å®¢', '55', 0, 1446633951, 1446633951);
 
-DROP TABLE IF EXISTS `onethink_config`;
-CREATE TABLE `onethink_config` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ÅäÖÃID',
-  `name` varchar(30) NOT NULL DEFAULT '' COMMENT 'ÅäÖÃÃû³Æ',
-  `type` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'ÅäÖÃÀàĞÍ',
-  `title` varchar(50) NOT NULL DEFAULT '' COMMENT 'ÅäÖÃËµÃ÷',
-  `group` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'ÅäÖÃ·Ö×é',
-  `extra` varchar(255) NOT NULL DEFAULT '' COMMENT 'ÅäÖÃÖµ',
-  `remark` varchar(100) NOT NULL DEFAULT '' COMMENT 'ÅäÖÃËµÃ÷',
-  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '´´½¨Ê±¼ä',
-  `update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '¸üĞÂÊ±¼ä',
-  `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '×´Ì¬',
-  `value` text COMMENT 'ÅäÖÃÖµ',
-  `sort` smallint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'ÅÅĞò',
+-- --------------------------------------------------------
+
+--
+-- è¡¨çš„ç»“æ„ `onethink_config`
+--
+
+CREATE TABLE IF NOT EXISTS `onethink_config` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'é…ç½®ID',
+  `name` varchar(30) NOT NULL DEFAULT '' COMMENT 'é…ç½®åç§°',
+  `type` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'é…ç½®ç±»å‹',
+  `title` varchar(50) NOT NULL DEFAULT '' COMMENT 'é…ç½®è¯´æ˜',
+  `group` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'é…ç½®åˆ†ç»„',
+  `extra` varchar(255) NOT NULL DEFAULT '' COMMENT 'é…ç½®å€¼',
+  `remark` varchar(100) NOT NULL DEFAULT '' COMMENT 'é…ç½®è¯´æ˜',
+  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'åˆ›å»ºæ—¶é—´',
+  `update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'æ›´æ–°æ—¶é—´',
+  `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'çŠ¶æ€',
+  `value` text COMMENT 'é…ç½®å€¼',
+  `sort` smallint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'æ’åº',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_name` (`name`),
   KEY `type` (`type`),
   KEY `group` (`group`)
-) ENGINE=MyISAM AUTO_INCREMENT=49 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=49 ;
 
-#
-# Dumping data for table onethink_config
-#
+--
+-- è½¬å­˜è¡¨ä¸­çš„æ•°æ® `onethink_config`
+--
 
-INSERT INTO `onethink_config` VALUES (1,'WEB_SITE_TITLE',1,'ÍøÕ¾±êÌâ',1,'','ÍøÕ¾±êÌâÇ°Ì¨ÏÔÊ¾±êÌâ',1378898976,1379235274,1,'OneThink',10);
-INSERT INTO `onethink_config` VALUES (2,'WEB_SITE_DESCRIPTION',2,'ÍøÕ¾ÃèÊö',1,'','ÍøÕ¾ËÑË÷ÒıÇæÃèÊö',1378898976,1379235841,1,'OneThinkÄÚÈİ¹ÜÀí¿ò¼Ü',14);
-INSERT INTO `onethink_config` VALUES (3,'WEB_SITE_KEYWORD',2,'ÍøÕ¾¹Ø¼ü×Ö',1,'','ÍøÕ¾ËÑË÷ÒıÇæ¹Ø¼ü×Ö',1378898976,1381390100,1,'ThinkPHP,OneThink',23);
-INSERT INTO `onethink_config` VALUES (4,'WEB_SITE_CLOSE',4,'¹Ø±ÕÕ¾µã',1,'0:¹Ø±Õ,1:¿ªÆô','Õ¾µã¹Ø±ÕºóÆäËûÓÃ»§²»ÄÜ·ÃÎÊ£¬¹ÜÀíÔ±¿ÉÒÔÕı³£·ÃÎÊ',1378898976,1379235296,1,'1',19);
-INSERT INTO `onethink_config` VALUES (9,'CONFIG_TYPE_LIST',3,'ÅäÖÃÀàĞÍÁĞ±í',4,'','Ö÷ÒªÓÃÓÚÊı¾İ½âÎöºÍÒ³Ãæ±íµ¥µÄÉú³É',1378898976,1379235348,1,'0:Êı×Ö\r\n1:×Ö·û\r\n2:ÎÄ±¾\r\n3:Êı×é\r\n4:Ã¶¾Ù',11);
-INSERT INTO `onethink_config` VALUES (10,'WEB_SITE_ICP',1,'ÍøÕ¾±¸°¸ºÅ',1,'','ÉèÖÃÔÚÍøÕ¾µ×²¿ÏÔÊ¾µÄ±¸°¸ºÅ£¬Èç¡°»¦ICP±¸12007941ºÅ-2',1378900335,1379235859,1,'',26);
-INSERT INTO `onethink_config` VALUES (11,'DOCUMENT_POSITION',3,'ÎÄµµÍÆ¼öÎ»',2,'','ÎÄµµÍÆ¼öÎ»£¬ÍÆ¼öµ½¶à¸öÎ»ÖÃKEYÖµÏà¼Ó¼´¿É',1379053380,1379235329,1,'1:ÁĞ±íÍÆ¼ö\r\n2:ÆµµÀÍÆ¼ö\r\n4:Ê×Ò³ÍÆ¼ö',15);
-INSERT INTO `onethink_config` VALUES (12,'DOCUMENT_DISPLAY',3,'ÎÄµµ¿É¼ûĞÔ',2,'','ÎÄÕÂ¿É¼ûĞÔ½öÓ°ÏìÇ°Ì¨ÏÔÊ¾£¬ºóÌ¨²»ÊÕÓ°Ïì',1379056370,1379235322,1,'0:ËùÓĞÈË¿É¼û\r\n1:½ö×¢²á»áÔ±¿É¼û\r\n2:½ö¹ÜÀíÔ±¿É¼û',20);
-INSERT INTO `onethink_config` VALUES (13,'COLOR_STYLE',4,'ºóÌ¨É«Ïµ',1,'default_color:Ä¬ÈÏ\r\nblue_color:×ÏÂŞÀ¼','ºóÌ¨ÑÕÉ«·ç¸ñ',1379122533,1379235904,1,'blue_color',29);
-INSERT INTO `onethink_config` VALUES (20,'CONFIG_GROUP_LIST',3,'ÅäÖÃ·Ö×é',4,'','ÅäÖÃ·Ö×é',1379228036,1384418383,1,'1:»ù±¾\r\n2:ÄÚÈİ\r\n3:ÓÃ»§\r\n4:ÏµÍ³\r\n5:ÓÊÏä',21);
-INSERT INTO `onethink_config` VALUES (21,'HOOKS_TYPE',3,'¹³×ÓµÄÀàĞÍ',4,'','ÀàĞÍ 1-ÓÃÓÚÀ©Õ¹ÏÔÊ¾ÄÚÈİ£¬2-ÓÃÓÚÀ©Õ¹ÒµÎñ´¦Àí',1379313397,1379313407,1,'1:ÊÓÍ¼\r\n2:¿ØÖÆÆ÷',27);
-INSERT INTO `onethink_config` VALUES (22,'AUTH_CONFIG',3,'AuthÅäÖÃ',4,'','×Ô¶¨ÒåAuth.class.phpÀàÅäÖÃ',1379409310,1379409564,1,'AUTH_ON:1\r\nAUTH_TYPE:2',32);
-INSERT INTO `onethink_config` VALUES (23,'OPEN_DRAFTBOX',4,'ÊÇ·ñ¿ªÆô²İ¸å¹¦ÄÜ',2,'0:¹Ø±Õ²İ¸å¹¦ÄÜ\r\n1:¿ªÆô²İ¸å¹¦ÄÜ\r\n','ĞÂÔöÎÄÕÂÊ±µÄ²İ¸å¹¦ÄÜÅäÖÃ',1379484332,1379484591,1,'1',6);
-INSERT INTO `onethink_config` VALUES (24,'DRAFT_AUTOSAVE_INTERVAL',0,'×Ô¶¯±£´æ²İ¸åÊ±¼ä',2,'','×Ô¶¯±£´æ²İ¸åµÄÊ±¼ä¼ä¸ô£¬µ¥Î»£ºÃë',1379484574,1422631047,1,'60',12);
-INSERT INTO `onethink_config` VALUES (25,'LIST_ROWS',0,'ºóÌ¨Ã¿Ò³¼ÇÂ¼Êı',2,'','ºóÌ¨Êı¾İÃ¿Ò³ÏÔÊ¾¼ÇÂ¼Êı',1379503896,1380427745,1,'10',35);
-INSERT INTO `onethink_config` VALUES (26,'USER_ALLOW_REGISTER',4,'ÊÇ·ñÔÊĞíÓÃ»§×¢²á',3,'0:¹Ø±Õ×¢²á\r\n1:ÔÊĞí×¢²á','ÊÇ·ñ¿ª·ÅÓÃ»§×¢²á',1379504487,1379504580,1,'1',16);
-INSERT INTO `onethink_config` VALUES (27,'CODEMIRROR_THEME',4,'Ô¤ÀÀ²å¼şµÄCodeMirrorÖ÷Ìâ',4,'3024-day:3024 day\r\n3024-night:3024 night\r\nambiance:ambiance\r\nbase16-dark:base16 dark\r\nbase16-light:base16 light\r\nblackboard:blackboard\r\ncobalt:cobalt\r\neclipse:eclipse\r\nelegant:elegant\r\nerlang-dark:erlang-dark\r\nlesser-dark:lesser-dark\r\nmidnight:midnight','ÏêÇé¼ûCodeMirror¹ÙÍø',1379814385,1384740813,1,'ambiance',17);
-INSERT INTO `onethink_config` VALUES (28,'DATA_BACKUP_PATH',1,'Êı¾İ¿â±¸·İ¸ùÂ·¾¶',4,'','Â·¾¶±ØĞëÒÔ / ½áÎ²',1381482411,1381482411,1,'./Data/',24);
-INSERT INTO `onethink_config` VALUES (29,'DATA_BACKUP_PART_SIZE',0,'Êı¾İ¿â±¸·İ¾í´óĞ¡',4,'','¸ÃÖµÓÃÓÚÏŞÖÆÑ¹ËõºóµÄ·Ö¾í×î´ó³¤¶È¡£µ¥Î»£ºB£»½¨ÒéÉèÖÃ20M',1381482488,1381729564,1,'20971520',30);
-INSERT INTO `onethink_config` VALUES (30,'DATA_BACKUP_COMPRESS',4,'Êı¾İ¿â±¸·İÎÄ¼şÊÇ·ñÆôÓÃÑ¹Ëõ',4,'0:²»Ñ¹Ëõ\r\n1:ÆôÓÃÑ¹Ëõ','Ñ¹Ëõ±¸·İÎÄ¼şĞèÒªPHP»·¾³Ö§³Ögzopen,gzwriteº¯Êı',1381713345,1381729544,1,'1',34);
-INSERT INTO `onethink_config` VALUES (31,'DATA_BACKUP_COMPRESS_LEVEL',4,'Êı¾İ¿â±¸·İÎÄ¼şÑ¹Ëõ¼¶±ğ',4,'1:ÆÕÍ¨\r\n4:Ò»°ã\r\n9:×î¸ß','Êı¾İ¿â±¸·İÎÄ¼şµÄÑ¹Ëõ¼¶±ğ£¬¸ÃÅäÖÃÔÚ¿ªÆôÑ¹ËõÊ±ÉúĞ§',1381713408,1381713408,1,'9',36);
-INSERT INTO `onethink_config` VALUES (32,'DEVELOP_MODE',4,'¿ªÆô¿ª·¢ÕßÄ£Ê½',4,'0:¹Ø±Õ\r\n1:¿ªÆô','ÊÇ·ñ¿ªÆô¿ª·¢ÕßÄ£Ê½',1383105995,1383291877,1,'1',37);
-INSERT INTO `onethink_config` VALUES (33,'ALLOW_VISIT',3,'²»ÊÜÏŞ¿ØÖÆÆ÷·½·¨',0,'','',1386644047,1422704535,1,'0:article/draftbox\r\n1:article/mydocument\r\n2:Category/tree\r\n3:Index/verify\r\n4:file/upload\r\n5:file/download\r\n6:user/updatePassword\r\n7:user/updateNickname\r\n8:user/submitPassword\r\n9:user/submitNickname\r\n10:file/uploadpicture',3);
-INSERT INTO `onethink_config` VALUES (34,'DENY_VISIT',3,'³¬¹Ü×¨ÏŞ¿ØÖÆÆ÷·½·¨',0,'','½ö³¬¼¶¹ÜÀíÔ±¿É·ÃÎÊµÄ¿ØÖÆÆ÷·½·¨',1386644141,1386644659,1,'0:Addons/addhook\r\n1:Addons/edithook\r\n2:Addons/delhook\r\n3:Addons/updateHook\r\n4:Admin/getMenus\r\n5:Admin/recordList\r\n6:AuthManager/updateRules\r\n7:AuthManager/tree',4);
-INSERT INTO `onethink_config` VALUES (35,'REPLY_LIST_ROWS',0,'»Ø¸´ÁĞ±íÃ¿Ò³ÌõÊı',2,'','',1386645376,1387178083,1,'10',5);
-INSERT INTO `onethink_config` VALUES (36,'ADMIN_ALLOW_IP',2,'ºóÌ¨ÔÊĞí·ÃÎÊIP',4,'','¶à¸öÓÃ¶ººÅ·Ö¸ô£¬Èç¹û²»ÅäÖÃ±íÊ¾²»ÏŞÖÆIP·ÃÎÊ',1387165454,1387165553,1,'',38);
-INSERT INTO `onethink_config` VALUES (37,'SHOW_PAGE_TRACE',4,'ÊÇ·ñÏÔÊ¾Ò³ÃæTrace',4,'0:¹Ø±Õ\r\n1:¿ªÆô','ÊÇ·ñÏÔÊ¾Ò³ÃæTraceĞÅÏ¢',1387165685,1387165685,1,'1',7);
-INSERT INTO `onethink_config` VALUES (38,'MAIL_TYPE',4,'ÓÊ¼ş·½Ê½',5,'0:SMTPÄ£¿é·¢ËÍ','ÓÊ¼ş·¢ËÍ·½Ê½¡£Ä¿Ç°Ö»Ö§³ÖSMTP·½Ê½',1410491198,1423723355,1,'0',22);
-INSERT INTO `onethink_config` VALUES (39,'MAIL_SMTP_HOST',1,'SMTP·şÎñÆ÷',5,'','ÓÊÏä·şÎñÆ÷Ãû³Æ¡¾Èç£ºsmtp.qq.com¡¿',1410491317,1422687078,1,'smtp.qq.com',25);
-INSERT INTO `onethink_config` VALUES (40,'MAIL_SMTP_PORT',0,'SMTP·şÎñÆ÷¶Ë¿Ú',5,'','¶Ë¿ÚÒ»°ãÎª25',1410491384,1410491384,1,'25',28);
-INSERT INTO `onethink_config` VALUES (41,'MAIL_SMTP_USER',1,'SMTP·şÎñÆ÷ÓÃ»§Ãû',5,'','ÓÊÏäÓÃ»§Ãû',1410491508,1410941682,1,'app880@foxmail.com',31);
-INSERT INTO `onethink_config` VALUES (42,'MAIL_SMTP_PASS',1,'SMTP·şÎñÆ÷ÃÜÂë',5,'ÓÊÏäÃÜÂë','ÃÜÂë',1410491656,1410941695,1,'',33);
-INSERT INTO `onethink_config` VALUES (43,'MAIL_SMTP_CE',1,'ÓÊ¼ş·¢ËÍ²âÊÔ',5,'','·¢ËÍ²âÊÔÓÊ¼şÓÃµÄ£¬²âÊÔÄãµÄÓÊÏäÅäÖÃ³É¹¦Ã»ÓĞ',1410491698,1410937656,1,'app880@foxmail.com',18);
-INSERT INTO `onethink_config` VALUES (44,'MAIL_REPLY_EMAIL',1,'·¢¼şÈËÓÊÏä',5,'','·¢¼şÈËÓÊÏä£¬Ä¬ÈÏÊ¹ÓÃSMTP·şÎñÆ÷ÓÃ»§Ãû',1410925495,1422687971,1,'app880@foxmail.com',13);
-INSERT INTO `onethink_config` VALUES (45,'MAIL_REPLY_NAME',1,'·¢¼şÈËÃû³Æ',5,'','·¢¼şÈËÃû³Æ£¬Ä¬ÈÏÊ¹ÓÃÍøÕ¾Ãû³Æ¡¾WEB_SITE_TITLE ÍøÕ¾±êÌâ¡¿',1422685995,1422688174,1,'ĞêĞê',8);
-INSERT INTO `onethink_config` VALUES (46,'WEB_SITE_NAME',0,'ÍøÕ¾Ãû³Æ',1,'','ÍøÕ¾Ãû³Æ',1422687631,1422687631,1,'app880.com',9);
+INSERT INTO `onethink_config` (`id`, `name`, `type`, `title`, `group`, `extra`, `remark`, `create_time`, `update_time`, `status`, `value`, `sort`) VALUES
+(1, 'WEB_SITE_TITLE', 1, 'ç½‘ç«™æ ‡é¢˜', 1, '', 'ç½‘ç«™æ ‡é¢˜å‰å°æ˜¾ç¤ºæ ‡é¢˜', 1378898976, 1379235274, 1, 'OneThink', 10),
+(2, 'WEB_SITE_DESCRIPTION', 2, 'ç½‘ç«™æè¿°', 1, '', 'ç½‘ç«™æœç´¢å¼•æ“æè¿°', 1378898976, 1379235841, 1, 'OneThinkå†…å®¹ç®¡ç†æ¡†æ¶', 14),
+(3, 'WEB_SITE_KEYWORD', 2, 'ç½‘ç«™å…³é”®å­—', 1, '', 'ç½‘ç«™æœç´¢å¼•æ“å…³é”®å­—', 1378898976, 1381390100, 1, 'ThinkPHP,OneThink', 23),
+(4, 'WEB_SITE_CLOSE', 4, 'å…³é—­ç«™ç‚¹', 1, '0:å…³é—­,1:å¼€å¯', 'ç«™ç‚¹å…³é—­åå…¶ä»–ç”¨æˆ·ä¸èƒ½è®¿é—®ï¼Œç®¡ç†å‘˜å¯ä»¥æ­£å¸¸è®¿é—®', 1378898976, 1379235296, 1, '1', 19),
+(9, 'CONFIG_TYPE_LIST', 3, 'é…ç½®ç±»å‹åˆ—è¡¨', 4, '', 'ä¸»è¦ç”¨äºæ•°æ®è§£æå’Œé¡µé¢è¡¨å•çš„ç”Ÿæˆ', 1378898976, 1379235348, 1, '0:æ•°å­—\r\n1:å­—ç¬¦\r\n2:æ–‡æœ¬\r\n3:æ•°ç»„\r\n4:æšä¸¾', 11),
+(10, 'WEB_SITE_ICP', 1, 'ç½‘ç«™å¤‡æ¡ˆå·', 1, '', 'è®¾ç½®åœ¨ç½‘ç«™åº•éƒ¨æ˜¾ç¤ºçš„å¤‡æ¡ˆå·ï¼Œå¦‚â€œæ²ªICPå¤‡12007941å·-2', 1378900335, 1379235859, 1, '', 26),
+(11, 'DOCUMENT_POSITION', 3, 'æ–‡æ¡£æ¨èä½', 2, '', 'æ–‡æ¡£æ¨èä½ï¼Œæ¨èåˆ°å¤šä¸ªä½ç½®KEYå€¼ç›¸åŠ å³å¯', 1379053380, 1379235329, 1, '1:åˆ—è¡¨æ¨è\r\n2:é¢‘é“æ¨è\r\n4:é¦–é¡µæ¨è', 15),
+(12, 'DOCUMENT_DISPLAY', 3, 'æ–‡æ¡£å¯è§æ€§', 2, '', 'æ–‡ç« å¯è§æ€§ä»…å½±å“å‰å°æ˜¾ç¤ºï¼Œåå°ä¸æ”¶å½±å“', 1379056370, 1379235322, 1, '0:æ‰€æœ‰äººå¯è§\r\n1:ä»…æ³¨å†Œä¼šå‘˜å¯è§\r\n2:ä»…ç®¡ç†å‘˜å¯è§', 20),
+(13, 'COLOR_STYLE', 4, 'åå°è‰²ç³»', 1, 'default_color:é»˜è®¤\r\nblue_color:ç´«ç½—å…°', 'åå°é¢œè‰²é£æ ¼', 1379122533, 1379235904, 1, 'blue_color', 29),
+(20, 'CONFIG_GROUP_LIST', 3, 'é…ç½®åˆ†ç»„', 4, '', 'é…ç½®åˆ†ç»„', 1379228036, 1384418383, 1, '1:åŸºæœ¬\r\n2:å†…å®¹\r\n3:ç”¨æˆ·\r\n4:ç³»ç»Ÿ\r\n5:é‚®ç®±', 21),
+(21, 'HOOKS_TYPE', 3, 'é’©å­çš„ç±»å‹', 4, '', 'ç±»å‹ 1-ç”¨äºæ‰©å±•æ˜¾ç¤ºå†…å®¹ï¼Œ2-ç”¨äºæ‰©å±•ä¸šåŠ¡å¤„ç†', 1379313397, 1379313407, 1, '1:è§†å›¾\r\n2:æ§åˆ¶å™¨', 27),
+(22, 'AUTH_CONFIG', 3, 'Authé…ç½®', 4, '', 'è‡ªå®šä¹‰Auth.class.phpç±»é…ç½®', 1379409310, 1379409564, 1, 'AUTH_ON:1\r\nAUTH_TYPE:2', 32),
+(23, 'OPEN_DRAFTBOX', 4, 'æ˜¯å¦å¼€å¯è‰ç¨¿åŠŸèƒ½', 2, '0:å…³é—­è‰ç¨¿åŠŸèƒ½\r\n1:å¼€å¯è‰ç¨¿åŠŸèƒ½\r\n', 'æ–°å¢æ–‡ç« æ—¶çš„è‰ç¨¿åŠŸèƒ½é…ç½®', 1379484332, 1379484591, 1, '1', 6),
+(24, 'DRAFT_AUTOSAVE_INTERVAL', 0, 'è‡ªåŠ¨ä¿å­˜è‰ç¨¿æ—¶é—´', 2, '', 'è‡ªåŠ¨ä¿å­˜è‰ç¨¿çš„æ—¶é—´é—´éš”ï¼Œå•ä½ï¼šç§’', 1379484574, 1422631047, 1, '60', 12),
+(25, 'LIST_ROWS', 0, 'åå°æ¯é¡µè®°å½•æ•°', 2, '', 'åå°æ•°æ®æ¯é¡µæ˜¾ç¤ºè®°å½•æ•°', 1379503896, 1380427745, 1, '10', 35),
+(26, 'USER_ALLOW_REGISTER', 4, 'æ˜¯å¦å…è®¸ç”¨æˆ·æ³¨å†Œ', 3, '0:å…³é—­æ³¨å†Œ\r\n1:å…è®¸æ³¨å†Œ', 'æ˜¯å¦å¼€æ”¾ç”¨æˆ·æ³¨å†Œ', 1379504487, 1379504580, 1, '1', 16),
+(27, 'CODEMIRROR_THEME', 4, 'é¢„è§ˆæ’ä»¶çš„CodeMirrorä¸»é¢˜', 4, '3024-day:3024 day\r\n3024-night:3024 night\r\nambiance:ambiance\r\nbase16-dark:base16 dark\r\nbase16-light:base16 light\r\nblackboard:blackboard\r\ncobalt:cobalt\r\neclipse:eclipse\r\nelegant:elegant\r\nerlang-dark:erlang-dark\r\nlesser-dark:lesser-dark\r\nmidnight:midnight', 'è¯¦æƒ…è§CodeMirrorå®˜ç½‘', 1379814385, 1384740813, 1, 'ambiance', 17),
+(28, 'DATA_BACKUP_PATH', 1, 'æ•°æ®åº“å¤‡ä»½æ ¹è·¯å¾„', 4, '', 'è·¯å¾„å¿…é¡»ä»¥ / ç»“å°¾', 1381482411, 1381482411, 1, './Data/', 24),
+(29, 'DATA_BACKUP_PART_SIZE', 0, 'æ•°æ®åº“å¤‡ä»½å·å¤§å°', 4, '', 'è¯¥å€¼ç”¨äºé™åˆ¶å‹ç¼©åçš„åˆ†å·æœ€å¤§é•¿åº¦ã€‚å•ä½ï¼šBï¼›å»ºè®®è®¾ç½®20M', 1381482488, 1381729564, 1, '20971520', 30),
+(30, 'DATA_BACKUP_COMPRESS', 4, 'æ•°æ®åº“å¤‡ä»½æ–‡ä»¶æ˜¯å¦å¯ç”¨å‹ç¼©', 4, '0:ä¸å‹ç¼©\r\n1:å¯ç”¨å‹ç¼©', 'å‹ç¼©å¤‡ä»½æ–‡ä»¶éœ€è¦PHPç¯å¢ƒæ”¯æŒgzopen,gzwriteå‡½æ•°', 1381713345, 1381729544, 1, '1', 34),
+(31, 'DATA_BACKUP_COMPRESS_LEVEL', 4, 'æ•°æ®åº“å¤‡ä»½æ–‡ä»¶å‹ç¼©çº§åˆ«', 4, '1:æ™®é€š\r\n4:ä¸€èˆ¬\r\n9:æœ€é«˜', 'æ•°æ®åº“å¤‡ä»½æ–‡ä»¶çš„å‹ç¼©çº§åˆ«ï¼Œè¯¥é…ç½®åœ¨å¼€å¯å‹ç¼©æ—¶ç”Ÿæ•ˆ', 1381713408, 1381713408, 1, '9', 36),
+(32, 'DEVELOP_MODE', 4, 'å¼€å¯å¼€å‘è€…æ¨¡å¼', 4, '0:å…³é—­\r\n1:å¼€å¯', 'æ˜¯å¦å¼€å¯å¼€å‘è€…æ¨¡å¼', 1383105995, 1383291877, 1, '1', 37),
+(33, 'ALLOW_VISIT', 3, 'ä¸å—é™æ§åˆ¶å™¨æ–¹æ³•', 0, '', '', 1386644047, 1422704535, 1, '0:article/draftbox\r\n1:article/mydocument\r\n2:Category/tree\r\n3:Index/verify\r\n4:file/upload\r\n5:file/download\r\n6:user/updatePassword\r\n7:user/updateNickname\r\n8:user/submitPassword\r\n9:user/submitNickname\r\n10:file/uploadpicture', 3),
+(34, 'DENY_VISIT', 3, 'è¶…ç®¡ä¸“é™æ§åˆ¶å™¨æ–¹æ³•', 0, '', 'ä»…è¶…çº§ç®¡ç†å‘˜å¯è®¿é—®çš„æ§åˆ¶å™¨æ–¹æ³•', 1386644141, 1386644659, 1, '0:Addons/addhook\r\n1:Addons/edithook\r\n2:Addons/delhook\r\n3:Addons/updateHook\r\n4:Admin/getMenus\r\n5:Admin/recordList\r\n6:AuthManager/updateRules\r\n7:AuthManager/tree', 4),
+(35, 'REPLY_LIST_ROWS', 0, 'å›å¤åˆ—è¡¨æ¯é¡µæ¡æ•°', 2, '', '', 1386645376, 1387178083, 1, '10', 5),
+(36, 'ADMIN_ALLOW_IP', 2, 'åå°å…è®¸è®¿é—®IP', 4, '', 'å¤šä¸ªç”¨é€—å·åˆ†éš”ï¼Œå¦‚æœä¸é…ç½®è¡¨ç¤ºä¸é™åˆ¶IPè®¿é—®', 1387165454, 1387165553, 1, '', 38),
+(37, 'SHOW_PAGE_TRACE', 4, 'æ˜¯å¦æ˜¾ç¤ºé¡µé¢Trace', 4, '0:å…³é—­\r\n1:å¼€å¯', 'æ˜¯å¦æ˜¾ç¤ºé¡µé¢Traceä¿¡æ¯', 1387165685, 1387165685, 1, '1', 7),
+(38, 'MAIL_TYPE', 4, 'é‚®ä»¶æ–¹å¼', 5, '0:SMTPæ¨¡å—å‘é€', 'é‚®ä»¶å‘é€æ–¹å¼ã€‚ç›®å‰åªæ”¯æŒSMTPæ–¹å¼', 1410491198, 1423723355, 1, '0', 22),
+(39, 'MAIL_SMTP_HOST', 1, 'SMTPæœåŠ¡å™¨', 5, '', 'é‚®ç®±æœåŠ¡å™¨åç§°ã€å¦‚ï¼šsmtp.qq.comã€‘', 1410491317, 1422687078, 1, 'smtp.qq.com', 25),
+(40, 'MAIL_SMTP_PORT', 0, 'SMTPæœåŠ¡å™¨ç«¯å£', 5, '', 'ç«¯å£ä¸€èˆ¬ä¸º25', 1410491384, 1410491384, 1, '25', 28),
+(41, 'MAIL_SMTP_USER', 1, 'SMTPæœåŠ¡å™¨ç”¨æˆ·å', 5, '', 'é‚®ç®±ç”¨æˆ·å', 1410491508, 1410941682, 1, 'app880@foxmail.com', 31),
+(42, 'MAIL_SMTP_PASS', 1, 'SMTPæœåŠ¡å™¨å¯†ç ', 5, 'é‚®ç®±å¯†ç ', 'å¯†ç ', 1410491656, 1410941695, 1, 'geniusxjqmail', 33),
+(43, 'MAIL_SMTP_CE', 1, 'é‚®ä»¶å‘é€æµ‹è¯•', 5, '', 'å‘é€æµ‹è¯•é‚®ä»¶ç”¨çš„ï¼Œæµ‹è¯•ä½ çš„é‚®ç®±é…ç½®æˆåŠŸæ²¡æœ‰', 1410491698, 1410937656, 1, 'app880@foxmail.com', 18),
+(44, 'MAIL_REPLY_EMAIL', 1, 'å‘ä»¶äººé‚®ç®±', 5, '', 'å‘ä»¶äººé‚®ç®±ï¼Œé»˜è®¤ä½¿ç”¨SMTPæœåŠ¡å™¨ç”¨æˆ·å', 1410925495, 1422687971, 1, 'app880@foxmail.com', 13),
+(45, 'MAIL_REPLY_NAME', 1, 'å‘ä»¶äººåç§°', 5, '', 'å‘ä»¶äººåç§°ï¼Œé»˜è®¤ä½¿ç”¨ç½‘ç«™åç§°ã€WEB_SITE_TITLE ç½‘ç«™æ ‡é¢˜ã€‘', 1422685995, 1422688174, 1, 'å˜˜å˜˜', 8),
+(46, 'WEB_SITE_NAME', 0, 'ç½‘ç«™åç§°', 1, '', 'ç½‘ç«™åç§°', 1422687631, 1422687631, 1, 'app880.com', 9);
 
-#
-# Source for table onethink_document
-#
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `onethink_document`;
-CREATE TABLE `onethink_document` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ÎÄµµID',
-  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'ÓÃ»§ID',
-  `name` char(40) NOT NULL DEFAULT '' COMMENT '±êÊ¶',
-  `title` char(80) NOT NULL DEFAULT '' COMMENT '±êÌâ',
-  `category_id` int(10) unsigned NOT NULL COMMENT 'ËùÊô·ÖÀà',
-  `group_id` smallint(3) unsigned NOT NULL COMMENT 'ËùÊô·Ö×é',
-  `description` char(140) NOT NULL DEFAULT '' COMMENT 'ÃèÊö',
-  `root` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '¸ù½Úµã',
-  `pid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'ËùÊôID',
-  `model_id` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'ÄÚÈİÄ£ĞÍID',
-  `type` tinyint(3) unsigned NOT NULL DEFAULT '2' COMMENT 'ÄÚÈİÀàĞÍ',
-  `position` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT 'ÍÆ¼öÎ»',
-  `link_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'ÍâÁ´',
-  `cover_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '·âÃæ',
-  `display` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '¿É¼ûĞÔ',
-  `deadline` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '½ØÖÁÊ±¼ä',
-  `attach` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '¸½¼şÊıÁ¿',
-  `view` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'ä¯ÀÀÁ¿',
-  `comment` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'ÆÀÂÛÊı',
-  `extend` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'À©Õ¹Í³¼Æ×Ö¶Î',
-  `level` int(10) NOT NULL DEFAULT '0' COMMENT 'ÓÅÏÈ¼¶',
-  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '´´½¨Ê±¼ä',
-  `update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '¸üĞÂÊ±¼ä',
-  `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'Êı¾İ×´Ì¬',
+--
+-- è¡¨çš„ç»“æ„ `onethink_document`
+--
+
+CREATE TABLE IF NOT EXISTS `onethink_document` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'æ–‡æ¡£ID',
+  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'ç”¨æˆ·ID',
+  `name` char(40) NOT NULL DEFAULT '' COMMENT 'æ ‡è¯†',
+  `title` char(80) NOT NULL DEFAULT '' COMMENT 'æ ‡é¢˜',
+  `category_id` int(10) unsigned NOT NULL COMMENT 'æ‰€å±åˆ†ç±»',
+  `group_id` smallint(3) unsigned NOT NULL COMMENT 'æ‰€å±åˆ†ç»„',
+  `description` char(140) NOT NULL DEFAULT '' COMMENT 'æè¿°',
+  `root` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'æ ¹èŠ‚ç‚¹',
+  `pid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'æ‰€å±ID',
+  `model_id` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'å†…å®¹æ¨¡å‹ID',
+  `type` tinyint(3) unsigned NOT NULL DEFAULT '2' COMMENT 'å†…å®¹ç±»å‹',
+  `position` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT 'æ¨èä½',
+  `link_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'å¤–é“¾',
+  `cover_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'å°é¢',
+  `display` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT 'å¯è§æ€§',
+  `deadline` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'æˆªè‡³æ—¶é—´',
+  `attach` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'é™„ä»¶æ•°é‡',
+  `view` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'æµè§ˆé‡',
+  `comment` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'è¯„è®ºæ•°',
+  `extend` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'æ‰©å±•ç»Ÿè®¡å­—æ®µ',
+  `level` int(10) NOT NULL DEFAULT '0' COMMENT 'ä¼˜å…ˆçº§',
+  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'åˆ›å»ºæ—¶é—´',
+  `update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'æ›´æ–°æ—¶é—´',
+  `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'æ•°æ®çŠ¶æ€',
   PRIMARY KEY (`id`),
   KEY `idx_category_status` (`category_id`,`status`),
   KEY `idx_status_type_pid` (`status`,`uid`,`pid`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='ÎÄµµÄ£ĞÍ»ù´¡±í';
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='æ–‡æ¡£æ¨¡å‹åŸºç¡€è¡¨' AUTO_INCREMENT=4 ;
 
-#
-# Dumping data for table onethink_document
-#
+-- --------------------------------------------------------
 
-INSERT INTO `onethink_document` VALUES (1,1,'','01',2,0,'',0,0,2,2,0,0,0,1,0,0,0,0,0,0,1424071613,1424071613,-1);
-INSERT INTO `onethink_document` VALUES (2,1,'','test',2,0,'',0,0,2,2,0,0,0,1,0,0,14,0,0,0,1424408160,1424409596,1);
+--
+-- è¡¨çš„ç»“æ„ `onethink_document_article`
+--
 
-#
-# Source for table onethink_document_article
-#
-
-DROP TABLE IF EXISTS `onethink_document_article`;
-CREATE TABLE `onethink_document_article` (
-  `id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'ÎÄµµID',
-  `parse` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'ÄÚÈİ½âÎöÀàĞÍ',
-  `content` text NOT NULL COMMENT 'ÎÄÕÂÄÚÈİ',
-  `template` varchar(100) NOT NULL DEFAULT '' COMMENT 'ÏêÇéÒ³ÏÔÊ¾Ä£°å',
-  `bookmark` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'ÊÕ²ØÊı',
+CREATE TABLE IF NOT EXISTS `onethink_document_article` (
+  `id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'æ–‡æ¡£ID',
+  `parse` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'å†…å®¹è§£æç±»å‹',
+  `content` text NOT NULL COMMENT 'æ–‡ç« å†…å®¹',
+  `template` varchar(100) NOT NULL DEFAULT '' COMMENT 'è¯¦æƒ…é¡µæ˜¾ç¤ºæ¨¡æ¿',
+  `bookmark` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'æ”¶è—æ•°',
+  `atlas` varchar(255) NOT NULL COMMENT 'å›¾é›†',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='ÎÄµµÄ£ĞÍÎÄÕÂ±í';
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='æ–‡æ¡£æ¨¡å‹æ–‡ç« è¡¨';
 
-#
-# Dumping data for table onethink_document_article
-#
+-- --------------------------------------------------------
 
-INSERT INTO `onethink_document_article` VALUES (1,0,'<em>01</em>','',0);
-INSERT INTO `onethink_document_article` VALUES (2,0,'<img src=\"/Uploads/Editor/2015-02-20/54e6c3d3b547d.jpg\" alt=\"\" />app880.com<img src=\"/Public/static/kindeditor/plugins/emoticons/images/13.gif\" border=\"0\" alt=\"\" />','',0);
+--
+-- è¡¨çš„ç»“æ„ `onethink_document_download`
+--
 
-#
-# Source for table onethink_document_download
-#
-
-DROP TABLE IF EXISTS `onethink_document_download`;
-CREATE TABLE `onethink_document_download` (
-  `id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'ÎÄµµID',
-  `parse` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'ÄÚÈİ½âÎöÀàĞÍ',
-  `content` text NOT NULL COMMENT 'ÏÂÔØÏêÏ¸ÃèÊö',
-  `template` varchar(100) NOT NULL DEFAULT '' COMMENT 'ÏêÇéÒ³ÏÔÊ¾Ä£°å',
-  `file_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'ÎÄ¼şID',
-  `download` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'ÏÂÔØ´ÎÊı',
-  `size` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT 'ÎÄ¼ş´óĞ¡',
+CREATE TABLE IF NOT EXISTS `onethink_document_download` (
+  `id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'æ–‡æ¡£ID',
+  `parse` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'å†…å®¹è§£æç±»å‹',
+  `content` text NOT NULL COMMENT 'ä¸‹è½½è¯¦ç»†æè¿°',
+  `template` varchar(100) NOT NULL DEFAULT '' COMMENT 'è¯¦æƒ…é¡µæ˜¾ç¤ºæ¨¡æ¿',
+  `file_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'æ–‡ä»¶ID',
+  `download` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'ä¸‹è½½æ¬¡æ•°',
+  `size` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT 'æ–‡ä»¶å¤§å°',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='ÎÄµµÄ£ĞÍÏÂÔØ±í';
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='æ–‡æ¡£æ¨¡å‹ä¸‹è½½è¡¨';
 
-#
-# Dumping data for table onethink_document_download
-#
+-- --------------------------------------------------------
 
+--
+-- è¡¨çš„ç»“æ„ `onethink_file`
+--
 
-#
-# Source for table onethink_file
-#
-
-DROP TABLE IF EXISTS `onethink_file`;
-CREATE TABLE `onethink_file` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ÎÄ¼şID',
-  `name` char(30) NOT NULL DEFAULT '' COMMENT 'Ô­Ê¼ÎÄ¼şÃû',
-  `savename` char(20) NOT NULL DEFAULT '' COMMENT '±£´æÃû³Æ',
-  `savepath` char(30) NOT NULL DEFAULT '' COMMENT 'ÎÄ¼ş±£´æÂ·¾¶',
-  `ext` char(5) NOT NULL DEFAULT '' COMMENT 'ÎÄ¼şºó×º',
-  `mime` char(40) NOT NULL DEFAULT '' COMMENT 'ÎÄ¼şmimeÀàĞÍ',
-  `size` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'ÎÄ¼ş´óĞ¡',
-  `md5` char(32) NOT NULL DEFAULT '' COMMENT 'ÎÄ¼şmd5',
-  `sha1` char(40) NOT NULL DEFAULT '' COMMENT 'ÎÄ¼ş sha1±àÂë',
-  `location` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'ÎÄ¼ş±£´æÎ»ÖÃ',
-  `url` varchar(255) NOT NULL DEFAULT '' COMMENT 'Ô¶³ÌµØÖ·',
-  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'ÉÏ´«Ê±¼ä',
+CREATE TABLE IF NOT EXISTS `onethink_file` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'æ–‡ä»¶ID',
+  `name` char(30) NOT NULL DEFAULT '' COMMENT 'åŸå§‹æ–‡ä»¶å',
+  `savename` char(20) NOT NULL DEFAULT '' COMMENT 'ä¿å­˜åç§°',
+  `savepath` char(30) NOT NULL DEFAULT '' COMMENT 'æ–‡ä»¶ä¿å­˜è·¯å¾„',
+  `ext` char(5) NOT NULL DEFAULT '' COMMENT 'æ–‡ä»¶åç¼€',
+  `mime` char(40) NOT NULL DEFAULT '' COMMENT 'æ–‡ä»¶mimeç±»å‹',
+  `size` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'æ–‡ä»¶å¤§å°',
+  `md5` char(32) NOT NULL DEFAULT '' COMMENT 'æ–‡ä»¶md5',
+  `sha1` char(40) NOT NULL DEFAULT '' COMMENT 'æ–‡ä»¶ sha1ç¼–ç ',
+  `location` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'æ–‡ä»¶ä¿å­˜ä½ç½®',
+  `url` varchar(255) NOT NULL DEFAULT '' COMMENT 'è¿œç¨‹åœ°å€',
+  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'ä¸Šä¼ æ—¶é—´',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_md5` (`md5`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='ÎÄ¼ş±í';
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='æ–‡ä»¶è¡¨' AUTO_INCREMENT=2 ;
 
-#
-# Dumping data for table onethink_file
-#
+--
+-- è½¬å­˜è¡¨ä¸­çš„æ•°æ® `onethink_file`
+--
 
-INSERT INTO `onethink_file` VALUES (1,'readme.txt','54e19a9159656.txt','2015-02-16/','txt','application/octet-stream',1295,'2cf1b2ad2a5cc2cd84832390f92155f9','d160fd26e536d54a84a7310907d5484c1462af0a',0,'',1424071312);
+INSERT INTO `onethink_file` (`id`, `name`, `savename`, `savepath`, `ext`, `mime`, `size`, `md5`, `sha1`, `location`, `url`, `create_time`) VALUES
+(1, 'readme.txt', '54e19a9159656.txt', '2015-02-16/', 'txt', 'application/octet-stream', 1295, '2cf1b2ad2a5cc2cd84832390f92155f9', 'd160fd26e536d54a84a7310907d5484c1462af0a', 0, '', 1424071312);
 
-#
-# Source for table onethink_friendlinks
-#
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `onethink_friendlinks`;
-CREATE TABLE `onethink_friendlinks` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Ö÷¼ü',
-  `type` int(1) NOT NULL DEFAULT '1' COMMENT 'Àà±ğ£¨1£ºÍ¼Æ¬£¬2£ºÆÕÍ¨£©',
-  `title` char(80) NOT NULL DEFAULT '' COMMENT 'Õ¾µãÃû³Æ',
-  `cover_id` int(10) NOT NULL COMMENT 'Í¼Æ¬ID',
-  `link` char(140) NOT NULL DEFAULT '' COMMENT 'Á´½ÓµØÖ·',
-  `level` int(3) unsigned NOT NULL DEFAULT '0' COMMENT 'ÓÅÏÈ¼¶',
-  `status` tinyint(2) NOT NULL DEFAULT '1' COMMENT '×´Ì¬£¨0£º½ûÓÃ£¬1£ºÕı³££©',
-  `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT 'Ìí¼ÓÊ±¼ä',
+--
+-- è¡¨çš„ç»“æ„ `onethink_friendlinks`
+--
+
+CREATE TABLE IF NOT EXISTS `onethink_friendlinks` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ä¸»é”®',
+  `type` int(1) NOT NULL DEFAULT '1' COMMENT 'ç±»åˆ«ï¼ˆ1ï¼šå›¾ç‰‡ï¼Œ2ï¼šæ™®é€šï¼‰',
+  `title` char(80) NOT NULL DEFAULT '' COMMENT 'ç«™ç‚¹åç§°',
+  `cover_id` int(10) NOT NULL COMMENT 'å›¾ç‰‡ID',
+  `link` char(140) NOT NULL DEFAULT '' COMMENT 'é“¾æ¥åœ°å€',
+  `level` int(3) unsigned NOT NULL DEFAULT '0' COMMENT 'ä¼˜å…ˆçº§',
+  `status` tinyint(2) NOT NULL DEFAULT '1' COMMENT 'çŠ¶æ€ï¼ˆ0ï¼šç¦ç”¨ï¼Œ1ï¼šæ­£å¸¸ï¼‰',
+  `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT 'æ·»åŠ æ—¶é—´',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
-#
-# Dumping data for table onethink_friendlinks
-#
+--
+-- è½¬å­˜è¡¨ä¸­çš„æ•°æ® `onethink_friendlinks`
+--
 
+INSERT INTO `onethink_friendlinks` (`id`, `type`, `title`, `cover_id`, `link`, `level`, `status`, `create_time`) VALUES
+(2, 2, 'app880.com', 0, 'http://app880.com', 0, 1, 1446607499),
+(4, 1, 'test', 50, '', 0, 1, 1446568240);
 
-#
-# Source for table onethink_guestbook
-#
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `onethink_guestbook`;
-CREATE TABLE `onethink_guestbook` (
+--
+-- è¡¨çš„ç»“æ„ `onethink_guestbook`
+--
+
+CREATE TABLE IF NOT EXISTS `onethink_guestbook` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nickname` varchar(224) NOT NULL COMMENT 'ÁôÑÔêÇ³Æ',
-  `contact` varchar(225) NOT NULL COMMENT 'ÁôÑÔÕßÁªÏµ·½Ê½',
-  `content` varchar(225) NOT NULL COMMENT 'ÁôÑÔÄÚÈİ',
-  `starttime` int(10) NOT NULL COMMENT 'ÁôÑÔÊ±¼ä',
-  `is_reply` int(11) NOT NULL COMMENT 'ÊÇ·ñ»Ø¸´',
-  `is_pass` int(11) NOT NULL COMMENT 'ÊÇ·ñÍ¨¹ı',
-  `r_content` varchar(225) NOT NULL COMMENT '»Ø¸´ÄÚÈİ',
+  `nickname` varchar(224) NOT NULL COMMENT 'ç•™è¨€æ˜µç§°',
+  `contact` varchar(225) NOT NULL COMMENT 'ç•™è¨€è€…è”ç³»æ–¹å¼',
+  `content` varchar(225) NOT NULL COMMENT 'ç•™è¨€å†…å®¹',
+  `starttime` int(10) NOT NULL COMMENT 'ç•™è¨€æ—¶é—´',
+  `is_reply` int(11) NOT NULL COMMENT 'æ˜¯å¦å›å¤',
+  `is_pass` int(11) NOT NULL COMMENT 'æ˜¯å¦é€šè¿‡',
+  `r_content` varchar(225) NOT NULL COMMENT 'å›å¤å†…å®¹',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
-#
-# Dumping data for table onethink_guestbook
-#
+-- --------------------------------------------------------
 
+--
+-- è¡¨çš„ç»“æ„ `onethink_hooks`
+--
 
-#
-# Source for table onethink_hooks
-#
-
-DROP TABLE IF EXISTS `onethink_hooks`;
-CREATE TABLE `onethink_hooks` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Ö÷¼ü',
-  `name` varchar(40) NOT NULL DEFAULT '' COMMENT '¹³×ÓÃû³Æ',
-  `description` text COMMENT 'ÃèÊö',
-  `type` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT 'ÀàĞÍ',
-  `update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '¸üĞÂÊ±¼ä',
-  `addons` varchar(255) NOT NULL DEFAULT '' COMMENT '¹³×Ó¹ÒÔØµÄ²å¼ş ''£¬''·Ö¸î',
+CREATE TABLE IF NOT EXISTS `onethink_hooks` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ä¸»é”®',
+  `name` varchar(40) NOT NULL DEFAULT '' COMMENT 'é’©å­åç§°',
+  `description` text COMMENT 'æè¿°',
+  `type` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT 'ç±»å‹',
+  `update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'æ›´æ–°æ—¶é—´',
+  `addons` varchar(255) NOT NULL DEFAULT '' COMMENT 'é’©å­æŒ‚è½½çš„æ’ä»¶ ''ï¼Œ''åˆ†å‰²',
   `status` tinyint(1) unsigned NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=MyISAM AUTO_INCREMENT=107 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=123 ;
 
-#
-# Dumping data for table onethink_hooks
-#
+--
+-- è½¬å­˜è¡¨ä¸­çš„æ•°æ® `onethink_hooks`
+--
 
-INSERT INTO `onethink_hooks` VALUES (1,'pageHeader','Ò³Ãæheader¹³×Ó£¬Ò»°ãÓÃÓÚ¼ÓÔØ²å¼şCSSÎÄ¼şºÍ´úÂë',1,1423988201,'Unslider',1);
-INSERT INTO `onethink_hooks` VALUES (3,'documentEditForm','Ìí¼Ó±à¼­±íµ¥µÄ À©Õ¹ÄÚÈİ¹³×Ó',1,0,'Attachment',1);
-INSERT INTO `onethink_hooks` VALUES (4,'documentDetailAfter','ÎÄµµÄ©Î²ÏÔÊ¾',1,1423983209,'Attachment,SocialComment,BaiduShare,Comment',1);
-INSERT INTO `onethink_hooks` VALUES (5,'documentDetailBefore','Ò³ÃæÄÚÈİÇ°ÏÔÊ¾ÓÃ¹³×Ó',1,0,'',1);
-INSERT INTO `onethink_hooks` VALUES (6,'documentSaveComplete','±£´æÎÄµµÊı¾İºóµÄÀ©Õ¹¹³×Ó',2,0,'Attachment',1);
-INSERT INTO `onethink_hooks` VALUES (7,'documentEditFormContent','Ìí¼Ó±à¼­±íµ¥µÄÄÚÈİÏÔÊ¾¹³×Ó',1,0,'Editor',1);
-INSERT INTO `onethink_hooks` VALUES (8,'adminArticleEdit','ºóÌ¨ÄÚÈİ±à¼­Ò³±à¼­Æ÷',1,1378982734,'EditorForAdmin',1);
-INSERT INTO `onethink_hooks` VALUES (13,'AdminIndex','Ê×Ò³Ğ¡¸ñ×Ó¸öĞÔ»¯ÏÔÊ¾',1,1382596073,'SiteStat,SystemInfo,DevTeam,Water,Mail,ImportData',1);
-INSERT INTO `onethink_hooks` VALUES (14,'topicComment','ÆÀÂÛÌá½»·½Ê½À©Õ¹¹³×Ó¡£',1,1380163518,'Editor',1);
-INSERT INTO `onethink_hooks` VALUES (16,'app_begin','Ó¦ÓÃ¿ªÊ¼',2,1384481614,'',1);
-INSERT INTO `onethink_hooks` VALUES (27,'pageFooter','Ò³Ãæfooter¹³×Ó£¬Ò»°ãÓÃÓÚ¼ÓÔØ²å¼şJSÎÄ¼şºÍJS´úÂë',1,1422719676,'Mail,ReturnTop,Unslider,Support',1);
-INSERT INTO `onethink_hooks` VALUES (29,'dealPicture','´¦ÀíÉÏ´«Í¼Æ¬µÄ¹³×Ó£¬ÔÚÏµÍ³µÄUpload.class.phpÍ¼Æ¬ÉÏ´«¹ı³ÌÖĞµ÷ÓÃ£¬¶ÔÉÏ´«µÄÍ¼Æ¬½øĞĞ¶îÍâµÄ´¦Àí¡£',2,1422726029,'Water',1);
-INSERT INTO `onethink_hooks` VALUES (69,'app_end','Ó¦ÓÃ½áÊø',2,1423674478,'Schedule',1);
-INSERT INTO `onethink_hooks` VALUES (86,'Friendlinks','µ÷ÓÃ£¨ÏÔÊ¾£©ÓÑÇéÁ´½ÓµÄ¹³×Ó',1,1423825560,'Friendlinks',1);
-INSERT INTO `onethink_hooks` VALUES (87,'Advs','µ÷ÓÃ¹ã¸æµÄ¹³×Ó',1,1423825694,'Advs',1);
-INSERT INTO `onethink_hooks` VALUES (89,'SyncLogin','µ÷ÓÃµÚÈı·½ÕËºÅÍ¬²½µÇÂ½µÄ¹³×Ó',1,1423825967,'SyncLogin',1);
-INSERT INTO `onethink_hooks` VALUES (101,'WechatAdminLogin','ºóÌ¨µÇÂ½Ò³Ãæ¹³×Ó£¬ÓÃÓÚÎ¢ĞÅ¶şÎ¬ÂëµÇÂ½',1,1423925643,'Wechat',1);
-INSERT INTO `onethink_hooks` VALUES (102,'WechatIndexLogin','Ç°Ì¨µÇÂ½Ò³Ãæ¹³×Ó£¬ÓÃÓÚÎ¢ĞÅ¶şÎ¬ÂëµÇÂ½',1,1423925643,'Wechat',1);
-INSERT INTO `onethink_hooks` VALUES (104,'Guestbook','µ÷ÓÃ£¨ÏÔÊ¾£©ÁôÑÔ°åµÄ¹³×Ó',1,1423925886,'Guestbook',1);
-INSERT INTO `onethink_hooks` VALUES (105,'Unslider','Í¼Æ¬ÂÖ²¥£¨½¹µãÍ¼£©²å¼ş¹³×Ó',1,1423988274,'Unslider',1);
-INSERT INTO `onethink_hooks` VALUES (106,'Vote','µ÷ÓÃ£¨ÏÔÊ¾£©Í¶Æ±²å¼şµÄ¹³×Ó',1,1423990253,'Vote',1);
+INSERT INTO `onethink_hooks` (`id`, `name`, `description`, `type`, `update_time`, `addons`, `status`) VALUES
+(1, 'pageHeader', 'é¡µé¢headeré’©å­ï¼Œä¸€èˆ¬ç”¨äºåŠ è½½æ’ä»¶CSSæ–‡ä»¶å’Œä»£ç ', 1, 1423988201, 'Unslider,Comment', 1),
+(3, 'documentEditForm', 'æ·»åŠ ç¼–è¾‘è¡¨å•çš„ æ‰©å±•å†…å®¹é’©å­', 1, 0, 'Attachment', 1),
+(4, 'documentDetailAfter', 'æ–‡æ¡£æœ«å°¾æ˜¾ç¤º', 1, 1423983209, 'Attachment,SocialComment,BaiduShare,Fancybox,Comment', 1),
+(5, 'documentDetailBefore', 'é¡µé¢å†…å®¹å‰æ˜¾ç¤ºç”¨é’©å­', 1, 0, '', 1),
+(6, 'documentSaveComplete', 'ä¿å­˜æ–‡æ¡£æ•°æ®åçš„æ‰©å±•é’©å­', 2, 0, 'Attachment', 1),
+(7, 'documentEditFormContent', 'æ·»åŠ ç¼–è¾‘è¡¨å•çš„å†…å®¹æ˜¾ç¤ºé’©å­', 1, 0, 'Editor', 1),
+(8, 'adminArticleEdit', 'åå°å†…å®¹ç¼–è¾‘é¡µç¼–è¾‘å™¨', 1, 1378982734, 'EditorForAdmin', 1),
+(13, 'AdminIndex', 'é¦–é¡µå°æ ¼å­ä¸ªæ€§åŒ–æ˜¾ç¤º', 1, 1382596073, 'SiteStat,SystemInfo,DevTeam,Mail,ImportData,Water', 1),
+(14, 'topicComment', 'è¯„è®ºæäº¤æ–¹å¼æ‰©å±•é’©å­ã€‚', 1, 1380163518, 'Editor', 1),
+(16, 'app_begin', 'åº”ç”¨å¼€å§‹', 2, 1384481614, '', 1),
+(86, 'Friendlinks', 'è°ƒç”¨ï¼ˆæ˜¾ç¤ºï¼‰å‹æƒ…é“¾æ¥çš„é’©å­', 1, 1423825560, 'Friendlinks', 1),
+(27, 'pageFooter', 'é¡µé¢footeré’©å­ï¼Œä¸€èˆ¬ç”¨äºåŠ è½½æ’ä»¶JSæ–‡ä»¶å’ŒJSä»£ç ', 1, 1446980562, 'Unslider,Mail,ReturnTop,Comment', 1),
+(29, 'dealPicture', 'å¤„ç†ä¸Šä¼ å›¾ç‰‡çš„é’©å­ï¼Œå¯¹ä¸Šä¼ çš„å›¾ç‰‡è¿›è¡Œé¢å¤–çš„å¤„ç†ã€‚æ°´å°ã€‚', 2, 1446897486, 'Water', 1),
+(89, 'SyncLogin', 'è°ƒç”¨ç¬¬ä¸‰æ–¹è´¦å·åŒæ­¥ç™»é™†çš„é’©å­', 1, 1423825967, 'SyncLogin', 1),
+(69, 'app_end', 'åº”ç”¨ç»“æŸ', 2, 1423674478, 'Schedule', 1),
+(105, 'Unslider', 'å›¾ç‰‡è½®æ’­ï¼ˆç„¦ç‚¹å›¾ï¼‰æ’ä»¶é’©å­', 1, 1423988274, 'Unslider', 1),
+(101, 'WechatAdminLogin', 'åå°ç™»é™†é¡µé¢é’©å­ï¼Œç”¨äºå¾®ä¿¡äºŒç»´ç ç™»é™†', 1, 1423925643, 'Wechat', 1),
+(102, 'WechatIndexLogin', 'å‰å°ç™»é™†é¡µé¢é’©å­ï¼Œç”¨äºå¾®ä¿¡äºŒç»´ç ç™»é™†', 1, 1423925643, 'Wechat', 1),
+(104, 'Guestbook', 'è°ƒç”¨ï¼ˆæ˜¾ç¤ºï¼‰ç•™è¨€æ¿çš„é’©å­', 1, 1423925886, 'Guestbook', 1),
+(106, 'Vote', 'è°ƒç”¨ï¼ˆæ˜¾ç¤ºï¼‰æŠ•ç¥¨æ’ä»¶çš„é’©å­', 1, 1423990253, 'Vote', 1),
+(108, 'UploadAvatar', 'è°ƒç”¨ï¼ˆæ˜¾ç¤ºï¼‰å¤´åƒä¸Šä¼ çš„é’©å­', 1, 1425134549, 'Avatar', 1),
+(109, 'AdminPageFooter', 'åå°é’©å­', 1, 1445875396, 'ImageManager', 1),
+(110, 'UploadImages', 'è°ƒç”¨å¤šå›¾ä¸Šä¼ æ’ä»¶çš„é’©å­', 1, 1444205337, 'UploadImages', 1),
+(122, 'Advertising', 'è°ƒç”¨å¹¿å‘Šä½å¹¿å‘Šçš„é’©å­', 1, 1446626227, 'Advertising', 1);
 
-#
-# Source for table onethink_mail_history
-#
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `onethink_mail_history`;
-CREATE TABLE `onethink_mail_history` (
+--
+-- è¡¨çš„ç»“æ„ `onethink_mail_history`
+--
+
+CREATE TABLE IF NOT EXISTS `onethink_mail_history` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `body` text NOT NULL,
@@ -1027,380 +1235,394 @@ CREATE TABLE `onethink_mail_history` (
   `from` varchar(255) NOT NULL,
   `status` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
-#
-# Dumping data for table onethink_mail_history
-#
+-- --------------------------------------------------------
 
+--
+-- è¡¨çš„ç»“æ„ `onethink_mail_history_link`
+--
 
-#
-# Source for table onethink_mail_history_link
-#
-
-DROP TABLE IF EXISTS `onethink_mail_history_link`;
-CREATE TABLE `onethink_mail_history_link` (
+CREATE TABLE IF NOT EXISTS `onethink_mail_history_link` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `mail_id` int(11) NOT NULL,
   `to` varchar(255) NOT NULL,
   `status` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
-#
-# Dumping data for table onethink_mail_history_link
-#
+-- --------------------------------------------------------
 
+--
+-- è¡¨çš„ç»“æ„ `onethink_mail_list`
+--
 
-#
-# Source for table onethink_mail_list
-#
-
-DROP TABLE IF EXISTS `onethink_mail_list`;
-CREATE TABLE `onethink_mail_list` (
+CREATE TABLE IF NOT EXISTS `onethink_mail_list` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `address` varchar(255) NOT NULL,
   `status` tinyint(4) NOT NULL,
   `create_time` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
-#
-# Dumping data for table onethink_mail_list
-#
+--
+-- è½¬å­˜è¡¨ä¸­çš„æ•°æ® `onethink_mail_list`
+--
 
-INSERT INTO `onethink_mail_list` VALUES (1,'836692464@qq.com',1,1424018069);
+INSERT INTO `onethink_mail_list` (`id`, `address`, `status`, `create_time`) VALUES
+(1, '836692464@qq.com', 1, 1424018069),
+(2, 'app880@foxmail.com', 1, 1445496165),
+(3, 'qq@foxmail.com', 0, 1445572839),
+(4, '8366@qq.com', 0, 1445581730),
+(5, 'gg@123.com', 0, 1445581742),
+(6, 'asd@123.com', 0, 1445586282),
+(7, 'dd@foxmali.com', 0, 1445920291),
+(8, 'ee@foxmali.com', 0, 1445920900),
+(9, 'aa@123.com', 0, 1445929224),
+(10, '88@88.com', 0, 1445945017),
+(11, '123@qq.com', 0, 1446771330);
 
-#
-# Source for table onethink_mail_token
-#
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `onethink_mail_token`;
-CREATE TABLE `onethink_mail_token` (
+--
+-- è¡¨çš„ç»“æ„ `onethink_mail_token`
+--
+
+CREATE TABLE IF NOT EXISTS `onethink_mail_token` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(50) NOT NULL,
   `token` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
-#
-# Dumping data for table onethink_mail_token
-#
+--
+-- è½¬å­˜è¡¨ä¸­çš„æ•°æ® `onethink_mail_token`
+--
 
+INSERT INTO `onethink_mail_token` (`id`, `email`, `token`) VALUES
+(5, '836692464@qq.com', 'SOrnUzGXr7');
 
-#
-# Source for table onethink_member
-#
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `onethink_member`;
-CREATE TABLE `onethink_member` (
-  `uid` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ÓÃ»§ID',
-  `nickname` char(16) NOT NULL DEFAULT '' COMMENT 'êÇ³Æ',
-  `sex` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'ĞÔ±ğ',
-  `birthday` date NOT NULL DEFAULT '0000-00-00' COMMENT 'ÉúÈÕ',
-  `qq` char(10) NOT NULL DEFAULT '' COMMENT 'qqºÅ',
-  `score` mediumint(8) NOT NULL DEFAULT '0' COMMENT 'ÓÃ»§»ı·Ö',
-  `login` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'µÇÂ¼´ÎÊı',
-  `reg_ip` bigint(20) NOT NULL DEFAULT '0' COMMENT '×¢²áIP',
-  `reg_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '×¢²áÊ±¼ä',
-  `last_login_ip` bigint(20) NOT NULL DEFAULT '0' COMMENT '×îºóµÇÂ¼IP',
-  `last_login_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '×îºóµÇÂ¼Ê±¼ä',
-  `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '»áÔ±×´Ì¬',
+--
+-- è¡¨çš„ç»“æ„ `onethink_member`
+--
+
+CREATE TABLE IF NOT EXISTS `onethink_member` (
+  `uid` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ç”¨æˆ·ID',
+  `nickname` char(16) NOT NULL DEFAULT '' COMMENT 'æ˜µç§°',
+  `sex` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'æ€§åˆ«',
+  `birthday` date NOT NULL DEFAULT '0000-00-00' COMMENT 'ç”Ÿæ—¥',
+  `qq` char(10) NOT NULL DEFAULT '' COMMENT 'qqå·',
+  `score` mediumint(8) NOT NULL DEFAULT '0' COMMENT 'ç”¨æˆ·ç§¯åˆ†',
+  `login` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'ç™»å½•æ¬¡æ•°',
+  `reg_ip` bigint(20) NOT NULL DEFAULT '0' COMMENT 'æ³¨å†ŒIP',
+  `reg_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'æ³¨å†Œæ—¶é—´',
+  `last_login_ip` bigint(20) NOT NULL DEFAULT '0' COMMENT 'æœ€åç™»å½•IP',
+  `last_login_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'æœ€åç™»å½•æ—¶é—´',
+  `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'ä¼šå‘˜çŠ¶æ€',
   PRIMARY KEY (`uid`),
   KEY `status` (`status`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='»áÔ±±í';
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='ä¼šå‘˜è¡¨' AUTO_INCREMENT=5 ;
 
-#
-# Dumping data for table onethink_member
-#
+--
+-- è½¬å­˜è¡¨ä¸­çš„æ•°æ® `onethink_member`
+--
 
-INSERT INTO `onethink_member` VALUES (1,'admin',0,'0000-00-00','',70,65,0,1422599239,2130706433,1424688334,1);
-INSERT INTO `onethink_member` VALUES (2,'xjq',0,'0000-00-00','',20,6,0,0,2130706433,1424148677,-1);
-INSERT INTO `onethink_member` VALUES (3,'geniusxjq',0,'0000-00-00','',50,27,2130706433,1422700152,2130706433,1424399281,1);
-INSERT INTO `onethink_member` VALUES (4,'xjq123',0,'0000-00-00','',10,1,2130706433,1424398807,2130706433,1424398807,1);
+INSERT INTO `onethink_member` (`uid`, `nickname`, `sex`, `birthday`, `qq`, `score`, `login`, `reg_ip`, `reg_time`, `last_login_ip`, `last_login_time`, `status`) VALUES
+(1, 'admin', 0, '0000-00-00', '', 240, 119, 0, 1422599239, 2130706433, 1447043052, 1),
+(2, 'xjq', 0, '0000-00-00', '', 20, 6, 0, 0, 2130706433, 1424148677, -1),
+(3, 'geniusxjq', 0, '0000-00-00', '', 160, 126, 2130706433, 1422700152, 2130706433, 1446740517, 1),
+(4, 'xjq123', 0, '0000-00-00', '', 10, 1, 2130706433, 1424398807, 2130706433, 1424398807, -1);
 
-#
-# Source for table onethink_menu
-#
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `onethink_menu`;
-CREATE TABLE `onethink_menu` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ÎÄµµID',
-  `title` varchar(50) NOT NULL DEFAULT '' COMMENT '±êÌâ',
-  `pid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'ÉÏ¼¶·ÖÀàID',
-  `sort` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'ÅÅĞò£¨Í¬¼¶ÓĞĞ§£©',
-  `url` char(255) NOT NULL DEFAULT '' COMMENT 'Á´½ÓµØÖ·',
-  `hide` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT 'ÊÇ·ñÒş²Ø',
-  `tip` varchar(255) NOT NULL DEFAULT '' COMMENT 'ÌáÊ¾',
-  `group` varchar(50) DEFAULT '' COMMENT '·Ö×é',
-  `is_dev` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT 'ÊÇ·ñ½ö¿ª·¢ÕßÄ£Ê½¿É¼û',
-  `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '×´Ì¬',
+--
+-- è¡¨çš„ç»“æ„ `onethink_menu`
+--
+
+CREATE TABLE IF NOT EXISTS `onethink_menu` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'æ–‡æ¡£ID',
+  `title` varchar(50) NOT NULL DEFAULT '' COMMENT 'æ ‡é¢˜',
+  `pid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'ä¸Šçº§åˆ†ç±»ID',
+  `sort` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'æ’åºï¼ˆåŒçº§æœ‰æ•ˆï¼‰',
+  `url` char(255) NOT NULL DEFAULT '' COMMENT 'é“¾æ¥åœ°å€',
+  `hide` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT 'æ˜¯å¦éšè—',
+  `tip` varchar(255) NOT NULL DEFAULT '' COMMENT 'æç¤º',
+  `group` varchar(50) DEFAULT '' COMMENT 'åˆ†ç»„',
+  `is_dev` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT 'æ˜¯å¦ä»…å¼€å‘è€…æ¨¡å¼å¯è§',
+  `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'çŠ¶æ€',
   PRIMARY KEY (`id`),
   KEY `pid` (`pid`),
   KEY `status` (`status`)
-) ENGINE=MyISAM AUTO_INCREMENT=136 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=136 ;
 
-#
-# Dumping data for table onethink_menu
-#
+--
+-- è½¬å­˜è¡¨ä¸­çš„æ•°æ® `onethink_menu`
+--
 
-INSERT INTO `onethink_menu` VALUES (1,'Ê×Ò³',0,1,'Index/index',0,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (2,'ÄÚÈİ',0,2,'Article/index',0,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (3,'ÎÄµµÁĞ±í',2,0,'article/index',1,'','ÄÚÈİ',0,1);
-INSERT INTO `onethink_menu` VALUES (4,'ĞÂÔö',3,0,'article/add',0,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (5,'±à¼­',3,0,'article/edit',0,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (6,'¸Ä±ä×´Ì¬',3,0,'article/setStatus',0,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (7,'±£´æ',3,0,'article/update',0,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (8,'±£´æ²İ¸å',3,0,'article/autoSave',0,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (9,'ÒÆ¶¯',3,0,'article/move',0,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (10,'¸´ÖÆ',3,0,'article/copy',0,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (11,'Õ³Ìù',3,0,'article/paste',0,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (12,'µ¼Èë',3,0,'article/batchOperate',0,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (13,'»ØÊÕÕ¾',2,0,'article/recycle',1,'','ÄÚÈİ',0,1);
-INSERT INTO `onethink_menu` VALUES (14,'»¹Ô­',13,0,'article/permit',0,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (15,'Çå¿Õ',13,0,'article/clear',0,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (16,'ÓÃ»§',0,3,'User/index',0,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (17,'ÓÃ»§ĞÅÏ¢',16,0,'User/index',0,'','ÓÃ»§¹ÜÀí',0,1);
-INSERT INTO `onethink_menu` VALUES (18,'ĞÂÔöÓÃ»§',17,0,'User/add',0,'Ìí¼ÓĞÂÓÃ»§','',0,1);
-INSERT INTO `onethink_menu` VALUES (19,'ÓÃ»§ĞĞÎª',16,0,'User/action',0,'','ĞĞÎª¹ÜÀí',0,1);
-INSERT INTO `onethink_menu` VALUES (20,'ĞÂÔöÓÃ»§ĞĞÎª',19,0,'User/addaction',0,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (21,'±à¼­ÓÃ»§ĞĞÎª',19,0,'User/editaction',0,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (22,'±£´æÓÃ»§ĞĞÎª',19,0,'User/saveAction',0,'\"ÓÃ»§->ÓÃ»§ĞĞÎª\"±£´æ±à¼­ºÍĞÂÔöµÄÓÃ»§ĞĞÎª','',0,1);
-INSERT INTO `onethink_menu` VALUES (23,'±ä¸üĞĞÎª×´Ì¬',19,0,'User/setStatus',0,'\"ÓÃ»§->ÓÃ»§ĞĞÎª\"ÖĞµÄÆôÓÃ,½ûÓÃºÍÉ¾³ıÈ¨ÏŞ','',0,1);
-INSERT INTO `onethink_menu` VALUES (24,'½ûÓÃ»áÔ±',19,0,'User/changeStatus?method=forbidUser',0,'\"ÓÃ»§->ÓÃ»§ĞÅÏ¢\"ÖĞµÄ½ûÓÃ','',0,1);
-INSERT INTO `onethink_menu` VALUES (25,'ÆôÓÃ»áÔ±',19,0,'User/changeStatus?method=resumeUser',0,'\"ÓÃ»§->ÓÃ»§ĞÅÏ¢\"ÖĞµÄÆôÓÃ','',0,1);
-INSERT INTO `onethink_menu` VALUES (26,'É¾³ı»áÔ±',19,0,'User/changeStatus?method=deleteUser',0,'\"ÓÃ»§->ÓÃ»§ĞÅÏ¢\"ÖĞµÄÉ¾³ı','',0,1);
-INSERT INTO `onethink_menu` VALUES (27,'È¨ÏŞ¹ÜÀí',16,0,'AuthManager/index',0,'','ÓÃ»§¹ÜÀí',0,1);
-INSERT INTO `onethink_menu` VALUES (28,'É¾³ı',27,0,'AuthManager/changeStatus?method=deleteGroup',0,'É¾³ıÓÃ»§×é','',0,1);
-INSERT INTO `onethink_menu` VALUES (29,'½ûÓÃ',27,0,'AuthManager/changeStatus?method=forbidGroup',0,'½ûÓÃÓÃ»§×é','',0,1);
-INSERT INTO `onethink_menu` VALUES (30,'»Ö¸´',27,0,'AuthManager/changeStatus?method=resumeGroup',0,'»Ö¸´ÒÑ½ûÓÃµÄÓÃ»§×é','',0,1);
-INSERT INTO `onethink_menu` VALUES (31,'ĞÂÔö',27,0,'AuthManager/createGroup',0,'´´½¨ĞÂµÄÓÃ»§×é','',0,1);
-INSERT INTO `onethink_menu` VALUES (32,'±à¼­',27,0,'AuthManager/editGroup',0,'±à¼­ÓÃ»§×éÃû³ÆºÍÃèÊö','',0,1);
-INSERT INTO `onethink_menu` VALUES (33,'±£´æÓÃ»§×é',27,0,'AuthManager/writeGroup',0,'ĞÂÔöºÍ±à¼­ÓÃ»§×éµÄ\"±£´æ\"°´Å¥','',0,1);
-INSERT INTO `onethink_menu` VALUES (34,'ÊÚÈ¨',27,0,'AuthManager/group',0,'\"ºóÌ¨ \\ ÓÃ»§ \\ ÓÃ»§ĞÅÏ¢\"ÁĞ±íÒ³µÄ\"ÊÚÈ¨\"²Ù×÷°´Å¥,ÓÃÓÚÉèÖÃÓÃ»§ËùÊôÓÃ»§×é','',0,1);
-INSERT INTO `onethink_menu` VALUES (35,'·ÃÎÊÊÚÈ¨',27,0,'AuthManager/access',0,'\"ºóÌ¨ \\ ÓÃ»§ \\ È¨ÏŞ¹ÜÀí\"ÁĞ±íÒ³µÄ\"·ÃÎÊÊÚÈ¨\"²Ù×÷°´Å¥','',0,1);
-INSERT INTO `onethink_menu` VALUES (36,'³ÉÔ±ÊÚÈ¨',27,0,'AuthManager/user',0,'\"ºóÌ¨ \\ ÓÃ»§ \\ È¨ÏŞ¹ÜÀí\"ÁĞ±íÒ³µÄ\"³ÉÔ±ÊÚÈ¨\"²Ù×÷°´Å¥','',0,1);
-INSERT INTO `onethink_menu` VALUES (37,'½â³ıÊÚÈ¨',27,0,'AuthManager/removeFromGroup',0,'\"³ÉÔ±ÊÚÈ¨\"ÁĞ±íÒ³ÄÚµÄ½â³ıÊÚÈ¨²Ù×÷°´Å¥','',0,1);
-INSERT INTO `onethink_menu` VALUES (38,'±£´æ³ÉÔ±ÊÚÈ¨',27,0,'AuthManager/addToGroup',0,'\"ÓÃ»§ĞÅÏ¢\"ÁĞ±íÒ³\"ÊÚÈ¨\"Ê±µÄ\"±£´æ\"°´Å¥ºÍ\"³ÉÔ±ÊÚÈ¨\"ÀïÓÒÉÏ½ÇµÄ\"Ìí¼Ó\"°´Å¥)','',0,1);
-INSERT INTO `onethink_menu` VALUES (39,'·ÖÀàÊÚÈ¨',27,0,'AuthManager/category',0,'\"ºóÌ¨ \\ ÓÃ»§ \\ È¨ÏŞ¹ÜÀí\"ÁĞ±íÒ³µÄ\"·ÖÀàÊÚÈ¨\"²Ù×÷°´Å¥','',0,1);
-INSERT INTO `onethink_menu` VALUES (40,'±£´æ·ÖÀàÊÚÈ¨',27,0,'AuthManager/addToCategory',0,'\"·ÖÀàÊÚÈ¨\"Ò³ÃæµÄ\"±£´æ\"°´Å¥','',0,1);
-INSERT INTO `onethink_menu` VALUES (41,'Ä£ĞÍÊÚÈ¨',27,0,'AuthManager/modelauth',0,'\"ºóÌ¨ \\ ÓÃ»§ \\ È¨ÏŞ¹ÜÀí\"ÁĞ±íÒ³µÄ\"Ä£ĞÍÊÚÈ¨\"²Ù×÷°´Å¥','',0,1);
-INSERT INTO `onethink_menu` VALUES (42,'±£´æÄ£ĞÍÊÚÈ¨',27,0,'AuthManager/addToModel',0,'\"·ÖÀàÊÚÈ¨\"Ò³ÃæµÄ\"±£´æ\"°´Å¥','',0,1);
-INSERT INTO `onethink_menu` VALUES (43,'À©Õ¹',0,7,'Addons/index',0,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (44,'²å¼ş¹ÜÀí',43,1,'Addons/index',0,'','À©Õ¹',0,1);
-INSERT INTO `onethink_menu` VALUES (45,'´´½¨',44,0,'Addons/create',0,'·şÎñÆ÷ÉÏ´´½¨²å¼ş½á¹¹Ïòµ¼','',0,1);
-INSERT INTO `onethink_menu` VALUES (46,'¼ì²â´´½¨',44,0,'Addons/checkForm',0,'¼ì²â²å¼şÊÇ·ñ¿ÉÒÔ´´½¨','',0,1);
-INSERT INTO `onethink_menu` VALUES (47,'Ô¤ÀÀ',44,0,'Addons/preview',0,'Ô¤ÀÀ²å¼ş¶¨ÒåÀàÎÄ¼ş','',0,1);
-INSERT INTO `onethink_menu` VALUES (48,'¿ìËÙÉú³É²å¼ş',44,0,'Addons/build',0,'¿ªÊ¼Éú³É²å¼ş½á¹¹','',0,1);
-INSERT INTO `onethink_menu` VALUES (49,'ÉèÖÃ',44,0,'Addons/config',0,'ÉèÖÃ²å¼şÅäÖÃ','',0,1);
-INSERT INTO `onethink_menu` VALUES (50,'½ûÓÃ',44,0,'Addons/disable',0,'½ûÓÃ²å¼ş','',0,1);
-INSERT INTO `onethink_menu` VALUES (51,'ÆôÓÃ',44,0,'Addons/enable',0,'ÆôÓÃ²å¼ş','',0,1);
-INSERT INTO `onethink_menu` VALUES (52,'°²×°',44,0,'Addons/install',0,'°²×°²å¼ş','',0,1);
-INSERT INTO `onethink_menu` VALUES (53,'Ğ¶ÔØ',44,0,'Addons/uninstall',0,'Ğ¶ÔØ²å¼ş','',0,1);
-INSERT INTO `onethink_menu` VALUES (54,'¸üĞÂÅäÖÃ',44,0,'Addons/saveconfig',0,'¸üĞÂ²å¼şÅäÖÃ´¦Àí','',0,1);
-INSERT INTO `onethink_menu` VALUES (55,'²å¼şºóÌ¨ÁĞ±í',44,0,'Addons/adminList',0,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (56,'URL·½Ê½·ÃÎÊ²å¼ş',44,0,'Addons/execute',0,'¿ØÖÆÊÇ·ñÓĞÈ¨ÏŞÍ¨¹ıurl·ÃÎÊ²å¼ş¿ØÖÆÆ÷·½·¨','',0,1);
-INSERT INTO `onethink_menu` VALUES (57,'¹³×Ó¹ÜÀí',43,2,'Addons/hooks',0,'','À©Õ¹',0,1);
-INSERT INTO `onethink_menu` VALUES (58,'Ä£ĞÍ¹ÜÀí',68,3,'Model/index',0,'','ÏµÍ³ÉèÖÃ',0,1);
-INSERT INTO `onethink_menu` VALUES (59,'ĞÂÔö',58,0,'model/add',0,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (60,'±à¼­',58,0,'model/edit',0,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (61,'¸Ä±ä×´Ì¬',58,0,'model/setStatus',0,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (62,'±£´æÊı¾İ',58,0,'model/update',0,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (63,'ÊôĞÔ¹ÜÀí',68,0,'Attribute/index',1,'ÍøÕ¾ÊôĞÔÅäÖÃ¡£','',0,1);
-INSERT INTO `onethink_menu` VALUES (64,'ĞÂÔö',63,0,'Attribute/add',0,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (65,'±à¼­',63,0,'Attribute/edit',0,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (66,'¸Ä±ä×´Ì¬',63,0,'Attribute/setStatus',0,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (67,'±£´æÊı¾İ',63,0,'Attribute/update',0,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (68,'ÏµÍ³',0,4,'Config/group',0,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (69,'ÍøÕ¾ÉèÖÃ',68,1,'Config/group',0,'','ÏµÍ³ÉèÖÃ',0,1);
-INSERT INTO `onethink_menu` VALUES (70,'ÅäÖÃ¹ÜÀí',68,4,'Config/index',0,'','ÏµÍ³ÉèÖÃ',0,1);
-INSERT INTO `onethink_menu` VALUES (71,'±à¼­',70,0,'Config/edit',0,'ĞÂÔö±à¼­ºÍ±£´æÅäÖÃ','',0,1);
-INSERT INTO `onethink_menu` VALUES (72,'É¾³ı',70,0,'Config/del',0,'É¾³ıÅäÖÃ','',0,1);
-INSERT INTO `onethink_menu` VALUES (73,'ĞÂÔö',70,0,'Config/add',0,'ĞÂÔöÅäÖÃ','',0,1);
-INSERT INTO `onethink_menu` VALUES (74,'±£´æ',70,0,'Config/save',0,'±£´æÅäÖÃ','',0,1);
-INSERT INTO `onethink_menu` VALUES (75,'²Ëµ¥¹ÜÀí',68,5,'Menu/index',0,'','ÏµÍ³ÉèÖÃ',0,1);
-INSERT INTO `onethink_menu` VALUES (76,'µ¼º½¹ÜÀí',68,6,'Channel/index',0,'','ÏµÍ³ÉèÖÃ',0,1);
-INSERT INTO `onethink_menu` VALUES (77,'ĞÂÔö',76,0,'Channel/add',0,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (78,'±à¼­',76,0,'Channel/edit',0,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (79,'É¾³ı',76,0,'Channel/del',0,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (80,'·ÖÀà¹ÜÀí',68,2,'Category/index',0,'','ÏµÍ³ÉèÖÃ',0,1);
-INSERT INTO `onethink_menu` VALUES (81,'±à¼­',80,0,'Category/edit',0,'±à¼­ºÍ±£´æÀ¸Ä¿·ÖÀà','',0,1);
-INSERT INTO `onethink_menu` VALUES (82,'ĞÂÔö',80,0,'Category/add',0,'ĞÂÔöÀ¸Ä¿·ÖÀà','',0,1);
-INSERT INTO `onethink_menu` VALUES (83,'É¾³ı',80,0,'Category/remove',0,'É¾³ıÀ¸Ä¿·ÖÀà','',0,1);
-INSERT INTO `onethink_menu` VALUES (84,'ÒÆ¶¯',80,0,'Category/operate/type/move',0,'ÒÆ¶¯À¸Ä¿·ÖÀà','',0,1);
-INSERT INTO `onethink_menu` VALUES (85,'ºÏ²¢',80,0,'Category/operate/type/merge',0,'ºÏ²¢À¸Ä¿·ÖÀà','',0,1);
-INSERT INTO `onethink_menu` VALUES (86,'±¸·İÊı¾İ¿â',68,0,'Database/index?type=export',0,'','Êı¾İ±¸·İ',0,1);
-INSERT INTO `onethink_menu` VALUES (87,'±¸·İ',86,0,'Database/export',0,'±¸·İÊı¾İ¿â','',0,1);
-INSERT INTO `onethink_menu` VALUES (88,'ÓÅ»¯±í',86,0,'Database/optimize',0,'ÓÅ»¯Êı¾İ±í','',0,1);
-INSERT INTO `onethink_menu` VALUES (89,'ĞŞ¸´±í',86,0,'Database/repair',0,'ĞŞ¸´Êı¾İ±í','',0,1);
-INSERT INTO `onethink_menu` VALUES (90,'»¹Ô­Êı¾İ¿â',68,0,'Database/index?type=import',0,'','Êı¾İ±¸·İ',0,1);
-INSERT INTO `onethink_menu` VALUES (91,'»Ö¸´',90,0,'Database/import',0,'Êı¾İ¿â»Ö¸´','',0,1);
-INSERT INTO `onethink_menu` VALUES (92,'É¾³ı',90,0,'Database/del',0,'É¾³ı±¸·İÎÄ¼ş','',0,1);
-INSERT INTO `onethink_menu` VALUES (93,'ÆäËû',0,5,'other',1,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (96,'ĞÂÔö',75,0,'Menu/add',0,'','ÏµÍ³ÉèÖÃ',0,1);
-INSERT INTO `onethink_menu` VALUES (98,'±à¼­',75,0,'Menu/edit',0,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (106,'ĞĞÎªÈÕÖ¾',16,0,'Action/actionlog',0,'','ĞĞÎª¹ÜÀí',0,1);
-INSERT INTO `onethink_menu` VALUES (108,'ĞŞ¸ÄÃÜÂë',16,0,'User/updatePassword',1,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (109,'ĞŞ¸ÄêÇ³Æ',16,0,'User/updateNickname',1,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (110,'²é¿´ĞĞÎªÈÕÖ¾',106,0,'action/edit',1,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (112,'ĞÂÔöÊı¾İ',58,0,'think/add',1,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (113,'±à¼­Êı¾İ',58,0,'think/edit',1,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (114,'µ¼Èë',75,0,'Menu/import',0,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (115,'Éú³É',58,0,'Model/generate',0,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (116,'ĞÂÔö¹³×Ó',57,0,'Addons/addHook',0,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (117,'±à¼­¹³×Ó',57,0,'Addons/edithook',0,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (118,'ÎÄµµÅÅĞò',3,0,'Article/sort',1,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (119,'ÅÅĞò',70,0,'Config/sort',1,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (120,'ÅÅĞò',75,0,'Menu/sort',1,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (121,'ÅÅĞò',76,0,'Channel/sort',1,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (122,'Êı¾İÁĞ±í',58,0,'think/lists',1,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (123,'ÉóºËÁĞ±í',3,0,'Article/examine',1,'','',0,1);
-INSERT INTO `onethink_menu` VALUES (124,'ÒÑ°²×°²å¼ş²Ëµ¥ÅÅĞò',44,0,'Addons/sort',1,'ÒÑ°²×°²å¼ş²Ëµ¥ÅÅĞò','',0,1);
-INSERT INTO `onethink_menu` VALUES (125,'Ç°Ì¨È¨ÏŞ¹ÜÀí',27,0,'AuthManager/accessUser',0,'','',0,0);
-INSERT INTO `onethink_menu` VALUES (126,'ĞÂÔöÇ°Ì¨È¨ÏŞ½Úµã',27,0,'AuthManager/addNode',0,'','',0,0);
+INSERT INTO `onethink_menu` (`id`, `title`, `pid`, `sort`, `url`, `hide`, `tip`, `group`, `is_dev`, `status`) VALUES
+(1, 'é¦–é¡µ', 0, 1, 'Index/index', 0, '', '', 0, 1),
+(2, 'å†…å®¹', 0, 2, 'Article/index', 0, '', '', 0, 1),
+(3, 'æ–‡æ¡£åˆ—è¡¨', 2, 0, 'article/index', 1, '', 'å†…å®¹', 0, 1),
+(4, 'æ–°å¢', 3, 0, 'article/add', 0, '', '', 0, 1),
+(5, 'ç¼–è¾‘', 3, 0, 'article/edit', 0, '', '', 0, 1),
+(6, 'æ”¹å˜çŠ¶æ€', 3, 0, 'article/setStatus', 0, '', '', 0, 1),
+(7, 'ä¿å­˜', 3, 0, 'article/update', 0, '', '', 0, 1),
+(8, 'ä¿å­˜è‰ç¨¿', 3, 0, 'article/autoSave', 0, '', '', 0, 1),
+(9, 'ç§»åŠ¨', 3, 0, 'article/move', 0, '', '', 0, 1),
+(10, 'å¤åˆ¶', 3, 0, 'article/copy', 0, '', '', 0, 1),
+(11, 'ç²˜è´´', 3, 0, 'article/paste', 0, '', '', 0, 1),
+(12, 'å¯¼å…¥', 3, 0, 'article/batchOperate', 0, '', '', 0, 1),
+(13, 'å›æ”¶ç«™', 2, 0, 'article/recycle', 1, '', 'å†…å®¹', 0, 1),
+(14, 'è¿˜åŸ', 13, 0, 'article/permit', 0, '', '', 0, 1),
+(15, 'æ¸…ç©º', 13, 0, 'article/clear', 0, '', '', 0, 1),
+(16, 'ç”¨æˆ·', 0, 3, 'User/index', 0, '', '', 0, 1),
+(17, 'ç”¨æˆ·ä¿¡æ¯', 16, 0, 'User/index', 0, '', 'ç”¨æˆ·ç®¡ç†', 0, 1),
+(18, 'æ–°å¢ç”¨æˆ·', 17, 0, 'User/add', 0, 'æ·»åŠ æ–°ç”¨æˆ·', '', 0, 1),
+(19, 'ç”¨æˆ·è¡Œä¸º', 16, 0, 'User/action', 0, '', 'è¡Œä¸ºç®¡ç†', 0, 1),
+(20, 'æ–°å¢ç”¨æˆ·è¡Œä¸º', 19, 0, 'User/addaction', 0, '', '', 0, 1),
+(21, 'ç¼–è¾‘ç”¨æˆ·è¡Œä¸º', 19, 0, 'User/editaction', 0, '', '', 0, 1),
+(22, 'ä¿å­˜ç”¨æˆ·è¡Œä¸º', 19, 0, 'User/saveAction', 0, '"ç”¨æˆ·->ç”¨æˆ·è¡Œä¸º"ä¿å­˜ç¼–è¾‘å’Œæ–°å¢çš„ç”¨æˆ·è¡Œä¸º', '', 0, 1),
+(23, 'å˜æ›´è¡Œä¸ºçŠ¶æ€', 19, 0, 'User/setStatus', 0, '"ç”¨æˆ·->ç”¨æˆ·è¡Œä¸º"ä¸­çš„å¯ç”¨,ç¦ç”¨å’Œåˆ é™¤æƒé™', '', 0, 1),
+(24, 'ç¦ç”¨ä¼šå‘˜', 19, 0, 'User/changeStatus?method=forbidUser', 0, '"ç”¨æˆ·->ç”¨æˆ·ä¿¡æ¯"ä¸­çš„ç¦ç”¨', '', 0, 1),
+(25, 'å¯ç”¨ä¼šå‘˜', 19, 0, 'User/changeStatus?method=resumeUser', 0, '"ç”¨æˆ·->ç”¨æˆ·ä¿¡æ¯"ä¸­çš„å¯ç”¨', '', 0, 1),
+(26, 'åˆ é™¤ä¼šå‘˜', 19, 0, 'User/changeStatus?method=deleteUser', 0, '"ç”¨æˆ·->ç”¨æˆ·ä¿¡æ¯"ä¸­çš„åˆ é™¤', '', 0, 1),
+(27, 'æƒé™ç®¡ç†', 16, 0, 'AuthManager/index', 0, '', 'ç”¨æˆ·ç®¡ç†', 0, 1),
+(28, 'åˆ é™¤', 27, 0, 'AuthManager/changeStatus?method=deleteGroup', 0, 'åˆ é™¤ç”¨æˆ·ç»„', '', 0, 1),
+(29, 'ç¦ç”¨', 27, 0, 'AuthManager/changeStatus?method=forbidGroup', 0, 'ç¦ç”¨ç”¨æˆ·ç»„', '', 0, 1),
+(30, 'æ¢å¤', 27, 0, 'AuthManager/changeStatus?method=resumeGroup', 0, 'æ¢å¤å·²ç¦ç”¨çš„ç”¨æˆ·ç»„', '', 0, 1),
+(31, 'æ–°å¢', 27, 0, 'AuthManager/createGroup', 0, 'åˆ›å»ºæ–°çš„ç”¨æˆ·ç»„', '', 0, 1),
+(32, 'ç¼–è¾‘', 27, 0, 'AuthManager/editGroup', 0, 'ç¼–è¾‘ç”¨æˆ·ç»„åç§°å’Œæè¿°', '', 0, 1),
+(33, 'ä¿å­˜ç”¨æˆ·ç»„', 27, 0, 'AuthManager/writeGroup', 0, 'æ–°å¢å’Œç¼–è¾‘ç”¨æˆ·ç»„çš„"ä¿å­˜"æŒ‰é’®', '', 0, 1),
+(34, 'æˆæƒ', 27, 0, 'AuthManager/group', 0, '"åå° \\ ç”¨æˆ· \\ ç”¨æˆ·ä¿¡æ¯"åˆ—è¡¨é¡µçš„"æˆæƒ"æ“ä½œæŒ‰é’®,ç”¨äºè®¾ç½®ç”¨æˆ·æ‰€å±ç”¨æˆ·ç»„', '', 0, 1),
+(35, 'è®¿é—®æˆæƒ', 27, 0, 'AuthManager/access', 0, '"åå° \\ ç”¨æˆ· \\ æƒé™ç®¡ç†"åˆ—è¡¨é¡µçš„"è®¿é—®æˆæƒ"æ“ä½œæŒ‰é’®', '', 0, 1),
+(36, 'æˆå‘˜æˆæƒ', 27, 0, 'AuthManager/user', 0, '"åå° \\ ç”¨æˆ· \\ æƒé™ç®¡ç†"åˆ—è¡¨é¡µçš„"æˆå‘˜æˆæƒ"æ“ä½œæŒ‰é’®', '', 0, 1),
+(37, 'è§£é™¤æˆæƒ', 27, 0, 'AuthManager/removeFromGroup', 0, '"æˆå‘˜æˆæƒ"åˆ—è¡¨é¡µå†…çš„è§£é™¤æˆæƒæ“ä½œæŒ‰é’®', '', 0, 1),
+(38, 'ä¿å­˜æˆå‘˜æˆæƒ', 27, 0, 'AuthManager/addToGroup', 0, '"ç”¨æˆ·ä¿¡æ¯"åˆ—è¡¨é¡µ"æˆæƒ"æ—¶çš„"ä¿å­˜"æŒ‰é’®å’Œ"æˆå‘˜æˆæƒ"é‡Œå³ä¸Šè§’çš„"æ·»åŠ "æŒ‰é’®)', '', 0, 1),
+(39, 'åˆ†ç±»æˆæƒ', 27, 0, 'AuthManager/category', 0, '"åå° \\ ç”¨æˆ· \\ æƒé™ç®¡ç†"åˆ—è¡¨é¡µçš„"åˆ†ç±»æˆæƒ"æ“ä½œæŒ‰é’®', '', 0, 1),
+(40, 'ä¿å­˜åˆ†ç±»æˆæƒ', 27, 0, 'AuthManager/addToCategory', 0, '"åˆ†ç±»æˆæƒ"é¡µé¢çš„"ä¿å­˜"æŒ‰é’®', '', 0, 1),
+(41, 'æ¨¡å‹æˆæƒ', 27, 0, 'AuthManager/modelauth', 0, '"åå° \\ ç”¨æˆ· \\ æƒé™ç®¡ç†"åˆ—è¡¨é¡µçš„"æ¨¡å‹æˆæƒ"æ“ä½œæŒ‰é’®', '', 0, 1),
+(42, 'ä¿å­˜æ¨¡å‹æˆæƒ', 27, 0, 'AuthManager/addToModel', 0, '"åˆ†ç±»æˆæƒ"é¡µé¢çš„"ä¿å­˜"æŒ‰é’®', '', 0, 1),
+(43, 'æ‰©å±•', 0, 7, 'Addons/index', 0, '', '', 0, 1),
+(44, 'æ’ä»¶ç®¡ç†', 43, 1, 'Addons/index', 0, '', 'æ‰©å±•', 0, 1),
+(45, 'åˆ›å»º', 44, 0, 'Addons/create', 0, 'æœåŠ¡å™¨ä¸Šåˆ›å»ºæ’ä»¶ç»“æ„å‘å¯¼', '', 0, 1),
+(46, 'æ£€æµ‹åˆ›å»º', 44, 0, 'Addons/checkForm', 0, 'æ£€æµ‹æ’ä»¶æ˜¯å¦å¯ä»¥åˆ›å»º', '', 0, 1),
+(47, 'é¢„è§ˆ', 44, 0, 'Addons/preview', 0, 'é¢„è§ˆæ’ä»¶å®šä¹‰ç±»æ–‡ä»¶', '', 0, 1),
+(48, 'å¿«é€Ÿç”Ÿæˆæ’ä»¶', 44, 0, 'Addons/build', 0, 'å¼€å§‹ç”Ÿæˆæ’ä»¶ç»“æ„', '', 0, 1),
+(49, 'è®¾ç½®', 44, 0, 'Addons/config', 0, 'è®¾ç½®æ’ä»¶é…ç½®', '', 0, 1),
+(50, 'ç¦ç”¨', 44, 0, 'Addons/disable', 0, 'ç¦ç”¨æ’ä»¶', '', 0, 1),
+(51, 'å¯ç”¨', 44, 0, 'Addons/enable', 0, 'å¯ç”¨æ’ä»¶', '', 0, 1),
+(52, 'å®‰è£…', 44, 0, 'Addons/install', 0, 'å®‰è£…æ’ä»¶', '', 0, 1),
+(53, 'å¸è½½', 44, 0, 'Addons/uninstall', 0, 'å¸è½½æ’ä»¶', '', 0, 1),
+(54, 'æ›´æ–°é…ç½®', 44, 0, 'Addons/saveconfig', 0, 'æ›´æ–°æ’ä»¶é…ç½®å¤„ç†', '', 0, 1),
+(55, 'æ’ä»¶åå°åˆ—è¡¨', 44, 0, 'Addons/adminList', 0, '', '', 0, 1),
+(56, 'URLæ–¹å¼è®¿é—®æ’ä»¶', 44, 0, 'Addons/execute', 0, 'æ§åˆ¶æ˜¯å¦æœ‰æƒé™é€šè¿‡urlè®¿é—®æ’ä»¶æ§åˆ¶å™¨æ–¹æ³•', '', 0, 1),
+(57, 'é’©å­ç®¡ç†', 43, 2, 'Addons/hooks', 0, '', 'æ‰©å±•', 0, 1),
+(58, 'æ¨¡å‹ç®¡ç†', 68, 3, 'Model/index', 0, '', 'ç³»ç»Ÿè®¾ç½®', 0, 1),
+(59, 'æ–°å¢', 58, 0, 'model/add', 0, '', '', 0, 1),
+(60, 'ç¼–è¾‘', 58, 0, 'model/edit', 0, '', '', 0, 1),
+(61, 'æ”¹å˜çŠ¶æ€', 58, 0, 'model/setStatus', 0, '', '', 0, 1),
+(62, 'ä¿å­˜æ•°æ®', 58, 0, 'model/update', 0, '', '', 0, 1),
+(63, 'å±æ€§ç®¡ç†', 68, 0, 'Attribute/index', 1, 'ç½‘ç«™å±æ€§é…ç½®ã€‚', '', 0, 1),
+(64, 'æ–°å¢', 63, 0, 'Attribute/add', 0, '', '', 0, 1),
+(65, 'ç¼–è¾‘', 63, 0, 'Attribute/edit', 0, '', '', 0, 1),
+(66, 'æ”¹å˜çŠ¶æ€', 63, 0, 'Attribute/setStatus', 0, '', '', 0, 1),
+(67, 'ä¿å­˜æ•°æ®', 63, 0, 'Attribute/update', 0, '', '', 0, 1),
+(68, 'ç³»ç»Ÿ', 0, 4, 'Config/group', 0, '', '', 0, 1),
+(69, 'ç½‘ç«™è®¾ç½®', 68, 1, 'Config/group', 0, '', 'ç³»ç»Ÿè®¾ç½®', 0, 1),
+(70, 'é…ç½®ç®¡ç†', 68, 4, 'Config/index', 0, '', 'ç³»ç»Ÿè®¾ç½®', 0, 1),
+(71, 'ç¼–è¾‘', 70, 0, 'Config/edit', 0, 'æ–°å¢ç¼–è¾‘å’Œä¿å­˜é…ç½®', '', 0, 1),
+(72, 'åˆ é™¤', 70, 0, 'Config/del', 0, 'åˆ é™¤é…ç½®', '', 0, 1),
+(73, 'æ–°å¢', 70, 0, 'Config/add', 0, 'æ–°å¢é…ç½®', '', 0, 1),
+(74, 'ä¿å­˜', 70, 0, 'Config/save', 0, 'ä¿å­˜é…ç½®', '', 0, 1),
+(75, 'èœå•ç®¡ç†', 68, 5, 'Menu/index', 0, '', 'ç³»ç»Ÿè®¾ç½®', 0, 1),
+(76, 'å¯¼èˆªç®¡ç†', 68, 6, 'Channel/index', 0, '', 'ç³»ç»Ÿè®¾ç½®', 0, 1),
+(77, 'æ–°å¢', 76, 0, 'Channel/add', 0, '', '', 0, 1),
+(78, 'ç¼–è¾‘', 76, 0, 'Channel/edit', 0, '', '', 0, 1),
+(79, 'åˆ é™¤', 76, 0, 'Channel/del', 0, '', '', 0, 1),
+(80, 'åˆ†ç±»ç®¡ç†', 68, 2, 'Category/index', 0, '', 'ç³»ç»Ÿè®¾ç½®', 0, 1),
+(81, 'ç¼–è¾‘', 80, 0, 'Category/edit', 0, 'ç¼–è¾‘å’Œä¿å­˜æ ç›®åˆ†ç±»', '', 0, 1),
+(82, 'æ–°å¢', 80, 0, 'Category/add', 0, 'æ–°å¢æ ç›®åˆ†ç±»', '', 0, 1),
+(83, 'åˆ é™¤', 80, 0, 'Category/remove', 0, 'åˆ é™¤æ ç›®åˆ†ç±»', '', 0, 1),
+(84, 'ç§»åŠ¨', 80, 0, 'Category/operate/type/move', 0, 'ç§»åŠ¨æ ç›®åˆ†ç±»', '', 0, 1),
+(85, 'åˆå¹¶', 80, 0, 'Category/operate/type/merge', 0, 'åˆå¹¶æ ç›®åˆ†ç±»', '', 0, 1),
+(86, 'å¤‡ä»½æ•°æ®åº“', 68, 0, 'Database/index?type=export', 0, '', 'æ•°æ®å¤‡ä»½', 0, 1),
+(87, 'å¤‡ä»½', 86, 0, 'Database/export', 0, 'å¤‡ä»½æ•°æ®åº“', '', 0, 1),
+(88, 'ä¼˜åŒ–è¡¨', 86, 0, 'Database/optimize', 0, 'ä¼˜åŒ–æ•°æ®è¡¨', '', 0, 1),
+(89, 'ä¿®å¤è¡¨', 86, 0, 'Database/repair', 0, 'ä¿®å¤æ•°æ®è¡¨', '', 0, 1),
+(90, 'è¿˜åŸæ•°æ®åº“', 68, 0, 'Database/index?type=import', 0, '', 'æ•°æ®å¤‡ä»½', 0, 1),
+(91, 'æ¢å¤', 90, 0, 'Database/import', 0, 'æ•°æ®åº“æ¢å¤', '', 0, 1),
+(92, 'åˆ é™¤', 90, 0, 'Database/del', 0, 'åˆ é™¤å¤‡ä»½æ–‡ä»¶', '', 0, 1),
+(93, 'å…¶ä»–', 0, 5, 'other', 1, '', '', 0, 1),
+(96, 'æ–°å¢', 75, 0, 'Menu/add', 0, '', 'ç³»ç»Ÿè®¾ç½®', 0, 1),
+(98, 'ç¼–è¾‘', 75, 0, 'Menu/edit', 0, '', '', 0, 1),
+(106, 'è¡Œä¸ºæ—¥å¿—', 16, 0, 'Action/actionlog', 0, '', 'è¡Œä¸ºç®¡ç†', 0, 1),
+(108, 'ä¿®æ”¹å¯†ç ', 16, 0, 'User/updatePassword', 1, '', '', 0, 1),
+(109, 'ä¿®æ”¹æ˜µç§°', 16, 0, 'User/updateNickname', 1, '', '', 0, 1),
+(110, 'æŸ¥çœ‹è¡Œä¸ºæ—¥å¿—', 106, 0, 'action/edit', 1, '', '', 0, 1),
+(112, 'æ–°å¢æ•°æ®', 58, 0, 'think/add', 1, '', '', 0, 1),
+(113, 'ç¼–è¾‘æ•°æ®', 58, 0, 'think/edit', 1, '', '', 0, 1),
+(114, 'å¯¼å…¥', 75, 0, 'Menu/import', 0, '', '', 0, 1),
+(115, 'ç”Ÿæˆ', 58, 0, 'Model/generate', 0, '', '', 0, 1),
+(116, 'æ–°å¢é’©å­', 57, 0, 'Addons/addHook', 0, '', '', 0, 1),
+(117, 'ç¼–è¾‘é’©å­', 57, 0, 'Addons/edithook', 0, '', '', 0, 1),
+(118, 'æ–‡æ¡£æ’åº', 3, 0, 'Article/sort', 1, '', '', 0, 1),
+(119, 'æ’åº', 70, 0, 'Config/sort', 1, '', '', 0, 1),
+(120, 'æ’åº', 75, 0, 'Menu/sort', 1, '', '', 0, 1),
+(121, 'æ’åº', 76, 0, 'Channel/sort', 1, '', '', 0, 1),
+(122, 'æ•°æ®åˆ—è¡¨', 58, 0, 'think/lists', 1, '', '', 0, 1),
+(123, 'å®¡æ ¸åˆ—è¡¨', 3, 0, 'Article/examine', 1, '', '', 0, 1),
+(124, 'å·²å®‰è£…æ’ä»¶èœå•æ’åº', 44, 0, 'Addons/sort', 1, 'å·²å®‰è£…æ’ä»¶èœå•æ’åº', '', 0, 1),
+(125, 'å‰å°æƒé™ç®¡ç†', 27, 0, 'AuthManager/accessUser', 0, '', '', 0, 0),
+(126, 'æ–°å¢å‰å°æƒé™èŠ‚ç‚¹', 27, 0, 'AuthManager/addNode', 0, '', '', 0, 0);
 
-#
-# Source for table onethink_model
-#
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `onethink_model`;
-CREATE TABLE `onethink_model` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Ä£ĞÍID',
-  `name` char(30) NOT NULL DEFAULT '' COMMENT 'Ä£ĞÍ±êÊ¶',
-  `title` char(30) NOT NULL DEFAULT '' COMMENT 'Ä£ĞÍÃû³Æ',
-  `extend` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '¼Ì³ĞµÄÄ£ĞÍ',
-  `relation` varchar(30) NOT NULL DEFAULT '' COMMENT '¼Ì³ĞÓë±»¼Ì³ĞÄ£ĞÍµÄ¹ØÁª×Ö¶Î',
-  `need_pk` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT 'ĞÂ½¨±íÊ±ÊÇ·ñĞèÒªÖ÷¼ü×Ö¶Î',
-  `field_sort` text COMMENT '±íµ¥×Ö¶ÎÅÅĞò',
-  `field_group` varchar(255) NOT NULL DEFAULT '1:»ù´¡' COMMENT '×Ö¶Î·Ö×é',
-  `attribute_list` text COMMENT 'ÊôĞÔÁĞ±í£¨±íµÄ×Ö¶Î£©',
-  `attribute_alias` varchar(255) NOT NULL DEFAULT '' COMMENT 'ÊôĞÔ±ğÃû¶¨Òå',
-  `template_list` varchar(100) NOT NULL DEFAULT '' COMMENT 'ÁĞ±íÄ£°å',
-  `template_add` varchar(100) NOT NULL DEFAULT '' COMMENT 'ĞÂÔöÄ£°å',
-  `template_edit` varchar(100) NOT NULL DEFAULT '' COMMENT '±à¼­Ä£°å',
-  `list_grid` text COMMENT 'ÁĞ±í¶¨Òå',
-  `list_row` smallint(2) unsigned NOT NULL DEFAULT '10' COMMENT 'ÁĞ±íÊı¾İ³¤¶È',
-  `search_key` varchar(50) NOT NULL DEFAULT '' COMMENT 'Ä¬ÈÏËÑË÷×Ö¶Î',
-  `search_list` varchar(255) NOT NULL DEFAULT '' COMMENT '¸ß¼¶ËÑË÷µÄ×Ö¶Î',
-  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '´´½¨Ê±¼ä',
-  `update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '¸üĞÂÊ±¼ä',
-  `status` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '×´Ì¬',
-  `engine_type` varchar(25) NOT NULL DEFAULT 'MyISAM' COMMENT 'Êı¾İ¿âÒıÇæ',
+--
+-- è¡¨çš„ç»“æ„ `onethink_model`
+--
+
+CREATE TABLE IF NOT EXISTS `onethink_model` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'æ¨¡å‹ID',
+  `name` char(30) NOT NULL DEFAULT '' COMMENT 'æ¨¡å‹æ ‡è¯†',
+  `title` char(30) NOT NULL DEFAULT '' COMMENT 'æ¨¡å‹åç§°',
+  `extend` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'ç»§æ‰¿çš„æ¨¡å‹',
+  `relation` varchar(30) NOT NULL DEFAULT '' COMMENT 'ç»§æ‰¿ä¸è¢«ç»§æ‰¿æ¨¡å‹çš„å…³è”å­—æ®µ',
+  `need_pk` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT 'æ–°å»ºè¡¨æ—¶æ˜¯å¦éœ€è¦ä¸»é”®å­—æ®µ',
+  `field_sort` text COMMENT 'è¡¨å•å­—æ®µæ’åº',
+  `field_group` varchar(255) NOT NULL DEFAULT '1:åŸºç¡€' COMMENT 'å­—æ®µåˆ†ç»„',
+  `attribute_list` text COMMENT 'å±æ€§åˆ—è¡¨ï¼ˆè¡¨çš„å­—æ®µï¼‰',
+  `attribute_alias` varchar(255) NOT NULL DEFAULT '' COMMENT 'å±æ€§åˆ«åå®šä¹‰',
+  `template_list` varchar(100) NOT NULL DEFAULT '' COMMENT 'åˆ—è¡¨æ¨¡æ¿',
+  `template_add` varchar(100) NOT NULL DEFAULT '' COMMENT 'æ–°å¢æ¨¡æ¿',
+  `template_edit` varchar(100) NOT NULL DEFAULT '' COMMENT 'ç¼–è¾‘æ¨¡æ¿',
+  `list_grid` text COMMENT 'åˆ—è¡¨å®šä¹‰',
+  `list_row` smallint(2) unsigned NOT NULL DEFAULT '10' COMMENT 'åˆ—è¡¨æ•°æ®é•¿åº¦',
+  `search_key` varchar(50) NOT NULL DEFAULT '' COMMENT 'é»˜è®¤æœç´¢å­—æ®µ',
+  `search_list` varchar(255) NOT NULL DEFAULT '' COMMENT 'é«˜çº§æœç´¢çš„å­—æ®µ',
+  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'åˆ›å»ºæ—¶é—´',
+  `update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'æ›´æ–°æ—¶é—´',
+  `status` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'çŠ¶æ€',
+  `engine_type` varchar(25) NOT NULL DEFAULT 'MyISAM' COMMENT 'æ•°æ®åº“å¼•æ“',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='ÎÄµµÄ£ĞÍ±í';
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='æ–‡æ¡£æ¨¡å‹è¡¨' AUTO_INCREMENT=9 ;
 
-#
-# Dumping data for table onethink_model
-#
+--
+-- è½¬å­˜è¡¨ä¸­çš„æ•°æ® `onethink_model`
+--
 
-INSERT INTO `onethink_model` VALUES (1,'document','»ù´¡ÎÄµµ',0,'',1,'{\"1\":[\"1\",\"2\",\"3\",\"4\",\"5\",\"6\",\"7\",\"8\",\"9\",\"10\",\"11\",\"12\",\"13\",\"14\",\"15\",\"16\",\"17\",\"18\",\"19\",\"20\",\"21\",\"22\"]}','1:»ù´¡','','','','','','id:±àºÅ\r\ntitle:±êÌâ:[EDIT]\r\ntype:ÀàĞÍ\r\nupdate_time:×îºó¸üĞÂ\r\nstatus:×´Ì¬\r\nview:ä¯ÀÀ\r\nid:²Ù×÷:[EDIT]|±à¼­,[DELETE]|É¾³ı',0,'','',1383891233,1384507827,1,'MyISAM');
-INSERT INTO `onethink_model` VALUES (2,'article','ÎÄÕÂ',1,'',1,'{\"1\":[\"3\",\"24\",\"2\",\"5\"],\"2\":[\"9\",\"13\",\"19\",\"10\",\"12\",\"16\",\"17\",\"26\",\"20\",\"14\",\"11\",\"25\"]}','1:»ù´¡,2:À©Õ¹','','','','','','',0,'','',1383891243,1422705220,1,'MyISAM');
-INSERT INTO `onethink_model` VALUES (3,'download','ÏÂÔØ',1,'',1,'{\"1\":[\"3\",\"28\",\"30\",\"32\",\"2\",\"5\",\"31\"],\"2\":[\"13\",\"10\",\"27\",\"9\",\"12\",\"16\",\"17\",\"19\",\"11\",\"20\",\"14\",\"29\"]}','1:»ù´¡,2:À©Õ¹','','','','','','',0,'','',1383891252,1387260449,1,'MyISAM');
+INSERT INTO `onethink_model` (`id`, `name`, `title`, `extend`, `relation`, `need_pk`, `field_sort`, `field_group`, `attribute_list`, `attribute_alias`, `template_list`, `template_add`, `template_edit`, `list_grid`, `list_row`, `search_key`, `search_list`, `create_time`, `update_time`, `status`, `engine_type`) VALUES
+(1, 'document', 'åŸºç¡€æ–‡æ¡£', 0, '', 1, '{"1":["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22"]}', '1:åŸºç¡€', '', '', '', '', '', 'id:ç¼–å·\r\ntitle:æ ‡é¢˜:[EDIT]\r\ntype:ç±»å‹\r\nupdate_time:æœ€åæ›´æ–°\r\nstatus:çŠ¶æ€\r\nview:æµè§ˆ\r\nid:æ“ä½œ:[EDIT]|ç¼–è¾‘,[DELETE]|åˆ é™¤', 0, '', '', 1383891233, 1384507827, 1, 'MyISAM'),
+(2, 'article', 'æ–‡ç« ', 1, '', 1, '{"1":["3","24","48","2","5"],"2":["9","13","19","10","12","16","17","26","20","14","11","25"]}', '1:åŸºç¡€,2:æ‰©å±•', '', '', '', '', '', '', 0, '', '', 1383891243, 1444976420, 1, 'MyISAM'),
+(3, 'download', 'ä¸‹è½½', 1, '', 1, '{"1":["3","28","30","32","2","5","31"],"2":["13","10","27","9","12","16","17","19","11","20","14","29"]}', '1:åŸºç¡€,2:æ‰©å±•', '', '', '', '', '', '', 0, '', '', 1383891252, 1387260449, 1, 'MyISAM');
 
-#
-# Source for table onethink_module
-#
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `onethink_module`;
-CREATE TABLE `onethink_module` (
+--
+-- è¡¨çš„ç»“æ„ `onethink_module`
+--
+
+CREATE TABLE IF NOT EXISTS `onethink_module` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(30) NOT NULL COMMENT 'Ä£¿éÃû',
-  `alias` varchar(30) NOT NULL COMMENT 'ÖĞÎÄÃû',
-  `version` varchar(20) NOT NULL COMMENT '°æ±¾ºÅ',
-  `is_com` tinyint(4) NOT NULL COMMENT 'ÊÇ·ñÉÌÒµ°æ',
-  `show_nav` tinyint(4) NOT NULL COMMENT 'ÊÇ·ñÏÔÊ¾ÔÚµ¼º½À¸ÖĞ',
-  `summary` varchar(200) NOT NULL COMMENT '¼ò½é',
-  `developer` varchar(50) NOT NULL COMMENT '¿ª·¢Õß',
-  `website` varchar(200) NOT NULL COMMENT 'ÍøÖ·',
-  `entry` varchar(50) NOT NULL COMMENT 'Ç°Ì¨Èë¿Ú',
-  `is_setup` tinyint(4) NOT NULL DEFAULT '1' COMMENT 'ÊÇ·ñÒÑ°²×°',
-  `sort` int(11) NOT NULL COMMENT 'Ä£¿éÅÅĞò',
+  `name` varchar(30) NOT NULL COMMENT 'æ¨¡å—å',
+  `alias` varchar(30) NOT NULL COMMENT 'ä¸­æ–‡å',
+  `version` varchar(20) NOT NULL COMMENT 'ç‰ˆæœ¬å·',
+  `is_com` tinyint(4) NOT NULL COMMENT 'æ˜¯å¦å•†ä¸šç‰ˆ',
+  `show_nav` tinyint(4) NOT NULL COMMENT 'æ˜¯å¦æ˜¾ç¤ºåœ¨å¯¼èˆªæ ä¸­',
+  `summary` varchar(200) NOT NULL COMMENT 'ç®€ä»‹',
+  `developer` varchar(50) NOT NULL COMMENT 'å¼€å‘è€…',
+  `website` varchar(200) NOT NULL COMMENT 'ç½‘å€',
+  `entry` varchar(50) NOT NULL COMMENT 'å‰å°å…¥å£',
+  `is_setup` tinyint(4) NOT NULL DEFAULT '1' COMMENT 'æ˜¯å¦å·²å®‰è£…',
+  `sort` int(11) NOT NULL COMMENT 'æ¨¡å—æ’åº',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
   KEY `name_2` (`name`)
-) ENGINE=MyISAM AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='Ä£¿é¹ÜÀí±í';
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='æ¨¡å—ç®¡ç†è¡¨' AUTO_INCREMENT=30 ;
 
-#
-# Dumping data for table onethink_module
-#
+--
+-- è½¬å­˜è¡¨ä¸­çš„æ•°æ® `onethink_module`
+--
 
-INSERT INTO `onethink_module` VALUES (24,'Group','Èº×é','1.0.0',0,1,'Èº×éÄ£¿é£¬ÔÊĞíÓÃ»§½¨Á¢×Ô¼ºµÄÈ¦×Ó','','','Group/index/index',1,0);
-INSERT INTO `onethink_module` VALUES (25,'Home','Ö÷Ò³','1.0.0',0,1,'Ê×Ò³Ä£¿é£¬Ö÷ÒªÓÃÓÚÕ¹Ê¾ÍøÕ¾ÄÚÈİ','','','Home/index/index',1,0);
+INSERT INTO `onethink_module` (`id`, `name`, `alias`, `version`, `is_com`, `show_nav`, `summary`, `developer`, `website`, `entry`, `is_setup`, `sort`) VALUES
+(24, 'Group', 'ç¾¤ç»„', '1.0.0', 0, 1, 'ç¾¤ç»„æ¨¡å—ï¼Œå…è®¸ç”¨æˆ·å»ºç«‹è‡ªå·±çš„åœˆå­', '', '', 'Group/index/index', 1, 0),
+(25, 'Home', 'ä¸»é¡µ', '1.0.0', 0, 1, 'é¦–é¡µæ¨¡å—ï¼Œä¸»è¦ç”¨äºå±•ç¤ºç½‘ç«™å†…å®¹', '', '', 'Home/index/index', 1, 0);
 
-#
-# Source for table onethink_picture
-#
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `onethink_picture`;
-CREATE TABLE `onethink_picture` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Ö÷¼üid×ÔÔö',
-  `path` varchar(255) NOT NULL DEFAULT '' COMMENT 'Â·¾¶',
-  `url` varchar(255) NOT NULL DEFAULT '' COMMENT 'Í¼Æ¬Á´½Ó',
-  `md5` char(32) NOT NULL DEFAULT '' COMMENT 'ÎÄ¼şmd5',
-  `sha1` char(40) NOT NULL DEFAULT '' COMMENT 'ÎÄ¼ş sha1±àÂë',
-  `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '×´Ì¬',
-  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '´´½¨Ê±¼ä',
+--
+-- è¡¨çš„ç»“æ„ `onethink_picture`
+--
+
+CREATE TABLE IF NOT EXISTS `onethink_picture` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ä¸»é”®idè‡ªå¢',
+  `path` varchar(255) NOT NULL DEFAULT '' COMMENT 'è·¯å¾„',
+  `url` varchar(255) NOT NULL DEFAULT '' COMMENT 'å›¾ç‰‡é“¾æ¥',
+  `md5` char(32) NOT NULL DEFAULT '' COMMENT 'æ–‡ä»¶md5',
+  `sha1` char(40) NOT NULL DEFAULT '' COMMENT 'æ–‡ä»¶ sha1ç¼–ç ',
+  `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT 'çŠ¶æ€',
+  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'åˆ›å»ºæ—¶é—´',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=81 ;
 
-#
-# Dumping data for table onethink_picture
-#
+-- --------------------------------------------------------
 
+--
+-- è¡¨çš„ç»“æ„ `onethink_schedule`
+--
 
-#
-# Source for table onethink_schedule
-#
-
-DROP TABLE IF EXISTS `onethink_schedule`;
-CREATE TABLE `onethink_schedule` (
+CREATE TABLE IF NOT EXISTS `onethink_schedule` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `task_to_run` varchar(255) NOT NULL COMMENT '¼Æ»®ÈÎÎñÖ´ĞĞ·½·¨',
-  `schedule_type` varchar(255) NOT NULL COMMENT 'Ö´ĞĞÆµÂÊ',
-  `modifier` varchar(255) DEFAULT NULL COMMENT 'Ö´ĞĞÆµÂÊ,ÀàĞÍÎªMONTHLYÊ±±ØĞë£»ONCEÊ±ÎŞĞ§£»ÆäËûÊ±Îª¿ÉÑ¡£¬Ä¬ÈÏÎª1',
-  `dirlist` varchar(255) DEFAULT NULL COMMENT 'Ö¸¶¨ÖÜ»òÔÂµÄÒ»Ìì»ò¶àÌì¡£Ö»ÓëWEEKLYºÍMONTHLY¹²Í¬Ê¹ÓÃÊ±ÓĞĞ§£¬ÆäËûÊ±ºöÂÔ¡£',
-  `month` varchar(255) DEFAULT NULL COMMENT 'Ö¸¶¨Ò»ÄêÖĞµÄÒ»¸öÔÂ»ò¶à¸öÔÂ.Ö»ÔÚschedule_type=MONTHLYÊ±ÓĞĞ§£¬ÆäËûÊ±ºöÂÔ¡£µ±modifier=LASTDAYÊ±±ØĞë£¬ÆäËûÊ±¿ÉÑ¡¡£ÓĞĞ§Öµ£ºJan - Dec£¬Ä¬ÈÏÎª*(Ã¿¸öÔÂ)',
-  `start_datetime` datetime NOT NULL COMMENT '¿ªÊ¼Ê±¼ä',
-  `end_datetime` datetime DEFAULT NULL COMMENT '½áÊøÊ±¼ä',
-  `last_run_time` datetime DEFAULT NULL COMMENT '×î½üÖ´ĞĞÊ±¼ä',
-  `info` varchar(255) DEFAULT NULL COMMENT '¶Ô¼Æ»®ÈÎÎñµÄ¼òÒªÃèÊö',
+  `title` varchar(50) NOT NULL COMMENT 'è®¡åˆ’ä»»åŠ¡åç§°',
+  `task_to_run` varchar(255) NOT NULL COMMENT 'è®¡åˆ’ä»»åŠ¡æ‰§è¡Œæ–¹æ³•',
+  `task_type` varchar(255) NOT NULL COMMENT 'æ‰§è¡Œå‘¨æœŸ:åªæ‰§è¡Œä¸€æ¬¡,æŒ‰åˆ†é’Ÿæ‰§è¡Œ,æŒ‰å°æ—¶æ‰§è¡Œ,æŒ‰å¤©æ‰§è¡Œ,æŒ‰å‘¨æ‰§è¡Œ,æŒ‰æœˆæ‰§è¡Œ',
+  `modifier` varchar(255) DEFAULT NULL COMMENT 'æ‰§è¡Œé¢‘ç‡,ç±»å‹ä¸ºâ€œæŒ‰æœˆæ‰§è¡Œâ€æ—¶å¿…é¡»ï¼›åªæ‰§è¡Œä¸€æ¬¡æ—¶æ— æ•ˆï¼›å…¶ä»–æ—¶ä¸ºå¯é€‰ï¼Œé»˜è®¤ä¸º1',
+  `daylist` varchar(255) DEFAULT NULL COMMENT 'æŒ‡å®šå‘¨æˆ–æœˆçš„ä¸€å¤©æˆ–å¤šå¤©ã€‚åªä¸WEEKLYå’ŒMONTHLYå…±åŒä½¿ç”¨æ—¶æœ‰æ•ˆï¼Œå…¶ä»–æ—¶å¿½ç•¥ã€‚',
+  `month` varchar(255) DEFAULT NULL COMMENT 'æŒ‡å®šä¸€å¹´ä¸­çš„ä¸€ä¸ªæœˆæˆ–å¤šä¸ªæœˆ.åªåœ¨task_type=MONTHLYæ—¶æœ‰æ•ˆï¼Œå…¶ä»–æ—¶å¿½ç•¥ã€‚å½“modifier=LASTDAYæ—¶å¿…é¡»ï¼Œå…¶ä»–æ—¶å¯é€‰ã€‚æœ‰æ•ˆå€¼ï¼šJan - Decï¼Œé»˜è®¤ä¸º*(æ¯ä¸ªæœˆ)',
+  `start_datetime` datetime NOT NULL COMMENT 'å¼€å§‹æ—¶é—´',
+  `end_datetime` datetime DEFAULT NULL COMMENT 'ç»“æŸæ—¶é—´',
+  `last_run_time` datetime DEFAULT NULL COMMENT 'æœ€è¿‘æ‰§è¡Œæ—¶é—´',
+  `memo` varchar(255) DEFAULT NULL COMMENT 'å¯¹è®¡åˆ’ä»»åŠ¡çš„ç®€è¦æè¿°',
+  `status` tinyint(2) NOT NULL DEFAULT '1' COMMENT 'çŠ¶æ€ï¼ˆ0ï¼šç¦ç”¨ï¼Œ1ï¼šæ­£å¸¸ï¼‰',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
-#
-# Dumping data for table onethink_schedule
-#
+--
+-- è½¬å­˜è¡¨ä¸­çš„æ•°æ® `onethink_schedule`
+--
 
+INSERT INTO `onethink_schedule` (`id`, `title`, `task_to_run`, `task_type`, `modifier`, `daylist`, `month`, `start_datetime`, `end_datetime`, `last_run_time`, `memo`, `status`) VALUES
+(1, '01', 'Function::send_mail::', 'ONCE', '', '', '', '2015-11-09 13:02:00', '2015-11-09 13:02:34', '2015-11-09 13:02:34', '999', 1);
 
-#
-# Source for table onethink_sensitive
-#
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `onethink_sensitive`;
-CREATE TABLE `onethink_sensitive` (
+--
+-- è¡¨çš„ç»“æ„ `onethink_sensitive`
+--
+
+CREATE TABLE IF NOT EXISTS `onethink_sensitive` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(50) NOT NULL,
   `status` tinyint(4) NOT NULL,
   `create_time` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
-#
-# Dumping data for table onethink_sensitive
-#
+--
+-- è½¬å­˜è¡¨ä¸­çš„æ•°æ® `onethink_sensitive`
+--
 
-INSERT INTO `onethink_sensitive` VALUES (1,'²İÄãÂè',1,1423663669);
-INSERT INTO `onethink_sensitive` VALUES (2,'²ÙÄãÃÃ',1,1423663710);
-INSERT INTO `onethink_sensitive` VALUES (3,'²ÙÄãÄÌÄÌ',1,1423663710);
-INSERT INTO `onethink_sensitive` VALUES (4,'²İÄãÄï',1,1423663710);
-INSERT INTO `onethink_sensitive` VALUES (5,'ËûÄÌÄÌ',1,1423895656);
+INSERT INTO `onethink_sensitive` (`id`, `title`, `status`, `create_time`) VALUES
+(1, 'è‰', 1, 1446778754);
 
-#
-# Source for table onethink_sync_login
-#
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `onethink_sync_login`;
-CREATE TABLE `onethink_sync_login` (
+--
+-- è¡¨çš„ç»“æ„ `onethink_sync_login`
+--
+
+CREATE TABLE IF NOT EXISTS `onethink_sync_login` (
   `uid` int(11) NOT NULL,
   `openid` varchar(255) NOT NULL,
   `type` varchar(255) NOT NULL,
@@ -1409,181 +1631,159 @@ CREATE TABLE `onethink_sync_login` (
   `status` tinyint(4) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-#
-# Dumping data for table onethink_sync_login
-#
+-- --------------------------------------------------------
 
+--
+-- è¡¨çš„ç»“æ„ `onethink_ucenter_admin`
+--
 
-#
-# Source for table onethink_ucenter_admin
-#
-
-DROP TABLE IF EXISTS `onethink_ucenter_admin`;
-CREATE TABLE `onethink_ucenter_admin` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '¹ÜÀíÔ±ID',
-  `member_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '¹ÜÀíÔ±ÓÃ»§ID',
-  `status` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '¹ÜÀíÔ±×´Ì¬',
+CREATE TABLE IF NOT EXISTS `onethink_ucenter_admin` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ç®¡ç†å‘˜ID',
+  `member_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'ç®¡ç†å‘˜ç”¨æˆ·ID',
+  `status` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'ç®¡ç†å‘˜çŠ¶æ€',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='¹ÜÀíÔ±±í';
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='ç®¡ç†å‘˜è¡¨' AUTO_INCREMENT=1 ;
 
-#
-# Dumping data for table onethink_ucenter_admin
-#
+-- --------------------------------------------------------
 
+--
+-- è¡¨çš„ç»“æ„ `onethink_ucenter_app`
+--
 
-#
-# Source for table onethink_ucenter_app
-#
-
-DROP TABLE IF EXISTS `onethink_ucenter_app`;
-CREATE TABLE `onethink_ucenter_app` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Ó¦ÓÃID',
-  `title` varchar(30) NOT NULL COMMENT 'Ó¦ÓÃÃû³Æ',
-  `url` varchar(100) NOT NULL COMMENT 'Ó¦ÓÃURL',
-  `ip` char(15) NOT NULL DEFAULT '' COMMENT 'Ó¦ÓÃIP',
-  `auth_key` varchar(100) NOT NULL DEFAULT '' COMMENT '¼ÓÃÜKEY',
-  `sys_login` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT 'Í¬²½µÇÂ½',
-  `allow_ip` varchar(255) NOT NULL DEFAULT '' COMMENT 'ÔÊĞí·ÃÎÊµÄIP',
-  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '´´½¨Ê±¼ä',
-  `update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '¸üĞÂÊ±¼ä',
-  `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'Ó¦ÓÃ×´Ì¬',
+CREATE TABLE IF NOT EXISTS `onethink_ucenter_app` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'åº”ç”¨ID',
+  `title` varchar(30) NOT NULL COMMENT 'åº”ç”¨åç§°',
+  `url` varchar(100) NOT NULL COMMENT 'åº”ç”¨URL',
+  `ip` char(15) NOT NULL DEFAULT '' COMMENT 'åº”ç”¨IP',
+  `auth_key` varchar(100) NOT NULL DEFAULT '' COMMENT 'åŠ å¯†KEY',
+  `sys_login` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT 'åŒæ­¥ç™»é™†',
+  `allow_ip` varchar(255) NOT NULL DEFAULT '' COMMENT 'å…è®¸è®¿é—®çš„IP',
+  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'åˆ›å»ºæ—¶é—´',
+  `update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'æ›´æ–°æ—¶é—´',
+  `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'åº”ç”¨çŠ¶æ€',
   PRIMARY KEY (`id`),
   KEY `status` (`status`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Ó¦ÓÃ±í';
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='åº”ç”¨è¡¨' AUTO_INCREMENT=1 ;
 
-#
-# Dumping data for table onethink_ucenter_app
-#
+-- --------------------------------------------------------
 
+--
+-- è¡¨çš„ç»“æ„ `onethink_ucenter_member`
+--
 
-#
-# Source for table onethink_ucenter_member
-#
-
-DROP TABLE IF EXISTS `onethink_ucenter_member`;
-CREATE TABLE `onethink_ucenter_member` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ÓÃ»§ID',
-  `username` char(16) NOT NULL COMMENT 'ÓÃ»§Ãû',
-  `password` char(32) NOT NULL COMMENT 'ÃÜÂë',
-  `email` char(32) NOT NULL COMMENT 'ÓÃ»§ÓÊÏä',
-  `mobile` char(15) NOT NULL DEFAULT '' COMMENT 'ÓÃ»§ÊÖ»ú',
-  `reg_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '×¢²áÊ±¼ä',
-  `reg_ip` bigint(20) NOT NULL DEFAULT '0' COMMENT '×¢²áIP',
-  `last_login_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '×îºóµÇÂ¼Ê±¼ä',
-  `last_login_ip` bigint(20) NOT NULL DEFAULT '0' COMMENT '×îºóµÇÂ¼IP',
-  `update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '¸üĞÂÊ±¼ä',
-  `status` tinyint(4) DEFAULT '0' COMMENT 'ÓÃ»§×´Ì¬',
+CREATE TABLE IF NOT EXISTS `onethink_ucenter_member` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ç”¨æˆ·ID',
+  `username` char(16) NOT NULL COMMENT 'ç”¨æˆ·å',
+  `password` char(32) NOT NULL COMMENT 'å¯†ç ',
+  `email` char(32) NOT NULL COMMENT 'ç”¨æˆ·é‚®ç®±',
+  `mobile` char(15) NOT NULL DEFAULT '' COMMENT 'ç”¨æˆ·æ‰‹æœº',
+  `reg_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'æ³¨å†Œæ—¶é—´',
+  `reg_ip` bigint(20) NOT NULL DEFAULT '0' COMMENT 'æ³¨å†ŒIP',
+  `last_login_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'æœ€åç™»å½•æ—¶é—´',
+  `last_login_ip` bigint(20) NOT NULL DEFAULT '0' COMMENT 'æœ€åç™»å½•IP',
+  `update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'æ›´æ–°æ—¶é—´',
+  `status` tinyint(4) DEFAULT '0' COMMENT 'ç”¨æˆ·çŠ¶æ€',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`),
   KEY `status` (`status`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='ÓÃ»§±í';
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='ç”¨æˆ·è¡¨' AUTO_INCREMENT=6 ;
 
-#
-# Dumping data for table onethink_ucenter_member
-#
+--
+-- è½¬å­˜è¡¨ä¸­çš„æ•°æ® `onethink_ucenter_member`
+--
 
-INSERT INTO `onethink_ucenter_member` VALUES (1,'admin','ecfb4272feb1d1fd11fc719c45b5e21d','836692464@qq.com','',1422599239,2130706433,1424688334,2130706433,1422599239,1);
-INSERT INTO `onethink_ucenter_member` VALUES (2,'xjq','bbe81237a2de1471f322ae25b0132dfc','app880@foxmail.com','',1422698522,2130706433,1424148677,2130706433,1422698522,1);
-INSERT INTO `onethink_ucenter_member` VALUES (3,'geniusxjq','bbe81237a2de1471f322ae25b0132dfc','geniusxjq@126.com','',1422699641,2130706433,1424399281,2130706433,1422699641,1);
-INSERT INTO `onethink_ucenter_member` VALUES (4,'xjq123','bbe81237a2de1471f322ae25b0132dfc','fafasfasdfsdf@126.com','',1424398787,2130706433,1424398807,2130706433,1424398787,1);
+INSERT INTO `onethink_ucenter_member` (`id`, `username`, `password`, `email`, `mobile`, `reg_time`, `reg_ip`, `last_login_time`, `last_login_ip`, `update_time`, `status`) VALUES
+(1, 'admin', 'bbe81237a2de1471f322ae25b0132dfc', '836692464@qq.com', '', 1444795583, 2130706433, 1447043052, 2130706433, 1444795583, 1),
+(2, 'xjq', 'bbe81237a2de1471f322ae25b0132dfc', 'app880@foxmail.com', '', 1422698522, 2130706433, 1424148677, 2130706433, 1422698522, 1),
+(3, 'geniusxjq', 'bbe81237a2de1471f322ae25b0132dfc', 'geniusxjq@126.com', '', 1445948878, 2130706433, 1446740517, 2130706433, 1445948878, 1),
+(4, 'xjq123', 'bbe81237a2de1471f322ae25b0132dfc', 'fafasfasdfsdf@126.com', '', 1424398787, 2130706433, 1424398807, 2130706433, 1424398787, 1),
+(5, '###', 'bbe81237a2de1471f322ae25b0132dfc', '777777@qq.com', '', 1444299602, 2130706433, 0, 0, 1444299602, 1);
 
-#
-# Source for table onethink_ucenter_setting
-#
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `onethink_ucenter_setting`;
-CREATE TABLE `onethink_ucenter_setting` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ÉèÖÃID',
-  `type` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'ÅäÖÃÀàĞÍ£¨1-ÓÃ»§ÅäÖÃ£©',
-  `value` text NOT NULL COMMENT 'ÅäÖÃÊı¾İ',
+--
+-- è¡¨çš„ç»“æ„ `onethink_ucenter_setting`
+--
+
+CREATE TABLE IF NOT EXISTS `onethink_ucenter_setting` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'è®¾ç½®ID',
+  `type` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'é…ç½®ç±»å‹ï¼ˆ1-ç”¨æˆ·é…ç½®ï¼‰',
+  `value` text NOT NULL COMMENT 'é…ç½®æ•°æ®',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='ÉèÖÃ±í';
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='è®¾ç½®è¡¨' AUTO_INCREMENT=1 ;
 
-#
-# Dumping data for table onethink_ucenter_setting
-#
+-- --------------------------------------------------------
 
+--
+-- è¡¨çš„ç»“æ„ `onethink_url`
+--
 
-#
-# Source for table onethink_url
-#
-
-DROP TABLE IF EXISTS `onethink_url`;
-CREATE TABLE `onethink_url` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Á´½ÓÎ¨Ò»±êÊ¶',
-  `url` char(255) NOT NULL DEFAULT '' COMMENT 'Á´½ÓµØÖ·',
-  `short` char(100) NOT NULL DEFAULT '' COMMENT '¶ÌÍøÖ·',
-  `status` tinyint(2) NOT NULL DEFAULT '2' COMMENT '×´Ì¬',
-  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '´´½¨Ê±¼ä',
+CREATE TABLE IF NOT EXISTS `onethink_url` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'é“¾æ¥å”¯ä¸€æ ‡è¯†',
+  `url` char(255) NOT NULL DEFAULT '' COMMENT 'é“¾æ¥åœ°å€',
+  `short` char(100) NOT NULL DEFAULT '' COMMENT 'çŸ­ç½‘å€',
+  `status` tinyint(2) NOT NULL DEFAULT '2' COMMENT 'çŠ¶æ€',
+  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'åˆ›å»ºæ—¶é—´',
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_url` (`url`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Á´½Ó±í';
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='é“¾æ¥è¡¨' AUTO_INCREMENT=1 ;
 
-#
-# Dumping data for table onethink_url
-#
+-- --------------------------------------------------------
 
+--
+-- è¡¨çš„ç»“æ„ `onethink_userdata`
+--
 
-#
-# Source for table onethink_userdata
-#
-
-DROP TABLE IF EXISTS `onethink_userdata`;
-CREATE TABLE `onethink_userdata` (
-  `uid` int(10) unsigned NOT NULL COMMENT 'ÓÃ»§id',
-  `type` tinyint(3) unsigned NOT NULL COMMENT 'ÀàĞÍ±êÊ¶',
-  `target_id` int(10) unsigned NOT NULL COMMENT 'Ä¿±êid',
+CREATE TABLE IF NOT EXISTS `onethink_userdata` (
+  `uid` int(10) unsigned NOT NULL COMMENT 'ç”¨æˆ·id',
+  `type` tinyint(3) unsigned NOT NULL COMMENT 'ç±»å‹æ ‡è¯†',
+  `target_id` int(10) unsigned NOT NULL COMMENT 'ç›®æ ‡id',
   UNIQUE KEY `uid` (`uid`,`type`,`target_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-#
-# Dumping data for table onethink_userdata
-#
+-- --------------------------------------------------------
 
+--
+-- è¡¨çš„ç»“æ„ `onethink_vote`
+--
 
-#
-# Source for table onethink_vote
-#
-
-DROP TABLE IF EXISTS `onethink_vote`;
-CREATE TABLE `onethink_vote` (
+CREATE TABLE IF NOT EXISTS `onethink_vote` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `title` char(80) NOT NULL COMMENT '±êÌâ',
-  `description` text COMMENT 'ÃèÊö',
-  `options` text NOT NULL COMMENT 'Ìí¼Ó¸÷ÖÖÍ¶Æ±Ñ¡Ïî',
-  `explanation` varchar(256) DEFAULT NULL COMMENT '±¸×¢',
-  `update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '¸üĞÂÊ±¼ä',
-  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '´´½¨Ê±¼ä',
+  `title` char(80) NOT NULL COMMENT 'æ ‡é¢˜',
+  `description` text COMMENT 'æè¿°',
+  `options` text NOT NULL COMMENT 'æ·»åŠ å„ç§æŠ•ç¥¨é€‰é¡¹',
+  `explanation` varchar(256) DEFAULT NULL COMMENT 'å¤‡æ³¨',
+  `update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'æ›´æ–°æ—¶é—´',
+  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'åˆ›å»ºæ—¶é—´',
   `voteconfig` char(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
 
-#
-# Dumping data for table onethink_vote
-#
+--
+-- è½¬å­˜è¡¨ä¸­çš„æ•°æ® `onethink_vote`
+--
 
+INSERT INTO `onethink_vote` (`id`, `title`, `description`, `options`, `explanation`, `update_time`, `create_time`, `voteconfig`) VALUES
+(13, '01', '01', '[{"id":"0","value":"01","num":"0","percent":"0"},{"id":"1","value":"1","num":"0","percent":"0"},{"id":"2","value":"1","num":"0","percent":"0"}]', '', 0, 1447046685, '1');
 
-#
-# Source for table onethink_wechat_message
-#
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `onethink_wechat_message`;
-CREATE TABLE `onethink_wechat_message` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '±àºÅ',
-  `msgid` int(64) unsigned NOT NULL COMMENT 'ĞÅÏ¢ID',
-  `type` varchar(100) NOT NULL COMMENT 'ĞÅÏ¢ÀàĞÍ',
-  `content` text NOT NULL COMMENT 'ĞÅÏ¢ÄÚÈİ',
-  `user` varchar(250) NOT NULL COMMENT 'ÓÃ»§Ãû&±êÊ¶',
-  `time` int(10) unsigned NOT NULL COMMENT '½ÓÊÕÊ±¼ä',
-  `is_reply` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'ÊÇ·ñ»Ø¸´',
+--
+-- è¡¨çš„ç»“æ„ `onethink_wechat_message`
+--
+
+CREATE TABLE IF NOT EXISTS `onethink_wechat_message` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ç¼–å·',
+  `msgid` int(64) unsigned NOT NULL COMMENT 'ä¿¡æ¯ID',
+  `type` varchar(100) NOT NULL COMMENT 'ä¿¡æ¯ç±»å‹',
+  `content` text NOT NULL COMMENT 'ä¿¡æ¯å†…å®¹',
+  `user` varchar(250) NOT NULL COMMENT 'ç”¨æˆ·å&æ ‡è¯†',
+  `time` int(10) unsigned NOT NULL COMMENT 'æ¥æ”¶æ—¶é—´',
+  `is_reply` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'æ˜¯å¦å›å¤',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
-#
-# Dumping data for table onethink_wechat_message
-#
-
-
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
