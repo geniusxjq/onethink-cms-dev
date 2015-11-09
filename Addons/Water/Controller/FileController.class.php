@@ -1,9 +1,10 @@
 <?php
-/**
+/*
  *
  * @author quick
  *
- */
+*/
+ 
 namespace Addons\Water\Controller;
 
 use Admin\Controller\AddonsController;
@@ -12,14 +13,16 @@ class FileController extends AddonsController
 {
 
     public function uploadPicture(){
-		
+	
         $config = array(
+						
 			'rootPath' => './Uploads/', //保存根路径			
             'savePath'   =>'Water/',
             'saveName'   =>'Water',
             'autoSub'    => true,
             'subName'    =>'',
             'replace'=> true,
+			
         );
 		
         /* 调用文件上传组件上传文件 */
@@ -32,7 +35,7 @@ class FileController extends AddonsController
 		
         if($info){
             $return['status'] = 1;
-            $return['url'] =$config['rootPath'].$config['savePath'].$info['download']['savename'];
+            $return['url'] =$config['rootPath'].$info['download']['savepath'].$info['download']['savename'];
         }else{
             $return['status'] = 0;
             $return['info'] = '上传失败';

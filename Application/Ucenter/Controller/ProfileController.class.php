@@ -52,7 +52,46 @@ class ProfileController extends UcenterController {
 	
 	public function avatar(){
 		
-		hook("UploadAvatar");
+		if(IS_POST){
+		
+			 $Avatar=D('Avatar');
+			 
+			 $pic_driver = C('PICTURE_UPLOAD_DRIVER');
+			 
+			 $config = array_merge(C('PICTURE_UPLOAD'),array(
+				'rootPath' => './Uploads/', //保存根路径			
+				'savePath'   =>'Avatar/',
+				'saveName'   =>'avatar',
+				'autoSub'    => true,
+				'subName'    =>UID,
+				'replace'=> true,
+			));
+			 
+			$info=$Avatar->upload(
+				$_FILES,
+				$config,
+				C('DOWNLOAD_UPLOAD_DRIVER'),
+				C("UPLOAD_{$pic_driver}_CONFIG")
+			);
+	
+			/* 记录图片信息 */
+			
+			if($info){
+			   $return['status'] = 1;
+			   $return['url'] =$config['rootPath'].$info['download']['savepath'].$info['download']['savename'];
+			   
+			} else {
+				$return['status'] = 0;
+				$return['info'] =$Avatar->getError();
+			}
+			
+			$this->ajaxReturn($return);
+		
+		}else{
+			
+			$this->display();
+			
+		}
 		
 	}
 	
