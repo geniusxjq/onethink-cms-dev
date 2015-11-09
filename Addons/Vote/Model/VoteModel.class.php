@@ -59,4 +59,18 @@ class VoteModel extends Model
 			'value' => 1,
 		),
 	);
+	
+	protected function _after_find(&$result,$options) {
+		
+	}
+	
+	protected function _after_select(&$result,$options){
+		foreach($result as &$record){
+			$this->_after_find($record,$options);
+		}
+		
+		int_to_string($result,array('voteconfig'=>array(1=>"单选",2=>"多选")));
+		
+	}
+
 }

@@ -25,12 +25,12 @@ class AdvertisingAddon extends Addon{
          * @var unknown_type
          */
         public $admin_list = array(
-        		'listKey' => array(
-        				'title'=>'广告位名称',
-        				'typetext'=>'广告位类型',
-        				'width'=>'广告位宽度',
-        				'height'=>'广告位高度',
-        				'statustext'=>'位置状态',
+        		'list_grid' => array(
+        				'title:广告位名称',
+        				'type_text:广告位类型',
+        				'width:广告位宽度',
+        				'height:广告位高度',
+        				'status_text:位置状态',
         		),
         		'model'=>'Advertising',
         		'order'=>'id asc'

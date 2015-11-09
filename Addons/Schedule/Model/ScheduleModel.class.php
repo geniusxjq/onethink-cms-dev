@@ -26,8 +26,6 @@ class ScheduleModel extends Model{
 	);
 	
 	protected function _afterFilter(&$result,$options) {
-		$result['status_text'] =  $result['status'] == 0 ? '禁用' : '正常';
-		$result['schedule_type_text']=$this->TAST_TYPE_TEXT[$result['schedule_type']];
 		
 	}
 	
@@ -39,6 +37,11 @@ class ScheduleModel extends Model{
 		foreach($result as &$record){
 			$this->_afterFilter($record,$options);
 		}
+		
+		int_to_string($result);
+		
+		int_to_string($result,array('task_type'=>$this->TAST_TYPE_TEXT));
+		
 	}
 	
 	//判断一个schedule是否有效
@@ -47,11 +50,11 @@ class ScheduleModel extends Model{
 		if( empty($schedule) ) {
 			$schedule = $this->schedule;
 		}
-		//task_to_run / schedule_type / start_datetime 必须
-		if( empty($schedule['task_to_run']) || empty($schedule['schedule_type']) || empty($schedule['start_datetime']) ) {
+		//task_to_run / task_type / start_datetime 必须
+		if( empty($schedule['task_to_run']) || empty($schedule['task_type']) || empty($schedule['start_datetime']) ) {
 			return false;
 		}
-		switch( strtoupper($schedule['schedule_type']) ) {
+		switch( strtoupper($schedule['task_type']) ) {
 			case 'ONCE':
 				return $this->_checkONCE($schedule);
 			case 'MINUTE':
@@ -135,7 +138,7 @@ class ScheduleModel extends Model{
 				
 		}
 		
-		if(strtoupper($schedule['schedule_type']) == 'ONCE') {
+		if(strtoupper($schedule['task_type']) == 'ONCE') {
 			
 			//ONCE类型的计划任务，将end_datetime设置为当前时间
 			$schedule['end_datetime'] = date('Y-m-d H:i:s');
@@ -143,7 +146,7 @@ class ScheduleModel extends Model{
 		}else {
 			
 			//非ONCE类型的计划任务， 防止由程序执行导致的启动时间的漂移
-			if(in_array($schedule['schedule_type'], array('MINUTE', 'HOURLY'))) {
+			if(in_array($schedule['task_type'], array('MINUTE', 'HOURLY'))) {
 				
 				//将last_run_time设置为当前时间（秒数设为0）
 				$schedule['last_run_time'] = date('Y-m-d H:i:s',$this->setSecondToZero());
@@ -160,7 +163,7 @@ class ScheduleModel extends Model{
 		$this->updateScheduleRunTime($schedule);
 		$str_log = "ID={$schedule['id']} 的任务已运行。 状态：".($run_result?"成功":"失败");
 		if(C('APP_DEBUG')){
-			$str_log  .= "任务为: {$schedule['task_to_run']} ，任务描述为: {$schedule['info']} 。";
+			$str_log  .= "任务为: {$schedule['task_to_run']} ，任务描述为: {$schedule['memo']} 。";
 		}
 		$this->_log($str_log);
 	}
@@ -253,7 +256,7 @@ class ScheduleModel extends Model{
 		($schedule['month'])&&($schedule['month']=count($schedule['month'])>=12?'*':implode(',',$schedule['month']));
 		(!$schedule['modifier'])&&($schedule['modifier']=1);
 		if($schedule['daylist']){
-			if(($schedule['schedule_type']=="WEEKLY")||(in_array($schedule['modifier'],array('FIRST','SECOND','THIRD','FOURTH','LAST')))){
+			if(($schedule['task_type']=="WEEKLY")||(in_array($schedule['modifier'],array('FIRST','SECOND','THIRD','FOURTH','LAST')))){
 				(count($schedule['daylist'])>=7)&&$schedule['daylist']="*";
 			}else{
 				(count($schedule['daylist'])>=31)&&$schedule['daylist']="*";
@@ -261,10 +264,10 @@ class ScheduleModel extends Model{
 			is_array($schedule['daylist'])&&($schedule['daylist']=implode(',',$schedule['daylist']));
 		}
 		
-		if($schedule['schedule_type']=='WEEKLY') {$schedule['month']='';}
-		if($schedule['schedule_type']=='MONTHLY-LASTDAY') {$schedule['daylist']='';}
-		if(in_array($schedule['schedule_type'],array('MINUTE','HOURLY','DAILY'))) {$schedule['daylist']=''; $schedule['month']='';}
-		if($schedule['schedule_type']=='ONCE'){ $schedule['daylist']=''; $schedule['month']=''; $schedule['modifier']='';}
+		if($schedule['task_type']=='WEEKLY') {$schedule['month']='';}
+		if($schedule['task_type']=='MONTHLY-LASTDAY') {$schedule['daylist']='';}
+		if(in_array($schedule['task_type'],array('MINUTE','HOURLY','DAILY'))) {$schedule['daylist']=''; $schedule['month']='';}
+		if($schedule['task_type']=='ONCE'){ $schedule['daylist']=''; $schedule['month']=''; $schedule['modifier']='';}
 		
 		return true;
 		
@@ -311,7 +314,7 @@ class ScheduleModel extends Model{
 		//更新到数据库
 		if( $this->isValidSchedule($schedule)) {
 			
-			if(strtoupper($schedule['schedule_type']) == 'ONCE') {
+			if(strtoupper($schedule['task_type']) == 'ONCE') {
 				
 				//ONCE类型的计划任务，将end_datetime和last_run_time设为相同
 				
@@ -337,10 +340,10 @@ class ScheduleModel extends Model{
 	//查询数据库，获取所有的计划任务（包括过期的）
 	//@return array()
 	public function getScheduleList() {
-		$this->scheduleList = S ( 'getScheduleList' );
+		$this->scheduleList = S ( 'Schedule-List' );
 		if ($this->scheduleList === false) {
 			$this->scheduleList = $this->where('status=1')->order ( 'id' )->select();
-			S ( 'getScheduleList', $this->scheduleList ); // 缓存一周
+			S ( 'Schedule-List', $this->scheduleList ); // 缓存一周
 		}
 		return $this->scheduleList;
 	}
@@ -361,7 +364,7 @@ class ScheduleModel extends Model{
 			return false;
 		}
 		
-		switch( strtoupper($schedule['schedule_type']) ) {
+		switch( strtoupper($schedule['task_type']) ) {
 			case 'ONCE':
 				$datetime =  $this->_calculateONCE($schedule);
 				break;
@@ -418,8 +421,8 @@ class ScheduleModel extends Model{
 		$this->schedule['task_to_run'] = $task_to_run;
 	}
 
-	public function setScheduleType($schedule_type) {
-		$this->schedule['schedule_type'] = $schedule_type;
+	public function setScheduleType($task_type) {
+		$this->schedule['task_type'] = $task_type;
 	}
 
 	public function setModifier($modifier) {
@@ -849,7 +852,7 @@ class ScheduleModel extends Model{
 	 * @return void
 	 */
 	public function cleanCache() {
-		S ( 'getScheduleList', null );
+		S ( 'Schedule-List', null );
 	}	
 	
 	 /**

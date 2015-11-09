@@ -12,12 +12,6 @@ use Common\Controller\Addon;
 class VoteAddon extends Addon
 {
 	
-	public function __construct()
-	{
-		parent::__construct();
-		include_once $this->addon_path . 'function.php';
-	}
-
 	public $info = array(
 		'name' => 'Vote',
 		'title' => '微投票',
@@ -55,7 +49,7 @@ class VoteAddon extends Addon
 		'list_grid' => array( //这里定义的是除了id序号外的表格里字段显示的表头名和模型一样支持函数和链接
 			'title:标题:[EDIT]',
 			'description:说明',
-			'voteconfig|viewtype:类型',
+			'voteconfig_text:类型',
 			'create_time|time_format:创建时间',
 			'id:操作:[EDIT]|编辑,[DELETE]|删除'
 		),

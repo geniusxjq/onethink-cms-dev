@@ -16,19 +16,18 @@ class SensitiveModel extends Model{
         array('create_time', NOW_TIME, self::MODEL_INSERT),
         array('status', 1, self::MODEL_BOTH),
     );
-	
-	protected function _afterFilter(&$result,$options) {
-		$result['status_text'] =  $result['status'] == 0 ? '禁用' : '正常';
-	}
-	
+		
 	protected function _after_find(&$result,$options) {
 		
 	}
 	
 	protected function _after_select(&$result,$options){
 		foreach($result as &$record){
-			$this->_afterFilter($record,$options);
+			$this->_after_find($record,$options);
 		}
+		
+		int_to_string($result);
+		
 	}
 
 	/**

@@ -40,8 +40,8 @@ class AdvertisementController extends AddonsController{
 				'link'=>'连接地址',
 				'create_time'=>'开始时间',
 				'end_time'=>'结束时间',
-				'is_nevertext'=>'永久有效',
-				'statustext'=>'状态',
+				'is_never_text'=>'永久有效',
+				'status_text'=>'状态',
 				'level'=>'优先级',
 		);
 		

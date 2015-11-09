@@ -10,6 +10,7 @@ use Think\Model;
 /**
  * 分类模型
  */
+ 
 class AdvertisingModel extends Model{
 	/* 自动完成规则 */
 	protected $_auto = array(
@@ -24,15 +25,18 @@ class AdvertisingModel extends Model{
 	}
 	
 	protected function _after_find(&$result,$options) {
-		$typetext = array(1=>'文字',2=>'图片',3=>'代码');//有其他广告位置自行添加  2，0版本将添加后台广告分类功能
-		$result['typetext'] = $typetext[$result['type']];
-		$result['statustext'] =  $result['status'] == 0 ? '禁用' : '正常';
 	}	
 	
 	protected function _after_select(&$result,$options){
+		
 		foreach($result as &$record){
 			$this->_after_find($record,$options);
 		}
+		
+		int_to_string($result);
+		
+		int_to_string($result,array('type'=>array(1=>'文字',2=>'图片',3=>'代码')));
+		
 	}
 		
 	/**

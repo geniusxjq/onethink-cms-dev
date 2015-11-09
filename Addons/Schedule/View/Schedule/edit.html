@@ -75,7 +75,7 @@ echo '<link href="__STATIC__/bootstrap/2.x/lib/datetimepicker/css/datetimepicker
                         <span class="check-tips">（执行任务的周期）</span>
                         </label>
 						<div class="controls">	
-                            <select name="schedule_type" id="schedule_type" >
+                            <select name="task_type" id="task_type" >
                             <option value="ONCE" selected="selected" data-text="once" data-type="type-1">只执行一次</option>
                             <option value="MINUTE" data-text="分钟(1-1439)" data-type="type-2">按分执行</option>
                             <option value="HOURLY" data-text="小时(1-23)" data-type="type-2">按时执行</option>
@@ -145,7 +145,7 @@ echo '<link href="__STATIC__/bootstrap/2.x/lib/datetimepicker/css/datetimepicker
 						<label class="item-label">简介<span class="check-tips">（对计划任务的简要描述）</span></label>
 						<div class="controls">
                         <label class="textarea">
-							<textarea rows="3" cols="54" name="info" value=""></textarea>
+							<textarea rows="3" cols="54" name="memo" value=""></textarea>
                         </label>
 						</div>
 					</div>																														
@@ -213,17 +213,17 @@ var EditData={$data?json_encode($data):'null'};
 		
 		}
 		
-		var the_schedule_type=$("#schedule_type option:selected").data("type");
+		var the_task_type=$("#task_type option:selected").data("type");
 		
 		//如果“按月的第N周执行”没有指定周的某一天则默认指定周一。
-		if(the_schedule_type=="type-5"){
+		if(the_task_type=="type-5"){
 			
 			$("#weekly-box input[class='checkbox-s'][value='Mon']").prop("checked",true);
 			
 		}
 		
 		//如果“按月的最后一天执行”没有指定月份，则默认指定每月。
-		if(the_schedule_type=="type-6"&&!$("#month-box input[class='checkbox-s']:checked").length){
+		if(the_task_type=="type-6"&&!$("#month-box input[class='checkbox-s']:checked").length){
 			
 			$("#month-box input[type='checkbox']").prop("checked",true);
 			
@@ -471,7 +471,7 @@ var EditData={$data?json_encode($data):'null'};
 	
 	function toggle_select_type(is_init){
 		
-		var o=$("#schedule_type option:selected");
+		var o=$("#task_type option:selected");
 		
 		var type=o.data("type");
 		
@@ -520,7 +520,7 @@ var EditData={$data?json_encode($data):'null'};
 	
 	$("#task-form").show();
 	
-	$("#schedule_type").change(toggle_select_type);
+	$("#task_type").change(toggle_select_type);
 	
 	//***************************************************全选的实现（checkbox）
 	

@@ -25,16 +25,19 @@ class AdvertisementModel extends Model{
 	protected function _after_find(&$result,$options) {
 		$_advertising = M('advertising')->find($result['position']);
 		$result['positiontext'] = $_advertising['title'];
-		$result['statustext'] =  $result['status'] == 0 ? '禁用' : '正常';
 		$result['create_time'] = date('Y-m-d H:i', $result['create_time']);
 		$result['end_time'] = date('Y-m-d H:i', $result['end_time']);
-		$result['is_nevertext']=$result['is_never']?'是':'否';
 	}
 	
 	protected function _after_select(&$result,$options){
 		foreach($result as &$record){
 			$this->_after_find($record,$options);
 		}
+		
+		int_to_string($result);
+		
+		int_to_string($result,array('is_never'=>array(0=>'否',1=>'是')));
+		
 	}
 		
 	/* 获取编辑数据 */
