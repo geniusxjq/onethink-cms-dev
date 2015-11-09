@@ -12,21 +12,27 @@ class FileController extends AddonsController
 {
 
     public function uploadPicture(){
+		
         $config = array(
-            'maxSize'    =>    3145728,
-            'rootPath'   =>    './Uploads/',
-            'savePath'   =>    'water/',
-            'saveName'   =>    'water',
-            'exts'       =>    array('jpg', 'gif', 'png', 'jpeg'),
-            'autoSub'    =>    true,
-            'subName'    =>    '',
+			'rootPath' => './Uploads/', //保存根路径			
+            'savePath'   =>'Water/',
+            'saveName'   =>'Water',
+            'autoSub'    => true,
+            'subName'    =>'',
             'replace'=> true,
         );
-        $upload = new \Think\Upload($config);// 实例化上传类
-        $info   =   $upload->upload($_FILES);
+		
+        /* 调用文件上传组件上传文件 */
+		 
+		$pic_driver = C('PICTURE_UPLOAD_DRIVER');
+		 
+        $Picture = new \Think\Upload(array_merge(C('PICTURE_UPLOAD'),$config),C('PICTURE_UPLOAD_DRIVER'),C("UPLOAD_{$pic_driver}_CONFIG"));
+				
+        $info = $Picture->upload($_FILES); 
+		
         if($info){
             $return['status'] = 1;
-            $return['url'] = './Uploads/water/'.$info['download']['savename'];
+            $return['url'] =$config['rootPath'].$config['savePath'].$info['download']['savename'];
         }else{
             $return['status'] = 0;
             $return['info'] = '上传失败';
