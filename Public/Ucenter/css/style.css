@@ -222,13 +222,10 @@ textarea:focus {
   }
 }
 
-/*导航底部开头部分*/
+/**/
 
 header .container{
-	padding:20px 0px 10px 0px;
-}
-header .container h2{
-	font-weight:normal;
+	padding:0px 0px 8px 0px;
 }
 
 /*卡片

@@ -1,54 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>{$mate_title}</title>
-  <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
-  <script src="__ADDONROOT__/js/jquery.min.js"></script>
-  <script src="__ADDONROOT__/js/jquery.Jcrop.js"></script>
-  <link rel="stylesheet" href="__ADDONROOT__/main.css" type="text/css" />
-  <link rel="stylesheet" href="__ADDONROOT__/css/jquery.Jcrop.css" type="text/css" />
-
-<script type="text/javascript">
-
-  $(function(){
-			 
-	   var pcnt = $('#preview-container'),
-        pimg=$('#preview'),
-        xs = pcnt.width(),
-        ys= pcnt.height();
-
-	  $('#cropbox').Jcrop({
-		aspectRatio: xs/ys,
-		onChange: updatePreview,
-		onSelect: updatePreview
-	  });
-
-	  function updateCoords(c)
-	  {
-		$('#x').val(c.x);
-		$('#y').val(c.y);
-		$('#w').val(c.w);
-		$('#h').val(c.h);
-	  };
-  
-	  function updatePreview(coords)
-	  {
-		  var rx = xs / coords.w;
-		  var ry = ys / coords.h;
-	  
-		  pimg.css({
-			  width: Math.round(rx * 500) + 'px',
-			  height: Math.round(ry * 370) + 'px',
-			  marginLeft: '-' + Math.round(rx * coords.x) + 'px',
-			  marginTop: '-' + Math.round(ry * coords.y) + 'px'
-		  });
-		  
-		  updateCoords(coords);
-	  }
-  
-  });
-
-</script>
+<extend name="Base/common" />
+<block name="style">
+<link rel="stylesheet" href="__ADDONS__/jcrop/css/jquery.Jcrop.css" type="text/css" />
 <style type="text/css">
   .jcrop-holder > div > div ,.preview-container {
 	  border-radius: 50%;
@@ -69,33 +21,94 @@
   height: 128px;
   overflow: hidden;
 }
-
 </style>
+</block>
+<block name="header">
+<header>
+  <div class="container text-center" style="padding-bottom:20px;">
+    <h2>头像设置</h2>
+  </div>
+</header>
+</block>
+<block name="body">
 
-</head>
-<body>
-
-<div class="container">
-<div class="row">
-<div class="span12">
-<div class="jc-demo-box">
-
-		<!-- This is the image we're attaching Jcrop to -->
-		<img src="__ADDONROOT__/img/pool.jpg" id="cropbox" />
-    <div id="preview-container" class="preview-container"> <img src="__ADDONROOT__/img/pool.jpg"  id="preview" class="jcrop-preview" alt="Preview" /> </div>
-
-		<!-- This is the form that our event handler fills -->
-<form action="" method="post" onSubmit="return checkCoords();">
-			<input type="hidden" id="x" name="x" />
-			<input type="hidden" id="y" name="y" />
-			<input type="hidden" id="w" name="w" />
-			<input type="hidden" id="h" name="h" />
-			<input type="submit" value="Crop Image" class="btn btn-large btn-inverse" />
-  </form>
+<div class="center-block col-md-10">
+    <!--卡片-->
+     <div class="row col-lg-7 col-md-7" id="crop_box">
+        <img width="100%" height="100%"  src="__ADDONS__/jcrop/img/pool.jpg" id="crop_box_img" />
+      </div>
+                            
+      <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 col-lg-offset-1 col-md-offset-1">
+            
+            <div class="col-lg-12 col-md-12 visible-md visible-lg" style="padding:0px;"> 
+            <div id="preview-container" class="preview-container"> 
+            <img src="__ADDONS__/jcrop/img/pool.jpg"  id="preview" class="jcrop-preview" alt="Preview" /> 
+            </div>
+            </div> 
+            
+            <div class="col-lg-12 col-md-12  col-sm-12 col-xs-12 "  style="padding:0px;padding-top:10px;"> 
+            <form action="" method="post" class="row " style="padding:0px;">
+              <input type="hidden" id="x" name="x" />
+              <input type="hidden" id="y" name="y" />
+              <input type="hidden" id="w" name="w" />
+              <input type="hidden" id="h" name="h" />
+              <button type="submit" class="btn btn-lg btn-warning col-sm-12 col-xs-12" >Crop Image</button>
+            </form>
+            </div>
+              
+        </div>
 </div>
-	</div>
-	</div>
-	</div>
-	</body>
 
-</html>
+
+
+</block>
+
+<block name="script">
+<script type="text/javascript" src="__STATIC__/jquery-migrate-1.2.1.min.js"></script>
+<script src="__ADDONS__/jcrop/js/jquery.Jcrop.js"></script>
+<script type="text/javascript">
+
+  $(function(){
+			 
+	   var pcnt = $('#preview-container'),
+        pimg=$('#preview'),xs = pcnt.width(),
+        ys= pcnt.height(),cache_coords={w:0,h:0,x:0,y:0};
+	  /*$('#crop_box_img').Jcrop({
+		aspectRatio: xs/ys,
+		onChange: updatePreview,
+		onSelect: updatePreview
+	  });*/
+	  
+	  $(window).resize(function(){
+		 updatePreview(cache_coords);
+	  });
+
+	  function updateCoords(c)
+	  {
+		$('#x').val(c.x);
+		$('#y').val(c.y);
+		$('#w').val(c.w);
+		$('#h').val(c.h);
+	  };
+  
+	  function updatePreview(coords)
+	  {
+		  var rx = xs / coords.w;
+		  var ry = ys / coords.h;
+		  
+		  cache_coords=coords;
+	  
+		  pimg.css({
+			  width: Math.round(rx * $("#crop_box_img").width()) + 'px',
+			  height: Math.round(ry * $("#crop_box_img").height()) + 'px',
+			  marginLeft: '-' + Math.round(rx * coords.x) + 'px',
+			  marginTop: '-' + Math.round(ry * coords.y) + 'px'
+		  });
+		  
+		  updateCoords(coords);
+	  }
+  
+  });
+
+</script>
+</block>
