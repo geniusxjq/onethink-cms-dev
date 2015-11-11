@@ -51,17 +51,19 @@ class ProfileController extends UcenterController {
     }
 	
 	public function avatar(){
-		
-		if(IS_POST){
 			
-			$info=D('Avatar')->dealAvatar();
-				
-			$this->ajaxReturn($info);
-		
+		if(count($_FILES)>0){
+			$return=D('Avatar')->dealAvatar('file');
+			$this->ajaxReturn($return);
+		}else if(IS_POST){
+			$return=D('Avatar')->dealAvatar('crop');
+			$this->ajaxReturn($return);
 		}else{
-			
+			$avatar=D('Avatar')->getAvatar(UID);
+			$data['avatar']=$avatar;
+			$this->assign('data',$data);
+			$this->assign('UID',UID);
 			$this->display();
-			
 		}
 		
 	}

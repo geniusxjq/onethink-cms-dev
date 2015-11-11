@@ -1,114 +1,203 @@
 <extend name="Base/common" />
 <block name="style">
-<link rel="stylesheet" href="__ADDONS__/jcrop/css/jquery.Jcrop.css" type="text/css" />
+<link rel="stylesheet" href="__STATIC__/jcrop/css/jquery.Jcrop.css" type="text/css" />
+<link rel="stylesheet" href="__STATIC__/webuploader/webuploader.css" type="text/css" />
 <style type="text/css">
   .jcrop-holder > div > div ,.preview-container {
 	  border-radius: 50%;
   }
-  #target {
-    background-color: #ccc;
-    width: 500px;
-    height: 370px;
-    font-size: 24px;
-    display: block;
-  }
-
 /* The Javascript code will set the aspect ratio of the crop
    area based on the size of the thumbnail preview,
    specified here */
-.preview-container {
-  width: 128px;
-  height: 128px;
+.preview-container{
+  width: 256px;
+  height: 256px;
   overflow: hidden;
+}
+.preview-container img{
+ max-width: none;
+}
+.jcrop-img-box{
+	background-color:#eee;
+	padding:0px;
+	margin:0px;
+	min-height:300px;
+	_height:300px;
+}
+.jcrop-img-box .alert{
+	margin:0px;
+	opacity:0.75;
+	position:absolute;
+	left:0px;
+	top:0px;
+	z-index:1000;
+}
+@media (max-width: 767px) {
+.jcrop-img-box img{
+	width:100%;
+	height:auto;
+}
+}
+.webuploader-pick {
+	width:100%;
+	height:100%;
+	margin:0px;
 }
 </style>
 </block>
 <block name="header">
+
 <header>
+
   <div class="container text-center" style="padding-bottom:20px;">
-    <h2>头像设置</h2>
+    <h2>头像设置 </h2>
   </div>
+  
 </header>
+
 </block>
+
 <block name="body">
 
 <div class="center-block col-md-10">
     <!--卡片-->
-     <div class="row col-lg-7 col-md-7" id="crop_box">
-        <img width="100%" height="100%"  src="__ADDONS__/jcrop/img/pool.jpg" id="crop_box_img" />
-      </div>
-                            
-      <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 col-lg-offset-1 col-md-offset-1">
+     <div class="row col-md-9 jcrop-img-box" >
+     <div id="upload_avatar_{$UID}_alert" class="alert alert-lg alert-danger">请选择图片</div>
+     <span id="crop_box_{$UID}"></span>
+     </div>
+                       
+      <div class="row col-md-3 col-md-offset-0">
             
-            <div class="col-lg-12 col-md-12 visible-md visible-lg" style="padding:0px;"> 
-            <div id="preview-container" class="preview-container"> 
-            <img src="__ADDONS__/jcrop/img/pool.jpg"  id="preview" class="jcrop-preview" alt="Preview" /> 
+            <div class="visible-md visible-lg" style="padding:0px;"> 
+            <div id="preview-container-{$UID}" class="preview-container" style="background-color:#e5e5e5;"> 
+            
+            <img src="{$data.avatar.path|default='__IMG__/default_avatar.jpg'}" />
+            
             </div>
             </div> 
             
-            <div class="col-lg-12 col-md-12  col-sm-12 col-xs-12 "  style="padding:0px;padding-top:10px;"> 
-            <form action="" method="post" class="row " style="padding:0px;">
-              <input type="hidden" id="x" name="x" />
-              <input type="hidden" id="y" name="y" />
-              <input type="hidden" id="w" name="w" />
-              <input type="hidden" id="h" name="h" />
-              <button type="submit" class="btn btn-lg btn-warning col-sm-12 col-xs-12" >Crop Image</button>
-            </form>
+            <div class="col-md-12" style="padding:0px;padding-top:10px;"> 
+              <div data-role="avatar_btn" class="btn btn-lg btn-warning col-md-10 col-xs-6 col-md-offset-1 " style="margin-bottom:10px; margin-top:10px;">提交头像</div>
+              <div id="upload_avatar_{$UID}" class="btn btn-lg col-md-10 col-xs-6 col-md-offset-1" style="margin-top:10px;padding:0px ">选择图片</div>
             </div>
-              
-        </div>
+          
+      </div>
+        
 </div>
-
-
 
 </block>
 
 <block name="script">
 <script type="text/javascript" src="__STATIC__/jquery-migrate-1.2.1.min.js"></script>
-<script src="__ADDONS__/jcrop/js/jquery.Jcrop.js"></script>
+<script type="text/javascript" src="__STATIC__/webuploader/webuploader.js"></script>
+<script src="__STATIC__/jcrop/js/jquery.Jcrop.js"></script>
 <script type="text/javascript">
-
-  $(function(){
-			 
-	   var pcnt = $('#preview-container'),
-        pimg=$('#preview'),xs = pcnt.width(),
-        ys= pcnt.height(),cache_coords={w:0,h:0,x:0,y:0};
-	  /*$('#crop_box_img').Jcrop({
-		aspectRatio: xs/ys,
-		onChange: updatePreview,
-		onSelect: updatePreview
-	  });*/
-	  
-	  $(window).resize(function(){
-		 updatePreview(cache_coords);
-	  });
-
-	  function updateCoords(c)
-	  {
-		$('#x').val(c.x);
-		$('#y').val(c.y);
-		$('#w').val(c.w);
-		$('#h').val(c.h);
-	  };
+	
+$(function () {
+	var crop=null;
+	var jcrop_api=null;
+	var boundx, boundy;
+	var path;
+	var pcnt=$('#preview-container-{$UID}'),xs = pcnt.width(),ys= pcnt.height();
+	var uploader_{$UID}= WebUploader.create({
+		// 选完文件后，是否自动上传。
+		auto: true,
+		// swf文件路径
+		swf: 'Uploader.swf',
+		// 文件接收服务端。
+		server: "{:U('avatar',array('uid'=>UID,'session_id'=>session_id()))}",
+		// 选择文件的按钮。可选。
+		// 内部根据当前运行是创建，可能是input元素，也可能是flash.
+		pick: '#upload_avatar_{$UID}',
+		// 只允许选择图片文件。
+		accept: {
+			title: 'Images',
+			extensions: 'gif,jpg,jpeg,bmp,png',
+			mimeTypes: 'image/*'
+		}
+	});
+	uploader_{$UID}.on('fileQueued', function (file) {
+		uploader_{$UID}.upload();
+	});
+	/*上传成功*/
+	uploader_{$UID}.on('uploadSuccess', function (file, ret) {
+		
+		if (ret.status == 0) {
+			$.zui.messager.danger(ret.info,{placement:'center'});
+		} else {
+			var src = ret.url || '__ROOT__' + ret.path;
+			path =src;
+			src=src+'?t='+new Date().getTime();
+			$("#crop_box_{$UID}").html('');
+			$("#crop_box_{$UID}").html('<img src="'+src+'">');
+			$("#preview-container-{$UID}").html('<img src="'+src+'">');
+			crop_init(src+'?t='+new Date().getTime());
+			//重置队列
+			uploader_{$UID}.reset();
+		}
+	});
+	
+	function crop_init(src){
+		crop&&(jcrop_api.destroy());
+		$("#crop_box_{$UID} img").load(function (){
+		   $("#crop_box_{$UID} >img").Jcrop({
+					aspectRatio: 1,
+					onChange: updatePreview,
+					onSelect: updatePreview,
+					minSize: [10, 10],
+					setSelect:[0, 0, 256, 256]
+				}, function () {
+					var bounds = this.getBounds();
+					boundx = bounds[0];
+					boundy = bounds[1];
+					jcrop_api = this;
+					crop = jcrop_api.tellScaled();
+					updatePreview(crop);
+				});
+		});
+	}
+	
+	function updatePreview(c){
+		crop=c;
+		var rx = xs / c.w;
+		var ry = ys / c.h;
+		$("#preview-container-{$UID} >img").css({
+			width: Math.round(rx * $("#crop_box_{$UID} >img").width()) + 'px',
+			height: Math.round(ry * $("#crop_box_{$UID} >img").height()) + 'px',
+			marginLeft: '-' + Math.round(rx * c.x) + 'px',
+			marginTop: '-' + Math.round(ry * c.y) + 'px',
+			display:'block'
+		});
+		
+	}
+	
+	$(window).resize(function(){
+	   crop&&crop_init(path);
+	   crop&&updatePreview(crop);
+	});
   
-	  function updatePreview(coords)
-	  {
-		  var rx = xs / coords.w;
-		  var ry = ys / coords.h;
-		  
-		  cache_coords=coords;
-	  
-		  pimg.css({
-			  width: Math.round(rx * $("#crop_box_img").width()) + 'px',
-			  height: Math.round(ry * $("#crop_box_img").height()) + 'px',
-			  marginLeft: '-' + Math.round(rx * coords.x) + 'px',
-			  marginTop: '-' + Math.round(ry * coords.y) + 'px'
-		  });
-		  
-		  updateCoords(coords);
-	  }
-  
-  });
+	$('[data-role=avatar_btn]').click(function(){
+		//检查是否已经裁剪过
+		if (!crop) {
+			 $.zui.messager.danger('请上传头像并裁剪',{placement:'center'});
+			return;
+		}
+		else{
+			var the_crop = crop.x / boundx + ',' + crop.y / boundy + ',' + crop.w / boundx + ',' + crop.h / boundy;
+		}
+		
+		//提交到服务器
+		var url = "{:U('avatar',array('uid'=>UID,'session_id'=>session_id()))}";
+		$.post(url, {crop:the_crop,path:path}, function (res) {
+				 $.zui.messager.danger(res.info,{placement:'center'});
+				 crop&&(jcrop_api.destroy());
+				 $("#crop_box_{$UID}").html('');
+				 crop=null;
+		});
+
+	})
+})
 
 </script>
+
 </block>

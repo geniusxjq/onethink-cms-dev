@@ -1214,7 +1214,7 @@ $.Jcrop = function(obj,opt)
 	interfaceUpdate(true);
 	
 	var api = {
-
+        
 		setImage: setImage,
 		animateTo: animateTo,
 		setSelect: setSelect,

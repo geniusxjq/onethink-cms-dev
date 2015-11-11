@@ -30,7 +30,7 @@ class UcenterController extends BaseController {
             return false;
         }
 		// 获取当前用户ID
-        if(defined('UID')) return ;
+        if(defined('UID')) return false;
         define('UID',is_login());
 		if(!UID){
 			$this->error('您还没有登录，请先登录！',U('Passport/login'));
