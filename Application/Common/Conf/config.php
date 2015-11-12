@@ -52,10 +52,10 @@ return array(
     'DOCUMENT_MODEL_TYPE' => array(2 => '主题', 1 => '目录', 3 => '段落'),
 
 	/*加载扩展函数文件*/
-	'LOAD_EXT_FILE'=>'time,parse,mail',
+	'LOAD_EXT_FILE'=>'time,parse,mail,user',
 	
 	/*加载扩展配置文件*/
-	'LOAD_EXT_CONFIG'=>'upload',
+	'LOAD_EXT_CONFIG'=>'upload,template',
 	
 	/* SESSION 和 COOKIE 配置 */
     'SESSION_PREFIX' => 'onethink_home', //session前缀

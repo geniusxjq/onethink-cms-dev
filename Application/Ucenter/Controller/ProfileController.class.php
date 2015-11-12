@@ -59,9 +59,6 @@ class ProfileController extends UcenterController {
 			$return=D('Avatar')->dealAvatar('crop');
 			$this->ajaxReturn($return);
 		}else{
-			$avatar=D('Avatar')->getAvatar(UID);
-			$data['avatar']=$avatar;
-			$this->assign('data',$data);
 			$this->assign('UID',UID);
 			$this->display();
 		}

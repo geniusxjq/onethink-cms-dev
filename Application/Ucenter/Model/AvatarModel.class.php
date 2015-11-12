@@ -31,7 +31,7 @@ class AvatarModel extends Model{
 		
 		if($type=='crop'){
 						
-			$info=$this->crop(I('post.path',''),I('post.crop',''));
+			$info=$this->crop(I('post.path',''),I('post.crop','0,0,128,128'),I('post.saveImgSize','128,128'),$uid);
 			
 			if($info){
 			   $return['status'] = 1;
@@ -65,7 +65,7 @@ class AvatarModel extends Model{
 		
 	}
 	
-	public function crop($img,$crop,$uid=UID,$width =256,$height =256){
+	public function crop($img,$crop,$wh='128,128',$uid=UID){
 		
 		 if(!$crop){
 			 
@@ -89,7 +89,9 @@ class AvatarModel extends Model{
 		 
 		 $IMG->open($img);
 
-		 list($x,$y,$w,$h)=explode(',',$crop);
+		 list($x,$y,$w,$h)=explode(',',$crop);//解析获取剪裁区域
+		 
+		 list($width,$height)=explode(',',$wh);//解析获取保存图片的高度
 		 
 		 //生成将单位换算成为像素
 		 

@@ -10,7 +10,7 @@
           <section class="comments-list">
           <foreach name="_data._list" item="item" key="k" >
             <div class="comment">
-              <a href="#" class="avatar"><i class="icon-user icon-2x"></i></a>
+              <a href="#" class="avatar"><img src="{:get_avatar($item['uid'])['path']}" /></a>
               <div class="content">          
               
               <div class="author">
@@ -50,7 +50,11 @@
             
             <header class="comment-form-header">
             
-            <a href="#" class="avatar"><i class="icon-user icon-2x"></i></a>
+            <a href="#" class="avatar">
+            
+            <img src="{:get_avatar(is_login())['path']}" />
+            
+            </a>
              <span>
                 <h4>{$_data['nickname']|default='游客'} </h4>你好，说点什么吧：
             </span>

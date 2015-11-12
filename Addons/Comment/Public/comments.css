@@ -11,14 +11,18 @@
 }
 .comment-box .avatar {
     float: left;
-    width: 64px;
-    height: 64px;
-	line-height:64px;
+    width: 88px;
+    height: 88px;
+	line-height:88px;
 	margin:0px;
-	background-color:#eaeaea;
+	background:none;
 	color:#fdfdfd;
 	text-align:center;
-	border-radius:0px;
+	border-radius:50%;
+	padding:0px;
+	overflow:hidden;
+}
+.comment-box .avatar img{
 }
 .comment-box .avatar + .content {
     padding-left: 0px;
@@ -26,6 +30,9 @@
 .comment-box .comments .comment >.content .author,
 .comment-box .comments .comment >.content .text{
     text-indent:10px;
+}
+.comment-box .comments .comment >.content .author{
+	font-weight:bold;
 }
 .comment-box .comments .comment >.content .text-muted{
 }
