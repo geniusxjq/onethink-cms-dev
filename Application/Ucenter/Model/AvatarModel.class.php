@@ -21,6 +21,7 @@ class AvatarModel extends Model{
 		
 		$where['uid']=$uid;
 		$where['is_temp']=0;
+		$where['status']=1;
 		$res=$this->where($where)->order($order)->find();
 		return $res?$res:'';
 		
@@ -50,6 +51,7 @@ class AvatarModel extends Model{
 			
 			if($info){
 			   $return['status'] = 1;
+			   $return['info'] ="头像上传成功";
 			   $return['url'] =$info;
 			   
 			} else {
@@ -65,7 +67,7 @@ class AvatarModel extends Model{
 	
 	public function crop($img,$crop,$uid=UID,$width =256,$height =256){
 		
-		 if(!crop){
+		 if(!$crop){
 			 
 			 $this->error="请选择剪裁区域";
 			 
@@ -135,7 +137,7 @@ class AvatarModel extends Model{
 					 
 		$config =array_merge(C('PICTURE_UPLOAD'),$config);
 		$config['callback'] = array($this, 'isFile');	
-		$config['removeTrash'] = array($this, 'removeTrash');
+		//$config['removeTrash'] = array($this, 'removeTrash');
 		/* 调用文件上传组件上传文件 */
 		 
         $Upload = new \Think\Upload($config,C('DOWNLOAD_UPLOAD_DRIVER'),C("UPLOAD_{$pic_driver}_CONFIG"));
@@ -184,17 +186,18 @@ class AvatarModel extends Model{
 			   
 			  $where['uid']=$uid;
 			  
-			  $data=$this->where($where)->order('create_time asc')->find();
+			  $_data=$this->where($where)->order('create_time asc')->find();
 			  
-			  if($data){
+			  if($_data){
 				   
-				   $Storage::unlink('.'.$data['path']);
-				   $data['uid']=$uid;
-				   $data['path']=$path;
-				   $data['is_temp']=1;
-				   $data['create_time']=NOW_TIME;
-				   $data['status']=1;
-				   $res=$this->save($data);
+				   $Storage::unlink('.'.$_data['path']);
+				   $_data['uid']=$uid;
+				   $_data['path']=$path;
+				   $_data['is_temp']=1;
+				   $_data['create_time']=NOW_TIME;
+				   $_data['status']=1;
+				   $_data['md5']=$data['md5'];
+				   $res=$this->save($_data);
 			   
 			   }else{
 			   

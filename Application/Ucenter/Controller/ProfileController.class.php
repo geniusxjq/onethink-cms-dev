@@ -52,7 +52,7 @@ class ProfileController extends UcenterController {
 	
 	public function avatar(){
 			
-		if(count($_FILES)>0){
+		if($_FILES['file']){
 			$return=D('Avatar')->dealAvatar('file');
 			$this->ajaxReturn($return);
 		}else if(IS_POST){
