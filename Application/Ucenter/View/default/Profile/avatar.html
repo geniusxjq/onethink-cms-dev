@@ -9,6 +9,11 @@
 
 .card > .avatar-preview-box{
 	background-color:#eee;
+	filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";  
+	-webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 .card:hover > .avatar-preview-box{
 	background-color:#eee;
@@ -32,8 +37,13 @@
 }
 .jcrop-img-box{
 	background:none;
-	padding:0px;
 	margin:0px;
+}
+.jcrop-img-box .container{
+	background-color:#fdfdfd;
+	min-height:300px;
+	padding:0px;
+	margin-top:10px;
 }
 .jcrop-img-box .alert{
 	margin:0px;
@@ -84,7 +94,7 @@ div[data-role=avatar_submit_btn]{
 <div class="center-block col-md-12 cards cards-borderless">
       <div class="col-md-4 col-sm-6 col-lg-3 ">
           <div class="card">
-            <span class=" media-wrapper avatar-preview-box" >  
+            <span class=" media-wrapper avatar-preview-box">  
             <div class="avatar-preview-container" id="avatar-preview-container-{$UID}">       
             <img src="{:get_avatar(UID)['path']}" />
             </div>   
@@ -100,7 +110,9 @@ div[data-role=avatar_submit_btn]{
 
      <div class="col-md-9 jcrop-img-box" >
          <div id="upload_avatar_{$UID}_alert" class="alert alert-lg alert-info">请选择图片</div>
+         <div class="container">
          <span id="crop_box_{$UID}"></span>
+         </div>
      </div>
                  
 </div>
