@@ -1,19 +1,22 @@
 .comment-box .comments .comment,.comments > header{
-	border:none;
 	font-weight:normal;
+	border:none;
 }
 .comment-box .comments > header {
-	padding-left:10px;
+}
+.comment-box .comments > header > h3{
+	font-size:16px;
+	padding:8px;
 }
 .comment-box .comment-reply{
 	font-weight:normal;
 	margin:0px;
 }
-.comment-box .avatar {
+.comment-box .avatar {	
+    position:relative;
     float: left;
     width: 88px;
     height: 88px;
-	line-height:88px;
 	margin:0px;
 	background:none;
 	color:#fdfdfd;
@@ -23,26 +26,49 @@
 	overflow:hidden;
 }
 .comment-box .avatar img{
+	max-width:100%;
 }
 .comment-box .avatar + .content {
-    padding-left: 0px;
+	padding:10px;
+	margin:0px;
+	min-height:60px;
+	left:0px;
+	top:0px;
+	background-color:#e3e3e3;
+
+}
+.comment-box .comments .comment >.content{
+	left:15px;
 }
 .comment-box .comments .comment >.content .author,
 .comment-box .comments .comment >.content .text{
     text-indent:10px;
 }
+.comment-box .comments .comment >.content .text{
+	padding-bottom:8px;
+}
 .comment-box .comments .comment >.content .author{
 	font-weight:bold;
+	color:#666;
 }
-.comment-box .comments .comment >.content .text-muted{
+.comment-box .comments .comment >.content span{
+	font-weight:normal;
+	color:#999;
 }
 .comment-box .comments .comment >.content .quote{
+	position:relative;
+	float:left;
+	color:#666;
 }
-.comment-box .comment-form{
-	padding-top:20px;
+
+.comment-box .comment-form footer {
+	left:15px;
+}
+.comment-box .comment-form textarea{
+	background-color:#e3e3e3;
+	color:#666;
 }
 .comment-box .comment-form button[type='submit']{
-	
 }
 .comment-box .comment-form .comment-verify-img{
 	border:solid 1px #eee;
@@ -51,16 +77,9 @@
 	cursor:pointer;
 }
 .comment-box .comment-form-header{
-	padding-bottom:20px;
 	display:block;
 	float:left;
-}
-.comment-box .comment-form-header span{
-	padding-left:10px;
-	display:block;
-	float:left;
-}
-.comment-box .comment-form-header span h4{
+	padding-bottom:10px;
 }
 .comment-box .comment-pagination {}
 .comment-box .comment-pagination li{}

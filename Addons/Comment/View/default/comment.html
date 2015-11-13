@@ -3,26 +3,23 @@
         
       <div class="comments row col-md-12">
           <header> 
-            <h3 class="row">
-            <i class="icon icon-quote-left icon-lg text-info"></i>&nbsp;&nbsp;评论 ( {$_data['count']} )&nbsp;&nbsp;  
-             </h3>     
+              <h3>评论 <em>{$_data['count']}</em></h3>
           </header> 
           <section class="comments-list">
           <foreach name="_data._list" item="item" key="k" >
-            <div class="comment">
+            <div class="comment ">
               <a href="#" class="avatar"><img src="{:get_avatar($item['uid'])['path']}" /></a>
-              <div class="content">          
-              
+              <div class="content col-md-11 col-xs-9">          
               <div class="author">
-                 <a href="#">{$item['username']==''?'游客':$item['username']}</a>
-                 <span class="text-muted pull-right">{$item['create_time']|time_format} </span>
+                 <a href="#">{$item['username']==''?'游客':$item['username']} <i class="icon icon-comment"></i></a>
+                 <span class="pull-right">{$item['create_time']|time_format} </span>
               </div>
                 
                 <div class="text">{$item['content']}</div>
                 
-                <div class="actions pull-right">
+                <div class="actions">
                 
-                  <a href="#"> <div class="quote" data-pid="{$item['id']}"><a href="#quote"> <i class="icon icon-pencil text-muted"></i>&nbsp;回复</a></div></a>
+                  <div class="quote" data-pid="{$item['id']}"><a href="#quote"> <i class="icon icon-pencil"></i>&nbsp;回复</a></div>
                   
                 </div>
                 
@@ -30,8 +27,8 @@
             </div> 
             </foreach>
           </section>
-          <footer>
-              <ul class=" row pager pager-loose comment-pagination">{$_data['_page']}</ul>
+          <footer class=" col-md-12 col-xs-11">
+              <ul class=" row pager pager-loose comment-pagination pull-right">{$_data['_page']}</ul>
           </footer>
 
       </div>
@@ -55,23 +52,14 @@
             <img src="{:get_avatar(is_login())['path']}" />
             
             </a>
-             <span>
-                <h4>{$_data['nickname']|default='游客'} </h4>你好，说点什么吧：
-            </span>
-            
             </header>
             
-            <footer>
+            <footer class="row col-md-11 col-xs-10">
+                
                 <form class="comment-form" action="{:addons_url('Comment://Comment/submit','',C('DEFAULT_MODULE'))}">
-                   
-                   <foreach name="_data.form_hidden_field" item="item" key="k">
-                    
-                    <input type="hidden" name="{$k}" value="{$item}" />
-                    
-                    </foreach>
-                    
+                    <h4>{$_data['nickname']|default='游客'} </h4>
                     <div class="form-group">
-                        <textarea name="content" name="content" style="width:100%;" rows="5"></textarea>
+                        <textarea name="content" name="content" style="width:100%;" rows="5" placeholder="你好，说点什么吧：" ></textarea>
                     </div>
                     
                     <eq name="_config.comment_verify" value="1" >
@@ -89,8 +77,14 @@
                     </eq>
               
                     <div class="form-group">
-                    <button type="submit" class="btn btn-lg btn-info">提交</button>
+                    <button type="submit" class="btn btn-lg btn-info col-md-2 col-sm-2 col-xs-5">提交</button>
                     </div>
+                    
+                    <foreach name="_data.form_hidden_field" item="item" key="k">
+                    
+                    <input type="hidden" name="{$k}" value="{$item}" />
+                    
+                    </foreach>
                           
                 </form>
              </footer>

@@ -3,39 +3,47 @@
 <link rel="stylesheet" href="__STATIC__/jcrop/css/jquery.Jcrop.css" type="text/css" />
 <link rel="stylesheet" href="__STATIC__/webuploader/webuploader.css" type="text/css" />
 <style type="text/css">
-  .jcrop-holder > div > div ,.preview-container {
-	  border-radius: 50%;
-  }
-/* The Javascript code will set the aspect ratio of the crop
-   area based on the size of the thumbnail preview,
-   specified here */
-.preview-container{
+.jcrop-holder > div > div ,.avatar-preview-container {
+  border-radius: 50%;
+}
+
+.card > .avatar-preview-box{
+	background-color:#eee;
+}
+.card:hover > .avatar-preview-box{
+	background-color:#eee;
+	filter: alpha(opacity=90);
+	opacity: .9;
+}
+.avatar-preview-container{
+  position:relative;
+  float:none;
   width: 128px;
   height: 128px;
   overflow: hidden;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:25px;
+  margin-bottom:25px;
+  border:5px #FFF solid;
 }
-.preview-container img{
+.avatar-preview-container img{
  max-width: none;
 }
 .jcrop-img-box{
-	background-color:#eee;
+	background:none;
 	padding:0px;
 	margin:0px;
-	min-height:320px;
-	_height:320px;
 }
 .jcrop-img-box .alert{
 	margin:0px;
-	opacity:0.75;
 	position:relative;
 	left:0px;
 	top:0;
 	z-index:10;
-	width:100%;
-	text-align:center;
 }
 .jcrop-img-box img{
-	width:100%;
+	width:auto;
 	height:auto;
 }
 .webuploader-pick,.webuploader-pick-hover{
@@ -45,6 +53,17 @@
 	border-radius: 0px;
 	background:none;
 	max-width:none;
+}
+div[data-role=avatar_select_btn]{
+	height:41px;
+	overflow:hidden;
+	margin-bottom:10px; 
+	margin-top:10px;
+	padding:0px;
+}
+div[data-role=avatar_submit_btn]{
+	margin-bottom:10px; 
+	margin-top:10px;
 }
 </style>
 </block>
@@ -62,26 +81,24 @@
 
 <block name="body">
 
-<div class="center-block col-md-12">
-     
-    <div class="row col-md-3">
-            
-            <div class="visible-md visible-lg  " style="padding:0px;"> 
-            <div id="preview-container-{$UID}" class="preview-container col-md-offset-1" style="background-color:#e5e5e5;"> 
-            
+<div class="center-block col-md-12 cards cards-borderless">
+      <div class="col-md-4 col-sm-6 col-lg-3 ">
+          <div class="card">
+            <span class=" media-wrapper avatar-preview-box" >  
+            <div class="avatar-preview-container" id="avatar-preview-container-{$UID}">       
             <img src="{:get_avatar(UID)['path']}" />
-            
+            </div>   
+            </span>
+            <span href="###" class="card-heading">            
+            <div class="col-md-12" style="padding:0px;padding-top:10px;"> 
+               <div data-role="avatar_select_btn" id="upload_avatar_{$UID}" class="btn btn-lg btn-warning col-md-12 col-xs-6" >选择图片</div> 
+               <div data-role="avatar_submit_btn" class="btn btn-lg btn-danger col-md-12 col-xs-6">提交头像</div>
             </div>
-            </div> 
-            
-            <div class="col-md-8" style="padding:0px;padding-top:10px;"> 
-               <div id="upload_avatar_{$UID}" class="btn btn-lg btn-warning col-md-12 col-xs-6" style="height:41px;overflow:hidden;margin-bottom:10px; margin-top:10px;padding:0px ">选择图片</div> 
-               <div data-role="avatar_btn" class="btn btn-lg btn-danger col-md-12 col-xs-6" style="margin-bottom:10px; margin-top:10px;">提交头像</div>
-            </div>
-          
-      </div>
+            </span>
+          </div>
+        </div>
 
-     <div class="row col-md-9 jcrop-img-box" >
+     <div class="col-md-9 jcrop-img-box" >
          <div id="upload_avatar_{$UID}_alert" class="alert alert-lg alert-info">请选择图片</div>
          <span id="crop_box_{$UID}"></span>
      </div>
@@ -101,7 +118,7 @@ $(function () {
 	var jcrop_api=null;
 	var boundx, boundy;
 	var path;
-	var pcnt=$('#preview-container-{$UID}'),xs = pcnt.width(),ys= pcnt.height();
+	var pcnt=$('#avatar-preview-container-{$UID}'),xs = pcnt.width(),ys= pcnt.height();
 	var uploader_{$UID}= WebUploader.create({
 		// 选完文件后，是否自动上传。
 		auto: true,
@@ -139,7 +156,7 @@ $(function () {
 				src=src+'?t='+new Date().getTime();
 				$("#crop_box_{$UID}").html('');
 				$("#crop_box_{$UID}").html('<img src="'+src+'">');
-				$("#preview-container-{$UID}").html('<img src="'+src+'">');
+				$("#avatar-preview-container-{$UID}").html('<img src="'+src+'">');
 				$("#crop_box_{$UID} img").load(function (){
 					crop_init(src+'?t='+new Date().getTime());
 				});
@@ -181,7 +198,7 @@ $(function () {
 		crop=c;
 		var rx = xs / c.w;
 		var ry = ys / c.h;
-		$("#preview-container-{$UID} >img").css({
+		$("#avatar-preview-container-{$UID} >img").css({
 			width: Math.round(rx * $("#crop_box_{$UID} >img").width()) + 'px',
 			height: Math.round(ry * $("#crop_box_{$UID} >img").height()) + 'px',
 			marginLeft: '-' + Math.round(rx * c.x) + 'px',
@@ -202,7 +219,7 @@ $(function () {
 	   
 	});
     
-	$('[data-role=avatar_btn]').click(function(){
+	$('[data-role=avatar_submit_btn]').click(function(){
 		//检查是否已经裁剪过
 		if (!crop) {
 			 $.zui.messager.danger('请上传头像并裁剪',{placement:'center'});

@@ -109,10 +109,13 @@ class AvatarModel extends Model{
 			$h = min($h, $w);
 			$w = $h;
 		 }
-			
-		 $IMG->crop($w,$h,$x,$y,$width,$height);
 		 
-		 $IMG->save($img);
+		 if($_w>$width||$_h>$height){
+			
+			 $IMG->crop($w,$h,$x,$y,$width,$height);
+			 
+			 $IMG->save($img);
+		 }
 		 
 		 $where['uid']=$uid;
 		 
