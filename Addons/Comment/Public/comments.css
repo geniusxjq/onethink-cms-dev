@@ -26,9 +26,10 @@
 	background:none;
 	color:#fdfdfd;
 	text-align:center;
-	border-radius:0px;
+	border-radius:50%;
 	padding:0px;
 	overflow:hidden;
+	top:5px;
 	left:8px;
 }
 .comment-box .avatar img{
@@ -70,7 +71,7 @@
 	color:#666;
 }
 .comment-box .comment-form footer {
-	padding-left:45px;
+	padding-left:43px;
 }
 .comment-box .comment-form footer h4{
 	text-indent:0px;
