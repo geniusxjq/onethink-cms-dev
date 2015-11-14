@@ -1,16 +1,15 @@
 .comment-box .comments > header{
 	font-weight:normal;
-	border:none;
 }
 .comment-box .comments .comment{
 	font-weight:normal;
-	border:none;
 }
 .comment-box .comments > header {
 }
 .comment-box .comments > header > h3{
 	font-size:16px;
 	padding:8px;
+	font-weight:normal;
 }
 .comment-box .comments > footer {
 	padding:0px;
@@ -18,9 +17,6 @@
 .comment-box .comment-reply{
 	font-weight:normal;
 	margin:0px;
-}
-.comment-box .comment-form-header .avatar{
-	left:13px;
 }
 .comment-box .avatar {	
     position:relative;
@@ -43,13 +39,10 @@
 .comment-box .avatar + .content {
 	padding:10px;
 	margin:0px;
-	min-height:60px;
-	left:0px;
+	left:8px;
 	top:0px;
 }
-.comment-box .comments .comment >.content{
-	left:15px;
-}
+
 .comment-box .comments .comment >.content .author,
 .comment-box .comments .comment >.content .text{
     text-indent:10px;
@@ -73,11 +66,15 @@
 	float:right;
 }
 .comment-box .comment-form footer {
-	padding-left:46px;
+	padding-left:35px;
 }
 .comment-box .comment-form footer h4{
 	text-indent:0px;
-	padding-bottom:8px;
+	padding-bottom:0px;
+}
+.comment-box .comment-form-header .avatar{
+	left:10px;
+	top:-10px;
 }
 .comment-box .comment-form textarea{
 }
@@ -95,7 +92,9 @@
 	padding-bottom:10px;
 }
 
-.comment-box .comment-pagination {}
+.comment-box .comment-pagination {
+	padding-top:0px;
+}
 .comment-box .comment-pagination li{}
 .comment-box .comment-pagination li a:hover{
 	color:#666;

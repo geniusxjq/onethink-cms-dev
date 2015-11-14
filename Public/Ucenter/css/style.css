@@ -17,6 +17,7 @@ body {
   position: relative;
   padding-top: 82px;
   font-size: 14px;
+  background:#f7f7f7;
   color: #707070;
   font-family: Verdana, 'Helvetica Neue', 'Microsoft Yahei', 'Hiragino Sans GB', 'Microsoft Sans Serif', 'WenQuanYi Micro Hei', sans-serif;
 }
@@ -96,18 +97,16 @@ textarea:focus {
 }
 .navbar-default{
 	border:none;
-	height:72px;
-	line-height:72px;
-	  -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, .030);
-			  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, .030);
+	height:82px;
+	line-height:82px;
 }
 .navbar-default .container{
-	background-color:none;
+	background-color:inherit;
 }
 
 .navbar-default .navbar-header{
-	height:72px;
-	line-height:72px;
+	height:82px;
+	line-height:82px;
 }
 .navbar-default  .navbar-collapse,
 .navbar-default  .navbar-form{
@@ -118,7 +117,7 @@ textarea:focus {
 .navbar-default .navbar-header .navbar-brand,
 .navbar-default .navbar-nav > li{
 	font-size:16px;
-	line-height:52px;
+	line-height:62px;
 	color:#666;
 } 
 
@@ -162,8 +161,8 @@ textarea:focus {
 .navbar-default .navbar-nav .dropdown-menu {
 	border:solid 1px #eee;
 	border-radius:0px;
-	  -webkit-box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, .050);
-			  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, .050);
+	  -webkit-box-shadow: 0px 10px 15px 0px rgba(0, 0, 0, .050);
+			  box-shadow: 0px 10px 15px 0px rgba(0, 0, 0, .050);
 }
 .navbar-default .navbar-nav>.open >.dropdown-menu {
 }
@@ -197,7 +196,7 @@ textarea:focus {
 
   .navbar-default .navbar-nav > li{
 	  font-size:16px;
-	  line-height:38px;
+	  line-height:48px;
   } 
   .navbar-default  .navbar-collapse{
 	  -webkit-box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, .075);
@@ -209,7 +208,7 @@ textarea:focus {
   .navbar-default .navbar-nav .dropdown-menu > li,
   .navbar-default .navbar-nav .dropdown-menu > li > a{
 	  font-size:14px;
-	  line-height:38px;
+	  line-height:48px;
   }
   .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
   .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
@@ -263,7 +262,7 @@ header .container{
   margin-bottom: 20px;
   overflow: hidden;
   border-radius: 0px;
-  background:none;
+  background:#fff;
   -webkit-box-shadow:none;
           box-shadow:none;
 }
@@ -322,10 +321,10 @@ header .container{
   top: 0;
 }
 .cards-borderless .card {
-   border:solid 1px #eee;
+   border:none;
 }
 .cards-borderless .card:hover {
-  border:solid 1px #eee;
+  border:none;
 }
 .cards-borderless .card > .card-heading,
 .cards-borderless .card > .card-actions,
