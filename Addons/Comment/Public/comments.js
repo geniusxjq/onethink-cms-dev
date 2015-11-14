@@ -31,7 +31,13 @@
 	});
 	
 	$(document).on('click','.comment-box .comments .comment >.content .quote',function(){
-		alert($(this).attr('class'));
+		 
+		setPID($(this).data('pid'));
+		
+		$("html,body").animate({scrollTop:($('#comment-reply-form').offset().top)},"slow");
+		
+		$(".comment-box .comment-form textarea").focus();
+		
 	});
 	
     function setPID(id) {

@@ -8,15 +8,11 @@
 }
 
 .card > .avatar-preview-box{
-	background-color:#eee;
-	filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";  
-	-webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+	background:#eee;
 }
-.card:hover > .avatar-preview-box{
-	background-color:#eee;
+.card:hover > .avatar-preview-box,
+.card > .avatar-preview-box:active{
+	background:#eee;
 	filter: alpha(opacity=90);
 	opacity: .9;
 }
@@ -30,19 +26,21 @@
   margin-right:auto;
   margin-top:25px;
   margin-bottom:25px;
-  border:5px #FFF solid;
+  border:5px solid #FFF;
 }
 .avatar-preview-container img{
  max-width: none;
 }
+
 .jcrop-img-box{
 	background:none;
 	margin:0px;
 }
+
 .jcrop-img-box .container{
 	min-height:300px;
 	padding:0px;
-	margin-top:20px;
+	margin-top:10px;
 }
 .jcrop-img-box .alert{
 	margin:0px;
@@ -51,7 +49,7 @@
 	top:0;
 	z-index:10;
 }
-.jcrop-img-box img{
+.jcrop-img-box span img{
 	width:auto;
 	height:auto;
 }
@@ -100,15 +98,15 @@ div[data-role=avatar_submit_btn]{
             </span>
             <span href="###" class="card-heading">            
             <div class="col-md-12" style="padding:0px;padding-top:10px;"> 
-               <div data-role="avatar_select_btn" id="upload_avatar_{$UID}" class="btn btn-lg btn-warning col-md-12 col-xs-6" >选择图片</div> 
-               <div data-role="avatar_submit_btn" class="btn btn-lg btn-danger col-md-12 col-xs-6">提交头像</div>
+               <div data-role="avatar_select_btn" id="upload_avatar_{$UID}" class="btn btn-lg btn-danger col-md-12 col-xs-6" >选择图片</div> 
+               <div data-role="avatar_submit_btn" class="btn btn-lg btn-warning col-md-12 col-xs-6">提交头像</div>
             </div>
             </span>
           </div>
         </div>
 
      <div class="col-md-9 jcrop-img-box" >
-         <div id="upload_avatar_{$UID}_alert" class="alert alert-lg alert-info">请选择图片</div>
+         <div id="upload_avatar_{$UID}_alert" class="alert alert-lg alert-info">请选择图片 </div>
          <div class="container">
          <span id="crop_box_{$UID}"></span>
          </div>
@@ -125,6 +123,8 @@ div[data-role=avatar_submit_btn]{
 <script type="text/javascript">
 	
 $(function () {
+	var msg=$.zui.messager;
+	var msg_on=null;
 	var crop=null;
 	var jcrop_api=null;
 	var boundx, boundy;
@@ -148,33 +148,45 @@ $(function () {
 		}
 	});
 	uploader_{$UID}.on('fileQueued', function (file) {
+		msg_on=msg.warning('开始上传……',{placement:'center'});
 		uploader_{$UID}.upload();
 	});
 	/*进度*/
 	uploader_{$UID}.on('uploadProgress', function (file,percent) {
-		$('#upload_avatar_{$UID}_alert').text(Math.ceil(percent*100)+'%');									  
+		show_alert(Math.ceil(percent*100)+'%',2);
 	});
 	/*上传成功*/
 	uploader_{$UID}.on('uploadSuccess', function (file, ret) {
+												  
+		msg_on.hide();
 		
 		if (ret.status == 0) {
-			$.zui.messager.danger(ret.info,{placement:'center'});
-			$('#upload_avatar_{$UID}_alert').text(ret.info);		
+			msg.danger(ret.info,{placement:'center'});
+			show_alert(ret.info,2);		
 		} else {
 			var src = ret.url || '__ROOT__' + ret.path;
 			if(path!=src){
+				
 				path =src;
 				src=src+'?t='+new Date().getTime();
-				$("#crop_box_{$UID}").html('');
-				$("#crop_box_{$UID}").html('<img src="'+src+'">');
-				$("#avatar-preview-container-{$UID}").html('<img src="'+src+'">');
-				$("#crop_box_{$UID} img").load(function (){
-					crop_init(src+'?t='+new Date().getTime());
+				
+				$(".jcrop-img-box .container").slideUp(300).fadeOut(1000,function(){
+																				 
+					$("#crop_box_{$UID}").html('');
+					$("#crop_box_{$UID}").html('<img src="'+src+'">');
+					$("#avatar-preview-container-{$UID}").html('<img src="'+src+'">');
+					$("#crop_box_{$UID} img").load(function (){
+						crop_init(src+'?t='+new Date().getTime());
+						$(".jcrop-img-box .container").slideDown(300).fadeIn(1000);
+					});
+					
+					show_alert('请剪裁图片',1);	
+					
 				});
-				$('#upload_avatar_{$UID}_alert').text('请剪裁图片');		
+				
 			}else{
-				$.zui.messager.danger('你选择了同样的图片',{placement:'center'});
-				$('#upload_avatar_{$UID}_alert').text('请剪裁图片');
+				msg.warning('你选择了同样的图片',{placement:'center'});
+				show_alert('请剪裁图片',1);
 			}
 			//重置队列
 			uploader_{$UID}.reset();
@@ -183,7 +195,8 @@ $(function () {
 	
 	/*出错*/
 	uploader_{$UID}.on('uploadError', function (file,reason) {
-		$('#upload_avatar_{$UID}_alert').text(reason);									  
+		msg.danger(reason,{placement:'center'});
+		show_alert(reason,2);									  
 	});
 	
 	function crop_init(src){
@@ -219,6 +232,31 @@ $(function () {
 		
 	}
 	
+	function show_alert(text,type){
+		
+		switch(type){
+			case 0:
+			   type="info";
+			break;
+			
+			case 1:
+				type="warning";
+			break;
+			
+			case 2:
+				type="danger";
+			break;
+			
+			case 3:
+				type="success";
+			break;
+			
+		}
+		
+		$('#upload_avatar_{$UID}_alert').text(text).removeClass('alert-info alert-warning alert-danger alert-success').addClass('alert-'+type);
+		
+	}
+	
 	$(window).resize(function(){
 							  
 	   $(".webuploader-pick+div").width('100%');
@@ -233,22 +271,34 @@ $(function () {
 	$('[data-role=avatar_submit_btn]').click(function(){
 		//检查是否已经裁剪过
 		if (!crop) {
-			 $.zui.messager.danger('请上传头像并裁剪',{placement:'center'});
+			 msg.danger('请上传头像并裁剪',{placement:'center'});
 			return;
 		}
 		else{
 			var the_crop = crop.x / boundx + ',' + crop.y / boundy + ',' + crop.w / boundx + ',' + crop.h / boundy;
 		}
 		
-		$('#upload_avatar_{$UID}_alert').text('正在剪裁图片……');		
+		show_alert('正在剪裁图片……',2);	
+		
+		msg.warning('正在剪裁图片……',{placement:'center'});
 		
 		//提交到服务器
 		var url = "{:U('avatar',array('uid'=>UID,'session_id'=>session_id()))}";
 		$.post(url, {crop:the_crop,path:path,saveImgSize:'128,128'}, function (res) {
-				 $.zui.messager.danger(res.info,{placement:'center'});
+				 
+				 if(res.status){
+					 
+					 msg.success(res.info,{placement:'center'});
+				 
+				 }else{
+					 
+					 msg.danger(res.info,{placement:'center'});
+					 
+				 }
+				 
 				 (!!crop)&&(jcrop_api.destroy());
-				 $("#crop_box_{$UID}").html('');
-				 $('#upload_avatar_{$UID}_alert').text('还要做点什么？');		
+				 $(".jcrop-img-box .container").slideUp(300).fadeOut(1000);
+				 show_alert('还要做点什么？',3);		
 				 crop=null;
 		});
 

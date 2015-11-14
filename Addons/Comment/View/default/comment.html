@@ -3,7 +3,7 @@
         
       <div class="comments row col-md-12">
           <header> 
-              <h3>评论 <em>{$_data['count']}</em></h3>
+              <h3>评论&nbsp;({$_data['count']})</h3>
           </header> 
           <section class="comments-list">
           <foreach name="_data._list" item="item" key="k" >
@@ -19,7 +19,7 @@
                 
                 <div class="actions">
                 
-                  <div class="quote" data-pid="{$item['id']}"><a href="#quote"> <i class="icon icon-pencil"></i>&nbsp;回复</a></div>
+                  <div class="quote" data-pid="{$item['id']}"><a href="javascript:void(0);"> <i class="icon icon-pencil"></i>&nbsp;回复</a></div>
                   
                 </div>
                 
@@ -55,11 +55,11 @@
             </header>
             
             <footer class="col-md-11 col-xs-10">
-                 <h4>{$_data['nickname']|default='游客'} </h4>
+                 <h4>{$_data['nickname']|default='游客'}</h4>
                 <form class="comment-form" action="{:addons_url('Comment://Comment/submit','',C('DEFAULT_MODULE'))}">
                    
                     <div class="form-group">
-                        <textarea name="content" name="content" style="width:100%;" rows="5" placeholder="你好，说点什么吧：" ></textarea>
+                        <textarea name="content" name="content" style="width:100%;"  rows="5" placeholder="你好，说点什么吧：" ></textarea>
                     </div>
                     
                     <eq name="_config.comment_verify" value="1" >
