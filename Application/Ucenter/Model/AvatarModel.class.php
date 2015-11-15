@@ -22,8 +22,7 @@ class AvatarModel extends Model{
 		$where['uid']=$uid;
 		$where['is_temp']=0;
 		$where['status']=1;
-		$res=$this->where($where)->order($order)->find();
-		return $res?$res:'';
+		return $this->where($where)->order($order)->find();
 		
 	}
 	
@@ -142,7 +141,7 @@ class AvatarModel extends Model{
 					 
 		$config =array_merge(C('PICTURE_UPLOAD'),$config);
 		$config['callback'] = array($this, 'isFile');	
-		//$config['removeTrash'] = array($this, 'removeTrash');
+		$config['removeTrash'] = array($this, 'removeTrash');
 		/* 调用文件上传组件上传文件 */
 		 
         $Upload = new \Think\Upload($config,C('DOWNLOAD_UPLOAD_DRIVER'),C("UPLOAD_{$pic_driver}_CONFIG"));

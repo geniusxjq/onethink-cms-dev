@@ -1,7 +1,7 @@
 
-<div class="row comment-box">
+<div class="comment-box">
         
-      <div class="comments row col-md-12">
+      <div class="row comments col-md-12">
           <header> 
               <h3>评论&nbsp;({$_data['count']})</h3>
           </header> 
@@ -9,9 +9,9 @@
           <foreach name="_data._list" item="item" key="k" >
             <div class="comment ">
               <a href="#" class="avatar"><img src="{:get_avatar($item['uid'])['path']}" /></a>
-              <div class="content col-md-11 col-xs-10">          
+              <div class="content col-md-12 col-xs-12">          
               <div class="author">
-                 <a href="#">{$item['username']==''?'游客':$item['username']} <i class="icon icon-comment"></i></a>
+                 <a href="javascript:void(0);">{$item['username']==''?'游客':$item['username']} </a>
                  <span class="pull-right">{$item['create_time']|time_format} </span>
               </div>
                 
@@ -19,7 +19,7 @@
                 
                 <div class="actions">
                 
-                  <div class="quote" data-pid="{$item['id']}"><a href="javascript:void(0);"> <i class="icon icon-pencil"></i>&nbsp;回复</a></div>
+                  <div class="quote" data-pid="{$item['id']}"><a href="javascript:void(0);">回复</a></div>
                   
                 </div>
                 
@@ -33,7 +33,7 @@
 
       </div>
             
-      <div class="comment-form" id="comment-reply-form">
+      <div class="row comments col-md-12">
       
             <php> if ($_config['comment_enable'] == 0) { </php>
             
@@ -45,18 +45,11 @@
                 
             <php> } else { </php>
             
-            <header class="comment-form-header">
             
-            <a href="#" class="avatar">
-            
-            <img src="{:get_avatar(is_login())['path']}" />
-            
-            </a>
-            </header>
-            
-            <footer class="col-md-11 col-xs-10">
-                 
-                <form class="comment-form" action="{:addons_url('Comment://Comment/submit','',C('DEFAULT_MODULE'))}">
+            <section class="comment" id="comment-reply-form">
+                <a href="#" class="avatar"><img src="{:get_avatar($data['uid'])['path']}" /></a>
+                <div class="content col-md-12 col-xs-12">    
+                <form action="{:addons_url('Comment://Comment/submit','',C('DEFAULT_MODULE'))}">
                   <div class="form-group">
                    <h4>{$_data['nickname']|default='游客'}</h4>
                   </div>
@@ -79,7 +72,7 @@
                     </eq>
               
                     <div class="form-group">
-                    <button type="submit" class="btn btn-lg btn-info col-md-1 col-sm-2 col-xs-3">提交</button>
+                    <button type="submit" class="btn btn-lg btn-info col-md-1  col-xs-2">提交</button>
                     </div>
                     
                     <foreach name="_data.form_hidden_field" item="item" key="k">
@@ -89,7 +82,8 @@
                     </foreach>
                           
                 </form>
-             </footer>
+                </div>
+             </section>
              
             <php>}</php>
             

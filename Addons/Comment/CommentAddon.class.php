@@ -81,7 +81,9 @@ class CommentAddon extends Addon{
       
 	$_data= $Comment->getComments($param['id'], $addon_config['comment_pagesize'],$addon_config['comment_show_examine_not']);
 	
-    $_data['nickname']=get_nickname();
+	$_data['uid']=is_login();
+    
+	$_data['nickname']=get_nickname();
 	
 	$_data['form_hidden_field']['did'] = $param['id'];
 	

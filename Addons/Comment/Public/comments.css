@@ -1,8 +1,17 @@
+.comment-box{
+	color:#393939;
+	font-size:12px;
+}
+/*
+comments
+*/
 .comment-box .comments > header{
 	font-weight:normal;
+	border:none;
 }
 .comment-box .comments .comment{
 	font-weight:normal;
+	border:none;
 }
 .comment-box .comments > header {
 }
@@ -21,34 +30,39 @@
 .comment-box .avatar {	
     position:relative;
     float: left;
-    width: 68px;
-    height: 68px;
+    width: 48px;
+    height: 48px;
 	margin:0px;
 	background:none;
 	color:#fdfdfd;
 	text-align:center;
-	border-radius:50%;
+	border-radius:0px;
 	padding:0px;
 	overflow:hidden;
-	top:15px;
-	left:8px;
+	top:0px;
+	left:0px;
 }
 .comment-box .avatar img{
 	max-width:100%;
 }
 .comment-box .avatar + .content {
-	padding:10px;
+	padding: 0px 0px 0px 70px;
 	margin:0px;
-	left:8px;
+	left:0px;
 	top:0px;
 }
 
 .comment-box .comments .comment >.content .author,
 .comment-box .comments .comment >.content .text{
-    text-indent:10px;
+    text-indent:0px;
 }
 .comment-box .comments .comment >.content .text{
 	padding-bottom:8px;
+}
+.comment-box .comments .comment >.content .author{
+	padding:5px;
+	color: #666;
+	background-color: #F2FBF5;
 }
 .comment-box .comments .comment >.content .author a{
 	font-weight:normal;
@@ -60,36 +74,21 @@
 	position:relative;
 	float:left;
 	width:100%;
+	color:#aaa;
+}
+.comment-box .comments .comment >.content .actions a{
+	color:inherit;
 }
 .comment-box .comments .comment >.content .quote{
 	position:relative;
 	float:right;
 }
-.comment-box .comment-form footer {
-	padding-left:35px;
-}
-.comment-box .comment-form footer h4{
-	text-indent:0px;
-	padding-bottom:0px;
-}
-.comment-box .comment-form-header .avatar{
-	left:10px;
-	top:-10px;
-}
-.comment-box .comment-form textarea{
-}
-.comment-box .comment-form button[type='submit']{
-}
-.comment-box .comment-form .comment-verify-img{
+
+.comment-box .comment-verify-img{
 	border:solid 1px #eee;
 	width:230px;
 	height:70px;
 	cursor:pointer;
-}
-.comment-box .comment-form-header{
-	display:block;
-	float:left;
-	padding-bottom:10px;
 }
 
 .comment-box .comment-pagination {

@@ -17,8 +17,8 @@ body {
   position: relative;
   padding-top: 82px;
   font-size: 14px;
-  background:#f7f7f7;
-  color: #707070;
+  background:#fff;
+  color: #000;
   font-family: Verdana, 'Helvetica Neue', 'Microsoft Yahei', 'Hiragino Sans GB', 'Microsoft Sans Serif', 'WenQuanYi Micro Hei', sans-serif;
 }
 li{ 
@@ -38,10 +38,26 @@ a:link{
 	text-decoration:none;
 	color:inherit;
 }
+a {
+    cursor: pointer;
+}
 a:link:hover,
 a:link:active{
 	text-decoration:underline;
 }
+a:visited {
+    color: #669;
+    text-decoration: none;
+}
+a:link {
+    color: #37a;
+    text-decoration: none;
+}
+a:visited {
+    color: #669;
+    text-decoration: none;
+}
+
 /*按钮/警告
 ------------------------------*/
 .btn,.alert{
@@ -224,9 +240,11 @@ textarea:focus {
 /**/
 
 header .container{
-	padding:0px 0px 0px 0px;
+	padding:10px 0px 0px 0px;
 }
-
+header .container h2{
+	font-weight:normal;
+}
 /*卡片
 *-------------------------------*/
 .cards {
@@ -403,6 +421,7 @@ header .container{
   background:none;
   text-align: center;
   margin-top:80px;
+  color:#666;
 }
 .footer .container{
 	padding:50px 0px; 

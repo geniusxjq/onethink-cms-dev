@@ -12,6 +12,7 @@
 function parse_content($content){
 	
 	/*调用敏感词过滤插件类(SensitiveAddon)进行敏感词过滤*/
+	
 	$class=get_addon_class("Sensitive");
 	
 	if(class_exists($class)){
@@ -21,6 +22,7 @@ function parse_content($content){
 		$content=$class->parseSensitiveWords($content);
 		
 	}
+	
 	/*敏感词过滤 END*/
 	
 	return $content;

@@ -43,7 +43,7 @@ class ProfileController extends UcenterController {
             if($res['status']){
                 $this->success('修改密码成功！');
             }else{
-                $this->error($this->showRegError($res['info']));
+                $this->error($this->showError($res['info']));
             }
         }else{
             $this->display();
@@ -70,7 +70,7 @@ class ProfileController extends UcenterController {
 	 * @param  integer $code 错误编码
 	 * @return string        错误信息
 	 */
-	private function showRegError($code = 0){
+	private function showError($code = 0){
 		switch ($code) {
 			case -1:  $error = '用户名长度必须在16个字符以内！'; break;
 			case -2:  $error = '用户名被禁止注册！'; break;

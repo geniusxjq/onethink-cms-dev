@@ -36,7 +36,7 @@
 		
 		$("html,body").animate({scrollTop:($('#comment-reply-form').offset().top)},"slow");
 		
-		$(".comment-box .comment-form textarea").focus();
+		$(".comment-box textarea").focus();
 		
 	});
 	
