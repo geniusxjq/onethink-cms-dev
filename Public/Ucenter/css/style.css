@@ -14,12 +14,11 @@ html,body {
 -------------------------------------------------- */
 
 body {
-  position: relative;
-  padding-top: 82px;
-  font-size: 14px;
-  background:#fff;
-  color: #000;
-  font-family: Verdana, 'Helvetica Neue', 'Microsoft Yahei', 'Hiragino Sans GB', 'Microsoft Sans Serif', 'WenQuanYi Micro Hei', sans-serif;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    color: #111;
+    font: normal 14px Arial, Helvetica, sans-serif;
 }
 li{ 
 	list-style-type:none;
@@ -38,9 +37,6 @@ a:link{
 	text-decoration:none;
 	color:inherit;
 }
-a {
-    cursor: pointer;
-}
 a:link:hover,
 a:link:active{
 	text-decoration:underline;
@@ -51,13 +47,12 @@ a:visited {
 }
 a:link {
     color: #37a;
+	cursor: pointer;
     text-decoration: none;
 }
-a:visited {
-    color: #669;
-    text-decoration: none;
+h1,h2,h3,h4,h5,h6{
+	color:#333;
 }
-
 /*按钮/警告
 ------------------------------*/
 .btn,.alert{
@@ -107,22 +102,22 @@ textarea:focus {
 /*页首
 ---------------------------------------------------------*/
 /*导航*/
+body {
+	padding-top:82px;
+}
 .navbar,.navbar-default{
 	background:#fff;
 	color:inherit;
+	height:82px;
+	line-height:82px;
 }
 .navbar-default{
 	border:none;
-	height:82px;
-	line-height:82px;
+	  -webkit-box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, .050);
+			  box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, .050);
 }
 .navbar-default .container{
 	background-color:inherit;
-}
-
-.navbar-default .navbar-header{
-	height:82px;
-	line-height:82px;
 }
 .navbar-default  .navbar-collapse,
 .navbar-default  .navbar-form{
@@ -196,23 +191,25 @@ textarea:focus {
 .navbar-default .navbar-nav .dropdown-menu > .active > a:focus {
 }
 @media (max-width: 767px) {
+  body {
+	padding-top:72px;
+  }
   /*导航*/
   .navbar,.navbar-default{
-	  background:#fff;
-	  
+	  height:72px;
+	  line-height:72px;
   }
   .navbar-default{
 	  border:none;
-	  height:72px;
-	  line-height:72px;
 	  -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, .030);
 			  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, .030);
   
-  }
-
+  }  
+  .navbar-default .navbar-nav .dropdown-menu > li,
+  .navbar-default .navbar-nav .dropdown-menu > li > a,
+  .navbar-default .navbar-header .navbar-brand,
   .navbar-default .navbar-nav > li{
-	  font-size:16px;
-	  line-height:48px;
+	  line-height:52px;
   } 
   .navbar-default  .navbar-collapse{
 	  -webkit-box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, .075);
@@ -220,11 +217,9 @@ textarea:focus {
   }
   .navbar-default .navbar-nav .open .dropdown-menu > .dropdown-header {
   }
-  
   .navbar-default .navbar-nav .dropdown-menu > li,
   .navbar-default .navbar-nav .dropdown-menu > li > a{
-	  font-size:14px;
-	  line-height:48px;
+	 line-height:48px;
   }
   .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
   .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
@@ -237,7 +232,7 @@ textarea:focus {
   }
 }
 
-/**/
+/*头部标题*/
 
 header .container{
 	padding:10px 0px 0px 0px;

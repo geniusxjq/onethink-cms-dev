@@ -1,6 +1,4 @@
 .comment-box{
-	color:#393939;
-	font-size:12px;
 }
 /*
 comments
@@ -15,7 +13,7 @@ comments
 }
 .comment-box .comments > header {
 }
-.comment-box .comments > header > h3{
+.comment-box .comments > header > h4{
 	font-size:16px;
 	padding:8px;
 	font-weight:normal;
@@ -41,6 +39,7 @@ comments
 	overflow:hidden;
 	top:0px;
 	left:0px;
+	z-index:10;
 }
 .comment-box .avatar img{
 	max-width:100%;
@@ -50,6 +49,7 @@ comments
 	margin:0px;
 	left:0px;
 	top:0px;
+	z-index:1;
 }
 
 .comment-box .comments .comment >.content .author,
@@ -61,8 +61,6 @@ comments
 }
 .comment-box .comments .comment >.content .author{
 	padding:5px;
-	color: #666;
-	background-color: #F2FBF5;
 }
 .comment-box .comments .comment >.content .author a{
 	font-weight:normal;

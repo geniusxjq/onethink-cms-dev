@@ -2,7 +2,7 @@
 
 <block name="header">
 <header>
-<div class="container">
+<div class="container text-center">
     <h2>用户登录</h2>
 </div>
 </header>
@@ -11,100 +11,22 @@
 
 <block name="body"> 
 <div class="center-block col-md-12">
-<!--卡片-->
-<div class="list">
-    <section class="cards cards-borderless">
-        <div class="col-md-4 col-sm-6 col-lg-3">
-          <div class="card">
-           <span class="media-wrapper"> <img src="http://img3.3lian.com/2013/s1/65/d/104.jpg" alt=""></span>
-            
-            <a href="###" class="card-heading"><strong>Lorem ipsum dolor sit.</strong></a>
-            <div class="card-content text-muted">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae, officia similique enim culpa ipsam voluptas. Quibusdam, tempora autem voluptatem aliquid!
-             </div>
-             <div class="card-actions">
-                <a href="###"><i class="icon-comment"></i> 343</a>
-                <span class="text-muted">&nbsp;&nbsp;2013-11-12 15:05:56</span>
-              </div>
-              
-              <div class="card-reveal">
-                <h5 class="card-heading">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat, autem dolorum accusantium laboriosam architecto veritatis eaque pariatur quisquam ea odit.</h5>
-                <div class="card-actions">
-                    <a href="###"><i class="icon-comment"></i> 343</a>
-                    <span class="text-muted">&nbsp;&nbsp;2013-11-12 15:05:56</span>
-                </div>
-                <div class="card-content text-muted">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae, officia similique enim culpa ipsam voluptas. Quibusdam, tempora autem voluptatem aliquid!
-                </div>
-
-              </div>
-              
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-6 col-lg-3">
-          <div class="card">
-             <span class="media-wrapper"><img src="http://img2.3lian.com/2014/f4/102/d/89.jpg" alt=""></span>
-            
-            <a href="###" class="card-heading"><strong>Lorem ipsum dolor sit.</strong></a>
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-6 col-lg-3">
-          <div class="card">
-            <span class="media-wrapper"><img src="http://img2.3lian.com/2014/f4/171/d/57.jpg" alt=""></span>
-            <span class="caption">Lorem ipsum dolor sit amet, consectetur</span>
-            <div class="card-heading">
-              <span class="pull-right"><a href="###"><i class="icon-heart-empty"></i></a></span>
-              <a href="###"><strong>Lorem ipsum dolor sit.</strong></a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4 col-sm-6 col-lg-3">
-          <div class="card">
-            <span class="media-wrapper"><img src="http://img3.3lian.com/2013/s1/65/d/104.jpg" alt=""></span>
-            <span class="caption">关于图片的说明</span>
-            <a href="###" class="card-heading"><strong>Lorem ipsum dolor sit.</strong></a>
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-6 col-lg-3">
-          <div class="card">
-            <span class="media-wrapper"><img src="http://img2.3lian.com/2014/f4/102/d/89.jpg" alt=""></span>
-            <span class="caption">Lorem ipsum dolor sit amet, consectetur </span>
-            <a href="###" class="card-heading"><strong>Lorem ipsum dolor sit.</strong></a>
-          </div>
-        </div>
-             <div class="col-md-4 col-sm-6 col-lg-3">
-          <div class="card">
-             <span class="media-wrapper"><img src="http://img2.3lian.com/2014/f4/102/d/89.jpg" alt=""></span>
-            <span class="caption">Lorem ipsum dolor sit amet, consectetur </span>
-            <a href="###" class="card-heading"><strong>Lorem ipsum dolor sit.</strong></a>
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-6 col-lg-3">
-          <div class="card">
-            <span class="media-wrapper"><img src="http://img2.3lian.com/2014/f4/171/d/57.jpg" alt=""></span>
-            <span class="caption">Lorem ipsum dolor sit amet, consectetur</span>
-            <div class="card-heading">
-              <span class="pull-right"><a href="###"><i class="icon-heart-empty"></i></a></span>
-              <a href="###"><strong>Lorem ipsum dolor sit.</strong></a>
-            </div>
-          </div>
-        </div>
-             <div class="col-md-4 col-sm-6 col-lg-3">
-          <div class="card">
-             <span class="media-wrapper"><img src="http://img2.3lian.com/2014/f4/102/d/89.jpg" alt=""></span>
-            <span class="caption">Lorem ipsum dolor sit amet, consectetur </span>
-            <a href="###" class="card-heading"><strong>Lorem ipsum dolor sit.</strong></a>
-          </div>
-        </div>
-    
-    </section>
-</div>
-<!--卡片 END-->
 <div class="container">
-{:hook('Advertising','1,2,3')}
-{:hook('Friendlinks','1,2,3')}
+
+<div class="col-md-8">
 {:hook('documentDetailAfter',array('id'=>4))}
 </div>
+
+<div class="col-md-4">
+{:hook('Advertising','1,2,3')}
+<hr />
+</div>
+
+</div>
+
+<div class="container">
+{:hook('Friendlinks','1,2,3')}
+</div>
+
 </div>
 </block>
