@@ -42,43 +42,6 @@ function is_administrator($uid = null){
     return $uid && (intval($uid) === C('USER_ADMINISTRATOR'));
 }
 
-/*
-*获取用户ID
-*@return integer 0-未登录，大于0-当前登录用户ID
-*@author genisuxjq <app880.com>
-*/
-
-function get_uid()
-{
-    return is_login();
-}
-
-/*
-*检测用户权限
-* @param string  $rule    检测的规则
-* @param string  $mode    check模式
-* @return boolean
-*@author genisuxjq <app880.com>
-*/
-
-function check_auth($rule, $type = AuthRuleModel::RULE_URL )
-{
-    if (is_administrator()) {
-        return true;//管理员允许访问任何页面
-    }
-    static $Auth = null;
-    if (!$Auth) {
-        $Auth = new \Think\Auth();
-    }
-    if (!$Auth->check($rule, is_login(), $type)) {
-        return false;
-    }
-    return true;
-
-}
-
-
-
 /**
  * 字符串转换为数组，主要用于把分隔符调整到第二个参数
  * @param  string $str  要分割的字符串
