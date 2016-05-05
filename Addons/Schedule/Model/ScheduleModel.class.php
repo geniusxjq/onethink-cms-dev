@@ -256,10 +256,11 @@ class ScheduleModel extends Model{
 		($schedule['month'])&&($schedule['month']=count($schedule['month'])>=12?'*':implode(',',$schedule['month']));
 		(!$schedule['modifier'])&&($schedule['modifier']=1);
 		if($schedule['daylist']){
+			$schedule['daylist']=array_unique($schedule['daylist']);
 			if(($schedule['task_type']=="WEEKLY")||(in_array($schedule['modifier'],array('FIRST','SECOND','THIRD','FOURTH','LAST')))){
 				(count($schedule['daylist'])>=7)&&$schedule['daylist']="*";
 			}else{
-				(count($schedule['daylist'])>=31)&&$schedule['daylist']="*";
+				//(count($schedule['daylist'])>=31)&&$schedule['daylist']="*";
 			}
 			is_array($schedule['daylist'])&&($schedule['daylist']=implode(',',$schedule['daylist']));
 		}

@@ -110,7 +110,7 @@ textarea:focus {
 	color:inherit;
 	height:82px;
 	line-height:82px;
-	display:none;
+	display:block;
 }
 .navbar-default{
 	border:none;
