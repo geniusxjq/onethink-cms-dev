@@ -176,13 +176,14 @@ function L($name=null, $value=null) {
 
 /**
  * 添加和获取页面Trace记录
- * @param string $value 变量
+ * @param string $value 值
  * @param string $label 标签
  * @param string $level 日志级别
  * @param boolean $record 是否记录日志
  * @return void|array
  */
 function trace($value='[think]',$label='',$level='DEBUG',$record=false) {
+	
     return Think\Think::trace($value,$label,$level,$record);
 }
 

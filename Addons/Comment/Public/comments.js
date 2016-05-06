@@ -1,4 +1,4 @@
-+$(function(){
+$(function(){
     $(document).on('submit','.comment-box form' ,function(){
         var $form = $(this);
         var url = $form.attr('action');
@@ -44,4 +44,4 @@
         $('input[name="pid"]').val(id);
     }
 	
-})(jQuery);
+});

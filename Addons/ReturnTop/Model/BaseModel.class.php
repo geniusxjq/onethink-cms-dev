@@ -23,7 +23,7 @@ class BaseModel{
 	}
 	
 	/*
-	获取字体数据列表
+	获取主题数据列表
 	*/
 	
 	public function get_theme_list(){

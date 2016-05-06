@@ -83,7 +83,7 @@ comments
 }
 
 .comment-box .comment-verify-img{
-	border:solid 1px #eee;
+	border:solid 0px #eee;
 	width:230px;
 	height:70px;
 	cursor:pointer;
