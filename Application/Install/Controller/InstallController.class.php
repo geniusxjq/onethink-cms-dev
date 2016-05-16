@@ -99,6 +99,7 @@ class InstallController extends Controller{
 
     //安装第三步，安装数据表，创建配置文件
     public function step3(){
+		
         if(session('step') != 2){
             $this->redirect('step2');
         }
@@ -132,4 +133,11 @@ class InstallController extends Controller{
             $this->redirect('Index/complete');
         }
     }
+	
+	public function dllSql(){
+		
+		
+		
+	}
+	
 }

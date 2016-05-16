@@ -134,4 +134,5 @@ class Db {
     static public function __callStatic($method, $params){
         return call_user_func_array(array(self::$_instance, $method), $params);
     }
+	
 }
