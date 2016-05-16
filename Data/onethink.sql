@@ -1,33 +1,14 @@
--- phpMyAdmin SQL Dump
--- version 3.5.2.2
--- http://www.phpmyadmin.net
---
--- 主机: 127.0.0.1
--- 生成日期: 2015 年 11 月 09 日 15:05
--- 服务器版本: 5.5.27
--- PHP 版本: 5.4.7
-
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
-
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 
---
--- 数据库: `onethink`
---
-
--- --------------------------------------------------------
-
---
--- 表的结构 `onethink_action`
---
 
 CREATE TABLE IF NOT EXISTS `onethink_action` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+`id` int(11) unsigned NOT NULL COMMENT '主键',
   `name` char(30) NOT NULL DEFAULT '' COMMENT '行为唯一标识',
   `title` char(80) NOT NULL DEFAULT '' COMMENT '行为说明',
   `remark` char(140) NOT NULL DEFAULT '' COMMENT '行为描述',
@@ -35,13 +16,8 @@ CREATE TABLE IF NOT EXISTS `onethink_action` (
   `log` text COMMENT '日志规则',
   `type` tinyint(2) unsigned NOT NULL DEFAULT '1' COMMENT '类型',
   `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '状态',
-  `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '修改时间',
-  PRIMARY KEY (`id`)
+  `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '修改时间'
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='系统行为表' AUTO_INCREMENT=12 ;
-
---
--- 转存表中的数据 `onethink_action`
---
 
 INSERT INTO `onethink_action` (`id`, `name`, `title`, `remark`, `rule`, `log`, `type`, `status`, `update_time`) VALUES
 (1, 'user_login', '用户登录', '积分+10，每天一次', 'table:member|field:score|condition:uid={$self} AND status>-1|rule:score+10|cycle:24|max:1;', '[user|get_nickname]在[time|time_format]登录了后台', 1, 1, 1387181220),
@@ -56,14 +32,8 @@ INSERT INTO `onethink_action` (`id`, `name`, `title`, `remark`, `rule`, `log`, `
 (10, 'update_menu', '更新菜单', '新增或修改或删除菜单', '', '', 1, 1, 1383296392),
 (11, 'update_category', '更新分类', '新增或修改或删除分类', '', '', 1, 1, 1383296765);
 
--- --------------------------------------------------------
-
---
--- 表的结构 `onethink_action_log`
---
-
 CREATE TABLE IF NOT EXISTS `onethink_action_log` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+`id` int(10) unsigned NOT NULL COMMENT '主键',
   `action_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '行为id',
   `user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '执行用户id',
   `action_ip` bigint(20) NOT NULL COMMENT '执行行为者ip',
@@ -71,16 +41,8 @@ CREATE TABLE IF NOT EXISTS `onethink_action_log` (
   `record_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '触发行为的数据id',
   `remark` varchar(255) NOT NULL DEFAULT '' COMMENT '日志备注',
   `status` tinyint(2) NOT NULL DEFAULT '1' COMMENT '状态',
-  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '执行行为的时间',
-  PRIMARY KEY (`id`),
-  KEY `action_ip_ix` (`action_ip`),
-  KEY `action_id_ix` (`action_id`),
-  KEY `user_id_ix` (`user_id`)
+  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '执行行为的时间'
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED COMMENT='行为日志表' AUTO_INCREMENT=359 ;
-
---
--- 转存表中的数据 `onethink_action_log`
---
 
 INSERT INTO `onethink_action_log` (`id`, `action_id`, `user_id`, `action_ip`, `model`, `record_id`, `remark`, `status`, `create_time`) VALUES
 (120, 1, 1, 2130706433, 'member', 1, 'admin在2015-02-17 15:19登录了后台', 1, 1424157551),
@@ -323,14 +285,8 @@ INSERT INTO `onethink_action_log` (`id`, `action_id`, `user_id`, `action_ip`, `m
 (357, 1, 1, 2130706433, 'member', 1, 'admin在2015-11-09 10:43登录了后台', 1, 1447036999),
 (358, 1, 1, 2130706433, 'member', 1, 'admin在2015-11-09 12:24登录了后台', 1, 1447043052);
 
--- --------------------------------------------------------
-
---
--- 表的结构 `onethink_addons`
---
-
 CREATE TABLE IF NOT EXISTS `onethink_addons` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+`id` int(10) unsigned NOT NULL COMMENT '主键',
   `name` varchar(40) NOT NULL COMMENT '插件名或标识',
   `title` varchar(20) NOT NULL DEFAULT '' COMMENT '中文名',
   `description` text COMMENT '插件描述',
@@ -342,13 +298,8 @@ CREATE TABLE IF NOT EXISTS `onethink_addons` (
   `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '安装时间',
   `has_adminlist` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否有后台列表',
   `is_locked` tinyint(1) DEFAULT '0' COMMENT '插件是否已被锁定',
-  `sort` int(10) DEFAULT '0' COMMENT '已安装插件菜单排序',
-  PRIMARY KEY (`id`)
+  `sort` int(10) DEFAULT '0' COMMENT '已安装插件菜单排序'
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='插件表' AUTO_INCREMENT=200 ;
-
---
--- 转存表中的数据 `onethink_addons`
---
 
 INSERT INTO `onethink_addons` (`id`, `name`, `title`, `description`, `status`, `config`, `author`, `url`, `version`, `create_time`, `has_adminlist`, `is_locked`, `sort`) VALUES
 (2, 'SiteStat', '站点统计信息', '统计站点的基础信息', 1, '{"title":"\\u7cfb\\u7edf\\u4fe1\\u606f","width":"1","display":"1","status":"0"}', 'thinkphp', '', '0.1', 1379512015, 0, 1, 0),
@@ -378,14 +329,8 @@ INSERT INTO `onethink_addons` (`id`, `name`, `title`, `description`, `status`, `
 (173, 'UploadImages', '多图上传', '多图上传', 1, 'null', '木梁大囧', '', '1.2', 1444205270, 0, 1, 0),
 (180, 'Comment', '评论', '本地独立评论插件', 1, '{"comment_title":"\\u8bc4\\u8bba\\u5217\\u8868","comment_enable":"1","comment_show_examine_not":"1","comment_verify":"1","comment_max_length":"150","comment_pagesize":"5","comment_need_login":"0","comment_template":"default"}', 'leoding86@msn.com', '', '0.8.0630Beta', 1444372674, 1, 0, 6);
 
--- --------------------------------------------------------
-
---
--- 表的结构 `onethink_advertisement`
---
-
 CREATE TABLE IF NOT EXISTS `onethink_advertisement` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+`id` int(11) unsigned NOT NULL COMMENT '主键',
   `title` char(80) NOT NULL DEFAULT '' COMMENT '广告名称',
   `position` int(11) NOT NULL COMMENT '广告位置',
   `advspic` int(11) NOT NULL COMMENT '图片地址(ID)',
@@ -396,51 +341,29 @@ CREATE TABLE IF NOT EXISTS `onethink_advertisement` (
   `status` tinyint(2) NOT NULL DEFAULT '1' COMMENT '状态（0：禁用，1：正常）',
   `is_never` tinyint(2) NOT NULL DEFAULT '0' COMMENT '永久有效不受时间限制的广告（0：不是，1：是）',
   `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '开始时间',
-  `end_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '结束时间',
-  PRIMARY KEY (`id`)
+  `end_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '结束时间'
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
-
---
--- 转存表中的数据 `onethink_advertisement`
---
 
 INSERT INTO `onethink_advertisement` (`id`, `title`, `position`, `advspic`, `advstext`, `advshtml`, `link`, `level`, `status`, `is_never`, `create_time`, `end_time`) VALUES
 (1, '011', 1, 0, 'test', '', '', 0, 1, 1, 1446626280, 1446626280);
 
--- --------------------------------------------------------
-
---
--- 表的结构 `onethink_advertising`
---
-
 CREATE TABLE IF NOT EXISTS `onethink_advertising` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+`id` int(11) unsigned NOT NULL COMMENT '主键',
   `title` char(80) NOT NULL DEFAULT '' COMMENT '广告位置名称',
   `type` int(11) unsigned NOT NULL DEFAULT '1' COMMENT '广告位置类型 1文字 2图片 3代码',
   `same_limit` int(11) unsigned NOT NULL DEFAULT '1' COMMENT '广告位同时展示的广告数量限制  1为默认展示一张',
   `idle_content` text NOT NULL COMMENT '广告位闲置时默认显示的广告内容',
   `width` char(20) NOT NULL DEFAULT '' COMMENT '广告位置宽度',
   `height` char(20) NOT NULL DEFAULT '' COMMENT '广告位置高度',
-  `status` tinyint(2) NOT NULL DEFAULT '1' COMMENT '状态（0：禁用，1：正常）',
-  PRIMARY KEY (`id`)
+  `status` tinyint(2) NOT NULL DEFAULT '1' COMMENT '状态（0：禁用，1：正常）'
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
-
---
--- 转存表中的数据 `onethink_advertising`
---
 
 INSERT INTO `onethink_advertising` (`id`, `title`, `type`, `same_limit`, `idle_content`, `width`, `height`, `status`) VALUES
 (1, '01', 1, 1, '<p style="text-align: left;"><img src="http://img.baidu.com/hi/jx2/j_0001.gif"/></p>', '', '', 1),
 (2, '02', 3, 1, '<p><img src="http://img.baidu.com/hi/jx2/j_0003.gif"/></p>', '100', '100', 1);
 
--- --------------------------------------------------------
-
---
--- 表的结构 `onethink_attachment`
---
-
 CREATE TABLE IF NOT EXISTS `onethink_attachment` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+`id` int(10) unsigned NOT NULL,
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户ID',
   `title` char(30) NOT NULL DEFAULT '' COMMENT '附件显示名',
   `type` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '附件类型',
@@ -452,19 +375,11 @@ CREATE TABLE IF NOT EXISTS `onethink_attachment` (
   `sort` int(8) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
   `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
-  `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '状态',
-  PRIMARY KEY (`id`),
-  KEY `idx_record_status` (`record_id`,`status`)
+  `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '状态'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='附件表' AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
-
---
--- 表的结构 `onethink_attribute`
---
-
 CREATE TABLE IF NOT EXISTS `onethink_attribute` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+`id` int(10) unsigned NOT NULL,
   `name` varchar(30) NOT NULL DEFAULT '' COMMENT '字段名',
   `title` varchar(100) NOT NULL DEFAULT '' COMMENT '字段注释',
   `field` varchar(100) NOT NULL DEFAULT '' COMMENT '字段定义',
@@ -484,14 +399,8 @@ CREATE TABLE IF NOT EXISTS `onethink_attribute` (
   `validate_type` varchar(25) NOT NULL DEFAULT '',
   `auto_rule` varchar(100) NOT NULL DEFAULT '',
   `auto_time` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `auto_type` varchar(25) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`),
-  KEY `model_id` (`model_id`)
+  `auto_type` varchar(25) NOT NULL DEFAULT ''
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='模型属性表' AUTO_INCREMENT=49 ;
-
---
--- 转存表中的数据 `onethink_attribute`
---
 
 INSERT INTO `onethink_attribute` (`id`, `name`, `title`, `field`, `type`, `value`, `remark`, `is_show`, `extra`, `model_id`, `is_must`, `status`, `update_time`, `create_time`, `validate_rule`, `validate_time`, `error_info`, `validate_type`, `auto_rule`, `auto_time`, `auto_type`) VALUES
 (1, 'uid', '用户ID', 'int(10) unsigned NOT NULL ', 'num', '0', '', 0, '', 1, 0, 1, 1384508362, 1383891233, '', 0, '', '', '', 0, ''),
@@ -528,24 +437,11 @@ INSERT INTO `onethink_attribute` (`id`, `name`, `title`, `field`, `type`, `value
 (32, 'size', '文件大小', 'bigint(20) unsigned NOT NULL ', 'num', '0', '单位bit', 1, '', 3, 0, 1, 1383896371, 1383891252, '', 0, '', '', '', 0, ''),
 (48, 'atlas', '图集', 'varchar(255) NOT NULL', 'pictures', '', '', 1, '', 2, 0, 1, 1444206487, 1444206487, '', 3, '', 'regex', '', 3, 'function');
 
--- --------------------------------------------------------
-
---
--- 表的结构 `onethink_auth_extend`
---
-
 CREATE TABLE IF NOT EXISTS `onethink_auth_extend` (
   `group_id` mediumint(10) unsigned NOT NULL COMMENT '用户id',
   `extend_id` mediumint(8) unsigned NOT NULL COMMENT '扩展表中数据的id',
-  `type` tinyint(1) unsigned NOT NULL COMMENT '扩展类型标识 1:栏目分类权限;2:模型权限',
-  UNIQUE KEY `group_extend_type` (`group_id`,`extend_id`,`type`),
-  KEY `uid` (`group_id`),
-  KEY `group_id` (`extend_id`)
+  `type` tinyint(1) unsigned NOT NULL COMMENT '扩展类型标识 1:栏目分类权限;2:模型权限'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='用户组与分类的对应关系表';
-
---
--- 转存表中的数据 `onethink_auth_extend`
---
 
 INSERT INTO `onethink_auth_extend` (`group_id`, `extend_id`, `type`) VALUES
 (1, 1, 1),
@@ -554,73 +450,37 @@ INSERT INTO `onethink_auth_extend` (`group_id`, `extend_id`, `type`) VALUES
 (1, 2, 2),
 (1, 3, 2);
 
--- --------------------------------------------------------
-
---
--- 表的结构 `onethink_auth_group`
---
-
 CREATE TABLE IF NOT EXISTS `onethink_auth_group` (
-  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户组id,自增主键',
+`id` mediumint(8) unsigned NOT NULL COMMENT '用户组id,自增主键',
   `module` varchar(20) NOT NULL DEFAULT '' COMMENT '用户组所属模块',
   `type` tinyint(4) NOT NULL DEFAULT '0' COMMENT '组类型',
   `title` char(20) NOT NULL DEFAULT '' COMMENT '用户组中文名称',
   `description` varchar(80) NOT NULL DEFAULT '' COMMENT '描述信息',
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '用户组状态：为1正常，为0禁用,-1为删除',
-  `rules` varchar(500) NOT NULL DEFAULT '' COMMENT '用户组拥有的规则id，多个规则 , 隔开',
-  PRIMARY KEY (`id`)
+  `rules` varchar(500) NOT NULL DEFAULT '' COMMENT '用户组拥有的规则id，多个规则 , 隔开'
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
-
---
--- 转存表中的数据 `onethink_auth_group`
---
 
 INSERT INTO `onethink_auth_group` (`id`, `module`, `type`, `title`, `description`, `status`, `rules`) VALUES
 (1, 'admin', 1, '默认用户组', '', 1, '2,7,8,9,10,11,12,13,14,15,16,17,18,79,211,217'),
 (2, 'admin', 1, '测试用户', '测试用户', 1, '232,2,7,8,9,10,11,12,13,14,15,16,17,18,79,211,217');
 
--- --------------------------------------------------------
-
---
--- 表的结构 `onethink_auth_group_access`
---
-
 CREATE TABLE IF NOT EXISTS `onethink_auth_group_access` (
   `uid` int(10) unsigned NOT NULL COMMENT '用户id',
-  `group_id` mediumint(8) unsigned NOT NULL COMMENT '用户组id',
-  UNIQUE KEY `uid_group_id` (`uid`,`group_id`),
-  KEY `uid` (`uid`),
-  KEY `group_id` (`group_id`)
+  `group_id` mediumint(8) unsigned NOT NULL COMMENT '用户组id'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `onethink_auth_group_access`
---
 
 INSERT INTO `onethink_auth_group_access` (`uid`, `group_id`) VALUES
 (3, 1);
 
--- --------------------------------------------------------
-
---
--- 表的结构 `onethink_auth_rule`
---
-
 CREATE TABLE IF NOT EXISTS `onethink_auth_rule` (
-  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '规则id,自增主键',
+`id` mediumint(8) unsigned NOT NULL COMMENT '规则id,自增主键',
   `module` varchar(20) NOT NULL COMMENT '规则所属module',
   `type` tinyint(2) NOT NULL DEFAULT '1' COMMENT '1-url;2-主菜单',
   `name` char(80) NOT NULL DEFAULT '' COMMENT '规则唯一英文标识',
   `title` char(20) NOT NULL DEFAULT '' COMMENT '规则中文描述',
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '是否有效(0:无效,1:有效)',
-  `condition` varchar(300) NOT NULL DEFAULT '' COMMENT '规则附加条件',
-  PRIMARY KEY (`id`),
-  KEY `module` (`module`,`status`,`type`)
+  `condition` varchar(300) NOT NULL DEFAULT '' COMMENT '规则附加条件'
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=235 ;
-
---
--- 转存表中的数据 `onethink_auth_rule`
---
 
 INSERT INTO `onethink_auth_rule` (`id`, `module`, `type`, `name`, `title`, `status`, `condition`) VALUES
 (1, 'admin', 2, 'Admin/Index/index', '首页', 1, ''),
@@ -842,30 +702,17 @@ INSERT INTO `onethink_auth_rule` (`id`, `module`, `type`, `name`, `title`, `stat
 (220, 'admin', 1, 'Admin/AuthManager/accessUser', '前台权限管理', 1, ''),
 (221, 'admin', 1, 'Admin/AuthManager/addNode', '新增前台权限节点', 1, '');
 
--- --------------------------------------------------------
-
---
--- 表的结构 `onethink_avatar`
---
-
 CREATE TABLE IF NOT EXISTS `onethink_avatar` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `uid` int(11) NOT NULL COMMENT '用户ID',
   `path` varchar(200) NOT NULL COMMENT '头像路径',
   `create_time` int(11) NOT NULL COMMENT '创建时间',
   `status` int(11) NOT NULL DEFAULT '0' COMMENT '头像状态，启用或禁用',
-  `is_temp` int(11) NOT NULL DEFAULT '1' COMMENT '头像图片文件是否是临时图片（只有用户提交确认后才作为头像使用）[0=不是 1=是]',
-  PRIMARY KEY (`id`)
+  `is_temp` int(11) NOT NULL DEFAULT '1' COMMENT '头像图片文件是否是临时图片（只有用户提交确认后才作为头像使用）[0=不是 1=是]'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
-
---
--- 表的结构 `onethink_category`
---
-
 CREATE TABLE IF NOT EXISTS `onethink_category` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '分类ID',
+`id` int(10) unsigned NOT NULL COMMENT '分类ID',
   `name` varchar(30) NOT NULL COMMENT '标志',
   `title` varchar(50) NOT NULL COMMENT '标题',
   `pid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '上级分类ID',
@@ -892,29 +739,16 @@ CREATE TABLE IF NOT EXISTS `onethink_category` (
   `update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
   `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '数据状态',
   `icon` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分类图标',
-  `groups` varchar(255) NOT NULL DEFAULT '' COMMENT '分组定义',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `uk_name` (`name`),
-  KEY `pid` (`pid`)
+  `groups` varchar(255) NOT NULL DEFAULT '' COMMENT '分组定义'
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='分类表' AUTO_INCREMENT=40 ;
-
---
--- 转存表中的数据 `onethink_category`
---
 
 INSERT INTO `onethink_category` (`id`, `name`, `title`, `pid`, `sort`, `list_row`, `meta_title`, `keywords`, `description`, `template_index`, `template_lists`, `template_detail`, `template_edit`, `model`, `model_sub`, `type`, `link_id`, `allow_publish`, `display`, `reply`, `check`, `reply_model`, `extend`, `create_time`, `update_time`, `status`, `icon`, `groups`) VALUES
 (1, 'blog', '博客', 0, 0, 10, '', '', '', '', '', '', '', '2,3', '2', '2,1', 0, 2, 1, 0, 0, '1', '', 1379474947, 1444128128, 1, 0, ''),
 (2, 'default_blog', '默认分类', 1, 0, 10, '', '', '', '', '', '', '', '2,3', '2', '2,1,3', 0, 2, 1, 0, 1, '1', '', 1379475028, 1444221558, 1, 0, ''),
 (39, 'feeling', '心得', 1, 1, 10, '', '', '', '', '', '', '', '2', '2', '2,1,3', 0, 1, 1, 0, 0, '', NULL, 1444221410, 1444221561, 1, 0, '');
 
--- --------------------------------------------------------
-
---
--- 表的结构 `onethink_channel`
---
-
 CREATE TABLE IF NOT EXISTS `onethink_channel` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '频道ID',
+`id` int(10) unsigned NOT NULL COMMENT '频道ID',
   `pid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '上级频道ID',
   `title` char(30) NOT NULL COMMENT '频道标题',
   `url` char(100) NOT NULL COMMENT '频道连接',
@@ -922,27 +756,15 @@ CREATE TABLE IF NOT EXISTS `onethink_channel` (
   `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
   `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '状态',
-  `target` tinyint(2) unsigned NOT NULL DEFAULT '0' COMMENT '新窗口打开',
-  PRIMARY KEY (`id`),
-  KEY `pid` (`pid`)
+  `target` tinyint(2) unsigned NOT NULL DEFAULT '0' COMMENT '新窗口打开'
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
-
---
--- 转存表中的数据 `onethink_channel`
---
 
 INSERT INTO `onethink_channel` (`id`, `pid`, `title`, `url`, `sort`, `create_time`, `update_time`, `status`, `target`) VALUES
 (1, 0, '首页', 'Home/Index/index', 1, 1379475111, 1424406781, 1, 0),
 (2, 0, '博客', 'Home/Article/index?category=blog', 2, 1379475131, 1424404779, 1, 0);
 
--- --------------------------------------------------------
-
---
--- 表的结构 `onethink_comment`
---
-
 CREATE TABLE IF NOT EXISTS `onethink_comment` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `pid` int(11) NOT NULL DEFAULT '0',
   `pids` text NOT NULL,
   `did` int(11) NOT NULL DEFAULT '0',
@@ -951,26 +773,15 @@ CREATE TABLE IF NOT EXISTS `onethink_comment` (
   `content` text NOT NULL,
   `status` int(11) NOT NULL DEFAULT '0',
   `create_time` int(10) NOT NULL DEFAULT '0',
-  `update_time` int(10) DEFAULT '0',
-  PRIMARY KEY (`id`)
+  `update_time` int(10) DEFAULT '0'
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
-
---
--- 转存表中的数据 `onethink_comment`
---
 
 INSERT INTO `onethink_comment` (`id`, `pid`, `pids`, `did`, `uid`, `username`, `content`, `status`, `create_time`, `update_time`) VALUES
 (9, 0, '0', 2, 0, '游客', 'sdfsfs', 0, 1446633965, 1446633965),
 (8, 0, '0', 2, 0, '游客', '55', 0, 1446633951, 1446633951);
 
--- --------------------------------------------------------
-
---
--- 表的结构 `onethink_config`
---
-
 CREATE TABLE IF NOT EXISTS `onethink_config` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '配置ID',
+`id` int(10) unsigned NOT NULL COMMENT '配置ID',
   `name` varchar(30) NOT NULL DEFAULT '' COMMENT '配置名称',
   `type` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '配置类型',
   `title` varchar(50) NOT NULL DEFAULT '' COMMENT '配置说明',
@@ -981,16 +792,8 @@ CREATE TABLE IF NOT EXISTS `onethink_config` (
   `update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
   `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '状态',
   `value` text COMMENT '配置值',
-  `sort` smallint(3) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `uk_name` (`name`),
-  KEY `type` (`type`),
-  KEY `group` (`group`)
+  `sort` smallint(3) unsigned NOT NULL DEFAULT '0' COMMENT '排序'
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=49 ;
-
---
--- 转存表中的数据 `onethink_config`
---
 
 INSERT INTO `onethink_config` (`id`, `name`, `type`, `title`, `group`, `extra`, `remark`, `create_time`, `update_time`, `status`, `value`, `sort`) VALUES
 (1, 'WEB_SITE_TITLE', 1, '网站标题', 1, '', '网站标题前台显示标题', 1378898976, 1379235274, 1, 'OneThink', 10),
@@ -1030,14 +833,8 @@ INSERT INTO `onethink_config` (`id`, `name`, `type`, `title`, `group`, `extra`, 
 (45, 'MAIL_REPLY_NAME', 1, '发件人名称', 5, '', '发件人名称，默认使用网站名称【WEB_SITE_TITLE 网站标题】', 1422685995, 1422688174, 1, '嘘嘘', 8),
 (46, 'WEB_SITE_NAME', 0, '网站名称', 1, '', '网站名称', 1422687631, 1422687631, 1, 'app880.com', 9);
 
--- --------------------------------------------------------
-
---
--- 表的结构 `onethink_document`
---
-
 CREATE TABLE IF NOT EXISTS `onethink_document` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '文档ID',
+`id` int(10) unsigned NOT NULL COMMENT '文档ID',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户ID',
   `name` char(40) NOT NULL DEFAULT '' COMMENT '标识',
   `title` char(80) NOT NULL DEFAULT '' COMMENT '标题',
@@ -1060,17 +857,8 @@ CREATE TABLE IF NOT EXISTS `onethink_document` (
   `level` int(10) NOT NULL DEFAULT '0' COMMENT '优先级',
   `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
-  `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '数据状态',
-  PRIMARY KEY (`id`),
-  KEY `idx_category_status` (`category_id`,`status`),
-  KEY `idx_status_type_pid` (`status`,`uid`,`pid`)
+  `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '数据状态'
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='文档模型基础表' AUTO_INCREMENT=4 ;
-
--- --------------------------------------------------------
-
---
--- 表的结构 `onethink_document_article`
---
 
 CREATE TABLE IF NOT EXISTS `onethink_document_article` (
   `id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '文档ID',
@@ -1078,15 +866,8 @@ CREATE TABLE IF NOT EXISTS `onethink_document_article` (
   `content` text NOT NULL COMMENT '文章内容',
   `template` varchar(100) NOT NULL DEFAULT '' COMMENT '详情页显示模板',
   `bookmark` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '收藏数',
-  `atlas` varchar(255) NOT NULL COMMENT '图集',
-  PRIMARY KEY (`id`)
+  `atlas` varchar(255) NOT NULL COMMENT '图集'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='文档模型文章表';
-
--- --------------------------------------------------------
-
---
--- 表的结构 `onethink_document_download`
---
 
 CREATE TABLE IF NOT EXISTS `onethink_document_download` (
   `id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '文档ID',
@@ -1095,18 +876,11 @@ CREATE TABLE IF NOT EXISTS `onethink_document_download` (
   `template` varchar(100) NOT NULL DEFAULT '' COMMENT '详情页显示模板',
   `file_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '文件ID',
   `download` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '下载次数',
-  `size` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '文件大小',
-  PRIMARY KEY (`id`)
+  `size` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '文件大小'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='文档模型下载表';
 
--- --------------------------------------------------------
-
---
--- 表的结构 `onethink_file`
---
-
 CREATE TABLE IF NOT EXISTS `onethink_file` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '文件ID',
+`id` int(10) unsigned NOT NULL COMMENT '文件ID',
   `name` char(30) NOT NULL DEFAULT '' COMMENT '原始文件名',
   `savename` char(20) NOT NULL DEFAULT '' COMMENT '保存名称',
   `savepath` char(30) NOT NULL DEFAULT '' COMMENT '文件保存路径',
@@ -1117,83 +891,47 @@ CREATE TABLE IF NOT EXISTS `onethink_file` (
   `sha1` char(40) NOT NULL DEFAULT '' COMMENT '文件 sha1编码',
   `location` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '文件保存位置',
   `url` varchar(255) NOT NULL DEFAULT '' COMMENT '远程地址',
-  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '上传时间',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `uk_md5` (`md5`)
+  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '上传时间'
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='文件表' AUTO_INCREMENT=2 ;
-
---
--- 转存表中的数据 `onethink_file`
---
 
 INSERT INTO `onethink_file` (`id`, `name`, `savename`, `savepath`, `ext`, `mime`, `size`, `md5`, `sha1`, `location`, `url`, `create_time`) VALUES
 (1, 'readme.txt', '54e19a9159656.txt', '2015-02-16/', 'txt', 'application/octet-stream', 1295, '2cf1b2ad2a5cc2cd84832390f92155f9', 'd160fd26e536d54a84a7310907d5484c1462af0a', 0, '', 1424071312);
 
--- --------------------------------------------------------
-
---
--- 表的结构 `onethink_friendlinks`
---
-
 CREATE TABLE IF NOT EXISTS `onethink_friendlinks` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+`id` int(11) unsigned NOT NULL COMMENT '主键',
   `type` int(1) NOT NULL DEFAULT '1' COMMENT '类别（1：图片，2：普通）',
   `title` char(80) NOT NULL DEFAULT '' COMMENT '站点名称',
   `cover_id` int(10) NOT NULL COMMENT '图片ID',
   `link` char(140) NOT NULL DEFAULT '' COMMENT '链接地址',
   `level` int(3) unsigned NOT NULL DEFAULT '0' COMMENT '优先级',
   `status` tinyint(2) NOT NULL DEFAULT '1' COMMENT '状态（0：禁用，1：正常）',
-  `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '添加时间',
-  PRIMARY KEY (`id`)
+  `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '添加时间'
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
-
---
--- 转存表中的数据 `onethink_friendlinks`
---
 
 INSERT INTO `onethink_friendlinks` (`id`, `type`, `title`, `cover_id`, `link`, `level`, `status`, `create_time`) VALUES
 (2, 2, 'app880.com', 0, 'http://app880.com', 0, 1, 1446607499),
 (4, 1, 'test', 50, '', 0, 1, 1446568240);
 
--- --------------------------------------------------------
-
---
--- 表的结构 `onethink_guestbook`
---
-
 CREATE TABLE IF NOT EXISTS `onethink_guestbook` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `nickname` varchar(224) NOT NULL COMMENT '留言昵称',
   `contact` varchar(225) NOT NULL COMMENT '留言者联系方式',
   `content` varchar(225) NOT NULL COMMENT '留言内容',
   `starttime` int(10) NOT NULL COMMENT '留言时间',
   `is_reply` int(11) NOT NULL COMMENT '是否回复',
   `is_pass` int(11) NOT NULL COMMENT '是否通过',
-  `r_content` varchar(225) NOT NULL COMMENT '回复内容',
-  PRIMARY KEY (`id`)
+  `r_content` varchar(225) NOT NULL COMMENT '回复内容'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
-
---
--- 表的结构 `onethink_hooks`
---
-
 CREATE TABLE IF NOT EXISTS `onethink_hooks` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+`id` int(10) unsigned NOT NULL COMMENT '主键',
   `name` varchar(40) NOT NULL DEFAULT '' COMMENT '钩子名称',
   `description` text COMMENT '描述',
   `type` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '类型',
   `update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
   `addons` varchar(255) NOT NULL DEFAULT '' COMMENT '钩子挂载的插件 ''，''分割',
-  `status` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`)
+  `status` tinyint(1) unsigned NOT NULL DEFAULT '1'
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=123 ;
-
---
--- 转存表中的数据 `onethink_hooks`
---
 
 INSERT INTO `onethink_hooks` (`id`, `name`, `description`, `type`, `update_time`, `addons`, `status`) VALUES
 (1, 'pageHeader', '页面header钩子，一般用于加载插件CSS文件和代码', 1, 1423988201, 'Unslider,Comment', 1),
@@ -1221,53 +959,28 @@ INSERT INTO `onethink_hooks` (`id`, `name`, `description`, `type`, `update_time`
 (110, 'UploadImages', '调用多图上传插件的钩子', 1, 1444205337, 'UploadImages', 1),
 (122, 'Advertising', '调用广告位广告的钩子', 1, 1446626227, 'Advertising', 1);
 
--- --------------------------------------------------------
-
---
--- 表的结构 `onethink_mail_history`
---
-
 CREATE TABLE IF NOT EXISTS `onethink_mail_history` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `body` text NOT NULL,
   `create_time` int(11) NOT NULL,
   `from` varchar(255) NOT NULL,
-  `status` tinyint(4) NOT NULL,
-  PRIMARY KEY (`id`)
+  `status` tinyint(4) NOT NULL
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
-
--- --------------------------------------------------------
-
---
--- 表的结构 `onethink_mail_history_link`
---
 
 CREATE TABLE IF NOT EXISTS `onethink_mail_history_link` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `mail_id` int(11) NOT NULL,
   `to` varchar(255) NOT NULL,
-  `status` tinyint(4) NOT NULL,
-  PRIMARY KEY (`id`)
+  `status` tinyint(4) NOT NULL
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
--- --------------------------------------------------------
-
---
--- 表的结构 `onethink_mail_list`
---
-
 CREATE TABLE IF NOT EXISTS `onethink_mail_list` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `address` varchar(255) NOT NULL,
   `status` tinyint(4) NOT NULL,
-  `create_time` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `create_time` int(11) NOT NULL
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
-
---
--- 转存表中的数据 `onethink_mail_list`
---
 
 INSERT INTO `onethink_mail_list` (`id`, `address`, `status`, `create_time`) VALUES
 (1, '836692464@qq.com', 1, 1424018069),
@@ -1282,34 +995,17 @@ INSERT INTO `onethink_mail_list` (`id`, `address`, `status`, `create_time`) VALU
 (10, '88@88.com', 0, 1445945017),
 (11, '123@qq.com', 0, 1446771330);
 
--- --------------------------------------------------------
-
---
--- 表的结构 `onethink_mail_token`
---
-
 CREATE TABLE IF NOT EXISTS `onethink_mail_token` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `token` varchar(20) NOT NULL,
-  PRIMARY KEY (`id`)
+  `token` varchar(20) NOT NULL
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
-
---
--- 转存表中的数据 `onethink_mail_token`
---
 
 INSERT INTO `onethink_mail_token` (`id`, `email`, `token`) VALUES
 (5, '836692464@qq.com', 'SOrnUzGXr7');
 
--- --------------------------------------------------------
-
---
--- 表的结构 `onethink_member`
---
-
 CREATE TABLE IF NOT EXISTS `onethink_member` (
-  `uid` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户ID',
+`uid` int(10) unsigned NOT NULL COMMENT '用户ID',
   `nickname` char(16) NOT NULL DEFAULT '' COMMENT '昵称',
   `sex` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '性别',
   `birthday` date NOT NULL DEFAULT '0000-00-00' COMMENT '生日',
@@ -1320,14 +1016,8 @@ CREATE TABLE IF NOT EXISTS `onethink_member` (
   `reg_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '注册时间',
   `last_login_ip` bigint(20) NOT NULL DEFAULT '0' COMMENT '最后登录IP',
   `last_login_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '最后登录时间',
-  `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '会员状态',
-  PRIMARY KEY (`uid`),
-  KEY `status` (`status`)
+  `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '会员状态'
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='会员表' AUTO_INCREMENT=5 ;
-
---
--- 转存表中的数据 `onethink_member`
---
 
 INSERT INTO `onethink_member` (`uid`, `nickname`, `sex`, `birthday`, `qq`, `score`, `login`, `reg_ip`, `reg_time`, `last_login_ip`, `last_login_time`, `status`) VALUES
 (1, 'admin', 0, '0000-00-00', '', 240, 119, 0, 1422599239, 2130706433, 1447043052, 1),
@@ -1335,14 +1025,8 @@ INSERT INTO `onethink_member` (`uid`, `nickname`, `sex`, `birthday`, `qq`, `scor
 (3, 'geniusxjq', 0, '0000-00-00', '', 160, 126, 2130706433, 1422700152, 2130706433, 1446740517, 1),
 (4, 'xjq123', 0, '0000-00-00', '', 10, 1, 2130706433, 1424398807, 2130706433, 1424398807, -1);
 
--- --------------------------------------------------------
-
---
--- 表的结构 `onethink_menu`
---
-
 CREATE TABLE IF NOT EXISTS `onethink_menu` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '文档ID',
+`id` int(10) unsigned NOT NULL COMMENT '文档ID',
   `title` varchar(50) NOT NULL DEFAULT '' COMMENT '标题',
   `pid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '上级分类ID',
   `sort` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '排序（同级有效）',
@@ -1351,15 +1035,8 @@ CREATE TABLE IF NOT EXISTS `onethink_menu` (
   `tip` varchar(255) NOT NULL DEFAULT '' COMMENT '提示',
   `group` varchar(50) DEFAULT '' COMMENT '分组',
   `is_dev` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否仅开发者模式可见',
-  `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '状态',
-  PRIMARY KEY (`id`),
-  KEY `pid` (`pid`),
-  KEY `status` (`status`)
+  `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '状态'
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=136 ;
-
---
--- 转存表中的数据 `onethink_menu`
---
 
 INSERT INTO `onethink_menu` (`id`, `title`, `pid`, `sort`, `url`, `hide`, `tip`, `group`, `is_dev`, `status`) VALUES
 (1, '首页', 0, 1, 'Index/index', 0, '', '', 0, 1),
@@ -1477,14 +1154,8 @@ INSERT INTO `onethink_menu` (`id`, `title`, `pid`, `sort`, `url`, `hide`, `tip`,
 (125, '前台权限管理', 27, 0, 'AuthManager/accessUser', 0, '', '', 0, 0),
 (126, '新增前台权限节点', 27, 0, 'AuthManager/addNode', 0, '', '', 0, 0);
 
--- --------------------------------------------------------
-
---
--- 表的结构 `onethink_model`
---
-
 CREATE TABLE IF NOT EXISTS `onethink_model` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '模型ID',
+`id` int(10) unsigned NOT NULL COMMENT '模型ID',
   `name` char(30) NOT NULL DEFAULT '' COMMENT '模型标识',
   `title` char(30) NOT NULL DEFAULT '' COMMENT '模型名称',
   `extend` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '继承的模型',
@@ -1504,27 +1175,16 @@ CREATE TABLE IF NOT EXISTS `onethink_model` (
   `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
   `status` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '状态',
-  `engine_type` varchar(25) NOT NULL DEFAULT 'MyISAM' COMMENT '数据库引擎',
-  PRIMARY KEY (`id`)
+  `engine_type` varchar(25) NOT NULL DEFAULT 'MyISAM' COMMENT '数据库引擎'
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='文档模型表' AUTO_INCREMENT=9 ;
-
---
--- 转存表中的数据 `onethink_model`
---
 
 INSERT INTO `onethink_model` (`id`, `name`, `title`, `extend`, `relation`, `need_pk`, `field_sort`, `field_group`, `attribute_list`, `attribute_alias`, `template_list`, `template_add`, `template_edit`, `list_grid`, `list_row`, `search_key`, `search_list`, `create_time`, `update_time`, `status`, `engine_type`) VALUES
 (1, 'document', '基础文档', 0, '', 1, '{"1":["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22"]}', '1:基础', '', '', '', '', '', 'id:编号\r\ntitle:标题:[EDIT]\r\ntype:类型\r\nupdate_time:最后更新\r\nstatus:状态\r\nview:浏览\r\nid:操作:[EDIT]|编辑,[DELETE]|删除', 0, '', '', 1383891233, 1384507827, 1, 'MyISAM'),
 (2, 'article', '文章', 1, '', 1, '{"1":["3","24","48","2","5"],"2":["9","13","19","10","12","16","17","26","20","14","11","25"]}', '1:基础,2:扩展', '', '', '', '', '', '', 0, '', '', 1383891243, 1444976420, 1, 'MyISAM'),
 (3, 'download', '下载', 1, '', 1, '{"1":["3","28","30","32","2","5","31"],"2":["13","10","27","9","12","16","17","19","11","20","14","29"]}', '1:基础,2:扩展', '', '', '', '', '', '', 0, '', '', 1383891252, 1387260449, 1, 'MyISAM');
 
--- --------------------------------------------------------
-
---
--- 表的结构 `onethink_module`
---
-
 CREATE TABLE IF NOT EXISTS `onethink_module` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `name` varchar(30) NOT NULL COMMENT '模块名',
   `alias` varchar(30) NOT NULL COMMENT '中文名',
   `version` varchar(20) NOT NULL COMMENT '版本号',
@@ -1535,45 +1195,25 @@ CREATE TABLE IF NOT EXISTS `onethink_module` (
   `website` varchar(200) NOT NULL COMMENT '网址',
   `entry` varchar(50) NOT NULL COMMENT '前台入口',
   `is_setup` tinyint(4) NOT NULL DEFAULT '1' COMMENT '是否已安装',
-  `sort` int(11) NOT NULL COMMENT '模块排序',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`),
-  KEY `name_2` (`name`)
+  `sort` int(11) NOT NULL COMMENT '模块排序'
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='模块管理表' AUTO_INCREMENT=30 ;
-
---
--- 转存表中的数据 `onethink_module`
---
 
 INSERT INTO `onethink_module` (`id`, `name`, `alias`, `version`, `is_com`, `show_nav`, `summary`, `developer`, `website`, `entry`, `is_setup`, `sort`) VALUES
 (24, 'Group', '群组', '1.0.0', 0, 1, '群组模块，允许用户建立自己的圈子', '', '', 'Group/index/index', 1, 0),
 (25, 'Home', '主页', '1.0.0', 0, 1, '首页模块，主要用于展示网站内容', '', '', 'Home/index/index', 1, 0);
 
--- --------------------------------------------------------
-
---
--- 表的结构 `onethink_picture`
---
-
 CREATE TABLE IF NOT EXISTS `onethink_picture` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键id自增',
+`id` int(10) unsigned NOT NULL COMMENT '主键id自增',
   `path` varchar(255) NOT NULL DEFAULT '' COMMENT '路径',
   `url` varchar(255) NOT NULL DEFAULT '' COMMENT '图片链接',
   `md5` char(32) NOT NULL DEFAULT '' COMMENT '文件md5',
   `sha1` char(40) NOT NULL DEFAULT '' COMMENT '文件 sha1编码',
   `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '状态',
-  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
-  PRIMARY KEY (`id`)
+  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间'
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=81 ;
 
--- --------------------------------------------------------
-
---
--- 表的结构 `onethink_schedule`
---
-
 CREATE TABLE IF NOT EXISTS `onethink_schedule` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `title` varchar(50) NOT NULL COMMENT '计划任务名称',
   `task_to_run` varchar(255) NOT NULL COMMENT '计划任务执行方法',
   `task_type` varchar(255) NOT NULL COMMENT '执行周期:只执行一次,按分钟执行,按小时执行,按天执行,按周执行,按月执行',
@@ -1584,43 +1224,21 @@ CREATE TABLE IF NOT EXISTS `onethink_schedule` (
   `end_datetime` datetime DEFAULT NULL COMMENT '结束时间',
   `last_run_time` datetime DEFAULT NULL COMMENT '最近执行时间',
   `memo` varchar(255) DEFAULT NULL COMMENT '对计划任务的简要描述',
-  `status` tinyint(2) NOT NULL DEFAULT '1' COMMENT '状态（0：禁用，1：正常）',
-  PRIMARY KEY (`id`)
+  `status` tinyint(2) NOT NULL DEFAULT '1' COMMENT '状态（0：禁用，1：正常）'
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
-
---
--- 转存表中的数据 `onethink_schedule`
---
 
 INSERT INTO `onethink_schedule` (`id`, `title`, `task_to_run`, `task_type`, `modifier`, `daylist`, `month`, `start_datetime`, `end_datetime`, `last_run_time`, `memo`, `status`) VALUES
 (1, '01', 'Function::send_mail::', 'ONCE', '', '', '', '2015-11-09 13:02:00', '2015-11-09 13:02:34', '2015-11-09 13:02:34', '999', 1);
 
--- --------------------------------------------------------
-
---
--- 表的结构 `onethink_sensitive`
---
-
 CREATE TABLE IF NOT EXISTS `onethink_sensitive` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `title` varchar(50) NOT NULL,
   `status` tinyint(4) NOT NULL,
-  `create_time` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `create_time` int(11) NOT NULL
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
-
---
--- 转存表中的数据 `onethink_sensitive`
---
 
 INSERT INTO `onethink_sensitive` (`id`, `title`, `status`, `create_time`) VALUES
 (1, '草', 1, 1446778754);
-
--- --------------------------------------------------------
-
---
--- 表的结构 `onethink_sync_login`
---
 
 CREATE TABLE IF NOT EXISTS `onethink_sync_login` (
   `uid` int(11) NOT NULL,
@@ -1631,27 +1249,14 @@ CREATE TABLE IF NOT EXISTS `onethink_sync_login` (
   `status` tinyint(4) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- 表的结构 `onethink_ucenter_admin`
---
-
 CREATE TABLE IF NOT EXISTS `onethink_ucenter_admin` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '管理员ID',
+`id` int(10) unsigned NOT NULL COMMENT '管理员ID',
   `member_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '管理员用户ID',
-  `status` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '管理员状态',
-  PRIMARY KEY (`id`)
+  `status` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '管理员状态'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='管理员表' AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
-
---
--- 表的结构 `onethink_ucenter_app`
---
-
 CREATE TABLE IF NOT EXISTS `onethink_ucenter_app` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '应用ID',
+`id` int(10) unsigned NOT NULL COMMENT '应用ID',
   `title` varchar(30) NOT NULL COMMENT '应用名称',
   `url` varchar(100) NOT NULL COMMENT '应用URL',
   `ip` char(15) NOT NULL DEFAULT '' COMMENT '应用IP',
@@ -1660,19 +1265,11 @@ CREATE TABLE IF NOT EXISTS `onethink_ucenter_app` (
   `allow_ip` varchar(255) NOT NULL DEFAULT '' COMMENT '允许访问的IP',
   `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
-  `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '应用状态',
-  PRIMARY KEY (`id`),
-  KEY `status` (`status`)
+  `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '应用状态'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='应用表' AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
-
---
--- 表的结构 `onethink_ucenter_member`
---
-
 CREATE TABLE IF NOT EXISTS `onethink_ucenter_member` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户ID',
+`id` int(10) unsigned NOT NULL COMMENT '用户ID',
   `username` char(16) NOT NULL COMMENT '用户名',
   `password` char(32) NOT NULL COMMENT '密码',
   `email` char(32) NOT NULL COMMENT '用户邮箱',
@@ -1682,16 +1279,8 @@ CREATE TABLE IF NOT EXISTS `onethink_ucenter_member` (
   `last_login_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '最后登录时间',
   `last_login_ip` bigint(20) NOT NULL DEFAULT '0' COMMENT '最后登录IP',
   `update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
-  `status` tinyint(4) DEFAULT '0' COMMENT '用户状态',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`),
-  UNIQUE KEY `email` (`email`),
-  KEY `status` (`status`)
+  `status` tinyint(4) DEFAULT '0' COMMENT '用户状态'
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='用户表' AUTO_INCREMENT=6 ;
-
---
--- 转存表中的数据 `onethink_ucenter_member`
---
 
 INSERT INTO `onethink_ucenter_member` (`id`, `username`, `password`, `email`, `mobile`, `reg_time`, `reg_ip`, `last_login_time`, `last_login_ip`, `update_time`, `status`) VALUES
 (1, 'admin', 'bbe81237a2de1471f322ae25b0132dfc', '836692464@qq.com', '', 1444795583, 2130706433, 1447043052, 2130706433, 1444795583, 1),
@@ -1700,90 +1289,252 @@ INSERT INTO `onethink_ucenter_member` (`id`, `username`, `password`, `email`, `m
 (4, 'xjq123', 'bbe81237a2de1471f322ae25b0132dfc', 'fafasfasdfsdf@126.com', '', 1424398787, 2130706433, 1424398807, 2130706433, 1424398787, 1),
 (5, '###', 'bbe81237a2de1471f322ae25b0132dfc', '777777@qq.com', '', 1444299602, 2130706433, 0, 0, 1444299602, 1);
 
--- --------------------------------------------------------
-
---
--- 表的结构 `onethink_ucenter_setting`
---
-
 CREATE TABLE IF NOT EXISTS `onethink_ucenter_setting` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '设置ID',
+`id` int(10) unsigned NOT NULL COMMENT '设置ID',
   `type` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '配置类型（1-用户配置）',
-  `value` text NOT NULL COMMENT '配置数据',
-  PRIMARY KEY (`id`)
+  `value` text NOT NULL COMMENT '配置数据'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='设置表' AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
-
---
--- 表的结构 `onethink_url`
---
-
 CREATE TABLE IF NOT EXISTS `onethink_url` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '链接唯一标识',
+`id` int(11) unsigned NOT NULL COMMENT '链接唯一标识',
   `url` char(255) NOT NULL DEFAULT '' COMMENT '链接地址',
   `short` char(100) NOT NULL DEFAULT '' COMMENT '短网址',
   `status` tinyint(2) NOT NULL DEFAULT '2' COMMENT '状态',
-  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `idx_url` (`url`)
+  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='链接表' AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- 表的结构 `onethink_userdata`
---
 
 CREATE TABLE IF NOT EXISTS `onethink_userdata` (
   `uid` int(10) unsigned NOT NULL COMMENT '用户id',
   `type` tinyint(3) unsigned NOT NULL COMMENT '类型标识',
-  `target_id` int(10) unsigned NOT NULL COMMENT '目标id',
-  UNIQUE KEY `uid` (`uid`,`type`,`target_id`)
+  `target_id` int(10) unsigned NOT NULL COMMENT '目标id'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- 表的结构 `onethink_vote`
---
-
 CREATE TABLE IF NOT EXISTS `onethink_vote` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+`id` int(10) unsigned NOT NULL COMMENT 'ID',
   `title` char(80) NOT NULL COMMENT '标题',
   `description` text COMMENT '描述',
   `options` text NOT NULL COMMENT '添加各种投票选项',
   `explanation` varchar(256) DEFAULT NULL COMMENT '备注',
   `update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
   `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
-  `voteconfig` char(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
+  `voteconfig` char(1) NOT NULL DEFAULT '1'
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
-
---
--- 转存表中的数据 `onethink_vote`
---
 
 INSERT INTO `onethink_vote` (`id`, `title`, `description`, `options`, `explanation`, `update_time`, `create_time`, `voteconfig`) VALUES
 (13, '01', '01', '[{"id":"0","value":"01","num":"0","percent":"0"},{"id":"1","value":"1","num":"0","percent":"0"},{"id":"2","value":"1","num":"0","percent":"0"}]', '', 0, 1447046685, '1');
 
--- --------------------------------------------------------
-
---
--- 表的结构 `onethink_wechat_message`
---
-
 CREATE TABLE IF NOT EXISTS `onethink_wechat_message` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号',
+`id` int(10) unsigned NOT NULL COMMENT '编号',
   `msgid` int(64) unsigned NOT NULL COMMENT '信息ID',
   `type` varchar(100) NOT NULL COMMENT '信息类型',
   `content` text NOT NULL COMMENT '信息内容',
   `user` varchar(250) NOT NULL COMMENT '用户名&标识',
   `time` int(10) unsigned NOT NULL COMMENT '接收时间',
-  `is_reply` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否回复',
-  PRIMARY KEY (`id`)
+  `is_reply` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否回复'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+
+ALTER TABLE `onethink_action`
+ ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `onethink_action_log`
+ ADD PRIMARY KEY (`id`), ADD KEY `action_ip_ix` (`action_ip`), ADD KEY `action_id_ix` (`action_id`), ADD KEY `user_id_ix` (`user_id`);
+
+ALTER TABLE `onethink_addons`
+ ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `onethink_advertisement`
+ ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `onethink_advertising`
+ ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `onethink_attachment`
+ ADD PRIMARY KEY (`id`), ADD KEY `idx_record_status` (`record_id`,`status`);
+
+ALTER TABLE `onethink_attribute`
+ ADD PRIMARY KEY (`id`), ADD KEY `model_id` (`model_id`);
+
+ALTER TABLE `onethink_auth_extend`
+ ADD UNIQUE KEY `group_extend_type` (`group_id`,`extend_id`,`type`), ADD KEY `uid` (`group_id`), ADD KEY `group_id` (`extend_id`);
+
+ALTER TABLE `onethink_auth_group`
+ ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `onethink_auth_group_access`
+ ADD UNIQUE KEY `uid_group_id` (`uid`,`group_id`), ADD KEY `uid` (`uid`), ADD KEY `group_id` (`group_id`);
+
+ALTER TABLE `onethink_auth_rule`
+ ADD PRIMARY KEY (`id`), ADD KEY `module` (`module`,`status`,`type`);
+
+ALTER TABLE `onethink_avatar`
+ ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `onethink_category`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `uk_name` (`name`), ADD KEY `pid` (`pid`);
+
+ALTER TABLE `onethink_channel`
+ ADD PRIMARY KEY (`id`), ADD KEY `pid` (`pid`);
+
+ALTER TABLE `onethink_comment`
+ ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `onethink_config`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `uk_name` (`name`), ADD KEY `type` (`type`), ADD KEY `group` (`group`);
+
+ALTER TABLE `onethink_document`
+ ADD PRIMARY KEY (`id`), ADD KEY `idx_category_status` (`category_id`,`status`), ADD KEY `idx_status_type_pid` (`status`,`uid`,`pid`);
+
+ALTER TABLE `onethink_document_article`
+ ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `onethink_document_download`
+ ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `onethink_file`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `uk_md5` (`md5`);
+
+ALTER TABLE `onethink_friendlinks`
+ ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `onethink_guestbook`
+ ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `onethink_hooks`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `name` (`name`);
+
+ALTER TABLE `onethink_mail_history`
+ ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `onethink_mail_history_link`
+ ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `onethink_mail_list`
+ ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `onethink_mail_token`
+ ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `onethink_member`
+ ADD PRIMARY KEY (`uid`), ADD KEY `status` (`status`);
+
+ALTER TABLE `onethink_menu`
+ ADD PRIMARY KEY (`id`), ADD KEY `pid` (`pid`), ADD KEY `status` (`status`);
+
+ALTER TABLE `onethink_model`
+ ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `onethink_module`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `name` (`name`), ADD KEY `name_2` (`name`);
+
+ALTER TABLE `onethink_picture`
+ ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `onethink_schedule`
+ ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `onethink_sensitive`
+ ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `onethink_ucenter_admin`
+ ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `onethink_ucenter_app`
+ ADD PRIMARY KEY (`id`), ADD KEY `status` (`status`);
+
+ALTER TABLE `onethink_ucenter_member`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `username` (`username`), ADD UNIQUE KEY `email` (`email`), ADD KEY `status` (`status`);
+
+ALTER TABLE `onethink_ucenter_setting`
+ ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `onethink_url`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `idx_url` (`url`);
+
+ALTER TABLE `onethink_userdata`
+ ADD UNIQUE KEY `uid` (`uid`,`type`,`target_id`);
+
+ALTER TABLE `onethink_vote`
+ ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `onethink_wechat_message`
+ ADD PRIMARY KEY (`id`);
+
+
+ALTER TABLE `onethink_action`
+MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=12;
+ALTER TABLE `onethink_action_log`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=359;
+ALTER TABLE `onethink_addons`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=200;
+ALTER TABLE `onethink_advertisement`
+MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=2;
+ALTER TABLE `onethink_advertising`
+MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=3;
+ALTER TABLE `onethink_attachment`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+ALTER TABLE `onethink_attribute`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=49;
+ALTER TABLE `onethink_auth_group`
+MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户组id,自增主键',AUTO_INCREMENT=3;
+ALTER TABLE `onethink_auth_rule`
+MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '规则id,自增主键',AUTO_INCREMENT=235;
+ALTER TABLE `onethink_avatar`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `onethink_category`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '分类ID',AUTO_INCREMENT=40;
+ALTER TABLE `onethink_channel`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '频道ID',AUTO_INCREMENT=4;
+ALTER TABLE `onethink_comment`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
+ALTER TABLE `onethink_config`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '配置ID',AUTO_INCREMENT=49;
+ALTER TABLE `onethink_document`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '文档ID',AUTO_INCREMENT=4;
+ALTER TABLE `onethink_file`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '文件ID',AUTO_INCREMENT=2;
+ALTER TABLE `onethink_friendlinks`
+MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=6;
+ALTER TABLE `onethink_guestbook`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `onethink_hooks`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=123;
+ALTER TABLE `onethink_mail_history`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+ALTER TABLE `onethink_mail_history_link`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+ALTER TABLE `onethink_mail_list`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+ALTER TABLE `onethink_mail_token`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+ALTER TABLE `onethink_member`
+MODIFY `uid` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户ID',AUTO_INCREMENT=5;
+ALTER TABLE `onethink_menu`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '文档ID',AUTO_INCREMENT=136;
+ALTER TABLE `onethink_model`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '模型ID',AUTO_INCREMENT=9;
+ALTER TABLE `onethink_module`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=30;
+ALTER TABLE `onethink_picture`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键id自增',AUTO_INCREMENT=81;
+ALTER TABLE `onethink_schedule`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+ALTER TABLE `onethink_sensitive`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+ALTER TABLE `onethink_ucenter_admin`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '管理员ID';
+ALTER TABLE `onethink_ucenter_app`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '应用ID';
+ALTER TABLE `onethink_ucenter_member`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户ID',AUTO_INCREMENT=6;
+ALTER TABLE `onethink_ucenter_setting`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '设置ID';
+ALTER TABLE `onethink_url`
+MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '链接唯一标识';
+ALTER TABLE `onethink_vote`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',AUTO_INCREMENT=14;
+ALTER TABLE `onethink_wechat_message`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号';
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
