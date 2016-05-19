@@ -76,9 +76,12 @@ class FileController extends AdminController {
         if($info){
            $return['status'] = 1;
            $return = array_merge($info['download'], $return);
+		   
+		   hook("dealPicture",$info);/* Hook [钩子调用水印插件] */
+		   
         } else {
             $return['status'] = 0;
-            $return['info']   = $Picture->getError();
+            $return['info']  = $Picture->getError();
         }
 
         /* 返回JSON数据 */

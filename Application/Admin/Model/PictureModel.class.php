@@ -59,8 +59,6 @@ class PictureModel extends Model{
 				
             }
 			
-			hook("dealPicture",$info);//钩子调用水印插件件
-			
             return $info; //文件上传成功
 			
         } else {

@@ -46,9 +46,9 @@ class WaterAddon extends Addon
 		
 		if(is_array($path)){
 			
-			foreach ($info as $key => $value) {
-					
-				$this->dealPicture($value['rootPath'].$value['savepath'].$value['savename']);
+			foreach ($path as $key => $value) {
+				
+				$this->dealPicture($value['path']);
 				
 			}
 			
@@ -115,7 +115,6 @@ class WaterAddon extends Addon
 			}
 			
 		}catch(Exception $e){}
-		
         return true;
      }
 
@@ -126,5 +125,4 @@ class WaterAddon extends Addon
         if ($config['display'])
             $this->display('widget');
     }
-
 }
