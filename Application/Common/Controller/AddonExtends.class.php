@@ -74,7 +74,7 @@ abstract class AddonExtends{
 				  
 					  if($stop){
 							  
-						  throw new \Exception('数据库错误信息：'.M('')->getDbError().'<br/>出错的SQL语句：'.$query);
+						  E('数据库错误信息：'.M('')->getDbError().'<br/>出错的SQL语句：'.$query);
 						  
 					  }
 					  					  

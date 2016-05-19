@@ -28,5 +28,13 @@ class IndexController extends HomeController {
         $this->display();
 		
     }
+	//系统首页
+    public function test(){
+						
+        dump(THINKPHP);
+		
+    }
+
+
 
 }
