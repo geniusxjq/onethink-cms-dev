@@ -15,13 +15,13 @@ class UcenterApi{
 		
 		$_path=C('TMPL_PARSE_STRING.__IMG__').'/default_avatar.png';
 		
-		if(!$uid) return array('path'=>$_path);
+		if(!$uid) return $_path;
 		
-		$data=D('Avatar')->getAvatar($uid);
+		$_rs=D('Avatar')->getAvatar($uid);
 		
-		if(!$data) $data['path']=$_path;
+		if($_rs) $_path=$_rs;
 		
-		return $data;
+		return $_path;
 		
 	}
 

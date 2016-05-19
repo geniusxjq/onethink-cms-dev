@@ -164,30 +164,27 @@ $(function () {
 			msg.danger(ret.info,{placement:'center'});
 			show_alert(ret.info,2);		
 		} else {
+			
 			var src = ret.url || '__ROOT__' + ret.path;
-			if(path!=src){
-				
-				path =src;
-				src=src+'?t='+new Date().getTime();
-				
-				$(".jcrop-img-box .container").slideUp(300).fadeOut(1000,function(){
-																				 
-					$("#crop_box_{$UID}").html('');
-					$("#crop_box_{$UID}").html('<img src="'+src+'">');
-					$("#avatar-preview-container-{$UID}").html('<img src="'+src+'">');
-					$("#crop_box_{$UID} img").load(function (){
-						crop_init(src+'?t='+new Date().getTime());
-						$(".jcrop-img-box .container").slideDown(300).fadeIn(1000);
-					});
-					
-					show_alert('请剪裁图片',1);	
-					
+			
+			path =src;
+			
+			src=src+'?t='+new Date().getTime();
+			
+			$(".jcrop-img-box .container").slideUp(300).fadeOut(1000,function(){
+																			 
+				$("#crop_box_{$UID}").html('');
+				$("#crop_box_{$UID}").html('<img src="'+src+'">');
+				$("#avatar-preview-container-{$UID}").html('<img src="'+src+'">');
+				$("#crop_box_{$UID} img").load(function (){
+					crop_init(src+'?t='+new Date().getTime());
+					$(".jcrop-img-box .container").slideDown(300).fadeIn(1000);
 				});
 				
-			}else{
-				msg.warning('你选择了同样的图片',{placement:'center'});
-				show_alert('请剪裁图片',1);
-			}
+				show_alert('请剪裁图片',1);	
+				
+			});
+				
 			//重置队列
 			uploader_{$UID}.reset();
 		}
@@ -200,7 +197,6 @@ $(function () {
 	});
 	
 	function crop_init(src){
-		
 	   $("#crop_box_{$UID} >img").Jcrop({
 			aspectRatio: 1,
 			onChange: updatePreview,
@@ -275,7 +271,7 @@ $(function () {
 			return;
 		}
 		else{
-			var the_crop = crop.x / boundx + ',' + crop.y / boundy + ',' + crop.w / boundx + ',' + crop.h / boundy;
+			var crop_rect = crop.x / boundx + ',' + crop.y / boundy + ',' + crop.w / boundx + ',' + crop.h / boundy;
 		}
 		
 		show_alert('正在剪裁图片……',2);	
@@ -284,24 +280,19 @@ $(function () {
 		
 		//提交到服务器
 		var url = "{:U('avatar',array('uid'=>UID,'session_id'=>session_id()))}";
-		$.post(url, {crop:the_crop,path:path,saveImgSize:'128,128'}, function (res) {
+		$.post(url, {crop_rect:crop_rect,path:path,pic_size:'128,128'}, function (res) {
 				 
 				 if(res.status){
-					 
 					 msg.success(res.info,{placement:'center'});
-				 
 				 }else{
-					 
 					 msg.danger(res.info,{placement:'center'});
-					 
 				 }
 				 
 				 (!!crop)&&(jcrop_api.destroy());
 				 $(".jcrop-img-box .container").slideUp(300).fadeOut(1000);
 				 show_alert('还要做点什么？',3);		
-				 crop=null;
+				 crop=null,path=null;
 		});
-
 	})
 })
 

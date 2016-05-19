@@ -44,6 +44,16 @@ class WaterAddon extends Addon
     public function dealPicture($path)
     {
 		
+		if(is_array($path)){
+			
+			foreach ($info as $key => $value) {
+					
+				$this->dealPicture($value['rootPath'].$value['savepath'].$value['savename']);
+				
+			}
+			
+		}
+		
 		if(!$path||strtolower(C('PICTURE_UPLOAD_DRIVER'))!='local') return false;
 		
 		if(substr($path,0,1)=='/'){

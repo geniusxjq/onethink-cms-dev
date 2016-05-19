@@ -40,31 +40,34 @@ class PictureModel extends Model{
 		$setting['removeTrash'] = array($this, 'removeTrash');
         $Upload = new Upload($setting, $driver, $config);
         $info   = $Upload->upload($files);
-
+		
         if($info){ //文件上传成功，记录文件信息
             foreach ($info as $key => &$value) {
                 /* 已经存在文件记录 */
                 if(isset($value['id']) && is_numeric($value['id'])){
                     continue;
                 }
-												
                 /* 记录文件信息 */
                 $value['path'] = substr($setting['rootPath'], 1).$value['savepath'].$value['savename'];	//在模板里的url路径
-				
-                if($this->create($value) && ($id = $this->add())){
+                
+				if($this->create($value) && ($id = $this->add())){
                     $value['id'] = $id;
                 } else {
                     //TODO: 文件上传成功，但是记录文件信息失败，需记录日志
                     unset($info[$key]);
                 }
-								
+				
             }
 			
+			hook("dealPicture",$info);//钩子调用水印插件件
+			
             return $info; //文件上传成功
+			
         } else {
             $this->error = $Upload->getError();
             return false;
         }
+		
     }
 
     /**

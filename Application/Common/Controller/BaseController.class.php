@@ -9,7 +9,7 @@ class BaseController extends Controller {
 		
         /* 读取数据库中的配置 */
 		
-        $config =   S('DB_CONFIG_DATA');
+        $config = S('DB_CONFIG_DATA');
 		
         if(!$config){
             $config =   api('Config/lists');

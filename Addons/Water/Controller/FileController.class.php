@@ -29,7 +29,7 @@ class FileController extends AddonsController
 		 
 		$pic_driver = C('PICTURE_UPLOAD_DRIVER');
 		 
-        $Picture = new \Think\Upload(array_merge(C('PICTURE_UPLOAD'),$config),C('PICTURE_UPLOAD_DRIVER'),C("UPLOAD_{$pic_driver}_CONFIG"));
+        $Picture = new \Think\Upload(array_merge(C('PICTURE_UPLOAD'),$config),$pic_driver,C("UPLOAD_{$pic_driver}_CONFIG"));
 				
         $info = $Picture->upload($_FILES); 
 		
@@ -42,6 +42,7 @@ class FileController extends AddonsController
         }
 
         $this->ajaxReturn($return);
+		
     }
 
 }
