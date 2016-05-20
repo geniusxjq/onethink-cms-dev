@@ -30,12 +30,11 @@ class AdvertisementModel extends Model{
 	}
 	
 	protected function _after_select(&$result,$options){
+		
 		foreach($result as &$record){
 			$this->_after_find($record,$options);
 		}
-		
-		int_to_string($result);
-		
+				
 		int_to_string($result,array('is_never'=>array(0=>'否',1=>'是')));
 		
 	}

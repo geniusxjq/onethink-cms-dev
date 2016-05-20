@@ -23,7 +23,7 @@ class InitHookBehavior extends Behavior {
         $data = S('hooks');
         if(!$data){
             $hooks = M('Hooks')->getField('name,addons');
-            foreach ($hooks as $key => $value) {
+            foreach ($hooks as $key => $value){
                 if($value){
                     $map['status']  =   1;
                     $names          =   explode(',',$value);

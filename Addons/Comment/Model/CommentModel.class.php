@@ -139,6 +139,25 @@ class CommentModel extends Model{
     $this->_fields['update_time']['value'] = time();
     $this->_thisModel = D('Comment');
   }
+  
+  protected function _after_find(&$result,$options){}
+  
+  protected function _after_select(&$result,$options){
+	  
+	  $_ids=get_sub_by_key($result,'pid');
+	  
+	  $_data= M('Document')->field('id,title')->select($_ids);
+	 
+	  $_arr=array();
+	  
+	  foreach($_data as $record){ $_arr['did'][$record['id']]=$record['title']; }
+	  
+	  if(in_array_case(MODULE_NAME,array('Admin'))){
+		   int_to_string($result);
+		   int_to_string($result,$_arr);
+	  }
+	  
+  }
 
   /**
    * 获得单条评论的方法
@@ -163,11 +182,11 @@ class CommentModel extends Model{
    * 获得评论列表，性能有待优化
    * @param int $id 文档id
    * @param int $pagesize 每页显示记录数
-   * @param boolean  $show_examine_not 显示未审核留言
+   * @param boolean  $show_unexamine 显示未审核留言
    * @param array  $where 附加条件
    * @return array 评论列表
    **/
-  public function getComments($id,$pagesize = 100,$show_examine_not=false,$where=array()) {
+  public function getComments($id,$pagesize = 100,$show_unexamine=false,$where=array()) {
 	  
 	$p = I("p",1,"intval");
 	
@@ -178,7 +197,7 @@ class CommentModel extends Model{
 	}
 	
 	$where['did']=$id;
-	!$show_examine_not&&$where['status']=1;
+	!$show_unexamine&&$where['status']=1;
 	$result['count'] = $count =$this->where($where)->count('id');
 
 	$result['_page'] =parse_page($result['count'],$pagesize);

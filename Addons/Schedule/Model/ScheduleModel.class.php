@@ -37,7 +37,7 @@ class ScheduleModel extends Model{
 		foreach($result as &$record){
 			$this->_afterFilter($record,$options);
 		}
-				
+		int_to_string($result);	
 		int_to_string($result,array('task_type'=>$this->TAST_TYPE_TEXT));
 		
 	}

@@ -8,6 +8,7 @@
 // +----------------------------------------------------------------------
 
 namespace Home\Controller;
+
 /**
  * 扩展控制器
  * 用于调度各个扩展的URL访问需求
@@ -36,5 +37,14 @@ class AddonsController extends HomeController{
 			$this->error('没有指定插件名称，控制器或操作！');
 		}
 	}
+	
+    /**
+     * 显示验证码
+     * @return void
+     */
+    public function verifyCode($id) {
+        $Verify = new \Think\Verify();
+        $Verify->entry($id);
+    }
 
 }

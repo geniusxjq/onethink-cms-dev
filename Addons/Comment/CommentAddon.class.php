@@ -47,9 +47,9 @@ class CommentAddon extends Addon{
     'list_grid' => array(           //这里定义的是除了id序号外的表格里字段显示的表头名和模型一样支持函数和链接
       'username:用户名',
       'content:内容',
-      'did:评论文档',
+      'did_text:评论文档',
       'create_time|time_format:评论时间',
-      'status:状态',
+      'status_text:状态',
       'id:操作:[EDIT]|编辑,[DELETE]|删除'
     ),
   );
@@ -79,7 +79,7 @@ class CommentAddon extends Addon{
 	
     if (!$addon_config['comment_pagesize']>0) return ;
       
-	$_data= $Comment->getComments($param['id'], $addon_config['comment_pagesize'],$addon_config['comment_show_examine_not']);
+	$_data= $Comment->getComments($param['id'], $addon_config['comment_pagesize'],$addon_config['comment_show_unexamine']);
 	
 	$_data['uid']=is_login();
     

@@ -9,48 +9,6 @@ class CommentController extends AddonsController{
         parent::__construct();
     }
 	
-	 /**
-     * 后台文档标题
-     * @return void
-     */
-    public function getDocumentsTitle() {
-        if (!is_administrator()) {
-            $this->error('非管理员用户');
-        }
-        $result = array('status' => 0, 'info' => '', 'data' => '');
-        $ids = I('post.ids', null);   // 文档ID集合
-        if ($ids === null) {
-            $result['info'] = '请求文档标题失败[INVALID_DOCUMENTS_IDS]';
-            $this->ajaxReturn($result);
-            exit();
-        }
-        $ids = explode(',', $ids);
-        $documents_title = array();
-        $Document = M('Document');
-        foreach ($ids as $id) {
-            if ($id == '') continue;
-            if (!preg_match('/^\d{1,}$/', $id)) {
-                $result['info'] = '请求文档标题失败[INVALID_DOCUMENT_ID:'.$id.']';
-                $this->ajaxReturn($result);
-                exit();
-            }
-            if (!isset($documents_title[$id])) {
-                if ($info = $Document->field('id, title, status')->where(array('id'=> $id))->find()) {
-                    $documents_title[$id] = $info['title'] . ($info['status'] != 1 ? '[未发布]' : '');
-                }
-                else {
-                    $result['info'] = '请求文档标题失败[HAS_NO_DOCUMENT:'.$id.']';
-                    $this->ajaxReturn($result);
-                    exit();
-                }
-            }
-        }
-        $result['status'] = 1;
-        $result['info'] = '请求成功';
-        $result['data'] = $documents_title;
-        $this->ajaxReturn($result);
-    }
-	
     /**
      * 后台编辑评论
      * @return void

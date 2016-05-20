@@ -18,7 +18,7 @@ return array(
     'value' => '1',
     ),
   
-  'comment_show_examine_not' => array(
+  'comment_show_unexamine' => array(
     'title' => '显示未审核评论',
     'tip'   => '是否显示未审核的评论',
     'type'  => 'radio',

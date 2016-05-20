@@ -53,3 +53,12 @@ function check_auth($rule, $type = AuthRuleModel::RULE_URL ){
     return true;
 	
 }
+
+/**
+ * 显示验证码
+ * @return void
+ */
+function verify_code($id) {
+	$Verify = new \Think\Verify();
+	return $Verify->entry($id);
+}

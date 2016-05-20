@@ -70,7 +70,7 @@
 
     		function success(data){
     			if(data.status){
-					$.zui.messager.success('登录成功',{placement:'center'});
+					$.zui.messager.info('登录成功',{placement:'center'});
 					setTimeout(function(){window.location.href = data.url;},1000);
     			} else {
 					$.zui.messager.warning(data.info,{placement:'center'});
