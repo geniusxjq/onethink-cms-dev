@@ -29,8 +29,15 @@ use Common\Controller\Addon;
 
         //实现的documentDetailAfter钩子方法
         public function documentDetailAfter($param){
-			$this->assign('addons_config', $this->getConfig());
+			
+			$conf=$this->getConfig();
+			
+			$conf['selector']&&$conf['selector']="img";
+			
+			$this->assign('addons_config',$conf);
+			
 			$this->display('content');
+			
         }
 
     }

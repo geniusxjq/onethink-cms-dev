@@ -17,7 +17,6 @@ class AvatarModel extends Model{
 		'savePath'   =>'Avatar/',
 		'saveName'   =>'avatar_',
 		'saveExt'  => 'jpg', 
-        'maxSize'       =>1*1024*1024, //上传的文件大小限制 (0-不做限制
 		'autoSub'    => true,
 		'replace'=> true
 	);

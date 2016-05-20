@@ -18,22 +18,22 @@ return array(
     'DEFAULT_MODULE'     => 'Home',
     'MODULE_DENY_LIST'   => array('Common','User','Admin','Install'),
     //'MODULE_ALLOW_LIST'  => array('Home','Ucenter'),
-
+    
     /* 系统数据加密设置 */
-    'DATA_AUTH_KEY' => 'T-S4uQAb%(Kx}$WhJ*8VfX9k|e;L,]d!2N{5Rp"l', //默认数据加密KEY
+    'DATA_AUTH_KEY' => '[AUTH_KEY]', //默认数据加密KEY
 	
-	/* 数据缓存设置*/ 
+    /* 数据缓存设置*/ 
     'DATA_CACHE_PREFIX' => 'onethink_', // 缓存前缀
     'DATA_CACHE_TYPE'   => 'File', // 数据缓存类型
-	
+    
     /* 数据库配置 */
-    'DB_TYPE'   => 'mysql', // 数据库类型
-    'DB_HOST'   => '127.0.0.1', // 服务器地址
-    'DB_NAME'   => 'onethink', // 数据库名
-    'DB_USER'   => 'root', // 用户名
-    'DB_PWD'    => '',  // 密码
-    'DB_PORT'   => '3306', // 端口
-    'DB_PREFIX' => 'onethink_', // 数据库表前缀
+    'DB_TYPE'   => '[DB_TYPE]', // 数据库类型
+    'DB_HOST'   => '[DB_HOST]', // 服务器地址
+    'DB_NAME'   => '[DB_NAME]', // 数据库名
+    'DB_USER'   => '[DB_USER]', // 用户名
+    'DB_PWD'    => '[DB_PWD]',  // 密码
+    'DB_PORT'   => '[DB_PORT]', // 端口
+    'DB_PREFIX' => '[DB_PREFIX]', // 数据库表前缀
 
     /* 用户相关设置 */
     'USER_MAX_CACHE'     => 1000, //最大缓存用户数

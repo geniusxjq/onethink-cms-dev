@@ -9,7 +9,8 @@
 <script type="text/javascript">
 jQuery(function(){
 	var group = {$addons_config['group']} ? "rel = 'group'" : "";
-	jQuery('a.img').each(function(){
+	
+	jQuery("{$addons_config['selector']}").each(function(){
 		var src = jQuery(this).attr('src');
 		var title = jQuery(this).attr('title');
 		jQuery(this).wrap("<a class='fancybox' title='"+title+"' "+group+" href='"+src+"' ></a>");
@@ -18,7 +19,7 @@ jQuery(function(){
 		'transitionIn'           :   "{$addons_config['transitionIn']}",
 		'transitionOut'          :   "{$addons_config['transitionOut']}",
 		'padding'                :   "{$addons_config['padding']}",
-		'hideOnContentClick'     :   "{$addons_config['hideOnContentClick']}",
+		'hideOnContentClick'     :   "{$addons_config['closeButton']}",
 		'easingIn'               :   "{$addons_config['easingIn']}",
  	});
 });

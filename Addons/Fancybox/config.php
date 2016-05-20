@@ -1,5 +1,10 @@
 <?php
 return array(
+    'selector'=>array(//配置在表单中的键名 ,这个会是config[random]
+		'title'=>'CSS选择器',//表单的文字
+		'type'=>'text',		 //表单的类型：text、textarea、checkbox、radio、select等
+		'value'=>'img',			 //表单的默认值
+	),
 	'group'=>array(//配置在表单中的键名 ,这个会是config[random]
 		'title'=>'是否开启图片分组:',//表单的文字
 		'type'=>'radio',		 //表单的类型：text、textarea、checkbox、radio、select等
@@ -34,7 +39,7 @@ return array(
 		'type'=>'text',		 //表单的类型：text、textarea、checkbox、radio、select等
 		'value'=>'10',			 //表单的默认值
 	),
-	'hideOnContentClick'=>array(//配置在表单中的键名 ,这个会是config[random]
+	'closeButton'=>array(//配置在表单中的键名 ,这个会是config[random]
 		'title'=>'是否点击图片关闭:',//表单的文字
 		'type'=>'radio',		 //表单的类型：text、textarea、checkbox、radio、select等
 		'options'=>array(		 //select 和radion、checkbox的子选项

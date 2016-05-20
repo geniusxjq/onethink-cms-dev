@@ -27,8 +27,8 @@
         <!-- Contents
         ================================================== -->
         <section id="contents">{$info.content}</section>
-        <hr/>
+        {:hook('UploadImages',$info)}   
+      <hr/>
         {:hook('documentDetailAfter',$info)}
-        
-    </div>
+  </div>
 </block>
