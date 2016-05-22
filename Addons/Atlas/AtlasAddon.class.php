@@ -18,20 +18,28 @@ use Common\Controller\Addon;
             'author' => '木梁大囧',
             'version' => '1.2'
         );
+		
+		public $addon_install_info = array(
+			'hooks'=>'Atlas:1:调用（显示）图集的钩子',
+		);
 
         public function install(){
-            return true;
+			
+            return $this->installAddon($this->addon_install_info);
+			
         }
-
+		
         public function uninstall(){
-            return true;
+			
+            return $this->uninstallAddon($this->addon_install_info);
+			
         }
 
         //实现的Atlas钩子方法
         public function Atlas($param){
 			
 			if(in_array_case(MODULE_NAME,array('Admin'))){
-	  
+	          
 				$name = $param['name'] ?: 'pics';
 				$valArr = $param['value'] ? explode(',', $param['value']) : array();
 				$this->assign('name',$name);

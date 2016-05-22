@@ -31,7 +31,6 @@
 .avatar-preview-container img{
  max-width: none;
 }
-
 .jcrop-img-box{
 	background:none;
 	margin:0px;
@@ -93,7 +92,7 @@ div[data-role=avatar_submit_btn]{
           <div class="card">
             <span class=" media-wrapper avatar-preview-box">  
             <div class="avatar-preview-container" id="avatar-preview-container-{$UID}">       
-            <img src="{:get_avatar(UID)}" />
+            <img src="{:get_avatar()}" />
             </div>   
             </span>
             <span href="###" class="card-heading">            
@@ -161,11 +160,13 @@ $(function () {
 		msg_on.hide();
 		
 		if (ret.status == 0) {
+			
 			msg.danger(ret.info,{placement:'center'});
-			show_alert(ret.info,2);		
+			show_alert(ret.info,2);
+					
 		} else {
 			
-			var src = ret.url || '__ROOT__' + ret.path;
+			var src = ret.url;
 			
 			path =src;
 			

@@ -11,18 +11,4 @@ namespace Ucenter\Api;
 
 class UcenterApi{
 
-	public function get_avatar($uid) {
-		
-		$_path=C('TMPL_PARSE_STRING.__IMG__').'/default_avatar.png';
-		
-		if(!$uid) return $_path;
-		
-		$_rs=D('Avatar')->getAvatar($uid);
-		
-		if($_rs) $_path=$_rs;
-		
-		return $_path;
-		
-	}
-
 }

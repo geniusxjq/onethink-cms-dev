@@ -33,11 +33,16 @@ class MemberModel extends Model {
      * @return boolean      ture-登录成功，false-登录失败
      */
     public function login($uid){
+		
         /* 检测是否在当前应用注册 */
         $user = $this->field(true)->find($uid);
-        if(!$user || 1 != $user['status']) {
+		
+        if(!$user&&($user['uid']==0||$user['status']!==1)) {
+			
             $this->error = '用户不存在或已被禁用！'; //应用级别禁用
-            return false;
+            
+			return false;
+			
         }
 
         //记录行为
@@ -62,6 +67,9 @@ class MemberModel extends Model {
      * @param  integer $user 用户信息数组
      */
     private function autoLogin($user){
+		
+		 if(!$user||$user['uid']==0) return false; 
+		
         /* 更新登录信息 */
         $data = array(
             'uid'             => $user['uid'],

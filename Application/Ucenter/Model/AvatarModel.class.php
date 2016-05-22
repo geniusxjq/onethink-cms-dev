@@ -4,14 +4,15 @@
 // +----------------------------------------------------------------------
 
 namespace Ucenter\Model;
-use Think\Model;
 use Think\Storage;
 
 /**
  * 文档基础模型
  */
-class AvatarModel extends Model{
+class AvatarModel{
 	
+	private $error=null;
+		
 	public $upload_config=array(
 		'rootPath' => './Uploads/',//保存根路径		
 		'savePath'   =>'Avatar/',
@@ -29,23 +30,19 @@ class AvatarModel extends Model{
 
 	public function getAvatar($uid=UID){
 		
+		!$uid&&$uid=is_login();
+		
 		$_conf=$this->upload_config;
 		
 		$_url=$_conf['rootPath'].$_conf['savePath'].$uid.'/'.$_conf['saveName'].$uid.'.'.$_conf['saveExt'];
 		
-		if(Storage::has($_url)) {
-			
-			if(substr($_url,0,1)=='.'){
-				
-				$_url=substr($_url,1);
-				
-			}
-			
-		    return $_url;
+		$default_url=C('TMPL_PARSE_STRING.__IMG__').'/default_avatar.png';
 		
+		if(Storage::has($_url)){
+			 return (substr($_url,0,1)=='.'?substr($_url,1):$_url); 
 		}
 		
-		return false;
+		return $default_url; 			
 		
 	}
 	
@@ -60,7 +57,7 @@ class AvatarModel extends Model{
 			   $return['info'] ="头像剪裁成功";
 			} else {
 				$return['status'] = 0;
-				$return['info'] =$this->getError();
+				$return['info'] =$this->error;
 			}
 			
 			return $return;
@@ -77,7 +74,7 @@ class AvatarModel extends Model{
 			   $return['url'] =$info;
 			} else {
 				$return['status'] = 0;
-				$return['info'] =$this->getError();
+				$return['info'] =$this->error;
 			}
 			
 			return $return;
@@ -168,6 +165,8 @@ class AvatarModel extends Model{
 		
         $info = $Upload->upload($files); 
 		
+		$err_str=array();
+		
         if($info){
 			
 			if($info['file']['id']){
@@ -182,11 +181,19 @@ class AvatarModel extends Model{
 			
         }else{
 			
-			$this->error=$Upload->getError();
+			if(in_array($Upload->getErrorNum(),array(1,2))){
+			
+				$this->error="上传的文件大小超过系统限制";
+			
+			}else{
+			
+				$this->error=$Upload->getError();
+			
+			}
+			
+			return false;
 			
         }
-		
-		return false;
 		
     }
 	

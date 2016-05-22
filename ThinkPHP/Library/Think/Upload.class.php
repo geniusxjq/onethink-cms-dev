@@ -36,6 +36,10 @@ class Upload {
      * @var string
      */
     private $error = ''; //上传错误信息
+	/*
+	*错误编号
+	*/
+	private $errorNum = ''; //错误编号
 
     /**
      * 上传驱动实例
@@ -100,6 +104,14 @@ class Upload {
      */
     public function getError(){
         return $this->error;
+    }
+	
+    /**
+     * 获取最后一次上传错误编号
+     * @return string 错误信息
+     */
+    public function getErrorNum(){
+        return $this->errorNum;
     }
 
     /**
@@ -169,7 +181,7 @@ class Upload {
             /* 调用回调函数检测文件是否存在 */
             $data = call_user_func($this->callback, $file);
             if( $this->callback && $data ){
-                if ( file_exists('.'.$data['path'])  ) {
+                if ( file_exists('.'.$data['path'])){
                     $info[$key] = $data;
                     continue;
                 }elseif($this->removeTrash){
@@ -312,6 +324,7 @@ class Upload {
      * @param string $errorNo  错误号
      */
     private function error($errorNo) {
+		$this->errorNum=$errorNo;
         switch ($errorNo) {
             case 1:
                 $this->error = '上传的文件超过了 php.ini 中 upload_max_filesize 选项限制的值！';

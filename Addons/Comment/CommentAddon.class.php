@@ -81,7 +81,7 @@ class CommentAddon extends Addon{
       
 	$_data= $Comment->getComments($param['id'], $addon_config['comment_pagesize'],$addon_config['comment_show_unexamine']);
 	
-	$_data['uid']=is_login();
+	$_data['uid']=get_uid();
     
 	$_data['nickname']=get_nickname();
 	

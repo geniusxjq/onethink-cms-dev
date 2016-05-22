@@ -53,11 +53,11 @@ body{ background: #290C0C; font-family: '微软雅黑'; color: #fff; font-size: 
 </div>
 <script type="text/javascript">
 (function(){
- var wait = document.getElementById('wait'),href = document.getElementById('href').href;
+ var wait = document.getElementById('wait');
  var interval = setInterval(function(){
      	var time = --wait.innerHTML;
      	if(time <= 0) {
-     		location.href = href;
+     		history.back();
      		clearInterval(interval);
      	};
      }, 1000);

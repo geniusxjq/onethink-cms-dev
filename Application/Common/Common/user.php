@@ -45,9 +45,8 @@ function get_uid(){
  * @author genisuxjq <app880.com>
  */
  
-function get_avatar($uid=null){
-	$uid = is_null($uid) ? is_login() : $uid;
-	return (new \Ucenter\Api\UcenterApi())->get_avatar($uid);// return url
+function get_avatar($uid){
+	return D('Ucenter/Avatar')->getAvatar($uid);// return url
 }
 
 /*

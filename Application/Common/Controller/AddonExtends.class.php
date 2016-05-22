@@ -322,8 +322,11 @@ abstract class AddonExtends{
 		}
 
 		//读取插件sql文件
-		$sqldata =$install_info['install_sql']?$install_info['install_sql']:$this->readSqlFile($this->addon_path.'/install.sql');
 		
+		$_file=$this->addon_path.'/install.sql';
+				
+		$sqldata =Storage::has($_file)?$this->readSqlFile($_file):($install_info['install_sql']||'');
+				
 		return $this->executeSql($sqldata);
 		
 	}
@@ -365,8 +368,10 @@ abstract class AddonExtends{
 		}
 		
 		//读取插件sql文件
-					
-		$sqldata =$install_info['uninstall_sql']?$install_info['uninstall_sql']:$this->readSqlFile($this->addon_path.'/uninstall.sql');
+		
+		$_file=$this->addon_path.'/uninstall.sql';
+				
+		$sqldata =Storage::has($_file)?$this->readSqlFile($_file):($install_info['uninstall_sql']||'');
 				
 		return $this->executeSql($sqldata);
 		

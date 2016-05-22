@@ -32,7 +32,7 @@ use Common\Controller\Addon;
 			
 			$conf=$this->getConfig();
 			
-			$conf['selector']&&$conf['selector']="img";
+			$conf['selector']&&$conf['selector']="img.fancybox";
 			
 			$this->assign('addons_config',$conf);
 			

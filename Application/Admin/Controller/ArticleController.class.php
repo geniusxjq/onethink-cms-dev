@@ -19,7 +19,7 @@ class ArticleController extends AdminController {
     /* 保存允许访问的公共方法 */
     static protected $allow = array( 'draftbox','mydocument');
 
-    private $cate_id        =   null; //文档分类id
+    private $cate_id = null; //文档分类id
 
     /**
      * 检测需要动态判断的文档类目有关的权限

@@ -16,53 +16,101 @@ use Admin\Model\AuthGroupModel;
  */
 class AdminController extends Controller {
 
-    /**
+	/**
      * 后台控制器初始化
      */
     protected function _initialize(){
-        // 获取当前用户ID
-        if(defined('UID')) return ;
-        define('UID',is_login());
-        if( !UID ){// 还没登录 跳转到登录页面
-            $this->redirect('Public/login');
-        }
-        /* 读取数据库中的配置 */
-        $config =   S('DB_CONFIG_DATA');
+		
+		/* 读取数据库中的配置 */
+		
+        $config = S('DB_CONFIG_DATA');
+		
         if(!$config){
-            $config =   api('Config/lists');
+			
+            $config = api('Config/lists');
+			
             S('DB_CONFIG_DATA',$config);
+			
         }
-        C($config); //添加配置
-
-        // 是否是超级管理员
-        define('IS_ROOT',   is_administrator());
-        if(!IS_ROOT && C('ADMIN_ALLOW_IP')){
-            // 检查IP地址访问
-            if(!in_array(get_client_ip(),explode(',',C('ADMIN_ALLOW_IP')))){
-                $this->error('403:禁止访问');
+		
+		C($config); //添加配置
+		
+		// 获取当前用户ID
+		if(defined('UID')) return false;
+		
+		define('UID',is_login());
+		
+        if( !UID ){// 还没登录 跳转到登录页面
+		
+            $this->redirect('Public/login');
+			
+			exit();
+			
+        }
+		
+        define('IS_ROOT',is_administrator());
+        
+		if(!IS_ROOT && C('ADMIN_ALLOW_IP')){
+            
+            if(!in_array(get_client_ip(),explode(',',C('ADMIN_ALLOW_IP')))){// 检查IP地址访问
+				
+				$this->error='403:禁止访问';
+				
             }
+			
         }
-        // 检测系统权限
+		        
+		// 检测系统权限超级管理员除外
+		
         if(!IS_ROOT){
-            $access =   $this->accessControl();
-            if ( false === $access ) {
-                $this->error('403:禁止访问');
-            }elseif(null === $access ){
-                //检测访问权限
-                $rule  = strtolower(MODULE_NAME.'/'.CONTROLLER_NAME.'/'.ACTION_NAME);
-                if ( !$this->checkRule($rule,array('in','1,2')) ){
-                    $this->error('未授权访问!');
-                }else{
-                    // 检测分类及内容有关的各项动态权限
-                    $dynamic    =   $this->checkDynamic();
-                    if( false === $dynamic ){
-                        $this->error('未授权访问!');
-                    }
-                }
-            }
-        }        
-
-        $this->assign('__MENU__', $this->getMenus());
+			
+			  //allow/deny
+			
+			  $deny = array_intersect_key(explode(',',C('ALLOW_VISIT')),explode(',',C('DENY_VISIT')));
+			  
+			  $check = CONTROLLER_NAME.'/'.ACTION_NAME;
+			  
+			  if (!$deny&&in_array_case($check,$deny)){
+				  
+				  $this->error='403:禁止访问';
+				  
+			  }
+			  
+			  //检测访问权限
+			  
+			  $rule = MODULE_NAME.'/'.CONTROLLER_NAME.'/'.ACTION_NAME;
+			  
+			  if (!$this->checkRule($rule,array('in','1,2')) ){
+				  
+				  $this->error='无静态访问权限';
+				  
+			  }else{
+				  
+				  // 检测分类及内容有关的各项动态权限
+				  $dynamic = $this->checkDynamic();
+				  
+				  if( false == $dynamic ){
+					  
+					  $this->error='无动态访问权限';
+					  
+				  }
+				  
+			  }
+			
+        }  
+		
+		if($this->error){
+		
+			D('Member')->logout(); 
+			
+			$this->error($this->error);
+			
+			exit();
+		
+		}
+		
+		$this->assign('__MENU__', $this->getMenus());   
+		
     }
 
     /**
@@ -72,10 +120,11 @@ class AdminController extends Controller {
      * @return boolean
      * @author 朱亚杰  <xcoolcc@gmail.com>
      */
+	 
     final protected function checkRule($rule, $type=AuthRuleModel::RULE_URL, $mode='url'){
-        static $Auth    =   null;
+        static $Auth = null;
         if (!$Auth) {
-            $Auth       =   new \Think\Auth();
+            $Auth = new \Think\Auth();
         }
         if(!$Auth->check($rule,UID,$type,$mode)){
             return false;
@@ -92,31 +141,8 @@ class AdminController extends Controller {
      *
      * @author 朱亚杰  <xcoolcc@gmail.com>
      */
+	 
     protected function checkDynamic(){}
-
-
-    /**
-     * action访问控制,在 **登陆成功** 后执行的第一项权限检测任务
-     *
-     * @return boolean|null  返回值必须使用 `===` 进行判断
-     *
-     *   返回 **false**, 不允许任何人访问(超管除外)
-     *   返回 **true**, 允许任何管理员访问,无需执行节点权限检测
-     *   返回 **null**, 需要继续执行节点权限检测决定是否允许访问
-     * @author 朱亚杰  <xcoolcc@gmail.com>
-     */
-    final protected function accessControl(){
-        $allow = C('ALLOW_VISIT');
-        $deny  = C('DENY_VISIT');
-        $check = strtolower(CONTROLLER_NAME.'/'.ACTION_NAME);
-        if ( !empty($deny)  && in_array_case($check,$deny) ) {
-            return false;//非超管禁止访问deny中的方法
-        }
-        if ( !empty($allow) && in_array_case($check,$allow) ) {
-            return true;
-        }
-        return null;//需要检测节点权限
-    }
 
     /**
      * 对数据表中的单行或多行记录执行修改 GET参数id为数字或逗号分隔的数字
@@ -169,7 +195,7 @@ class AdminController extends Controller {
      *
      * @author 朱亚杰  <zhuyajie@topthink.net>
      */
-    protected function resume (  $model , $where = array() , $msg = array( 'success'=>'状态恢复成功！', 'error'=>'状态恢复失败！')){
+    protected function resume ( $model , $where = array() , $msg = array( 'success'=>'状态恢复成功！', 'error'=>'状态恢复失败！')){
         $data    =  array('status' => 1);
         $this->editRow(   $model , $data, $where, $msg);
     }
@@ -380,16 +406,16 @@ class AdminController extends Controller {
      * 返回数据集
      */
     protected function lists ($model,$where=array(),$order='',$field=true){
-        $options    =   array();
-        $REQUEST    =   (array)I('request.');
+        $options = array();
+        $REQUEST = (array)I('request.');
         if(is_string($model)){
             $model  =   M($model);
         }
 
-        $OPT        =   new \ReflectionProperty($model,'options');
+        $OPT = new \ReflectionProperty($model,'options');
         $OPT->setAccessible(true);
 
-        $pk         =   $model->getPk();
+        $pk = $model->getPk();
         if($order===null){
             //order置空
         }else if ( isset($REQUEST['_order']) && isset($REQUEST['_field']) && in_array(strtolower($REQUEST['_order']),array('desc','asc')) ) {
@@ -402,13 +428,13 @@ class AdminController extends Controller {
         unset($REQUEST['_order'],$REQUEST['_field']);
 
         if(empty($where)){
-            $where  =   array('status'=>array('egt',0));
+            $where = array('status'=>array('egt',0));
         }
         if( !empty($where)){
-            $options['where']   =   $where;
+            $options['where'] = $where;
         }
-        $options      =   array_merge( (array)$OPT->getValue($model), $options );
-        $total        =   $model->where($options['where'])->count();
+        $options = array_merge( (array)$OPT->getValue($model), $options );
+        $total = $model->where($options['where'])->count();
 
         if( isset($REQUEST['r']) ){
             $listRows = (int)$REQUEST['r'];
@@ -419,7 +445,7 @@ class AdminController extends Controller {
         if($total>$listRows){
             $page->setConfig('theme','%FIRST% %UP_PAGE% %LINK_PAGE% %DOWN_PAGE% %END% %HEADER%');
         }
-        $p =$page->show();
+        $p = $page->show();
         $this->assign('_page', $p? $p: '');
         $this->assign('_total',$total);
         $options['limit'] = $page->firstRow.','.$page->listRows;
@@ -442,8 +468,8 @@ class AdminController extends Controller {
             foreach ($list as $k=>$data){
                 foreach($data as $key=>$val){
                     if(isset($attrList[$key])){
-                        $extra      =   $attrList[$key]['extra'];
-                        $type       =   $attrList[$key]['type'];
+                        $extra = $attrList[$key]['extra'];
+                        $type = $attrList[$key]['type'];
                         if('select'== $type || 'checkbox' == $type || 'radio' == $type || 'bool' == $type) {
                             // 枚举/多选/单选/布尔型
                             $options    =   parse_field_attr($extra);
@@ -451,14 +477,14 @@ class AdminController extends Controller {
                                 $data[$key]    =   $options[$val];
                             }
                         }elseif('date'==$type){ // 日期型
-                            $data[$key]    =   date('Y-m-d',$val);
+                            $data[$key] = date('Y-m-d',$val);
                         }elseif('datetime' == $type){ // 时间型
-                            $data[$key]    =   date('Y-m-d H:i',$val);
+                            $data[$key] = date('Y-m-d H:i',$val);
                         }
                     }
                 }
                 $data['model_id'] = $model_id;
-                $list[$k]   =   $data;
+                $list[$k] = $data;
             }
         }
         return $list;
